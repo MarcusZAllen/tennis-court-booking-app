@@ -1,0 +1,12 @@
+{
+  "name": "tennis-court-booking app",
+  "version": "1.0.0",
+  "description": "Scrapes tennis court availability from Park Sports",
+  "main": "scrape.js",
+  "scripts": {
+    "start": "node scrape.js"
+  },
+  "dependencies": {
+    "playwright": "^1.39.0"
+  }
+}
