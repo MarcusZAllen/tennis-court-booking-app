@@ -1,11 +1,20 @@
 {
-  "name": "tennis-court-booking app",
+  "name": "tennis-court-booking-app",
   "version": "1.0.0",
-  "description": "Scrapes tennis court availability from Park Sports",
+  "description": "Aggregates tennis court availability from public booking websites in London.",
   "main": "scrape.js",
   "scripts": {
     "start": "node scrape.js"
   },
+  "keywords": [
+    "tennis",
+    "scraper",
+    "booking",
+    "playwright",
+    "london"
+  ],
+  "author": "Marcus Allen",
+  "license": "MIT",
   "dependencies": {
     "playwright": "^1.39.0"
   }
