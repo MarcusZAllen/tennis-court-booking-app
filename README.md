@@ -1,6 +1,7 @@
 # 🎾 Tennis Court booking app 
 
-This project is an early prototype of a **tennis court availability aggregator** for public courts in London. Booking a court is currently frustrating because each venue uses a different system. This app solves that by **scraping multiple booking websites** and displaying all available slots in one place.
+A script-based tool to aggregate publicly available tennis court booking data across different platforms in London. The goal is to maximize your chances of booking a court — without jumping across multiple outdated websites.
+
 ---
 
 ## 🚀 What This Project Does
@@ -12,23 +13,50 @@ This project is an early prototype of a **tennis court availability aggregator**
 - Built for flexibility — start simple and grow into a full product.
 
 ## 📦 Project Structure
-tennis-court-scraper-template/
-├── scrape.js               # Main scraper logic using Playwright
-├── package.json            # Dependencies and scripts
-├── .gitignore              # Hides node_modules and secrets
-├── README.md               # You’re reading it!
-├── data/                   # Optional: save scraped output here
-├── examples/               # Optional: mock data or sample output
 
-## 🚀 How to Use
+```bash
+tennis-court-booking-app/
+├── scrapers/                  # Individual scrapers for each booking site
+│   ├── parksports.js          # done
+│   └── clubspark.js           # (planned)
+├── runner/                    # Scripts that orchestrate scrapers
+│   ├── scrape-multiple-dates.js 
+│   └── scrape-all-sites.js
+├── data/                      # Scraped output and debug files
+│   ├── output.json
+│   └── debug.html
+├── utils/                     # Helper functions (optional, planned)
+├── package.json
+└── README.md
 
-1. Clone or download this repo.
-2. Run `npm install` to install Playwright.
-3. Run the scraper with `node scrape.js`.
+👋 How to Use
+	1.	Clone or download this repo.
+	2.	Run npm install to install dependencies (e.g. Playwright).
+	3.	Run the scraper with:
+        node scrapers/parksports.js
+    4. (Planned) To scrape multiple dates:
+        node runner/scrape-multiple-dates.js
 
+    
 ## 📁 Output
 
-Scraped court slots will be printed to the console. You can modify the script to save results to `data/output.json`.
+Scraped court slots will be printed to the console (for now). The script saves results to `data/output.json`. This will then be formatted into a calendar view in the front-end.
+
+## Data format
+{
+  "provider": "parksports",
+  "court": "Regents Park",
+  "date": "2025-06-03",
+  "readableTime": "14:00 - 15:00",
+  "cost": "£16.40"
+}
+
+## 🧠 Roadmap
+- Scrape Park Sports availability
+- Loop over multiple dates
+- Add support for ClubSpark
+- Combine multiple scrapers into a unified output
+- Deploy as scheduled cloud task
 
 ## ⚠️ Note
 
