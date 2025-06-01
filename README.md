@@ -1,4 +1,4 @@
-# 🎾 Tennis Court booking app 
+# 🎾 Tennis Court Booking App
 
 A script-based tool to aggregate publicly available tennis court booking data across different platforms in London. The goal is to maximize your chances of booking a court — without jumping across multiple outdated websites.
 
@@ -7,14 +7,16 @@ A script-based tool to aggregate publicly available tennis court booking data ac
 ## 🚀 What This Project Does
 
 - Scrapes availability data from court booking sites like Park Sports or ClubSpark.
-- Outputs structured court slot information (court name, date, time).
-- Displays available slots in a user-friendly frontend (Lovable or Framer).
-- Allows user to quickly book a an available court from the website.
+- Outputs structured court slot information (court name, date, time, cost).
+- (Planned) Displays available slots in a user-friendly frontend (Lovable or Framer).
+- (Planned) Allows users to book an available court directly from the website.
 - Built for flexibility — start simple and grow into a full product.
+
+---
 
 ## 📦 Project Structure
 
-```bash
+```
 tennis-court-booking-app/
 ├── scrapers/                  # Individual scrapers for each booking site
 │   ├── parksports.js          # done
@@ -28,21 +30,46 @@ tennis-court-booking-app/
 ├── utils/                     # Helper functions (optional, planned)
 ├── package.json
 └── README.md
+```
 
-👋 How to Use
-	1.	Clone or download this repo.
-	2.	Run npm install to install dependencies (e.g. Playwright).
-	3.	Run the scraper with:
-        node scrapers/parksports.js
-    4. (Planned) To scrape multiple dates:
-        node runner/scrape-multiple-dates.js
+---
 
-    
+## 👋 How to Use
+
+1. Clone or download this repo.
+2. Run `npm install` to install dependencies (e.g. Playwright).
+3. Run the scraper with:
+
+```
+node scrapers/parksports.js
+```
+
+4. (Planned) To scrape multiple dates:
+
+```
+node runner/scrape-multiple-dates.js
+```
+
+---
+
 ## 📁 Output
 
-Scraped court slots will be printed to the console (for now). The script saves results to `data/output.json`. This will then be formatted into a calendar view in the front-end.
+- Scraped court slots are printed to the console.
+- They are also saved to:
 
-## Data format
+```
+data/output.json
+```
+
+This will later feed into a frontend calendar view.
+
+---
+
+## 📊 Data Format
+
+Each slot is output like this:
+
+```json
 {
   "provider": "parksports",
   "court": "Regents Park",
@@ -50,14 +77,21 @@ Scraped court slots will be printed to the console (for now). The script saves r
   "readableTime": "14:00 - 15:00",
   "cost": "£16.40"
 }
+```
+
+---
 
 ## 🧠 Roadmap
-- Scrape Park Sports availability
-- Loop over multiple dates
-- Add support for ClubSpark
-- Combine multiple scrapers into a unified output
-- Deploy as scheduled cloud task
 
-## ⚠️ Note
+- [x] Scrape Park Sports availability  
+- [ ] Loop over multiple dates  
+- [ ] Add support for ClubSpark  
+- [ ] Combine multiple scrapers into a unified output  
+- [ ] Display results in a calendar UI  
+- [ ] Deploy as scheduled cloud task  
 
-This is for educational or personal use only. Be mindful of scraping limits and website terms of service.
+---
+
+## ⚠️ Disclaimer
+
+This project is for educational or personal use only. Be mindful of scraping limits and website terms of service.
