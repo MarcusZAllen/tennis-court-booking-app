@@ -1,0 +1,62 @@
+[
+  {
+    "provider": "parksports",
+    "location": "Regent's Park",
+    "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-06-07&role=guest&resource-group-id=4b9d73dd-ca02-4e95-09fe-9a92d6d323d4",
+    "date": "2025-06-07",
+    "readableTime": "Book at 07:00 - 08:00",
+    "cost": "£19.55",
+    "startMinutes": 420,
+    "endMinutes": 480,
+    "sessionId": "fbfa0755-24a8-4700-9a95-b9dda8e89fc5",
+    "slotKey": "8025533e-35ef-4749-92c2-0df99e0aaef3fbfa0755-24a8-4700-9a95-b9dda8e89fc5420"
+  },
+  {
+    "provider": "parksports",
+    "location": "Regent's Park",
+    "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-06-07&role=guest&resource-group-id=4b9d73dd-ca02-4e95-09fe-9a92d6d323d4",
+    "date": "2025-06-07",
+    "readableTime": "Book at 07:00 - 08:00",
+    "cost": "£19.55",
+    "startMinutes": 420,
+    "endMinutes": 480,
+    "sessionId": "fbfa0755-24a8-4700-9a95-b9dda8e89fc5",
+    "slotKey": "f91e9940-69b4-4297-b80f-be26f9470839fbfa0755-24a8-4700-9a95-b9dda8e89fc5420"
+  },
+  {
+    "provider": "parksports",
+    "location": "Regent's Park",
+    "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-06-07&role=guest&resource-group-id=4b9d73dd-ca02-4e95-09fe-9a92d6d323d4",
+    "date": "2025-06-07",
+    "readableTime": "Book at 07:00 - 08:00",
+    "cost": "£19.55",
+    "startMinutes": 420,
+    "endMinutes": 480,
+    "sessionId": "fbfa0755-24a8-4700-9a95-b9dda8e89fc5",
+    "slotKey": "d0d3bb94-4fc8-4160-89dd-cf70f82e15c8fbfa0755-24a8-4700-9a95-b9dda8e89fc5420"
+  },
+  {
+    "provider": "parksports",
+    "location": "Regent's Park",
+    "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-06-07&role=guest&resource-group-id=4b9d73dd-ca02-4e95-09fe-9a92d6d323d4",
+    "date": "2025-06-07",
+    "readableTime": "Book at 07:00 - 08:00",
+    "cost": "£19.55",
+    "startMinutes": 420,
+    "endMinutes": 480,
+    "sessionId": "fbfa0755-24a8-4700-9a95-b9dda8e89fc5",
+    "slotKey": "e1edd204-4ca7-4046-82aa-69a35586db21fbfa0755-24a8-4700-9a95-b9dda8e89fc5420"
+  },
+  {
+    "provider": "parksports",
+    "location": "Regent's Park",
+    "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-06-07&role=guest&resource-group-id=4b9d73dd-ca02-4e95-09fe-9a92d6d323d4",
+    "date": "2025-06-07",
+    "readableTime": "Book at 07:00 - 08:00",
+    "cost": "£19.55",
+    "startMinutes": 420,
+    "endMinutes": 480,
+    "sessionId": "fbfa0755-24a8-4700-9a95-b9dda8e89fc5",
+    "slotKey": "b968bfb3-2013-4c4d-a1b1-592c58bbabc8fbfa0755-24a8-4700-9a95-b9dda8e89fc5420"
+  }
+]
