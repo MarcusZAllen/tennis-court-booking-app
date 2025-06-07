@@ -39,7 +39,6 @@ export default function Home() {
         });
 
         setDates(next7);
-        const allTimes = new Set(fixedTimes);
 
         for (const loc of locations) {
           for (const slot of loc.slots) {
