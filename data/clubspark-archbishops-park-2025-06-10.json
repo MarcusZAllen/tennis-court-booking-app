@@ -1,0 +1,14 @@
+[
+  {
+    "provider": "clubspark",
+    "location": "Archbishops Park",
+    "bookingUrl": "https://clubspark.lta.org.uk/archbishopsparklambethnorth/Booking/BookByDate#?role=guest&date=2025-06-10",
+    "date": "2025-06-10",
+    "readableTime": "Book at 09:00 - 10:00",
+    "cost": "£7.70",
+    "startMinutes": 540,
+    "endMinutes": 600,
+    "sessionId": "3ee93913-0a6d-4965-aa7b-eede9b4ba57d",
+    "slotKey": "f788bfd8-01f8-4847-8647-3cd1f22ee39e3ee93913-0a6d-4965-aa7b-eede9b4ba57d540"
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "provider": "parksports",
+    "location": "Hyde Park",
+    "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-06-07",
+    "date": "2025-06-07",
+    "readableTime": "Book at 16:00 - 17:00",
+    "cost": "£21.85",
+    "startMinutes": 960,
+    "endMinutes": 1020,
+    "sessionId": "b2ee9300-7d16-43e2-81a9-80c0135a93b3",
+    "slotKey": "5abc4055-7db8-4a93-99db-6e3bab8e8585b2ee9300-7d16-43e2-81a9-80c0135a93b3960"
+  },
+  {
+    "provider": "parksports",
+    "location": "Hyde Park",
+    "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-06-07",
+    "date": "2025-06-07",
+    "readableTime": "Book at 17:00 - 18:00",
+    "cost": "£21.85",
+    "startMinutes": 1020,
+    "endMinutes": 1080,
+    "sessionId": "b2ee9300-7d16-43e2-81a9-80c0135a93b3",
+    "slotKey": "5abc4055-7db8-4a93-99db-6e3bab8e8585b2ee9300-7d16-43e2-81a9-80c0135a93b3960"
+  },
+  {
+    "provider": "parksports",
+    "location": "Hyde Park",
+    "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-06-07",
+    "date": "2025-06-07",
+    "readableTime": "Book at 16:00 - 17:00",
+    "cost": "£21.85",
+    "startMinutes": 960,
+    "endMinutes": 1020,
+    "sessionId": "b2ee9300-7d16-43e2-81a9-80c0135a93b3",
+    "slotKey": "99b4715b-feae-4395-be13-007154d08035b2ee9300-7d16-43e2-81a9-80c0135a93b3960"
+  },
+  {
+    "provider": "parksports",
+    "location": "Hyde Park",
+    "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-06-07",
+    "date": "2025-06-07",
+    "readableTime": "Book at 17:00 - 18:00",
+    "cost": "£21.85",
+    "startMinutes": 1020,
+    "endMinutes": 1080,
+    "sessionId": "b2ee9300-7d16-43e2-81a9-80c0135a93b3",
+    "slotKey": "99b4715b-feae-4395-be13-007154d08035b2ee9300-7d16-43e2-81a9-80c0135a93b3960"
+  },
+  {
+    "provider": "parksports",
+    "location": "Hyde Park",
+    "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-06-07",
+    "date": "2025-06-07",
+    "readableTime": "Book at 17:00 - 18:00",
+    "cost": "£21.85",
+    "startMinutes": 1020,
+    "endMinutes": 1080,
+    "sessionId": "b2ee9300-7d16-43e2-81a9-80c0135a93b3",
+    "slotKey": "35843bac-1024-4bfd-8215-016d6ae7ffefb2ee9300-7d16-43e2-81a9-80c0135a93b31020"
+  },
+  {
+    "provider": "parksports",
+    "location": "Hyde Park",
+    "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-06-07",
+    "date": "2025-06-07",
+    "readableTime": "Book at 17:00 - 18:00",
+    "cost": "£21.85",
+    "startMinutes": 1020,
+    "endMinutes": 1080,
+    "sessionId": "b2ee9300-7d16-43e2-81a9-80c0135a93b3",
+    "slotKey": "3b03cc41-d973-41e1-98cd-8de9090bcf18b2ee9300-7d16-43e2-81a9-80c0135a93b31020"
+  }
+]

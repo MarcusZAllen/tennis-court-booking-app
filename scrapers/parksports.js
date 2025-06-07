@@ -1,15 +1,26 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
 
-module.exports = async function scrapeParkSports(date) {
+module.exports = async function scrapeParkSports({ name, url }, date) {
   const startTime = Date.now();
-  const browser = await chromium.launch({ headless: true });
+  
+  // Add randomized delay before scraping to avoid rate limiting
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+  const randomDelay = 2000 + Math.random() * 3000;
+  await delay(randomDelay);
+  
+  // Launch browser with slowMo to appear more human-like and reduce rate limiting risk
+  const browser = await chromium.launch({
+    headless: true, // set to false if debugging
+    slowMo: 100      // slows operations slightly to reduce server suspicion
+  });
   const page = await browser.newPage();
 
-  const baseURL = 'https://regents.parksports.co.uk/Booking/BookByDate#?role=guest&resource-group-id=4b9d73dd-ca02-4e95-09fe-9a92d6d323d4';
+  const location = name;
+  const baseURL = url;
   await page.goto(`${baseURL}&date=${date}`, { waitUntil: 'networkidle' });
 
-  console.log(`Loaded court availability for ${date}`);
+  console.log(`[${location} - ${date}] Loaded court availability for ${date}`);
 
   await page.waitForLoadState('domcontentloaded');
   await page.waitForTimeout(4000);
@@ -18,21 +29,22 @@ module.exports = async function scrapeParkSports(date) {
   const isEmpty = await page.$('.court-grid.no-slots');
 
   if (isEmpty) {
-    console.log(`✅ No slots available on ${date} (confirmed by site)`);
+    console.log(`[${location} - ${date}] ✅ No slots available on ${date} (confirmed by site)`);
     await browser.close();
     return [];
   }
 
   if (!hasSlots) {
-    console.log(`🟡 No slots found and no empty-state marker on ${date} — saving debug to investigate.`);
+    console.log(`[${location} - ${date}] 🟡 No slots found and no empty-state marker on ${date} — saving debug to investigate.`);
     fs.writeFileSync(`data/debug-${date}.html`, await page.content());
     await browser.close();
     return [];
   }
 
-  console.log('✅ Booking slots loaded');
+  console.log(`[${location} - ${date}] ✅ Booking slots loaded`);
 
-  const slots = await page.$$eval('.resource-interval', (intervals) => {
+  const slots = await page.$$eval('.resource-interval', (intervals, meta) => {
+    const { location, baseURL, date } = meta;
     const convertToTime = (minutes) => {
       const h = String(Math.floor(minutes / 60)).padStart(2, '0');
       const m = String(minutes % 60).padStart(2, '0');
@@ -59,8 +71,8 @@ module.exports = async function scrapeParkSports(date) {
 
         return {
           provider: "parksports",
-          location: "Regent's Park",
-          bookingUrl: `https://regents.parksports.co.uk/Booking/BookByDate#?date=${date}&role=guest&resource-group-id=4b9d73dd-ca02-4e95-09fe-9a92d6d323d4`,
+          location,
+          bookingUrl: `${baseURL}&date=${date}`,
           date,
           readableTime: timeSpan.innerText.trim(),
           cost: costSpan.innerText.trim(),
@@ -71,13 +83,15 @@ module.exports = async function scrapeParkSports(date) {
         };
       })
       .filter(Boolean);
-  });
+  },
+  { location, baseURL, date }
+  );
 
-  const outputPath = `data/parksports-${date}.json`;
+  const outputPath = `data/parksports-${location.toLowerCase().replace(/\s+/g, '-')}-${date}.json`;
   fs.writeFileSync(outputPath, JSON.stringify(slots, null, 2));
-  console.log(`💾 Saved ${slots.length} slots to ${outputPath}`);
+  console.log(`[${location} - ${date}] 💾 Saved ${slots.length} slots to ${outputPath}`);
   await browser.close();
   const duration = ((Date.now() - startTime) / 1000).toFixed(2);
-  console.log(`⏱️ Scraping for ${date} completed in ${duration} seconds`);
+  console.log(`[${location} - ${date}] ⏱️ Scraping for ${date} completed in ${duration} seconds`);
   return slots;
 };

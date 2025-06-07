@@ -1,0 +1,14 @@
+[
+  {
+    "provider": "parksports",
+    "location": "Regent's Park",
+    "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-06-09",
+    "date": "2025-06-09",
+    "readableTime": "Book at 18:00 - 19:00",
+    "cost": "£45.00",
+    "startMinutes": 1080,
+    "endMinutes": 1140,
+    "sessionId": "98ef4514-d609-4a65-858b-8efd500ea643",
+    "slotKey": "24562cff-b844-4edd-a70b-4480a7f9caae98ef4514-d609-4a65-858b-8efd500ea6431080"
+  }
+]
