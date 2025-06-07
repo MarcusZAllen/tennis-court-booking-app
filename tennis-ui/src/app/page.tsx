@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import CalendarTable from './components/CalendarTable';
 
 type Slot = {
   date: string;
@@ -35,20 +36,29 @@ export default function Home() {
         const fixedTimes = Array.from({ length: 15 }, (_, i) => {
           const hour = i + 7;
           const hourStr = hour.toString().padStart(2, '0');
-          return `Book at ${hourStr}:00 - ${hourStr === '21' ? '22' : (hour + 1).toString().padStart(2, '0')}:00`;
+          return `Book at ${hourStr}:00 - ${(hour + 1).toString().padStart(2, '0')}:00`;
         });
 
         setDates(next7);
+        setTimes(fixedTimes);
 
+        // Initialize the tempMap structure
+        for (const time of fixedTimes) {
+          tempMap[time] = {};
+          for (const date of next7) {
+            tempMap[time][date] = new Set<string>();
+          }
+        }
+
+        // Populate the tempMap with unique locations
         for (const loc of locations) {
           for (const slot of loc.slots) {
-            const { date, readableTime } = slot;
+            const { date, readableTime, location } = slot;
             if (!next7.includes(date)) continue;
-
-            if (!tempMap[readableTime]) tempMap[readableTime] = {};
-            if (!tempMap[readableTime][date]) tempMap[readableTime][date] = new Set();
-
-            tempMap[readableTime][date].add(loc.location);
+            
+            if (tempMap[readableTime]?.[date]) {
+              tempMap[readableTime][date].add(location);
+            }
           }
         }
 
@@ -62,47 +72,22 @@ export default function Home() {
         }
 
         setCalendar(result);
-        setTimes(fixedTimes);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching location data:', error);
         setLoading(false);
       });
   }, []);
 
   return (
-    <main className="p-6 max-w-6xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">7-Day Tennis Court Availability</h1>
+    <main className="p-6 max-w-6xl mx-auto bg-[rgba(252,244,237,1)] min-h-screen">
+      <h1 className="text-3xl font-bold text-[rgb(124,180,107)] mb-6">7-Day Tennis Court Availability</h1>
 
       {loading ? (
-        <p>Loading...</p>
+        <p className="text-gray-600">Loading...</p>
       ) : (
-        <div className="overflow-auto border rounded-md">
-          <table className="min-w-full text-sm">
-            <thead>
-              <tr>
-                <th className="p-2 text-left bg-gray-100">Time</th>
-                {dates.map(date => (
-                  <th key={date} className="p-2 bg-gray-100 text-center">
-                    {date}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {times.map(time => {
-                const counts = calendar[time] || {};
-                return (
-                  <tr key={time} className="border-t">
-                    <td className="p-2 font-medium">{time.replace('Book at ', '')}</td>
-                    {dates.map(date => (
-                      <td key={date} className="p-2 text-center">
-                        {counts[date] ?? 0}
-                      </td>
-                    ))}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        <CalendarTable calendar={calendar} dates={dates} times={times} />
       )}
     </main>
   );
