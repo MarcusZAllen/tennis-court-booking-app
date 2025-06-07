@@ -1,9 +1,8 @@
-// postcss.config.mjs
-const config = {
+// tennis-ui/postcss.config.mjs
+
+export default {
   plugins: {
-    tailwindcss: {},
+    '@tailwindcss/postcss': {},
     autoprefixer: {},
   },
-};
-
-export default config;
+}
