@@ -19,10 +19,14 @@ export default function Home() {
   const [dates, setDates] = useState<string[]>([]);
   const [times, setTimes] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/data/locations.json')
-      .then(res => res.json())
+    fetch('/api/data/locations')
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch locations');
+        return res.json();
+      })
       .then((locations: LocationData[]) => {
         const tempMap: Record<string, Record<string, Set<string>>> = {};
 
@@ -76,13 +80,23 @@ export default function Home() {
       })
       .catch(error => {
         console.error('Error fetching location data:', error);
+        setError(error.message);
         setLoading(false);
       });
   }, []);
 
+  if (error) {
+    return (
+      <main className="p-6 max-w-6xl mx-auto bg-brand-background2 min-h-screen">
+        <h1 className="text-3xl font-bold text-brand-primary mb-6">7-Day Tennis Court Availability</h1>
+        <p className="text-red-600">Error: {error}</p>
+      </main>
+    );
+  }
+
   return (
-    <main className="p-6 max-w-6xl mx-auto bg-[rgba(252,244,237,1)] min-h-screen">
-      <h1 className="text-3xl font-bold text-[rgb(124,180,107)] mb-6">7-Day Tennis Court Availability</h1>
+    <main className="p-6 max-w-6xl mx-auto bg-brand-background2 min-h-screen">
+      <h1 className="text-3xl font-bold text-brand-primary mb-6">7-Day Tennis Court Availability</h1>
 
       {loading ? (
         <p className="text-gray-600">Loading...</p>
