@@ -62,10 +62,6 @@ export default function Home() {
           }
         }
 
-        const sortedTimes = Array.from(allTimes).sort((a, b) =>
-          a.localeCompare(b, undefined, { numeric: true })
-        );
-
         setCalendar(result);
         setTimes(fixedTimes);
         setLoading(false);
