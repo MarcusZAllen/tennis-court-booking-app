@@ -10,9 +10,12 @@ type CalendarGridProps = {
 
 const CalendarGrid: React.FC<CalendarGridProps> = ({ calendar, dates, times }) => {
   return (
-    <tbody className="divide-y divide-gray-200">
+    <tbody>
       {times.map(time => (
-        <tr key={time} className="hover:bg-gray-50/50">
+        <tr 
+          key={time} 
+          className="group transition-colors hover:bg-gray-50/30"
+        >
           <TimeColumn time={time} />
           {dates.map(date => (
             <CalendarCell

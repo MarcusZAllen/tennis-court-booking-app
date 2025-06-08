@@ -15,8 +15,12 @@ const TimeColumn: React.FC<TimeColumnProps> = ({ time }) => {
     .join(' - ');
 
   return (
-    <td className="sticky left-0 z-10 bg-brand-background1 p-4 border-b border-gray-200 font-medium text-left whitespace-nowrap">
-      {timeRange}
+    <td className="sticky left-0 z-20 p-2 sm:p-3 lg:p-4">
+      <div className="bg-brand-background1 rounded-lg p-2 sm:p-3 shadow-sm">
+        <span className="font-medium text-sm sm:text-base text-gray-700 whitespace-nowrap">
+          {timeRange}
+        </span>
+      </div>
     </td>
   );
 };
