@@ -88,8 +88,8 @@ export default function Home() {
   if (error) {
     return (
       <div className="min-h-screen w-full bg-brand-background2 flex items-center justify-center">
-        <div className="w-full max-w-6xl p-6">
-          <h1 className="text-2xl font-semibold text-center mb-8">
+        <div className="w-full max-w-7xl px-4">
+          <h1 className="text-xl font-medium text-center mb-6">
             Tennis Court Availability
           </h1>
           <p className="text-red-600 text-center">Error: {error}</p>
@@ -100,8 +100,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen w-full bg-brand-background2 flex items-center justify-center">
-      <div className="w-full max-w-6xl p-6">
-        <h1 className="text-2xl font-semibold text-center mb-8">
+      <div className="w-full max-w-7xl px-4">
+        <h1 className="text-xl font-medium text-center mb-6">
           Tennis Court Availability
         </h1>
         
@@ -110,8 +110,10 @@ export default function Home() {
             <div className="animate-pulse text-gray-600">Loading...</div>
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <CalendarTable calendar={calendar} dates={dates} times={times} />
+          <div className="flex justify-center">
+            <div className="w-full overflow-x-auto">
+              <CalendarTable calendar={calendar} dates={dates} times={times} />
+            </div>
           </div>
         )}
       </div>

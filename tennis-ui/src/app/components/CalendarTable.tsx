@@ -11,8 +11,8 @@ type CalendarTableProps = {
 
 const CalendarTable: React.FC<CalendarTableProps> = ({ calendar, dates, times }) => {
   return (
-    <div className="relative bg-brand-background2 rounded-xl shadow-lg">
-      <div className="overflow-x-auto p-4">
+    <div className="relative bg-white rounded-xl shadow-lg">
+      <div className="p-6">
         <table className="w-full border-separate border-spacing-0">
           <CalendarHeader dates={dates} />
           <CalendarGrid calendar={calendar} dates={dates} times={times} />
