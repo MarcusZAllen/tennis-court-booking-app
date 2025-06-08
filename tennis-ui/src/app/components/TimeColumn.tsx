@@ -5,13 +5,12 @@ type TimeColumnProps = {
 };
 
 const TimeColumn: React.FC<TimeColumnProps> = ({ time }) => {
-  // Convert "Book at XX:00 - YY:00" to "XX - YY"
+  // Convert "Book at XX:00 - YY:00" to "X - Y" format
   const timeRange = time
     .replace('Book at ', '')
     .replace(':00', '')
-    .replace(' - ', ' - ')
     .split(' - ')
-    .map(t => t.padStart(2, '0'))
+    .map(t => parseInt(t).toString()) // Remove leading zeros
     .join(' - ');
 
   return (

@@ -87,32 +87,34 @@ export default function Home() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-brand-background2 flex flex-col items-center">
-        <h1 className="text-lg font-semibold text-center mt-4 mb-8">
-          Tennis Court Availability
-        </h1>
-        <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <main className="min-h-screen bg-brand-background2 flex items-center justify-center">
+        <div className="w-full max-w-6xl mx-auto px-4 py-8">
+          <h1 className="text-lg font-semibold text-center mb-8">
+            Tennis Court Availability
+          </h1>
           <p className="text-red-600 text-center">Error: {error}</p>
         </div>
-      </div>
+      </main>
     );
   }
 
   return (
-    <div className="min-h-screen bg-brand-background2 flex flex-col items-center">
-      <h1 className="text-lg font-semibold text-center mt-4 mb-8">
-        Tennis Court Availability
-      </h1>
-      
-      {loading ? (
-        <div className="flex items-center justify-center h-64">
-          <div className="animate-pulse text-gray-600">Loading...</div>
-        </div>
-      ) : (
-        <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 overflow-x-auto">
-          <CalendarTable calendar={calendar} dates={dates} times={times} />
-        </div>
-      )}
-    </div>
+    <main className="min-h-screen bg-brand-background2 flex items-center justify-center">
+      <div className="w-full max-w-6xl mx-auto px-4 py-8">
+        <h1 className="text-lg font-semibold text-center mb-8">
+          Tennis Court Availability
+        </h1>
+        
+        {loading ? (
+          <div className="flex items-center justify-center h-64">
+            <div className="animate-pulse text-gray-600">Loading...</div>
+          </div>
+        ) : (
+          <div className="overflow-x-auto rounded-xl">
+            <CalendarTable calendar={calendar} dates={dates} times={times} />
+          </div>
+        )}
+      </div>
+    </main>
   );
 }
