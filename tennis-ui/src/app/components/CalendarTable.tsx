@@ -11,11 +11,16 @@ type CalendarTableProps = {
 
 const CalendarTable: React.FC<CalendarTableProps> = ({ calendar, dates, times }) => {
   return (
-    <div className="overflow-x-auto rounded-md border border-black shadow-lg bg-white">
-      <table className="min-w-full text-sm text-center border-collapse">
-        <CalendarHeader dates={dates} />
-        <CalendarGrid calendar={calendar} dates={dates} times={times} />
-      </table>
+    <div className="w-full max-w-6xl mx-auto px-4">
+      <h1 className="text-2xl font-semibold text-brand-primary text-center mb-8">
+        7-Day Tennis Court Availability
+      </h1>
+      <div className="overflow-x-auto rounded-lg shadow-lg bg-white">
+        <table className="min-w-full border-separate border-spacing-0">
+          <CalendarHeader dates={dates} />
+          <CalendarGrid calendar={calendar} dates={dates} times={times} />
+        </table>
+      </div>
     </div>
   );
 };

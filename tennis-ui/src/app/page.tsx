@@ -87,19 +87,22 @@ export default function Home() {
 
   if (error) {
     return (
-      <main className="p-6 max-w-6xl mx-auto bg-brand-background2 min-h-screen">
-        <h1 className="text-3xl font-bold text-brand-primary mb-6">7-Day Tennis Court Availability</h1>
-        <p className="text-red-600">Error: {error}</p>
+      <main className="min-h-screen bg-brand-background2 py-8">
+        <div className="max-w-6xl mx-auto px-4">
+          <p className="text-red-600 text-center">Error: {error}</p>
+        </div>
       </main>
     );
   }
 
   return (
-    <main className="p-6 max-w-6xl mx-auto bg-brand-background2 min-h-screen">
-      <h1 className="text-3xl font-bold text-brand-primary mb-6">7-Day Tennis Court Availability</h1>
-
+    <main className="min-h-screen bg-brand-background2 py-8">
       {loading ? (
-        <p className="text-gray-600">Loading...</p>
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex items-center justify-center h-64">
+            <div className="animate-pulse text-gray-600">Loading...</div>
+          </div>
+        </div>
       ) : (
         <CalendarTable calendar={calendar} dates={dates} times={times} />
       )}

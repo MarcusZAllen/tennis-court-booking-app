@@ -2,19 +2,23 @@ import React from 'react';
 
 type CalendarCellProps = {
   count: number;
-  isHeader?: boolean;
 };
 
-const CalendarCell: React.FC<CalendarCellProps> = ({ count, isHeader = false }) => {
+const CalendarCell: React.FC<CalendarCellProps> = ({ count }) => {
   return (
-    <td
-      className={`
-        border border-black px-3 py-2
-        ${isHeader ? 'bg-brand-background1 font-semibold' : 'bg-brand-background2'}
-        ${count > 0 ? 'text-brand-primary' : 'text-gray-400'}
-      `}
-    >
-      {count}
+    <td className="p-4 border-b border-gray-200">
+      <div 
+        className={`
+          flex items-center justify-center
+          rounded-lg p-2 transition-colors
+          ${count > 0 
+            ? 'bg-brand-background2 text-brand-primary font-semibold hover:bg-brand-background2/80 cursor-pointer' 
+            : 'bg-gray-50 text-gray-400'
+          }
+        `}
+      >
+        {count}
+      </div>
     </td>
   );
 };
