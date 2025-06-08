@@ -85,36 +85,36 @@ export default function Home() {
       });
   }, []);
 
-  if (error) {
-    return (
-      <div className="min-h-screen w-full bg-brand-background2 flex items-center justify-center">
-        <div className="w-full max-w-7xl px-4">
-          <h1 className="text-xl font-medium text-center mb-6">
-            Tennis Court Availability
-          </h1>
-          <p className="text-red-600 text-center">Error: {error}</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen w-full bg-brand-background2 flex items-center justify-center">
-      <div className="w-full max-w-7xl px-4">
-        <h1 className="text-xl font-medium text-center mb-6">
-          Tennis Court Availability
-        </h1>
-        
-        {loading ? (
-          <div className="flex items-center justify-center h-64">
-            <div className="animate-pulse text-gray-600">Loading...</div>
-          </div>
-        ) : (
-          <div className="flex justify-center">
-            <div className="w-full overflow-x-auto">
-              <CalendarTable calendar={calendar} dates={dates} times={times} />
+    <div className="flex justify-center items-center min-h-screen bg-brand-background2 px-4">
+      <div className="max-w-[1200px] max-h-[90vh] w-full h-full overflow-auto p-6 bg-white shadow-md rounded-lg">
+        {error ? (
+          <>
+            <h1 className="text-xl font-medium text-center mb-6">
+              Tennis Court Availability
+            </h1>
+            <div className="min-h-screen w-full flex items-center justify-center">
+              <p className="text-red-600 text-center">Error: {error}</p>
             </div>
-          </div>
+          </>
+        ) : (
+          <>
+            <h1 className="text-xl font-medium text-center mb-6">
+              Tennis Court Availability
+            </h1>
+            
+            {loading ? (
+              <div className="flex items-center justify-center h-64">
+                <div className="animate-pulse text-gray-600">Loading...</div>
+              </div>
+            ) : (
+              <div className="flex justify-center">
+                <div className="w-full overflow-x-auto">
+                  <CalendarTable calendar={calendar} dates={dates} times={times} />
+                </div>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

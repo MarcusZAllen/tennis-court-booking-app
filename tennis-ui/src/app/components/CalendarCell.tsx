@@ -6,11 +6,11 @@ type CalendarCellProps = {
 
 const CalendarCell: React.FC<CalendarCellProps> = ({ count }) => {
   return (
-    <td className="p-4">
+    <td className="p-8">
       <div 
         className={`
           flex items-center justify-center
-          aspect-square w-full
+          aspect-square w-full h-full
           rounded-lg p-4
           shadow-sm transition-all duration-200
           ${count > 0 
