@@ -87,34 +87,40 @@ export default function Home() {
 
   if (error) {
     return (
-      <main className="min-h-screen bg-brand-background2 flex items-center justify-center">
-        <div className="w-full max-w-6xl mx-auto px-4 py-8">
-          <h1 className="text-lg font-semibold text-center mb-8">
-            Tennis Court Availability
-          </h1>
-          <p className="text-red-600 text-center">Error: {error}</p>
-        </div>
-      </main>
+      <div className="min-h-screen w-full bg-brand-background2">
+        <main className="h-full w-full flex items-center justify-center p-6">
+          <div className="w-full max-w-6xl">
+            <h1 className="text-2xl font-semibold text-center mb-8">
+              Tennis Court Availability
+            </h1>
+            <p className="text-red-600 text-center">Error: {error}</p>
+          </div>
+        </main>
+      </div>
     );
   }
 
   return (
-    <main className="min-h-screen bg-brand-background2 flex items-center justify-center">
-      <div className="w-full max-w-6xl mx-auto px-4 py-8">
-        <h1 className="text-lg font-semibold text-center mb-8">
-          Tennis Court Availability
-        </h1>
-        
-        {loading ? (
-          <div className="flex items-center justify-center h-64">
-            <div className="animate-pulse text-gray-600">Loading...</div>
-          </div>
-        ) : (
-          <div className="overflow-x-auto rounded-xl">
-            <CalendarTable calendar={calendar} dates={dates} times={times} />
-          </div>
-        )}
-      </div>
-    </main>
+    <div className="min-h-screen w-full bg-brand-background2">
+      <main className="h-full w-full flex items-center justify-center p-6">
+        <div className="w-full max-w-6xl">
+          <h1 className="text-2xl font-semibold text-center mb-8">
+            Tennis Court Availability
+          </h1>
+          
+          {loading ? (
+            <div className="flex items-center justify-center h-64">
+              <div className="animate-pulse text-gray-600">Loading...</div>
+            </div>
+          ) : (
+            <div className="bg-white rounded-xl shadow-lg p-4">
+              <div className="overflow-x-auto">
+                <CalendarTable calendar={calendar} dates={dates} times={times} />
+              </div>
+            </div>
+          )}
+        </div>
+      </main>
+    </div>
   );
 }
