@@ -11,11 +11,11 @@ const CalendarCell: React.FC<CalendarCellProps> = ({ count }) => {
       <div 
         className={`
           flex flex-col items-center justify-center
-          aspect-square w-full h-full
-          rounded-lg p-12
+          aspect-square min-w-[100px] min-h-[100px] md:min-w-[120px] md:min-h-[120px]
+          rounded-lg
           shadow-sm transition-all duration-200
           ${available 
-            ? 'bg-white text-gray-900 font-bold hover:bg-gray-50 hover:shadow-md cursor-pointer' 
+            ? 'bg-white text-gray-900 font-bold hover:bg-gray-100 hover:shadow-md cursor-pointer' 
             : 'bg-gray-100 text-gray-400'
           }
         `}

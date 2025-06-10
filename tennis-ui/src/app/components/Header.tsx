@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header: React.FC = () => (
   <header className="w-full bg-white border-b border-gray-200 shadow-sm">
-    <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+    <div className="w-full max-w-7xl mx-auto flex flex-row items-center justify-between px-6 py-4">
       <div className="text-xl font-bold tracking-tight text-gray-900">
         I WANT TO PLAY TENNIS
       </div>
