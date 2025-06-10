@@ -7,12 +7,12 @@ type CalendarCellProps = {
 const CalendarCell: React.FC<CalendarCellProps> = ({ count }) => {
   const available = count > 0;
   return (
-    <td className="p-8">
+    <td className="p-2">
       <div 
         className={`
           flex flex-col items-center justify-center
           aspect-square w-full h-full
-          rounded-lg
+          rounded-lg p-12
           shadow-sm transition-all duration-200
           ${available 
             ? 'bg-white text-gray-900 font-bold hover:bg-gray-50 hover:shadow-md cursor-pointer' 
