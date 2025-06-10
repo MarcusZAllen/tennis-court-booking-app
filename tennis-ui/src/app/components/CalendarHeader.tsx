@@ -8,26 +8,19 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({ dates }) => {
   return (
     <thead>
       <tr>
-        <th className="sticky left-0 z-20 p-4 w-32 sm:w-36">
-          <div className="bg-brand-background1 rounded-lg p-4 shadow-sm">
-            <span className="font-medium text-sm sm:text-base text-gray-700">
-              Time
-            </span>
-          </div>
-        </th>
+        <th className="sticky left-0 z-20 p-6 w-24 bg-white text-lg font-bold text-gray-800 text-center">Hour</th>
         {dates.map(date => {
           const dateObj = new Date(date);
-          const dayName = dateObj.toLocaleDateString('en-GB', { weekday: 'short' });
+          const dayName = dateObj.toLocaleDateString('en-GB', { weekday: 'long' });
           const dayDate = dateObj.getDate();
-          
+          const daySuffix = (d => (d > 3 && d < 21) || d % 10 > 3 ? 'th' : ['th', 'st', 'nd', 'rd'][d % 10])(dayDate);
           return (
             <th 
               key={date} 
-              className="p-4 min-w-[120px] sm:min-w-[140px]"
+              className="p-4 min-w-[120px] text-center"
             >
-              <div className="bg-brand-background1 rounded-lg p-4 shadow-sm">
-                <div className="font-semibold text-sm sm:text-base">{dayName}</div>
-                <div className="text-xs sm:text-sm text-gray-600">{dayDate}</div>
+              <div className="font-bold text-base text-gray-900">
+                {dayName}, {dayDate}{daySuffix}
               </div>
             </th>
           );

@@ -6,10 +6,10 @@ This document defines the core brand color palette and their intended uses.
 
 | Name           | Value                  | Usage Description           |
 |----------------|------------------------|-----------------------------|
-| Background 1   | rgba(255, 255, 255, 1) | Main background             |
-| Background 2   | rgba(252, 244, 237, 1) | Secondary background        |
-| Main Color     | rgb(124, 180, 107)     | Brand's primary identity    |
-| Accent         | rgba(255, 69, 26, 1)   | Accent (used sparingly)     |
+| Background 1   | #ffffff              | Main background             |
+| Background 2   | #fcf4ed              | Secondary background        |
+| Main Color     | #7cb46b              | Brand's primary identity    |
+| Accent         | #ff451a              | Accent (used sparingly)     |
 | Border/Shadow  | black                  | For borders and shadows     |
 
 > Note: All colors should be used with accessibility and contrast in mind.
