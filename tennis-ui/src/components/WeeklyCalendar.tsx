@@ -103,7 +103,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
               {weekDates.map((d, colIdx) => {
                 const dateStr = d.toISOString().split("T")[0]; // Format: YYYY-MM-DD
                 const timeInMinutes = time * 60;
-                const slotData = calendarData[dateStr]?.[timeInMinutes];
+                const slotData = calendarData?.[dateStr]?.[timeInMinutes];
                 const availability = slotData?.totalCourts ?? 0;
                 const isAvailable = availability > 0;
                 // slot style logic updated here

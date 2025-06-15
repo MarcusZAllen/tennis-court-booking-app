@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Jost } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 
-const inter = Inter({
+
+const jost = Jost({
   subsets: ["latin"],
+  variable: "--font-jost",
   display: "swap",
 });
 
@@ -20,9 +22,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>
-        <Navbar />
-        {children}
+      <body className={`${jost.variable} font-jost antialiased bg-brand-background2`}>
+        <div className="min-h-screen w-full flex flex-col items-center px-4">
+          <Navbar />
+          <main className="w-full max-w-[1440px] mx-auto">{children}</main>
+        </div>
       </body>
     </html>
   );
