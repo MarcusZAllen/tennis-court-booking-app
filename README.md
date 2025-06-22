@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 T# 🎾 Tennis Court Booking App
+=======
+# 🎾 Tennis Court Booking App
+>>>>>>> 121eb37ae1536e4b7f8ac3003b18dd8c6af8b0fa
 
 A script-based tool to aggregate publicly available tennis court booking data across different platforms in London. The goal is to maximize your chances of booking a court — without jumping across multiple outdated websites.
 
@@ -94,4 +98,8 @@ Each slot is output like this:
 
 ## ⚠️ Disclaimer
 
+<<<<<<< HEAD
 This project is for educational or personal use only. Be mindful of scraping limits and website terms of service.
+=======
+This project is for educational or personal use only. Be mindful of scraping limits and website terms of service.
+>>>>>>> 121eb37ae1536e4b7f8ac3003b18dd8c6af8b0fa

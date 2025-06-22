@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "tennis-ui",
   "version": "0.1.0",
   "private": true,
@@ -33,5 +34,26 @@
     "tailwindcss": "^3.4.17",
     "tsconfig-paths": "^4.1.2",
     "typescript": "^5"
+=======
+  "name": "tennis-court-booking-app",
+  "version": "1.0.0",
+  "description": "Aggregates tennis court availability from public booking websites in London.",
+  "main": "scrape.js",
+  "scripts": {
+    "start": "node scrape.js"
+  },
+  "keywords": [
+    "tennis",
+    "scraper",
+    "booking",
+    "playwright",
+    "london"
+  ],
+  "author": "Marcus Allen",
+  "license": "MIT",
+  "dependencies": {
+    "p-limit": "^6.2.0",
+    "playwright": "^1.39.0"
+>>>>>>> 121eb37ae1536e4b7f8ac3003b18dd8c6af8b0fa
   }
 }

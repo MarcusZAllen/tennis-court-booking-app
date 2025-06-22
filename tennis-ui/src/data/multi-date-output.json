@@ -1,0 +1,38 @@
+[
+  {
+    "provider": "clubspark",
+    "location": "Main Courts",
+    "bookingUrl": "https://example.com/book",
+    "date": "2024-03-18",
+    "readableTime": "Book at 07:00 - 08:00",
+    "cost": "£15.00",
+    "startMinutes": 420,
+    "endMinutes": 480,
+    "sessionId": "session1",
+    "slotKey": "key1"
+  },
+  {
+    "provider": "clubspark",
+    "location": "Main Courts",
+    "bookingUrl": "https://example.com/book",
+    "date": "2024-03-18",
+    "readableTime": "Book at 08:00 - 09:00",
+    "cost": "£15.00",
+    "startMinutes": 480,
+    "endMinutes": 540,
+    "sessionId": "session1",
+    "slotKey": "key2"
+  },
+  {
+    "provider": "clubspark",
+    "location": "Main Courts",
+    "bookingUrl": "https://example.com/book",
+    "date": "2024-03-19",
+    "readableTime": "Book at 09:00 - 10:00",
+    "cost": "£15.00",
+    "startMinutes": 540,
+    "endMinutes": 600,
+    "sessionId": "session2",
+    "slotKey": "key3"
+  }
+] 
