@@ -1,0 +1,15 @@
+# 🎨 Brand Color Guidelines
+
+This document defines the core brand color palette and their intended uses.
+
+## Primary Colors
+
+| Name           | Value                  | Usage Description           |
+|----------------|------------------------|-----------------------------|
+| Background 1   | #ffffff              | Main background             |
+| Background 2   | #fcf4ed              | Secondary background        |
+| Main Color     | #7cb46b              | Brand's primary identity    |
+| Accent         | #ff451a              | Accent (used sparingly)     |
+| Border/Shadow  | black                  | For borders and shadows     |
+
+> Note: All colors should be used with accessibility and contrast in mind.
