@@ -19,12 +19,14 @@ export default function LocationPills({ selected, onSelect }: LocationPillsProps
           type="button"
           className={`px-4 py-1 rounded-full font-jost text-sm font-medium transition
             ${selected === loc
-              ? "bg-white text-black shadow border border-gray-300"
-              : "bg-[#f5f3ff] text-gray-400 border border-gray-200 hover:bg-[#ebe6f1] hover:text-black"}
+              ? "text-white shadow border"
+              : "bg-[#fcf4ed] text-gray-600 border border-gray-200 hover:bg-[#ff451a] hover:text-white"}
             focus:outline-none`}
           style={{
             letterSpacing: "0.06em",
             minWidth: 0,
+            backgroundColor: selected === loc ? '#7cb46b' : undefined,
+            borderColor: selected === loc ? '#7cb46b' : undefined,
           }}
           aria-pressed={selected === loc}
           onClick={() => { onSelect(loc); }}

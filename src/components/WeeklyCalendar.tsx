@@ -42,18 +42,29 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
   const [selectedSlot, setSelectedSlot] = React.useState<{
     day: number;
     time: number;
+    dateStr: string;
+    timeInMinutes: number;
+    slotData: any;
   } | null>(null);
   const [modalOpen, setModalOpen] = React.useState(false);
 
   // On slot click: open modal with date and time details
-  const handleSlotClick = (colIdx: number, rowIdx: number) => {
-    setSelectedSlot({ day: colIdx, time: rowIdx });
+  const handleSlotClick = (colIdx: number, rowIdx: number, dateStr: string, timeInMinutes: number, slotData: any) => {
+    setSelectedSlot({ 
+      day: colIdx, 
+      time: rowIdx, 
+      dateStr, 
+      timeInMinutes, 
+      slotData 
+    });
     setModalOpen(true);
   };
 
   // Format selected slot info for modal
   let selectedDateStr = "";
   let selectedTimeStr = "";
+  let selectedSlots: any[] = [];
+  
   if (selectedSlot) {
     const date = weekDates[selectedSlot.day];
     selectedDateStr = date
@@ -61,6 +72,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
       : "";
     const hour = TIMES[selectedSlot.time];
     selectedTimeStr = hour < 12 ? `${hour}am` : hour === 12 ? `12pm` : `${hour - 12}pm`;
+    selectedSlots = selectedSlot.slotData?.slots || [];
   }
 
   return (
@@ -68,11 +80,11 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
       className="rounded-[8px] bg-white border border-black w-full max-w-[900px] calendar-main-area"
       style={{
         boxShadow: "0 2px 12px 0 rgb(60 80 60 / 0.08)",
-        padding: "16px",
+        padding: "24px",
         margin: 0,
       }}
     >
-      <table className="min-w-full border-separate border-spacing-1 font-medium select-none">
+      <table className="min-w-full border-separate border-spacing-2 font-medium select-none">
         <thead>
           <tr>
             <th className="w-6 h-14 pr-1 align-middle"></th>
@@ -139,10 +151,10 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
                       pointerEvents: isAvailable ? "auto" : "none",
                       backgroundColor: !isAvailable ? "#e5e7eb" : undefined, // Tailwind gray-300
                     }}
-                    onClick={() => isAvailable && handleSlotClick(colIdx, rowIdx)}
+                    onClick={() => isAvailable && handleSlotClick(colIdx, rowIdx, dateStr, timeInMinutes, slotData)}
                     onKeyDown={e => {
                       if (isAvailable && (e.key === "Enter" || e.key === " ")) {
-                        handleSlotClick(colIdx, rowIdx);
+                        handleSlotClick(colIdx, rowIdx, dateStr, timeInMinutes, slotData);
                       }
                     }}
                   >
@@ -184,6 +196,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
         open={modalOpen}
         date={selectedDateStr}
         time={selectedTimeStr}
+        slots={selectedSlots}
         onClose={() => setModalOpen(false)}
       />
     </div>

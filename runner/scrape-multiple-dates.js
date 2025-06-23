@@ -36,6 +36,15 @@ for (const file of fs.readdirSync(DATA_DIR)) {
 console.log('🧹 Cleaned up old per-day JSON files');
 
 (async () => {
+  const startTime = Date.now();
+  const stats = {
+    totalTasks: 0,
+    successful: 0,
+    failed: 0,
+    totalSlots: 0,
+    errors: []
+  };
+
   try {
     const dates = getFutureDates(7); // scrape next 7 days
 
@@ -43,19 +52,26 @@ console.log('🧹 Cleaned up old per-day JSON files');
 
     for (const date of dates) {
       for (const location of clubSparkLocations) {
+        stats.totalTasks++;
         scrapeTasks.push(clubLimit(async () => {
           console.log(`[${location.name} - ${date}] Starting ClubSpark scrape`);
           try {
             const slots = await scrapeClubSpark(location, date);
-            return slots;
+            stats.successful++;
+            stats.totalSlots += slots.length;
+            return { success: true, slots, location: location.name, date };
           } catch (err) {
-            console.error(`[${location.name} - ${date}] ❌ Error:`, err.message);
-            return [];
+            stats.failed++;
+            const error = `[${location.name} - ${date}] ❌ Error: ${err.message}`;
+            stats.errors.push(error);
+            console.error(error);
+            return { success: false, slots: [], location: location.name, date, error: err.message };
           }
         }));
       }
 
       for (const location of parkSportsLocations) {
+        stats.totalTasks++;
         scrapeTasks.push(parkLimit(async () => {
           console.log(`[${location.name} - ${date}] Starting Park Sports scrape`);
           try {
@@ -64,10 +80,15 @@ console.log('🧹 Cleaned up old per-day JSON files');
             await new Promise(res => setTimeout(res, delay));
 
             const slots = await scrapeParkSports(location, date);
-            return slots;
+            stats.successful++;
+            stats.totalSlots += slots.length;
+            return { success: true, slots, location: location.name, date };
           } catch (err) {
-            console.error(`[${location.name} - ${date}] ❌ Error:`, err.message);
-            return [];
+            stats.failed++;
+            const error = `[${location.name} - ${date}] ❌ Error: ${err.message}`;
+            stats.errors.push(error);
+            console.error(error);
+            return { success: false, slots: [], location: location.name, date, error: err.message };
           }
         }));
       }
@@ -76,7 +97,7 @@ console.log('🧹 Cleaned up old per-day JSON files');
     const results = await Promise.allSettled(scrapeTasks);
     const allSlots = results
       .filter(res => res.status === 'fulfilled')
-      .flatMap(res => res.value);
+      .flatMap(res => res.value.slots || []);
 
     if (!fs.existsSync('data')) {
       fs.mkdirSync('data');
@@ -96,10 +117,27 @@ console.log('🧹 Cleaned up old per-day JSON files');
       console.error('❌ Failed to run aggregation script:', err.message);
     }
 
-    console.log(`Scraped ${allSlots.length} slots across ${dates.length} days.`);
-  } catch (e) {
-    console.error('Unexpected top-level error:', e);
+    // 📊 Print summary statistics
+    const duration = ((Date.now() - startTime) / 1000).toFixed(2);
+    console.log('\n📊 SCRAPING SUMMARY');
+    console.log('==================');
+    console.log(`⏱️  Total duration: ${duration} seconds`);
+    console.log(`📋 Total tasks: ${stats.totalTasks}`);
+    console.log(`✅ Successful: ${stats.successful}`);
+    console.log(`❌ Failed: ${stats.failed}`);
+    console.log(`🎾 Total slots found: ${stats.totalSlots}`);
+    console.log(`📅 Dates scraped: ${dates.length}`);
+    console.log(`🏟️  Locations: ${clubSparkLocations.length + parkSportsLocations.length}`);
+    
+    if (stats.errors.length > 0) {
+      console.log('\n⚠️  ERRORS:');
+      stats.errors.forEach(error => console.log(`  ${error}`));
+    }
 
+    console.log(`\n🎉 Scraping completed successfully!`);
+  } catch (e) {
+    console.error('💥 Unexpected top-level error:', e);
+    process.exit(1);
   } finally {
     process.exit(0); // ✅ Ensure clean script exit
   }

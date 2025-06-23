@@ -8,22 +8,23 @@ import {
   DialogClose,
 } from "./ui/dialog";
 import { Button } from "./ui/button";
+import { ExternalLink, MapPin } from "lucide-react";
 
-// Example locations for the modal; in real app, pass locations as props.
-const LOCATION_LIST = [
-  { name: "Wimbledon", courts: 5 },
-  { name: "Regent’s Park", courts: 4 },
-  { name: "Battersea", courts: 3 },
-  { name: "Hackney Downs", courts: 2 },
-  { name: "Ealing", courts: 1 },
-];
+type Slot = {
+  provider: string;
+  location: string;
+  bookingUrl: string;
+  cost: string;
+  sessionId: string;
+  slotKey: string;
+};
 
 type SlotBookingModalProps = {
   open: boolean;
   date: string;
   time: string;
   onClose: () => void;
-  locations?: { name: string; courts: number }[];
+  slots?: Slot[];
 };
 
 export default function SlotBookingModal({
@@ -31,38 +32,113 @@ export default function SlotBookingModal({
   date,
   time,
   onClose,
-  locations = LOCATION_LIST,
+  slots = [],
 }: SlotBookingModalProps) {
+  // Group slots by location and count courts
+  const locationGroups = slots.reduce((groups, slot) => {
+    const location = slot.location;
+    if (!groups[location]) {
+      groups[location] = {
+        count: 0,
+        sampleSlot: slot, // Keep one slot for booking URL
+        provider: slot.provider
+      };
+    }
+    groups[location].count++;
+    return groups;
+  }, {} as Record<string, { count: number; sampleSlot: Slot; provider: string }>);
+
+  const handleBookingClick = (bookingUrl: string) => {
+    window.open(bookingUrl, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-md w-full px-6 py-6 rounded-2xl shadow-xl bg-white">
+      <DialogContent className="max-w-md w-full px-6 py-6 shadow-xl bg-white">
         <DialogHeader>
-          <DialogTitle className="text-xl font-jost text-center mb-1">
+          <DialogTitle className="text-xl font-jost text-center mb-3">
             {date}, {time}
           </DialogTitle>
-          <DialogDescription className="text-center mb-3">
-            Available Locations
+          <DialogDescription className="text-center mb-6 text-gray-600">
+            Available courts across {Object.keys(locationGroups).length} locations
           </DialogDescription>
         </DialogHeader>
-        <div className="space-y-3">
-          {locations.map((loc, idx) => (
+        
+        <div className="space-y-4">
+          {Object.entries(locationGroups).map(([location, data]) => (
             <div
-              key={loc.name}
-              className="flex items-center justify-between px-4 py-2 rounded-lg bg-gray-50 border border-gray-200"
+              key={location}
+              className="flex items-center justify-between px-5 py-4 rounded-xl bg-gray-50 border border-gray-200 hover:bg-gray-100 transition-colors"
             >
-              <span className="font-jost text-base text-gray-900">{loc.name}</span>
-              <span className="text-xs text-gray-500 font-jost mr-2">
-                {loc.courts} court{loc.courts !== 1 ? "s" : ""}
-              </span>
+              <div className="flex items-center space-x-3">
+                <MapPin className="h-4 w-4" style={{ color: '#7cb46b' }} />
+                <div>
+                  <span className="font-jost text-base font-medium text-gray-900">
+                    {location}
+                  </span>
+                  <div className="flex items-center space-x-2 mt-1">
+                    <span className="text-sm text-gray-600">
+                      {data.count} court{data.count !== 1 ? 's' : ''} available
+                    </span>
+                    <span className="text-xs text-gray-500 font-medium">
+                      {data.provider}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              
               <Button
-                variant="secondary"
+                onClick={() => handleBookingClick(data.sampleSlot.bookingUrl)}
                 size="sm"
-                className="ml-2 px-4 py-1 rounded-full font-jost text-sm"
+                className="px-4 py-2 font-medium rounded-xl flex items-center space-x-1"
+                style={{ 
+                  backgroundColor: '#7cb46b',
+                  borderColor: '#7cb46b',
+                  color: 'white'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#6ba55a';
+                  e.currentTarget.style.borderColor = '#6ba55a';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#7cb46b';
+                  e.currentTarget.style.borderColor = '#7cb46b';
+                }}
               >
-                Book Now
+                <span>Book</span>
+                <ExternalLink className="h-3 w-3" />
               </Button>
             </div>
           ))}
+          
+          {Object.keys(locationGroups).length === 0 && (
+            <div className="text-center py-8 text-gray-500 rounded-xl bg-gray-50 border border-gray-200">
+              <p className="text-lg font-medium">No courts available</p>
+              <p className="text-sm">Try selecting a different time slot</p>
+            </div>
+          )}
+        </div>
+        
+        <div className="flex justify-end mt-8">
+          <Button
+            variant="outline"
+            onClick={onClose}
+            className="px-6 py-2 font-medium rounded-xl"
+            style={{ 
+              borderColor: '#7cb46b',
+              color: '#7cb46b'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#7cb46b';
+              e.currentTarget.style.color = 'white';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+              e.currentTarget.style.color = '#7cb46b';
+            }}
+          >
+            Close
+          </Button>
         </div>
       </DialogContent>
     </Dialog>

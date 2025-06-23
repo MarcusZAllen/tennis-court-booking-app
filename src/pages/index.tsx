@@ -28,6 +28,7 @@ const Index = () => {
               Check real-time availability. Grab the perfect slot—no hassle.
             </p>
           </section>
+          
           {/* Location Pills Selector - now directly above calendar */}
           <LocationPills selected={location} onSelect={setLocation} />
           {/* Weekly Calendar Booking Grid */}

@@ -1,105 +1,183 @@
-<<<<<<< HEAD
-T# 🎾 Tennis Court Booking App
-=======
-# 🎾 Tennis Court Booking App
->>>>>>> 121eb37ae1536e4b7f8ac3003b18dd8c6af8b0fa
+# Tennis Court Booking Aggregator
 
-A script-based tool to aggregate publicly available tennis court booking data across different platforms in London. The goal is to maximize your chances of booking a court — without jumping across multiple outdated websites.
+A comprehensive tennis court availability aggregator that scrapes real-time booking data from multiple providers across London and presents it in a user-friendly web interface.
 
----
+## 🎾 Features
 
-## 🚀 What This Project Does
+- **Multi-Provider Support**: Scrapes from ClubSpark and ParkSports booking systems
+- **Real-Time Data**: Updates availability every scrape cycle
+- **Concurrent Scraping**: Efficient parallel processing with rate limiting
+- **Modern UI**: Next.js frontend with responsive design
+- **Location Filtering**: Filter by specific tennis courts
+- **Weekly Calendar View**: Easy-to-use booking interface
 
-- Scrapes availability data from court booking sites like Park Sports or ClubSpark.
-- Outputs structured court slot information (court name, date, time, cost).
-- (Planned) Displays available slots in a user-friendly frontend (Lovable or Framer).
-- (Planned) Allows users to book an available court directly from the website.
-- Built for flexibility — start simple and grow into a full product.
+## 🏟️ Supported Locations
 
----
+### ClubSpark
+- Battersea Park
+- Archbishops Park
 
-## 📦 Project Structure
+### ParkSports  
+- Regents Park
+- Hyde Park
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd tennis-court-booking-app
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Install Playwright browsers**
+   ```bash
+   npx playwright install chromium
+   ```
+
+4. **Run the scraper**
+   ```bash
+   npm run scrape
+   ```
+
+5. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+6. **Open your browser**
+   Navigate to `http://localhost:3000`
+
+## 📁 Project Structure
 
 ```
 tennis-court-booking-app/
-├── scrapers/                  # Individual scrapers for each booking site
-│   ├── parksports.js          # done
-│   └── clubspark.js           # (planned)
-├── runner/                    # Scripts that orchestrate scrapers
-│   ├── scrape-multiple-dates.js 
-│   └── scrape-all-sites.js
-├── data/                      # Scraped output and debug files
-│   ├── output.json
-│   └── debug.html
-├── utils/                     # Helper functions (optional, planned)
-├── package.json
-└── README.md
+├── scrapers/           # Web scraping modules
+│   ├── clubspark.js   # ClubSpark scraper
+│   └── parksports.js  # ParkSports scraper
+├── runner/            # Scraping orchestration
+│   └── scrape-multiple-dates.js
+├── locations/         # Location configurations
+│   ├── clubspark.js
+│   └── parksports.js
+├── data/             # Scraped data storage
+├── src/              # Next.js frontend
+│   ├── components/   # React components
+│   ├── hooks/        # Custom React hooks
+│   ├── utils/        # Utility functions
+│   └── pages/        # Next.js pages
+└── config.js         # Configuration file
 ```
 
----
+## 🔧 Configuration
 
-## 👋 How to Use
+Edit `config.js` to customize:
+- Scraping parameters (days ahead, concurrency limits)
+- Rate limiting settings
+- Data paths
+- Logging levels
 
-1. Clone or download this repo.
-2. Run `npm install` to install dependencies (e.g. Playwright).
-3. Run the scraper with:
+## 📊 Data Flow
 
-```
-node scrapers/parksports.js
-```
+1. **Scraping**: Individual scrapers fetch availability from booking sites
+2. **Aggregation**: Daily files are combined into location-based summaries
+3. **Transformation**: Data is formatted for frontend consumption
+4. **Display**: React components render the calendar interface
 
-4. (Planned) To scrape multiple dates:
+## 🛠️ Available Scripts
 
-```
-node runner/scrape-multiple-dates.js
-```
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run scrape` - Run the scraper
+- `npm run aggregate` - Aggregate daily data to locations
+- `npm run lint` - Run ESLint
 
----
+## 🔍 Adding New Locations
 
-## 📁 Output
+1. **Add location to provider config**:
+   ```javascript
+   // locations/clubspark.js
+   {
+     name: "New Location",
+     url: "https://booking-url.com"
+   }
+   ```
 
-- Scraped court slots are printed to the console.
-- They are also saved to:
+2. **Test the scraper**:
+   ```bash
+   node scrapers/clubspark.js
+   ```
 
-```
-data/output.json
-```
+3. **Update frontend filters** if needed
 
-This will later feed into a frontend calendar view.
+## 🚨 Rate Limiting
 
----
+The scraper implements intelligent rate limiting:
+- **ParkSports**: 2 concurrent requests (strict)
+- **ClubSpark**: 3 concurrent requests (lenient)
+- **Overall**: 5 concurrent requests maximum
+- **Delays**: 5-8 second randomized delays for ParkSports
 
-## 📊 Data Format
+## 📈 Monitoring
 
-Each slot is output like this:
+The scraper provides detailed statistics:
+- Total tasks executed
+- Success/failure rates
+- Total slots found
+- Error logging
+- Performance metrics
 
-```json
-{
-  "provider": "parksports",
-  "court": "Regents Park",
-  "date": "2025-06-03",
-  "readableTime": "14:00 - 15:00",
-  "cost": "£16.40"
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## 📄 License
+
+MIT License - see LICENSE file for details
+
+## ⚠️ Legal Notice
+
+This tool is for educational and personal use. Please respect the terms of service of the booking websites you're scraping. Consider implementing appropriate delays and not overwhelming their servers.
+
+## 🆘 Troubleshooting
+
+### Common Issues
+
+1. **Playwright browser not found**
+   ```bash
+   npx playwright install chromium
+   ```
+
+2. **Rate limiting errors**
+   - Increase delays in `config.js`
+   - Reduce concurrency limits
+
+3. **Scraping failures**
+   - Check debug HTML files in `data/`
+   - Verify booking URLs are still valid
+   - Check for website changes
+
+### Debug Mode
+
+Enable debug logging in `config.js`:
+```javascript
+logging: {
+  level: 'debug',
+  saveDebugHtml: true
 }
 ```
-
----
-
-## 🧠 Roadmap
-
-- [x] Scrape Park Sports availability  
-- [ ] Loop over multiple dates  
-- [ ] Add support for ClubSpark  
-- [ ] Combine multiple scrapers into a unified output  
-- [ ] Display results in a calendar UI  
-- [ ] Deploy as scheduled cloud task  
-
----
-
-## ⚠️ Disclaimer
-
-<<<<<<< HEAD
-This project is for educational or personal use only. Be mindful of scraping limits and website terms of service.
-=======
-This project is for educational or personal use only. Be mindful of scraping limits and website terms of service.
->>>>>>> 121eb37ae1536e4b7f8ac3003b18dd8c6af8b0fa

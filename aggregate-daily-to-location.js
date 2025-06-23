@@ -15,6 +15,7 @@ function normalizeLocationName(slug) {
 }
 
 const DATA_DIR = path.join(__dirname, 'data');
+const FRONTEND_DATA_DIR = path.join(__dirname, 'src', 'data');
 
 // Load and flatten all daily JSON files excluding aggregate files
 function loadAllSlots() {
@@ -89,9 +90,31 @@ function saveAggregatedData(provider, grouped) {
   }
 }
 
+// Copy multi-date-output.json to frontend data directory
+function copyToFrontend() {
+  const sourcePath = path.join(DATA_DIR, 'multi-date-output.json');
+  const targetPath = path.join(FRONTEND_DATA_DIR, 'multi-date-output.json');
+  
+  // Ensure frontend data directory exists
+  if (!fs.existsSync(FRONTEND_DATA_DIR)) {
+    fs.mkdirSync(FRONTEND_DATA_DIR, { recursive: true });
+  }
+  
+  if (fs.existsSync(sourcePath)) {
+    fs.copyFileSync(sourcePath, targetPath);
+    console.log(`📋 Copied multi-date-output.json to frontend data directory`);
+  } else {
+    console.warn(`⚠️  multi-date-output.json not found in ${DATA_DIR}`);
+  }
+}
+
 console.log('🔄 Aggregating slots across all locations...');
 const slots = loadAllSlots();
 const allLocations = getAllScrapedLocations();
 const grouped = groupByLocation(slots, allLocations);
 saveAggregatedData('by-location', grouped);
+
+// Copy data to frontend
+copyToFrontend();
+
 console.log('🎉 Aggregation complete.');
