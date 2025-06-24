@@ -12,14 +12,12 @@ function formatDaySuffix(day: number) {
   return day + "th";
 }
 
-// Generate dates for the current week (Mon–Sun)
+// Generate dates for the current week (starting from today)
 function getCurrentWeek() {
-  const curr = new Date();
-  const monday = new Date(curr);
-  monday.setDate(curr.getDate() - ((curr.getDay() + 6) % 7));
+  const today = new Date();
   return Array.from({ length: 7 }, (_, i) => {
-    const d = new Date(monday);
-    d.setDate(monday.getDate() + i);
+    const d = new Date(today);
+    d.setDate(today.getDate() + i);
     return d;
   });
 }
@@ -39,6 +37,11 @@ type WeeklyCalendarProps = {
 
 const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedLocation }) => {
   const weekDates = getCurrentWeek();
+  
+  // Debug logging
+  console.log('Calendar week dates:', weekDates.map(d => d.toDateString()));
+  console.log('Available data dates:', Object.keys(calendarData || {}));
+  
   const [selectedSlot, setSelectedSlot] = React.useState<{
     day: number;
     time: number;
@@ -113,7 +116,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
                 {time < 12 ? `${time}am` : time === 12 ? `12pm` : `${time - 12}pm`}
               </th>
               {weekDates.map((d, colIdx) => {
-                const dateStr = d.toISOString().split("T")[0]; // Format: YYYY-MM-DD
+                const dateStr = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); // Format: YYYY-MM-DD
                 const timeInMinutes = time * 60;
                 const slotData = calendarData?.[dateStr]?.[timeInMinutes];
                 const availability = slotData?.totalCourts ?? 0;

@@ -34,19 +34,19 @@ export default function SlotBookingModal({
   onClose,
   slots = [],
 }: SlotBookingModalProps) {
-  // Group slots by location and count courts
+  // Group slots by location and count unique courts (by slotKey)
   const locationGroups = slots.reduce((groups, slot) => {
     const location = slot.location;
     if (!groups[location]) {
       groups[location] = {
-        count: 0,
+        slotKeys: new Set<string>(),
         sampleSlot: slot, // Keep one slot for booking URL
         provider: slot.provider
       };
     }
-    groups[location].count++;
+    groups[location].slotKeys.add(slot.slotKey);
     return groups;
-  }, {} as Record<string, { count: number; sampleSlot: Slot; provider: string }>);
+  }, {} as Record<string, { slotKeys: Set<string>; sampleSlot: Slot; provider: string }>);
 
   const handleBookingClick = (bookingUrl: string) => {
     window.open(bookingUrl, '_blank', 'noopener,noreferrer');
@@ -78,7 +78,7 @@ export default function SlotBookingModal({
                   </span>
                   <div className="flex items-center space-x-2 mt-1">
                     <span className="text-sm text-gray-600">
-                      {data.count} court{data.count !== 1 ? 's' : ''} available
+                      {data.slotKeys.size} court{data.slotKeys.size !== 1 ? 's' : ''} available
                     </span>
                     <span className="text-xs text-gray-500 font-medium">
                       {data.provider}

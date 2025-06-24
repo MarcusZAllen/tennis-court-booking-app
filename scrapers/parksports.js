@@ -1,20 +1,31 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
 
+// Add randomized delay function
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
 module.exports = async function scrapeParkSports({ name, url }, date) {
   const startTime = Date.now();
   
   // Add randomized delay before scraping to avoid rate limiting
-  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-  const randomDelay = 2000 + Math.random() * 3000;
+  const randomDelay = 4000 + Math.random() * 5000; // 4-9 seconds (more conservative for ParkSports)
   await delay(randomDelay);
   
   // Launch browser with slowMo to appear more human-like and reduce rate limiting risk
   const browser = await chromium.launch({
-    headless: true, // set to false if debugging
-    slowMo: 100      // slows operations slightly to reduce server suspicion
+    headless: true,
+    slowMo: 200      // slows operations slightly to reduce server suspicion
   });
   const page = await browser.newPage();
+
+  // Set a realistic user agent
+  const userAgents = [
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15'
+  ];
+  const randomUserAgent = userAgents[Math.floor(Math.random() * userAgents.length)];
+  await page.setUserAgent(randomUserAgent);
 
   const location = name;
   const baseURL = url;
@@ -65,7 +76,7 @@ module.exports = async function scrapeParkSports({ name, url }, date) {
 
         if (!timeSpan || !costSpan || !dataTestId || !dataTestId.includes('|')) return null;
 
-        const [_, date, startMinutes] = dataTestId.split('|');
+        const [_, dateFromTestId, startMinutes] = dataTestId.split('|');
         const start = parseInt(interval.getAttribute('data-system-start-time'));
         const end = parseInt(interval.getAttribute('data-system-end-time'));
 

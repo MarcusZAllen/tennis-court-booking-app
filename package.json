@@ -9,7 +9,9 @@
     "start": "next start",
     "lint": "next lint",
     "scrape": "node runner/scrape-multiple-dates.js",
-    "aggregate": "node aggregate-daily-to-location.js"
+    "scrape:prod": "node runner/scrape-production.js",
+    "aggregate": "node aggregate-daily-to-location.js",
+    "cleanup": "node utils/data-cleanup.js"
   },
   "keywords": [
     "tennis",

@@ -21,11 +21,11 @@ const Index = () => {
         >
           {/* Headline + subheader */}
           <section className="w-full text-center px-4 pt-10 md:pt-14">
-            <h1 className="text-3xl md:text-5xl font-bold mb-3 md:mb-4 text-black leading-tight font-jost uppercase">
+            <h1 className="text-3xl md:text-3xl font-bold mb-3 md:mb-4 text-black leading-tight font-jost uppercase">
               Find and book tennis courts across London
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-4">
-              Check real-time availability. Grab the perfect slot—no hassle.
+              Check real-time availability. Grab the perfect slot.
             </p>
           </section>
           

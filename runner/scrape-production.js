@@ -5,12 +5,14 @@ const scrapeClubSpark = require('../scrapers/clubspark');
 const clubSparkLocations = require('../locations/clubspark');
 const parkSportsLocations = require('../locations/parksports');
 const DataCleanup = require('../utils/data-cleanup');
+const { retryWithBackoff } = require('../utils/retry-helper');
+const { getProxyArgs } = require('../utils/proxy-config');
 
 const pLimit = require('p-limit').default;
-const limit = pLimit(3); // Reduce concurrency to 3 total scrapes at a time
 
-const parkLimit = pLimit(1);  // Park Sports is strict — limit to 1 at a time
-const clubLimit = pLimit(2);  // ClubSpark seems less strict — limit to 2 at a time
+// Conservative limits for production
+const parkLimit = pLimit(1);  // Park Sports: 1 at a time
+const clubLimit = pLimit(1);  // ClubSpark: 1 at a time
 
 // Generate a list of future dates in YYYY-MM-DD format
 function getFutureDates(daysAhead) {
@@ -25,15 +27,13 @@ function getFutureDates(daysAhead) {
   return dates;
 }
 
-// 🧹 Clean up old data files
-console.log('🧹 Starting data cleanup...');
-const cleanup = new DataCleanup();
-cleanup.runFullCleanup({
-  dailyFilesMaxAge: 7,    // Keep daily files for 7 days
-  debugFilesMaxAge: 3,    // Keep debug files for 3 days
-  cleanEmpty: true,       // Remove empty files
-  showStats: true         // Show before/after statistics
-});
+// Production scraping with retry logic
+async function scrapeWithRetry(scraper, location, date) {
+  return retryWithBackoff(async () => {
+    console.log(`[${location.name} - ${date}] Starting scrape attempt`);
+    return await scraper(location, date);
+  }, 3, 2000); // 3 retries, 2 second base delay
+}
 
 (async () => {
   const startTime = Date.now();
@@ -46,17 +46,36 @@ cleanup.runFullCleanup({
   };
 
   try {
-    const dates = getFutureDates(7); // scrape next 7 days
+    // 🧹 Clean up old data files
+    console.log('🧹 Starting data cleanup...');
+    const cleanup = new DataCleanup();
+    cleanup.runFullCleanup({
+      dailyFilesMaxAge: 7,
+      debugFilesMaxAge: 3,
+      cleanEmpty: true,
+      showStats: true
+    });
 
+    const dates = getFutureDates(7); // scrape next 7 days
     const scrapeTasks = [];
+
+    // Add delays between different locations to avoid overwhelming servers
+    let taskDelay = 0;
+    const delayBetweenLocations = 10000; // 10 seconds between different locations
 
     for (const date of dates) {
       for (const location of clubSparkLocations) {
         stats.totalTasks++;
+        const currentDelay = taskDelay;
+        taskDelay += delayBetweenLocations;
+        
         scrapeTasks.push(clubLimit(async () => {
+          // Wait for the scheduled delay
+          await new Promise(resolve => setTimeout(resolve, currentDelay));
+          
           console.log(`[${location.name} - ${date}] Starting ClubSpark scrape`);
           try {
-            const slots = await scrapeClubSpark(location, date);
+            const slots = await scrapeWithRetry(scrapeClubSpark, location, date);
             stats.successful++;
             stats.totalSlots += slots.length;
             return { success: true, slots, location: location.name, date };
@@ -72,14 +91,16 @@ cleanup.runFullCleanup({
 
       for (const location of parkSportsLocations) {
         stats.totalTasks++;
+        const currentDelay = taskDelay;
+        taskDelay += delayBetweenLocations;
+        
         scrapeTasks.push(parkLimit(async () => {
+          // Wait for the scheduled delay
+          await new Promise(resolve => setTimeout(resolve, currentDelay));
+          
           console.log(`[${location.name} - ${date}] Starting Park Sports scrape`);
           try {
-            // ⏳ Add randomized delay to avoid IP bans
-            const delay = 5000 + Math.random() * 3000; // 5–8s
-            await new Promise(res => setTimeout(res, delay));
-
-            const slots = await scrapeParkSports(location, date);
+            const slots = await scrapeWithRetry(scrapeParkSports, location, date);
             stats.successful++;
             stats.totalSlots += slots.length;
             return { success: true, slots, location: location.name, date };
@@ -94,6 +115,7 @@ cleanup.runFullCleanup({
       }
     }
 
+    console.log(`⏳ Starting ${scrapeTasks.length} scraping tasks with delays...`);
     const results = await Promise.allSettled(scrapeTasks);
     const allSlots = results
       .filter(res => res.status === 'fulfilled')
@@ -109,6 +131,7 @@ cleanup.runFullCleanup({
     );
     console.log(`💾 Saved combined output to data/multi-date-output.json`);
 
+    // Run aggregation
     console.log('\n🔗 Running aggregation to per-location files...');
     const { execSync } = require('child_process');
     try {
@@ -119,8 +142,8 @@ cleanup.runFullCleanup({
 
     // 📊 Print summary statistics
     const duration = ((Date.now() - startTime) / 1000).toFixed(2);
-    console.log('\n📊 SCRAPING SUMMARY');
-    console.log('==================');
+    console.log('\n📊 PRODUCTION SCRAPING SUMMARY');
+    console.log('==============================');
     console.log(`⏱️  Total duration: ${duration} seconds`);
     console.log(`📋 Total tasks: ${stats.totalTasks}`);
     console.log(`✅ Successful: ${stats.successful}`);
@@ -134,11 +157,11 @@ cleanup.runFullCleanup({
       stats.errors.forEach(error => console.log(`  ${error}`));
     }
 
-    console.log(`\n🎉 Scraping completed successfully!`);
+    console.log(`\n🎉 Production scraping completed successfully!`);
   } catch (e) {
     console.error('💥 Unexpected top-level error:', e);
     process.exit(1);
   } finally {
-    process.exit(0); // ✅ Ensure clean script exit
+    process.exit(0);
   }
-})();
+})(); 

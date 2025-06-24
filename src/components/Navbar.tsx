@@ -9,15 +9,15 @@ const Navbar = () => {
       {/* Logo */}
       <div className="flex items-center">
         <span
-          className="text-black rounded-[14px] px-4 py-2 text-[1.5rem] md:text-[2rem] uppercase font-jost font-normal tracking-widest border-0 select-none"
+          className="text-black rounded-[14px] px-4 py-2 text-[1.5rem] md:text-[1rem] uppercase font-jost font-normal tracking-widest border-0 select-none"
           style={{
             background: "transparent",
             letterSpacing: "0.19em",
-            fontWeight: 400,
+            fontWeight: 100,
           }}
           tabIndex={-1}
         >
-          I WANT TO PLAY TENNIS
+          BOOK A COURT
         </span>
       </div>
       {/* Right: Courts, Share, Profile */}

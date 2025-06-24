@@ -32,7 +32,7 @@ export function transformSlotData(data: any[]): TransformedData {
       };
     }
 
-    transformed[slot.date][slot.startMinutes].totalCourts++;
+    // Add the slot to the array
     transformed[slot.date][slot.startMinutes].slots.push({
       provider: slot.provider,
       location: slot.location,
@@ -40,6 +40,15 @@ export function transformSlotData(data: any[]): TransformedData {
       cost: slot.cost,
       sessionId: slot.sessionId,
       slotKey: slot.slotKey
+    });
+  });
+
+  // After adding all slots, count unique courts for each time slot
+  Object.keys(transformed).forEach(date => {
+    Object.keys(transformed[date]).forEach(timeInMinutes => {
+      const timeSlot = transformed[date][parseInt(timeInMinutes)];
+      const uniqueSlotKeys = new Set(timeSlot.slots.map(slot => slot.slotKey));
+      timeSlot.totalCourts = uniqueSlotKeys.size;
     });
   });
 
