@@ -56,7 +56,7 @@ async function scrapeWithRetry(scraper, location, date) {
       showStats: true
     });
 
-    const dates = getFutureDates(7); // scrape next 7 days
+    const dates = getFutureDates(8); // scrape next 8 days
     const scrapeTasks = [];
 
     // Add delays between different locations to avoid overwhelming servers

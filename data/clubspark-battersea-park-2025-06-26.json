@@ -4,72 +4,12 @@
     "location": "Battersea Park",
     "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
     "date": "2025-06-26",
-    "readableTime": "Book at 08:00 - 09:00",
-    "cost": "£11.60",
-    "startMinutes": 480,
-    "endMinutes": 540,
-    "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
-    "slotKey": "ffa2c051-22bf-4da5-ae2a-aa4f089653c95d3d99ee-d0c5-478b-982c-a9de1bab18c0480"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Battersea Park",
-    "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
-    "date": "2025-06-26",
-    "readableTime": "Book at 13:00 - 14:00",
-    "cost": "£11.60",
-    "startMinutes": 780,
-    "endMinutes": 840,
-    "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
-    "slotKey": "ffa2c051-22bf-4da5-ae2a-aa4f089653c95d3d99ee-d0c5-478b-982c-a9de1bab18c0780"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Battersea Park",
-    "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
-    "date": "2025-06-26",
-    "readableTime": "Book at 08:00 - 09:00",
-    "cost": "£11.60",
-    "startMinutes": 480,
-    "endMinutes": 540,
-    "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
-    "slotKey": "494ada4e-6fcc-41f0-84fd-a276f5fc61ad5d3d99ee-d0c5-478b-982c-a9de1bab18c0480"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Battersea Park",
-    "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
-    "date": "2025-06-26",
-    "readableTime": "Book at 13:00 - 14:00",
-    "cost": "£11.60",
-    "startMinutes": 780,
-    "endMinutes": 840,
-    "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
-    "slotKey": "494ada4e-6fcc-41f0-84fd-a276f5fc61ad5d3d99ee-d0c5-478b-982c-a9de1bab18c0780"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Battersea Park",
-    "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
-    "date": "2025-06-26",
     "readableTime": "Book at 15:00 - 16:00",
     "cost": "£11.60",
     "startMinutes": 900,
     "endMinutes": 960,
     "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
-    "slotKey": "494ada4e-6fcc-41f0-84fd-a276f5fc61ad5d3d99ee-d0c5-478b-982c-a9de1bab18c0900"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Battersea Park",
-    "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
-    "date": "2025-06-26",
-    "readableTime": "Book at 11:00 - 12:00",
-    "cost": "£11.60",
-    "startMinutes": 660,
-    "endMinutes": 720,
-    "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
-    "slotKey": "8fbfb3df-c16c-4ff5-a185-288c01ee45505d3d99ee-d0c5-478b-982c-a9de1bab18c0660"
+    "slotKey": "ffa2c051-22bf-4da5-ae2a-aa4f089653c95d3d99ee-d0c5-478b-982c-a9de1bab18c0900"
   },
   {
     "provider": "clubspark",
@@ -112,36 +52,12 @@
     "location": "Battersea Park",
     "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
     "date": "2025-06-26",
-    "readableTime": "Book at 11:00 - 12:00",
-    "cost": "£11.60",
-    "startMinutes": 660,
-    "endMinutes": 720,
-    "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
-    "slotKey": "692099e5-37f1-4dbf-b745-0b85ef0f426f5d3d99ee-d0c5-478b-982c-a9de1bab18c0660"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Battersea Park",
-    "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
-    "date": "2025-06-26",
     "readableTime": "Book at 07:00 - 08:00",
     "cost": "£11.60",
     "startMinutes": 420,
     "endMinutes": 480,
     "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
     "slotKey": "e6245459-b121-40e4-9c44-c85cf46ed4f65d3d99ee-d0c5-478b-982c-a9de1bab18c0420"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Battersea Park",
-    "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
-    "date": "2025-06-26",
-    "readableTime": "Book at 11:00 - 12:00",
-    "cost": "£11.60",
-    "startMinutes": 660,
-    "endMinutes": 720,
-    "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
-    "slotKey": "e6245459-b121-40e4-9c44-c85cf46ed4f65d3d99ee-d0c5-478b-982c-a9de1bab18c0660"
   },
   {
     "provider": "clubspark",
@@ -172,18 +88,6 @@
     "location": "Battersea Park",
     "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
     "date": "2025-06-26",
-    "readableTime": "Book at 10:00 - 11:00",
-    "cost": "£11.60",
-    "startMinutes": 600,
-    "endMinutes": 660,
-    "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
-    "slotKey": "bab40408-2728-46dc-81cf-9c45e956f3255d3d99ee-d0c5-478b-982c-a9de1bab18c0600"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Battersea Park",
-    "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
-    "date": "2025-06-26",
     "readableTime": "Book at 13:00 - 14:00",
     "cost": "£11.60",
     "startMinutes": 780,
@@ -208,24 +112,12 @@
     "location": "Battersea Park",
     "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
     "date": "2025-06-26",
-    "readableTime": "Book at 12:00 - 13:00",
-    "cost": "£11.60",
-    "startMinutes": 720,
-    "endMinutes": 780,
-    "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
-    "slotKey": "23691a0d-b17b-4f84-b180-19d12314bfe75d3d99ee-d0c5-478b-982c-a9de1bab18c0720"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Battersea Park",
-    "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
-    "date": "2025-06-26",
     "readableTime": "Book at 13:00 - 14:00",
     "cost": "£11.60",
     "startMinutes": 780,
     "endMinutes": 840,
     "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
-    "slotKey": "23691a0d-b17b-4f84-b180-19d12314bfe75d3d99ee-d0c5-478b-982c-a9de1bab18c0720"
+    "slotKey": "23691a0d-b17b-4f84-b180-19d12314bfe75d3d99ee-d0c5-478b-982c-a9de1bab18c0780"
   },
   {
     "provider": "clubspark",
@@ -244,36 +136,12 @@
     "location": "Battersea Park",
     "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
     "date": "2025-06-26",
-    "readableTime": "Book at 07:00 - 08:00",
-    "cost": "£11.60",
-    "startMinutes": 420,
-    "endMinutes": 480,
-    "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
-    "slotKey": "65f48dfb-6303-4bef-a172-7aba86b163a85d3d99ee-d0c5-478b-982c-a9de1bab18c0420"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Battersea Park",
-    "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
-    "date": "2025-06-26",
     "readableTime": "Book at 08:00 - 09:00",
     "cost": "£11.60",
     "startMinutes": 480,
     "endMinutes": 540,
     "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
-    "slotKey": "65f48dfb-6303-4bef-a172-7aba86b163a85d3d99ee-d0c5-478b-982c-a9de1bab18c0420"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Battersea Park",
-    "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
-    "date": "2025-06-26",
-    "readableTime": "Book at 12:00 - 13:00",
-    "cost": "£11.60",
-    "startMinutes": 720,
-    "endMinutes": 780,
-    "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
-    "slotKey": "65f48dfb-6303-4bef-a172-7aba86b163a85d3d99ee-d0c5-478b-982c-a9de1bab18c0720"
+    "slotKey": "65f48dfb-6303-4bef-a172-7aba86b163a85d3d99ee-d0c5-478b-982c-a9de1bab18c0480"
   },
   {
     "provider": "clubspark",
@@ -285,7 +153,7 @@
     "startMinutes": 780,
     "endMinutes": 840,
     "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
-    "slotKey": "65f48dfb-6303-4bef-a172-7aba86b163a85d3d99ee-d0c5-478b-982c-a9de1bab18c0720"
+    "slotKey": "65f48dfb-6303-4bef-a172-7aba86b163a85d3d99ee-d0c5-478b-982c-a9de1bab18c0780"
   },
   {
     "provider": "clubspark",
@@ -340,24 +208,12 @@
     "location": "Battersea Park",
     "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
     "date": "2025-06-26",
-    "readableTime": "Book at 07:00 - 08:00",
-    "cost": "£11.60",
-    "startMinutes": 420,
-    "endMinutes": 480,
-    "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
-    "slotKey": "68b53afd-2e77-406a-9814-26c4b8a3c0595d3d99ee-d0c5-478b-982c-a9de1bab18c0420"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Battersea Park",
-    "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
-    "date": "2025-06-26",
     "readableTime": "Book at 08:00 - 09:00",
     "cost": "£11.60",
     "startMinutes": 480,
     "endMinutes": 540,
     "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
-    "slotKey": "68b53afd-2e77-406a-9814-26c4b8a3c0595d3d99ee-d0c5-478b-982c-a9de1bab18c0420"
+    "slotKey": "68b53afd-2e77-406a-9814-26c4b8a3c0595d3d99ee-d0c5-478b-982c-a9de1bab18c0480"
   },
   {
     "provider": "clubspark",
@@ -436,18 +292,6 @@
     "location": "Battersea Park",
     "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
     "date": "2025-06-26",
-    "readableTime": "Book at 21:00 - 22:00",
-    "cost": "£15.00",
-    "startMinutes": 1260,
-    "endMinutes": 1320,
-    "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
-    "slotKey": "c5711421-344b-41ff-a2fc-94aa179691ca5d3d99ee-d0c5-478b-982c-a9de1bab18c01260"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Battersea Park",
-    "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
-    "date": "2025-06-26",
     "readableTime": "Book at 08:00 - 09:00",
     "cost": "£11.60",
     "startMinutes": 480,
@@ -490,30 +334,6 @@
     "endMinutes": 840,
     "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
     "slotKey": "54e5763e-8ee8-4210-8f3d-dfe024dd10a25d3d99ee-d0c5-478b-982c-a9de1bab18c0720"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Battersea Park",
-    "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
-    "date": "2025-06-26",
-    "readableTime": "Book at 14:00 - 15:00",
-    "cost": "£11.60",
-    "startMinutes": 840,
-    "endMinutes": 900,
-    "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
-    "slotKey": "54e5763e-8ee8-4210-8f3d-dfe024dd10a25d3d99ee-d0c5-478b-982c-a9de1bab18c0720"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Battersea Park",
-    "bookingUrl": "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest&date=2025-06-26",
-    "date": "2025-06-26",
-    "readableTime": "Book at 21:00 - 22:00",
-    "cost": "£15.00",
-    "startMinutes": 1260,
-    "endMinutes": 1320,
-    "sessionId": "5d3d99ee-d0c5-478b-982c-a9de1bab18c0",
-    "slotKey": "54e5763e-8ee8-4210-8f3d-dfe024dd10a25d3d99ee-d0c5-478b-982c-a9de1bab18c01260"
   },
   {
     "provider": "clubspark",

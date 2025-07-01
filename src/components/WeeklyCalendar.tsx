@@ -1,6 +1,8 @@
 import * as React from "react";
 import SlotBookingModal from "./SlotBookingModal";
 import type { TransformedData } from "@/utils/transformSlotData";
+import { RotateCcw } from "lucide-react";
+import RefreshButton from "./RefreshButton";
 
 // Utility to add "st", "nd", "rd", "th" suffix to date
 function formatDaySuffix(day: number) {
@@ -15,7 +17,7 @@ function formatDaySuffix(day: number) {
 // Generate dates for the current week (starting from today)
 function getCurrentWeek() {
   const today = new Date();
-  return Array.from({ length: 7 }, (_, i) => {
+  return Array.from({ length: 8 }, (_, i) => {
     const d = new Date(today);
     d.setDate(today.getDate() + i);
     return d;
@@ -50,6 +52,34 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
     slotData: any;
   } | null>(null);
   const [modalOpen, setModalOpen] = React.useState(false);
+  const [scraping, setScraping] = React.useState(false);
+  const [done, setDone] = React.useState(false);
+  const [hovered, setHovered] = React.useState(false);
+  const [pressed, setPressed] = React.useState(false);
+
+  // Animation for completion
+  React.useEffect(() => {
+    if (done) {
+      const timeout = setTimeout(() => setDone(false), 1200);
+      return () => clearTimeout(timeout);
+    }
+  }, [done]);
+
+  const handleReplay = async () => {
+    if (scraping) return;
+    setScraping(true);
+    setDone(false);
+    try {
+      const res = await fetch("/api/scrape", { method: "POST" });
+      if (res.ok) {
+        setDone(true);
+      }
+    } catch (e) {
+      // Optionally show error
+    } finally {
+      setScraping(false);
+    }
+  };
 
   // On slot click: open modal with date and time details
   const handleSlotClick = (colIdx: number, rowIdx: number, dateStr: string, timeInMinutes: number, slotData: any) => {
@@ -85,12 +115,16 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
         boxShadow: "0 2px 12px 0 rgb(60 80 60 / 0.08)",
         padding: "24px",
         margin: 0,
+        position: "relative"
       }}
     >
       <table className="min-w-full border-separate border-spacing-2 font-medium select-none">
         <thead>
           <tr>
-            <th className="w-6 h-14 pr-1 align-middle"></th>
+            {/* Refresh button in line with header row and time column */}
+            <th className="w-6 h-14 pr-1 align-middle" style={{ position: 'relative', minWidth: 36, width: 36, padding: 0 }}>
+              <RefreshButton />
+            </th>
             {weekDates.map((d, idx) => (
               <th
                 key={idx}

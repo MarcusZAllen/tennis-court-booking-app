@@ -16,8 +16,6 @@ module.exports = async function scrapeClubSpark({ name, url }, date) {
     headless: true,
     slowMo: 150 // slows operations to reduce server suspicion
   });
-  const page = await browser.newPage();
-
   // Set a realistic user agent
   const userAgents = [
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -25,7 +23,8 @@ module.exports = async function scrapeClubSpark({ name, url }, date) {
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15'
   ];
   const randomUserAgent = userAgents[Math.floor(Math.random() * userAgents.length)];
-  await page.setUserAgent(randomUserAgent);
+  const context = await browser.newContext({ userAgent: randomUserAgent });
+  const page = await context.newPage();
 
   const location = name;
   const baseURL = url;  

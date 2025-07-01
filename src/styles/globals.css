@@ -9,3 +9,9 @@
     font-family: 'Jost', sans-serif;
   }
 }
+
+/* Calendar slot hover: make all text inside white */
+.calendar-main-area td.bg-white:hover span,
+.calendar-main-area td.bg-white:hover {
+  color: #fff !important;
+}

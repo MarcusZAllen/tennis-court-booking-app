@@ -46,7 +46,7 @@ cleanup.runFullCleanup({
   };
 
   try {
-    const dates = getFutureDates(7); // scrape next 7 days
+    const dates = getFutureDates(8); // scrape next 8 days
 
     const scrapeTasks = [];
 
