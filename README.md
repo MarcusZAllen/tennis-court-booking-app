@@ -181,3 +181,5 @@ logging: {
   saveDebugHtml: true
 }
 ```
+
+<!-- Last updated for Vercel deployment -->
