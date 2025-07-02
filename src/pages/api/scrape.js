@@ -10,20 +10,25 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log('🚀 Starting scheduled scraping job...');
-    
-    // Run the production scraper
-    const { stdout, stderr } = await execAsync('npm run scrape:prod', {
+    console.log('🚀 Starting manual scrape for all providers...');
+
+    // Run Clubspark scraper
+    await execAsync('node runner/scrape-clubspark-only.js', {
       cwd: process.cwd(),
-      timeout: 300000 // 5 minutes timeout
+      timeout: 300000 // 5 minutes
     });
 
-    console.log('✅ Scraping completed successfully');
-    console.log('STDOUT:', stdout);
-    
-    if (stderr) {
-      console.log('STDERR:', stderr);
-    }
+    // Run ParkSports scraper
+    await execAsync('node runner/scrape-parksports-only.js', {
+      cwd: process.cwd(),
+      timeout: 300000 // 5 minutes
+    });
+
+    // Run aggregation
+    await execAsync('node aggregate-daily-to-location.js', {
+      cwd: process.cwd(),
+      timeout: 300000 // 5 minutes
+    });
 
     res.status(200).json({ 
       success: true, 
@@ -32,7 +37,6 @@ export default async function handler(req, res) {
     });
   } catch (error) {
     console.error('❌ Scraping failed:', error);
-    
     res.status(500).json({ 
       success: false, 
       error: error.message,

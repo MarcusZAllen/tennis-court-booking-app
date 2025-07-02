@@ -4,6 +4,10 @@ const path = require('path');
 
 // Normalize location names to prevent duplicates from inconsistent casing or punctuation
 function normalizeLocationName(slug) {
+  if (typeof slug !== 'string') {
+    console.warn('⚠️  normalizeLocationName: expected string but got', slug);
+    return 'Unknown';
+  }
   return slug
     .toLowerCase()
     .replace(/-/g, ' ')

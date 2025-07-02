@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "tennis-court-booking-app",
   "version": "1.0.0",
   "description": "Aggregates tennis court availability from public booking websites in London.",
@@ -9,7 +10,6 @@
     "start": "next start",
     "lint": "next lint",
     "scrape": "node runner/scrape-multiple-dates.js",
-    "scrape:prod": "node runner/scrape-production.js",
     "aggregate": "node aggregate-daily-to-location.js",
     "cleanup": "node utils/data-cleanup.js"
   },
@@ -58,6 +58,7 @@
     "lucide-react": "^0.515.0",
     "next": "^14.1.0",
     "next-themes": "^0.4.6",
+    "node-fetch": "^3.3.2",
     "p-limit": "^6.2.0",
     "playwright": "^1.39.0",
     "react": "^18.3.1",
