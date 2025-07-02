@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const clubSparkLocations = require('../locations/clubspark');
-const scrapeClubSpark = require('../scrapers/clubspark-api');
+import scrapeClubSpark from '../scrapers/clubspark-api.js';
 
 // Generate a list of future dates in YYYY-MM-DD format
 function getFutureDates(daysAhead) {
