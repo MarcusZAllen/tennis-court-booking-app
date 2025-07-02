@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import scrapeParkSports from '../scrapers/parksports';
+import scrapeParkSports from '../scrapers/parksports.js';
 import clubSparkLocations from '../locations/clubspark';
 import parkSportsLocations from '../locations/parksports';
 import DataCleanup from '../utils/data-cleanup';
