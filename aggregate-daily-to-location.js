@@ -2,6 +2,10 @@
 import fs from 'fs';
 import path from 'path';
 
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const DATA_DIR = path.join(__dirname, 'data');
+const FRONTEND_DATA_DIR = path.join(__dirname, 'src', 'data');
+
 // Normalize location names to prevent duplicates from inconsistent casing or punctuation
 function normalizeLocationName(slug) {
   if (typeof slug !== 'string') {
@@ -17,9 +21,6 @@ function normalizeLocationName(slug) {
     .replace(/\s+/g, ' ')       // remove excess spaces
     .trim();
 }
-
-const DATA_DIR = path.join(__dirname, 'data');
-const FRONTEND_DATA_DIR = path.join(__dirname, 'src', 'data');
 
 // Load and flatten all daily JSON files excluding aggregate files
 function loadAllSlots() {
