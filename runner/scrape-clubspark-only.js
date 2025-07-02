@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const clubSparkLocations = require('../locations/clubspark');
+import fs from 'fs';
+import path from 'path';
+import clubSparkLocations from '../locations/clubspark.js';
 import scrapeClubSpark from '../scrapers/clubspark-api.js';
 
 // Generate a list of future dates in YYYY-MM-DD format

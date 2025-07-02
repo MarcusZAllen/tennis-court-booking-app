@@ -1,4 +1,4 @@
-module.exports = [
+const parksportsLocations = [
     {
       name: "Regents Park",
       url: "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest"
@@ -9,3 +9,5 @@ module.exports = [
     },
       // Add more locations as needed
 ];
+
+export default parksportsLocations;

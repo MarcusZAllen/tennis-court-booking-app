@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 // Helper to extract venue slug from Clubspark URL
 function getVenueSlug(url) {

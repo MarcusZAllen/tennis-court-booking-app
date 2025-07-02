@@ -1,4 +1,7 @@
-module.exports = {
+import clubsparkLocations from './locations/clubspark.js';
+import parksportsLocations from './locations/parksports.js';
+
+const config = {
   // Scraping configuration
   scraping: {
     daysAhead: 7,
@@ -31,11 +34,11 @@ module.exports = {
   providers: {
     clubSpark: {
       name: 'ClubSpark',
-      locations: require('./locations/clubspark')
+      locations: clubsparkLocations
     },
     parkSports: {
-      name: 'ParkSports', 
-      locations: require('./locations/parksports')
+      name: 'ParkSports',
+      locations: parksportsLocations
     }
   },
 
@@ -45,4 +48,6 @@ module.exports = {
     saveDebugHtml: true,
     debugPath: './data/debug'
   }
-}; 
+};
+
+export default config; 

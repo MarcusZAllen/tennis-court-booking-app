@@ -3,9 +3,9 @@ import path from 'path';
 import scrapeParkSports from '../scrapers/parksports.js';
 import clubSparkLocations from '../locations/clubspark.js';
 import parkSportsLocations from '../locations/parksports.js';
-import DataCleanup from '../utils/data-cleanup';
-import scrapeClubSpark from '../scrapers/clubspark-api';
-
+import DataCleanup from '../utils/data-cleanup.js';
+import scrapeClubSpark from '../scrapers/clubspark-api.js';
+import { execSync } from 'child_process';
 import pLimit from 'p-limit';
 const limit = pLimit(3); // Reduce concurrency to 3 total scrapes at a time
 
@@ -115,7 +115,6 @@ cleanup.runFullCleanup({
     console.log(`💾 Saved combined output to data/multi-date-output.json`);
 
     console.log('\n🔗 Running aggregation to per-location files...');
-    const { execSync } = require('child_process');
     try {
       execSync('node aggregate-daily-to-location.js', { stdio: 'inherit', cwd: path.resolve(__dirname, '..') });
     } catch (err) {

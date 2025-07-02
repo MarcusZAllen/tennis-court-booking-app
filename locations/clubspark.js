@@ -1,4 +1,4 @@
-module.exports = [
+const clubsparkLocations = [
   {
     name: "Battersea Park",
     url: "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest",
@@ -36,3 +36,5 @@ module.exports = [
   },
   // Add more locations as needed
 ];
+
+export default clubsparkLocations;

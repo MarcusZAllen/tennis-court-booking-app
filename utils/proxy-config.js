@@ -1,13 +1,13 @@
 // Proxy configuration for IP rotation
 // Note: You'll need to set up proxy services like Bright Data, SmartProxy, or similar
 
-const PROXY_CONFIG = {
+export const PROXY_CONFIG = {
   enabled: process.env.USE_PROXIES === 'true',
   proxies: process.env.PROXY_LIST ? process.env.PROXY_LIST.split(',') : [],
   currentIndex: 0
 };
 
-function getNextProxy() {
+export function getNextProxy() {
   if (!PROXY_CONFIG.enabled || PROXY_CONFIG.proxies.length === 0) {
     return null;
   }
@@ -18,7 +18,7 @@ function getNextProxy() {
   return proxy;
 }
 
-function getProxyArgs() {
+export function getProxyArgs() {
   const proxy = getNextProxy();
   if (!proxy) return {};
   
@@ -30,6 +30,4 @@ function getProxyArgs() {
       // password: process.env.PROXY_PASSWORD
     }
   };
-}
-
-module.exports = { getProxyArgs, PROXY_CONFIG }; 
+} 

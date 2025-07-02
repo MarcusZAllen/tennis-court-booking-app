@@ -1,10 +1,10 @@
-const { chromium } = require('playwright');
-const fs = require('fs');
+import { chromium } from 'playwright';
+import fs from 'fs';
 
 // Add randomized delay function
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
-module.exports = async function scrapeParkSports({ name, url }, date) {
+const scrapeParkSports = async function ({ name, url }, date) {
   const startTime = Date.now();
   
   // Add randomized delay before scraping to avoid rate limiting
@@ -105,3 +105,5 @@ module.exports = async function scrapeParkSports({ name, url }, date) {
   console.log(`[${location} - ${date}] ⏱️ Scraping for ${date} completed in ${duration} seconds`);
   return slots;
 };
+
+export default scrapeParkSports;

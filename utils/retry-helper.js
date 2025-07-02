@@ -1,5 +1,5 @@
 // Retry helper with exponential backoff
-async function retryWithBackoff(fn, maxRetries = 3, baseDelay = 1000) {
+export async function retryWithBackoff(fn, maxRetries = 3, baseDelay = 1000) {
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       return await fn();
@@ -26,6 +26,4 @@ async function retryWithBackoff(fn, maxRetries = 3, baseDelay = 1000) {
       }
     }
   }
-}
-
-module.exports = { retryWithBackoff }; 
+} 

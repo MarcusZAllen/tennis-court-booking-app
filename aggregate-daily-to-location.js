@@ -1,6 +1,6 @@
 // aggregate daily data to location
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 // Normalize location names to prevent duplicates from inconsistent casing or punctuation
 function normalizeLocationName(slug) {

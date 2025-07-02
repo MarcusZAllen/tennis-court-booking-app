@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 /**
  * Comprehensive data cleanup utility
@@ -221,16 +221,4 @@ class DataCleanup {
   }
 }
 
-// Export for use in other scripts
-module.exports = DataCleanup;
-
-// Run cleanup if this script is executed directly
-if (require.main === module) {
-  const cleanup = new DataCleanup();
-  cleanup.runFullCleanup({
-    dailyFilesMaxAge: 7,
-    debugFilesMaxAge: 3,
-    cleanEmpty: true,
-    showStats: true
-  });
-} 
+export default DataCleanup; 
