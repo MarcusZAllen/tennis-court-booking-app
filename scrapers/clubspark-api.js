@@ -130,4 +130,4 @@ async function scrapeClubsparkAPI({ name, url, bookingWindow }) {
   return slots;
 }
 
-module.exports = scrapeClubsparkAPI; 
+export default scrapeClubsparkAPI; 
