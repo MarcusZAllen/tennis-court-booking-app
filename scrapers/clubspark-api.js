@@ -16,17 +16,19 @@ async function fetchVenueSessions(venueSlug, startDate, endDate) {
 }
 
 async function scrapeClubsparkAPI({ name, url, bookingWindow }) {
-  // Get today's date and bookingWindow-1 days ahead
+  // Get today's date in London timezone and bookingWindow-1 days ahead
   const today = new Date();
-  const startDate = today.getFullYear() + '-' +
-    String(today.getMonth() + 1).padStart(2, '0') + '-' +
-    String(today.getDate()).padStart(2, '0');
-  const endDateObj = new Date(today);
-  endDateObj.setDate(today.getDate() + ((bookingWindow || 7) - 1));
+  // Convert to London timezone (BST/GMT)
+  const londonTime = new Date(today.toLocaleString("en-US", {timeZone: "Europe/London"}));
+  const startDate = londonTime.getFullYear() + '-' +
+    String(londonTime.getMonth() + 1).padStart(2, '0') + '-' +
+    String(londonTime.getDate()).padStart(2, '0');
+  const endDateObj = new Date(londonTime);
+  endDateObj.setDate(londonTime.getDate() + ((bookingWindow || 7) - 1));
   const endDate = endDateObj.getFullYear() + '-' +
     String(endDateObj.getMonth() + 1).padStart(2, '0') + '-' +
     String(endDateObj.getDate()).padStart(2, '0');
-  console.log(`[Clubspark Scraper] Requesting data from ${startDate} to ${endDate} (today: ${today.toString()})`);
+  console.log(`[Clubspark Scraper] Requesting data from ${startDate} to ${endDate} (London today: ${londonTime.toString()})`);
 
   const venueSlug = getVenueSlug(url);
   if (!venueSlug) throw new Error(`Could not extract venue slug from URL: ${url}`);
