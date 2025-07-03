@@ -29,6 +29,7 @@ async function scrapeClubsparkAPI({ name, url, bookingWindow }) {
   const data = await fetchVenueSessions(venueSlug, startDate, endDate);
   const slots = [];
   let debugSessions = [];
+  let filteredSessions = [];
 
   for (const resource of data.Resources || []) {
     for (const day of resource.Days || []) {
@@ -63,14 +64,17 @@ async function scrapeClubsparkAPI({ name, url, bookingWindow }) {
       let slotDate = day.Date;
       if (slotDate && slotDate.includes('T')) slotDate = slotDate.split('T')[0];
       for (const session of day.Sessions || []) {
-        // Only include available slots
+        // Filter for available slots only
         if (session.Capacity !== 1) continue;
+        if (session.CourtCost <= 0) continue;
+        
         const startMinutes = session.StartTime;
         const endMinutes = session.EndTime;
         const duration = endMinutes - startMinutes;
         let cost = session.CourtCost;
         if (typeof cost === 'number') cost = `£${cost.toFixed(2)}`;
         if (typeof cost === 'string' && !cost.startsWith('£')) cost = `£${cost}`;
+        
         // Split multi-hour sessions into 1-hour slots
         if (duration > 60) {
           for (let start = startMinutes; start < endMinutes; start += 60) {
@@ -122,6 +126,11 @@ async function scrapeClubsparkAPI({ name, url, bookingWindow }) {
       }
     }
   }
+
+  // Save filtered sessions for debugging
+  const filteredPath = path.join('data', `clubspark-filtered-${name.toLowerCase().replace(/\s+/g, '-')}-${startDate}-to-${endDate}.json`);
+  fs.writeFileSync(filteredPath, JSON.stringify(filteredSessions, null, 2));
+  console.log(`🚫 [${name}] Filtered out ${filteredSessions.length} sessions with Capacity !== 1`);
 
   // Save to file (for compatibility with your runner)
   const outputPath = path.join('data', `clubspark-${name.toLowerCase().replace(/\s+/g, '-')}-${startDate}-to-${endDate}.json`);

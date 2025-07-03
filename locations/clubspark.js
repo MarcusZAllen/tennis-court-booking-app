@@ -2,7 +2,7 @@ const clubsparkLocations = [
   {
     name: "Battersea Park",
     url: "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest",
-    bookingWindow: 7
+    bookingWindow: 1
   },
   {
     name: "Archbishops Park",
@@ -32,6 +32,26 @@ const clubsparkLocations = [
   {
     name: "Burgess Park",
     url: "https://clubspark.lta.org.uk/BurgessParkSouthwark/Booking/BookByDate#?role=guest",
+    bookingWindow: 7
+  },
+  {
+    name: "Clapham Common",
+    url: "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest",
+    bookingWindow: 7
+  },
+  {
+    name: "Southwark Park",
+    url: "https://clubspark.lta.org.uk/SouthwarkPark/Booking/BookByDate#?role=guest",
+    bookingWindow: 7
+  },
+  {
+    name: "Vauxhall Park",
+    url: "https://clubspark.lta.org.uk/VauxhallPark/Booking/BookByDate#?role=guest",
+    bookingWindow: 7
+  },
+  {
+    name: "South Park Fulham",
+    url: "https://clubspark.lta.org.uk/SouthParkFulham/Booking/BookByDate#?role=guest",
     bookingWindow: 7
   },
   // Add more locations as needed

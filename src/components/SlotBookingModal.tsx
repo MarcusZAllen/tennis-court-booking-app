@@ -54,7 +54,7 @@ export default function SlotBookingModal({
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-md w-full px-6 py-6 shadow-xl bg-white">
+      <DialogContent className="max-w-md w-full px-6 py-6 shadow-xl bg-white max-h-[80vh] flex flex-col">
         <DialogHeader>
           <DialogTitle className="text-xl font-jost text-center mb-3">
             {date}, {time}
@@ -64,7 +64,7 @@ export default function SlotBookingModal({
           </DialogDescription>
         </DialogHeader>
         
-        <div className="space-y-4">
+        <div className="space-y-4 flex-1 overflow-y-auto">
           {Object.entries(locationGroups).map(([location, data]) => (
             <div
               key={location}
@@ -81,7 +81,7 @@ export default function SlotBookingModal({
                       {data.slotKeys.size} court{data.slotKeys.size !== 1 ? 's' : ''} available
                     </span>
                     <span className="text-xs text-gray-500 font-medium">
-                      {data.provider}
+                      {data.sampleSlot.cost}
                     </span>
                   </div>
                 </div>
@@ -119,7 +119,7 @@ export default function SlotBookingModal({
           )}
         </div>
         
-        <div className="flex justify-end mt-8">
+        <div className="flex justify-end mt-8 flex-shrink-0">
           <Button
             variant="outline"
             onClick={onClose}
