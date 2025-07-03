@@ -1,8 +1,9 @@
 // aggregate daily data to location
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = path.join(__dirname, 'data');
 const FRONTEND_DATA_DIR = path.join(__dirname, 'src', 'data');
 
