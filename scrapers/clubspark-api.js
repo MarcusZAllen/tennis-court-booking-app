@@ -18,10 +18,15 @@ async function fetchVenueSessions(venueSlug, startDate, endDate) {
 async function scrapeClubsparkAPI({ name, url, bookingWindow }) {
   // Get today's date and bookingWindow-1 days ahead
   const today = new Date();
-  const startDate = today.toISOString().split('T')[0];
+  const startDate = today.getFullYear() + '-' +
+    String(today.getMonth() + 1).padStart(2, '0') + '-' +
+    String(today.getDate()).padStart(2, '0');
   const endDateObj = new Date(today);
   endDateObj.setDate(today.getDate() + ((bookingWindow || 7) - 1));
-  const endDate = endDateObj.toISOString().split('T')[0];
+  const endDate = endDateObj.getFullYear() + '-' +
+    String(endDateObj.getMonth() + 1).padStart(2, '0') + '-' +
+    String(endDateObj.getDate()).padStart(2, '0');
+  console.log(`[Clubspark Scraper] Requesting data from ${startDate} to ${endDate} (today: ${today.toString()})`);
 
   const venueSlug = getVenueSlug(url);
   if (!venueSlug) throw new Error(`Could not extract venue slug from URL: ${url}`);
