@@ -198,6 +198,19 @@
     "provider": "clubspark",
     "location": "Archbishops Park",
     "court": "Court 2",
+    "bookingUrl": "https://clubspark.lta.org.uk/archbishopsparklambethnorth/Booking/BookByDate#?role=guest&date=2025-07-07",
+    "date": "2025-07-07",
+    "readableTime": "08:00 - 09:00",
+    "cost": "£7.70",
+    "startMinutes": 480,
+    "endMinutes": 540,
+    "sessionId": "Archbishops-Park_Court-2_2025-07-07_480_540",
+    "slotKey": "Archbishops-Park_Court-2_2025-07-07_480_540"
+  },
+  {
+    "provider": "clubspark",
+    "location": "Archbishops Park",
+    "court": "Court 2",
     "bookingUrl": "https://clubspark.lta.org.uk/archbishopsparklambethnorth/Booking/BookByDate#?role=guest&date=2025-07-08",
     "date": "2025-07-08",
     "readableTime": "13:00 - 14:00",
@@ -375,19 +388,6 @@
     "endMinutes": 1020,
     "sessionId": "Holland-Park-(Kensington)_Court-2_2025-07-11_960_1020",
     "slotKey": "Holland-Park-(Kensington)_Court-2_2025-07-11_960_1020"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Holland Park (Kensington)",
-    "court": "Court 3",
-    "bookingUrl": "https://clubspark.lta.org.uk/hollandpark2/Booking/BookByDate#?role=guest&date=2025-07-08",
-    "date": "2025-07-08",
-    "readableTime": "08:00 - 09:00",
-    "cost": "£10.20",
-    "startMinutes": 480,
-    "endMinutes": 540,
-    "sessionId": "Holland-Park-(Kensington)_Court-3_2025-07-08_480_540",
-    "slotKey": "Holland-Park-(Kensington)_Court-3_2025-07-08_480_540"
   },
   {
     "provider": "clubspark",
@@ -3833,6 +3833,19 @@
     "endMinutes": 840,
     "sessionId": "Burgess-Park_Crt-2_2025-07-06_810_840",
     "slotKey": "Burgess-Park_Crt-2_2025-07-06_810_840"
+  },
+  {
+    "provider": "clubspark",
+    "location": "Burgess Park",
+    "court": "Crt 2",
+    "bookingUrl": "https://clubspark.lta.org.uk/BurgessParkSouthwark/Booking/BookByDate#?role=guest&date=2025-07-06",
+    "date": "2025-07-06",
+    "readableTime": "15:00 - 16:00",
+    "cost": "£4.95",
+    "startMinutes": 900,
+    "endMinutes": 960,
+    "sessionId": "Burgess-Park_Crt-2_2025-07-06_900_960",
+    "slotKey": "Burgess-Park_Crt-2_2025-07-06_900_960"
   },
   {
     "provider": "clubspark",
@@ -8429,19 +8442,6 @@
     "court": "Court 5",
     "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-11",
     "date": "2025-07-11",
-    "readableTime": "08:00 - 09:00",
-    "cost": "£12.00",
-    "startMinutes": 480,
-    "endMinutes": 540,
-    "sessionId": "Clapham-Common_Court-5_2025-07-11_480_540",
-    "slotKey": "Clapham-Common_Court-5_2025-07-11_480_540"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Clapham Common",
-    "court": "Court 5",
-    "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-11",
-    "date": "2025-07-11",
     "readableTime": "09:00 - 10:00",
     "cost": "£12.00",
     "startMinutes": 540,
@@ -9501,19 +9501,6 @@
     "endMinutes": 960,
     "sessionId": "Clapham-Common_Court-7_2025-07-10_900_960",
     "slotKey": "Clapham-Common_Court-7_2025-07-10_900_960"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Clapham Common",
-    "court": "Court 7",
-    "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-10",
-    "date": "2025-07-10",
-    "readableTime": "21:00 - 22:00",
-    "cost": "£12.00",
-    "startMinutes": 1260,
-    "endMinutes": 1320,
-    "sessionId": "Clapham-Common_Court-7_2025-07-10_1260_1320",
-    "slotKey": "Clapham-Common_Court-7_2025-07-10_1260_1320"
   },
   {
     "provider": "clubspark",
@@ -14220,19 +14207,6 @@
     "endMinutes": 1050,
     "sessionId": "Southwark-Park_Court-3_2025-07-11_1020_1050",
     "slotKey": "Southwark-Park_Court-3_2025-07-11_1020_1050"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Southwark Park",
-    "court": "Court 4",
-    "bookingUrl": "https://clubspark.lta.org.uk/SouthwarkPark/Booking/BookByDate#?role=guest&date=2025-07-06",
-    "date": "2025-07-06",
-    "readableTime": "20:00 - 21:00",
-    "cost": "£4.95",
-    "startMinutes": 1200,
-    "endMinutes": 1260,
-    "sessionId": "Southwark-Park_Court-4_2025-07-06_1200_1260",
-    "slotKey": "Southwark-Park_Court-4_2025-07-06_1200_1260"
   },
   {
     "provider": "clubspark",
@@ -16721,6 +16695,19 @@
     "provider": "clubspark",
     "location": "Archbishops Park",
     "court": "Court 2",
+    "bookingUrl": "https://clubspark.lta.org.uk/archbishopsparklambethnorth/Booking/BookByDate#?role=guest&date=2025-07-07",
+    "date": "2025-07-07",
+    "readableTime": "08:00 - 09:00",
+    "cost": "£7.70",
+    "startMinutes": 480,
+    "endMinutes": 540,
+    "sessionId": "Archbishops-Park_Court-2_2025-07-07_480_540",
+    "slotKey": "Archbishops-Park_Court-2_2025-07-07_480_540"
+  },
+  {
+    "provider": "clubspark",
+    "location": "Archbishops Park",
+    "court": "Court 2",
     "bookingUrl": "https://clubspark.lta.org.uk/archbishopsparklambethnorth/Booking/BookByDate#?role=guest&date=2025-07-08",
     "date": "2025-07-08",
     "readableTime": "13:00 - 14:00",
@@ -16898,19 +16885,6 @@
     "endMinutes": 1020,
     "sessionId": "Holland-Park-(Kensington)_Court-2_2025-07-11_960_1020",
     "slotKey": "Holland-Park-(Kensington)_Court-2_2025-07-11_960_1020"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Holland Park (Kensington)",
-    "court": "Court 3",
-    "bookingUrl": "https://clubspark.lta.org.uk/hollandpark2/Booking/BookByDate#?role=guest&date=2025-07-08",
-    "date": "2025-07-08",
-    "readableTime": "08:00 - 09:00",
-    "cost": "£10.20",
-    "startMinutes": 480,
-    "endMinutes": 540,
-    "sessionId": "Holland-Park-(Kensington)_Court-3_2025-07-08_480_540",
-    "slotKey": "Holland-Park-(Kensington)_Court-3_2025-07-08_480_540"
   },
   {
     "provider": "clubspark",
@@ -20356,6 +20330,19 @@
     "endMinutes": 840,
     "sessionId": "Burgess-Park_Crt-2_2025-07-06_810_840",
     "slotKey": "Burgess-Park_Crt-2_2025-07-06_810_840"
+  },
+  {
+    "provider": "clubspark",
+    "location": "Burgess Park",
+    "court": "Crt 2",
+    "bookingUrl": "https://clubspark.lta.org.uk/BurgessParkSouthwark/Booking/BookByDate#?role=guest&date=2025-07-06",
+    "date": "2025-07-06",
+    "readableTime": "15:00 - 16:00",
+    "cost": "£4.95",
+    "startMinutes": 900,
+    "endMinutes": 960,
+    "sessionId": "Burgess-Park_Crt-2_2025-07-06_900_960",
+    "slotKey": "Burgess-Park_Crt-2_2025-07-06_900_960"
   },
   {
     "provider": "clubspark",
@@ -24952,19 +24939,6 @@
     "court": "Court 5",
     "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-11",
     "date": "2025-07-11",
-    "readableTime": "08:00 - 09:00",
-    "cost": "£12.00",
-    "startMinutes": 480,
-    "endMinutes": 540,
-    "sessionId": "Clapham-Common_Court-5_2025-07-11_480_540",
-    "slotKey": "Clapham-Common_Court-5_2025-07-11_480_540"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Clapham Common",
-    "court": "Court 5",
-    "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-11",
-    "date": "2025-07-11",
     "readableTime": "09:00 - 10:00",
     "cost": "£12.00",
     "startMinutes": 540,
@@ -26024,19 +25998,6 @@
     "endMinutes": 960,
     "sessionId": "Clapham-Common_Court-7_2025-07-10_900_960",
     "slotKey": "Clapham-Common_Court-7_2025-07-10_900_960"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Clapham Common",
-    "court": "Court 7",
-    "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-10",
-    "date": "2025-07-10",
-    "readableTime": "21:00 - 22:00",
-    "cost": "£12.00",
-    "startMinutes": 1260,
-    "endMinutes": 1320,
-    "sessionId": "Clapham-Common_Court-7_2025-07-10_1260_1320",
-    "slotKey": "Clapham-Common_Court-7_2025-07-10_1260_1320"
   },
   {
     "provider": "clubspark",
@@ -30743,19 +30704,6 @@
     "endMinutes": 1050,
     "sessionId": "Southwark-Park_Court-3_2025-07-11_1020_1050",
     "slotKey": "Southwark-Park_Court-3_2025-07-11_1020_1050"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Southwark Park",
-    "court": "Court 4",
-    "bookingUrl": "https://clubspark.lta.org.uk/SouthwarkPark/Booking/BookByDate#?role=guest&date=2025-07-06",
-    "date": "2025-07-06",
-    "readableTime": "20:00 - 21:00",
-    "cost": "£4.95",
-    "startMinutes": 1200,
-    "endMinutes": 1260,
-    "sessionId": "Southwark-Park_Court-4_2025-07-06_1200_1260",
-    "slotKey": "Southwark-Park_Court-4_2025-07-06_1200_1260"
   },
   {
     "provider": "clubspark",
@@ -33244,6 +33192,19 @@
     "provider": "clubspark",
     "location": "Archbishops Park",
     "court": "Court 2",
+    "bookingUrl": "https://clubspark.lta.org.uk/archbishopsparklambethnorth/Booking/BookByDate#?role=guest&date=2025-07-07",
+    "date": "2025-07-07",
+    "readableTime": "08:00 - 09:00",
+    "cost": "£7.70",
+    "startMinutes": 480,
+    "endMinutes": 540,
+    "sessionId": "Archbishops-Park_Court-2_2025-07-07_480_540",
+    "slotKey": "Archbishops-Park_Court-2_2025-07-07_480_540"
+  },
+  {
+    "provider": "clubspark",
+    "location": "Archbishops Park",
+    "court": "Court 2",
     "bookingUrl": "https://clubspark.lta.org.uk/archbishopsparklambethnorth/Booking/BookByDate#?role=guest&date=2025-07-08",
     "date": "2025-07-08",
     "readableTime": "13:00 - 14:00",
@@ -33421,19 +33382,6 @@
     "endMinutes": 1020,
     "sessionId": "Holland-Park-(Kensington)_Court-2_2025-07-11_960_1020",
     "slotKey": "Holland-Park-(Kensington)_Court-2_2025-07-11_960_1020"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Holland Park (Kensington)",
-    "court": "Court 3",
-    "bookingUrl": "https://clubspark.lta.org.uk/hollandpark2/Booking/BookByDate#?role=guest&date=2025-07-08",
-    "date": "2025-07-08",
-    "readableTime": "08:00 - 09:00",
-    "cost": "£10.20",
-    "startMinutes": 480,
-    "endMinutes": 540,
-    "sessionId": "Holland-Park-(Kensington)_Court-3_2025-07-08_480_540",
-    "slotKey": "Holland-Park-(Kensington)_Court-3_2025-07-08_480_540"
   },
   {
     "provider": "clubspark",
@@ -36879,6 +36827,19 @@
     "endMinutes": 840,
     "sessionId": "Burgess-Park_Crt-2_2025-07-06_810_840",
     "slotKey": "Burgess-Park_Crt-2_2025-07-06_810_840"
+  },
+  {
+    "provider": "clubspark",
+    "location": "Burgess Park",
+    "court": "Crt 2",
+    "bookingUrl": "https://clubspark.lta.org.uk/BurgessParkSouthwark/Booking/BookByDate#?role=guest&date=2025-07-06",
+    "date": "2025-07-06",
+    "readableTime": "15:00 - 16:00",
+    "cost": "£4.95",
+    "startMinutes": 900,
+    "endMinutes": 960,
+    "sessionId": "Burgess-Park_Crt-2_2025-07-06_900_960",
+    "slotKey": "Burgess-Park_Crt-2_2025-07-06_900_960"
   },
   {
     "provider": "clubspark",
@@ -41475,19 +41436,6 @@
     "court": "Court 5",
     "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-11",
     "date": "2025-07-11",
-    "readableTime": "08:00 - 09:00",
-    "cost": "£12.00",
-    "startMinutes": 480,
-    "endMinutes": 540,
-    "sessionId": "Clapham-Common_Court-5_2025-07-11_480_540",
-    "slotKey": "Clapham-Common_Court-5_2025-07-11_480_540"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Clapham Common",
-    "court": "Court 5",
-    "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-11",
-    "date": "2025-07-11",
     "readableTime": "09:00 - 10:00",
     "cost": "£12.00",
     "startMinutes": 540,
@@ -42547,19 +42495,6 @@
     "endMinutes": 960,
     "sessionId": "Clapham-Common_Court-7_2025-07-10_900_960",
     "slotKey": "Clapham-Common_Court-7_2025-07-10_900_960"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Clapham Common",
-    "court": "Court 7",
-    "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-10",
-    "date": "2025-07-10",
-    "readableTime": "21:00 - 22:00",
-    "cost": "£12.00",
-    "startMinutes": 1260,
-    "endMinutes": 1320,
-    "sessionId": "Clapham-Common_Court-7_2025-07-10_1260_1320",
-    "slotKey": "Clapham-Common_Court-7_2025-07-10_1260_1320"
   },
   {
     "provider": "clubspark",
@@ -47266,19 +47201,6 @@
     "endMinutes": 1050,
     "sessionId": "Southwark-Park_Court-3_2025-07-11_1020_1050",
     "slotKey": "Southwark-Park_Court-3_2025-07-11_1020_1050"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Southwark Park",
-    "court": "Court 4",
-    "bookingUrl": "https://clubspark.lta.org.uk/SouthwarkPark/Booking/BookByDate#?role=guest&date=2025-07-06",
-    "date": "2025-07-06",
-    "readableTime": "20:00 - 21:00",
-    "cost": "£4.95",
-    "startMinutes": 1200,
-    "endMinutes": 1260,
-    "sessionId": "Southwark-Park_Court-4_2025-07-06_1200_1260",
-    "slotKey": "Southwark-Park_Court-4_2025-07-06_1200_1260"
   },
   {
     "provider": "clubspark",
@@ -49767,6 +49689,19 @@
     "provider": "clubspark",
     "location": "Archbishops Park",
     "court": "Court 2",
+    "bookingUrl": "https://clubspark.lta.org.uk/archbishopsparklambethnorth/Booking/BookByDate#?role=guest&date=2025-07-07",
+    "date": "2025-07-07",
+    "readableTime": "08:00 - 09:00",
+    "cost": "£7.70",
+    "startMinutes": 480,
+    "endMinutes": 540,
+    "sessionId": "Archbishops-Park_Court-2_2025-07-07_480_540",
+    "slotKey": "Archbishops-Park_Court-2_2025-07-07_480_540"
+  },
+  {
+    "provider": "clubspark",
+    "location": "Archbishops Park",
+    "court": "Court 2",
     "bookingUrl": "https://clubspark.lta.org.uk/archbishopsparklambethnorth/Booking/BookByDate#?role=guest&date=2025-07-08",
     "date": "2025-07-08",
     "readableTime": "13:00 - 14:00",
@@ -49944,19 +49879,6 @@
     "endMinutes": 1020,
     "sessionId": "Holland-Park-(Kensington)_Court-2_2025-07-11_960_1020",
     "slotKey": "Holland-Park-(Kensington)_Court-2_2025-07-11_960_1020"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Holland Park (Kensington)",
-    "court": "Court 3",
-    "bookingUrl": "https://clubspark.lta.org.uk/hollandpark2/Booking/BookByDate#?role=guest&date=2025-07-08",
-    "date": "2025-07-08",
-    "readableTime": "08:00 - 09:00",
-    "cost": "£10.20",
-    "startMinutes": 480,
-    "endMinutes": 540,
-    "sessionId": "Holland-Park-(Kensington)_Court-3_2025-07-08_480_540",
-    "slotKey": "Holland-Park-(Kensington)_Court-3_2025-07-08_480_540"
   },
   {
     "provider": "clubspark",
@@ -53402,6 +53324,19 @@
     "endMinutes": 840,
     "sessionId": "Burgess-Park_Crt-2_2025-07-06_810_840",
     "slotKey": "Burgess-Park_Crt-2_2025-07-06_810_840"
+  },
+  {
+    "provider": "clubspark",
+    "location": "Burgess Park",
+    "court": "Crt 2",
+    "bookingUrl": "https://clubspark.lta.org.uk/BurgessParkSouthwark/Booking/BookByDate#?role=guest&date=2025-07-06",
+    "date": "2025-07-06",
+    "readableTime": "15:00 - 16:00",
+    "cost": "£4.95",
+    "startMinutes": 900,
+    "endMinutes": 960,
+    "sessionId": "Burgess-Park_Crt-2_2025-07-06_900_960",
+    "slotKey": "Burgess-Park_Crt-2_2025-07-06_900_960"
   },
   {
     "provider": "clubspark",
@@ -57998,19 +57933,6 @@
     "court": "Court 5",
     "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-11",
     "date": "2025-07-11",
-    "readableTime": "08:00 - 09:00",
-    "cost": "£12.00",
-    "startMinutes": 480,
-    "endMinutes": 540,
-    "sessionId": "Clapham-Common_Court-5_2025-07-11_480_540",
-    "slotKey": "Clapham-Common_Court-5_2025-07-11_480_540"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Clapham Common",
-    "court": "Court 5",
-    "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-11",
-    "date": "2025-07-11",
     "readableTime": "09:00 - 10:00",
     "cost": "£12.00",
     "startMinutes": 540,
@@ -59070,19 +58992,6 @@
     "endMinutes": 960,
     "sessionId": "Clapham-Common_Court-7_2025-07-10_900_960",
     "slotKey": "Clapham-Common_Court-7_2025-07-10_900_960"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Clapham Common",
-    "court": "Court 7",
-    "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-10",
-    "date": "2025-07-10",
-    "readableTime": "21:00 - 22:00",
-    "cost": "£12.00",
-    "startMinutes": 1260,
-    "endMinutes": 1320,
-    "sessionId": "Clapham-Common_Court-7_2025-07-10_1260_1320",
-    "slotKey": "Clapham-Common_Court-7_2025-07-10_1260_1320"
   },
   {
     "provider": "clubspark",
@@ -63789,19 +63698,6 @@
     "endMinutes": 1050,
     "sessionId": "Southwark-Park_Court-3_2025-07-11_1020_1050",
     "slotKey": "Southwark-Park_Court-3_2025-07-11_1020_1050"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Southwark Park",
-    "court": "Court 4",
-    "bookingUrl": "https://clubspark.lta.org.uk/SouthwarkPark/Booking/BookByDate#?role=guest&date=2025-07-06",
-    "date": "2025-07-06",
-    "readableTime": "20:00 - 21:00",
-    "cost": "£4.95",
-    "startMinutes": 1200,
-    "endMinutes": 1260,
-    "sessionId": "Southwark-Park_Court-4_2025-07-06_1200_1260",
-    "slotKey": "Southwark-Park_Court-4_2025-07-06_1200_1260"
   },
   {
     "provider": "clubspark",
@@ -66290,6 +66186,19 @@
     "provider": "clubspark",
     "location": "Archbishops Park",
     "court": "Court 2",
+    "bookingUrl": "https://clubspark.lta.org.uk/archbishopsparklambethnorth/Booking/BookByDate#?role=guest&date=2025-07-07",
+    "date": "2025-07-07",
+    "readableTime": "08:00 - 09:00",
+    "cost": "£7.70",
+    "startMinutes": 480,
+    "endMinutes": 540,
+    "sessionId": "Archbishops-Park_Court-2_2025-07-07_480_540",
+    "slotKey": "Archbishops-Park_Court-2_2025-07-07_480_540"
+  },
+  {
+    "provider": "clubspark",
+    "location": "Archbishops Park",
+    "court": "Court 2",
     "bookingUrl": "https://clubspark.lta.org.uk/archbishopsparklambethnorth/Booking/BookByDate#?role=guest&date=2025-07-08",
     "date": "2025-07-08",
     "readableTime": "13:00 - 14:00",
@@ -66467,19 +66376,6 @@
     "endMinutes": 1020,
     "sessionId": "Holland-Park-(Kensington)_Court-2_2025-07-11_960_1020",
     "slotKey": "Holland-Park-(Kensington)_Court-2_2025-07-11_960_1020"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Holland Park (Kensington)",
-    "court": "Court 3",
-    "bookingUrl": "https://clubspark.lta.org.uk/hollandpark2/Booking/BookByDate#?role=guest&date=2025-07-08",
-    "date": "2025-07-08",
-    "readableTime": "08:00 - 09:00",
-    "cost": "£10.20",
-    "startMinutes": 480,
-    "endMinutes": 540,
-    "sessionId": "Holland-Park-(Kensington)_Court-3_2025-07-08_480_540",
-    "slotKey": "Holland-Park-(Kensington)_Court-3_2025-07-08_480_540"
   },
   {
     "provider": "clubspark",
@@ -69925,6 +69821,19 @@
     "endMinutes": 840,
     "sessionId": "Burgess-Park_Crt-2_2025-07-06_810_840",
     "slotKey": "Burgess-Park_Crt-2_2025-07-06_810_840"
+  },
+  {
+    "provider": "clubspark",
+    "location": "Burgess Park",
+    "court": "Crt 2",
+    "bookingUrl": "https://clubspark.lta.org.uk/BurgessParkSouthwark/Booking/BookByDate#?role=guest&date=2025-07-06",
+    "date": "2025-07-06",
+    "readableTime": "15:00 - 16:00",
+    "cost": "£4.95",
+    "startMinutes": 900,
+    "endMinutes": 960,
+    "sessionId": "Burgess-Park_Crt-2_2025-07-06_900_960",
+    "slotKey": "Burgess-Park_Crt-2_2025-07-06_900_960"
   },
   {
     "provider": "clubspark",
@@ -74521,19 +74430,6 @@
     "court": "Court 5",
     "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-11",
     "date": "2025-07-11",
-    "readableTime": "08:00 - 09:00",
-    "cost": "£12.00",
-    "startMinutes": 480,
-    "endMinutes": 540,
-    "sessionId": "Clapham-Common_Court-5_2025-07-11_480_540",
-    "slotKey": "Clapham-Common_Court-5_2025-07-11_480_540"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Clapham Common",
-    "court": "Court 5",
-    "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-11",
-    "date": "2025-07-11",
     "readableTime": "09:00 - 10:00",
     "cost": "£12.00",
     "startMinutes": 540,
@@ -75593,19 +75489,6 @@
     "endMinutes": 960,
     "sessionId": "Clapham-Common_Court-7_2025-07-10_900_960",
     "slotKey": "Clapham-Common_Court-7_2025-07-10_900_960"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Clapham Common",
-    "court": "Court 7",
-    "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-10",
-    "date": "2025-07-10",
-    "readableTime": "21:00 - 22:00",
-    "cost": "£12.00",
-    "startMinutes": 1260,
-    "endMinutes": 1320,
-    "sessionId": "Clapham-Common_Court-7_2025-07-10_1260_1320",
-    "slotKey": "Clapham-Common_Court-7_2025-07-10_1260_1320"
   },
   {
     "provider": "clubspark",
@@ -80312,19 +80195,6 @@
     "endMinutes": 1050,
     "sessionId": "Southwark-Park_Court-3_2025-07-11_1020_1050",
     "slotKey": "Southwark-Park_Court-3_2025-07-11_1020_1050"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Southwark Park",
-    "court": "Court 4",
-    "bookingUrl": "https://clubspark.lta.org.uk/SouthwarkPark/Booking/BookByDate#?role=guest&date=2025-07-06",
-    "date": "2025-07-06",
-    "readableTime": "20:00 - 21:00",
-    "cost": "£4.95",
-    "startMinutes": 1200,
-    "endMinutes": 1260,
-    "sessionId": "Southwark-Park_Court-4_2025-07-06_1200_1260",
-    "slotKey": "Southwark-Park_Court-4_2025-07-06_1200_1260"
   },
   {
     "provider": "clubspark",
@@ -82813,6 +82683,19 @@
     "provider": "clubspark",
     "location": "Archbishops Park",
     "court": "Court 2",
+    "bookingUrl": "https://clubspark.lta.org.uk/archbishopsparklambethnorth/Booking/BookByDate#?role=guest&date=2025-07-07",
+    "date": "2025-07-07",
+    "readableTime": "08:00 - 09:00",
+    "cost": "£7.70",
+    "startMinutes": 480,
+    "endMinutes": 540,
+    "sessionId": "Archbishops-Park_Court-2_2025-07-07_480_540",
+    "slotKey": "Archbishops-Park_Court-2_2025-07-07_480_540"
+  },
+  {
+    "provider": "clubspark",
+    "location": "Archbishops Park",
+    "court": "Court 2",
     "bookingUrl": "https://clubspark.lta.org.uk/archbishopsparklambethnorth/Booking/BookByDate#?role=guest&date=2025-07-08",
     "date": "2025-07-08",
     "readableTime": "13:00 - 14:00",
@@ -82990,19 +82873,6 @@
     "endMinutes": 1020,
     "sessionId": "Holland-Park-(Kensington)_Court-2_2025-07-11_960_1020",
     "slotKey": "Holland-Park-(Kensington)_Court-2_2025-07-11_960_1020"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Holland Park (Kensington)",
-    "court": "Court 3",
-    "bookingUrl": "https://clubspark.lta.org.uk/hollandpark2/Booking/BookByDate#?role=guest&date=2025-07-08",
-    "date": "2025-07-08",
-    "readableTime": "08:00 - 09:00",
-    "cost": "£10.20",
-    "startMinutes": 480,
-    "endMinutes": 540,
-    "sessionId": "Holland-Park-(Kensington)_Court-3_2025-07-08_480_540",
-    "slotKey": "Holland-Park-(Kensington)_Court-3_2025-07-08_480_540"
   },
   {
     "provider": "clubspark",
@@ -86448,6 +86318,19 @@
     "endMinutes": 840,
     "sessionId": "Burgess-Park_Crt-2_2025-07-06_810_840",
     "slotKey": "Burgess-Park_Crt-2_2025-07-06_810_840"
+  },
+  {
+    "provider": "clubspark",
+    "location": "Burgess Park",
+    "court": "Crt 2",
+    "bookingUrl": "https://clubspark.lta.org.uk/BurgessParkSouthwark/Booking/BookByDate#?role=guest&date=2025-07-06",
+    "date": "2025-07-06",
+    "readableTime": "15:00 - 16:00",
+    "cost": "£4.95",
+    "startMinutes": 900,
+    "endMinutes": 960,
+    "sessionId": "Burgess-Park_Crt-2_2025-07-06_900_960",
+    "slotKey": "Burgess-Park_Crt-2_2025-07-06_900_960"
   },
   {
     "provider": "clubspark",
@@ -91044,19 +90927,6 @@
     "court": "Court 5",
     "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-11",
     "date": "2025-07-11",
-    "readableTime": "08:00 - 09:00",
-    "cost": "£12.00",
-    "startMinutes": 480,
-    "endMinutes": 540,
-    "sessionId": "Clapham-Common_Court-5_2025-07-11_480_540",
-    "slotKey": "Clapham-Common_Court-5_2025-07-11_480_540"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Clapham Common",
-    "court": "Court 5",
-    "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-11",
-    "date": "2025-07-11",
     "readableTime": "09:00 - 10:00",
     "cost": "£12.00",
     "startMinutes": 540,
@@ -92116,19 +91986,6 @@
     "endMinutes": 960,
     "sessionId": "Clapham-Common_Court-7_2025-07-10_900_960",
     "slotKey": "Clapham-Common_Court-7_2025-07-10_900_960"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Clapham Common",
-    "court": "Court 7",
-    "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-10",
-    "date": "2025-07-10",
-    "readableTime": "21:00 - 22:00",
-    "cost": "£12.00",
-    "startMinutes": 1260,
-    "endMinutes": 1320,
-    "sessionId": "Clapham-Common_Court-7_2025-07-10_1260_1320",
-    "slotKey": "Clapham-Common_Court-7_2025-07-10_1260_1320"
   },
   {
     "provider": "clubspark",
@@ -96835,19 +96692,6 @@
     "endMinutes": 1050,
     "sessionId": "Southwark-Park_Court-3_2025-07-11_1020_1050",
     "slotKey": "Southwark-Park_Court-3_2025-07-11_1020_1050"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Southwark Park",
-    "court": "Court 4",
-    "bookingUrl": "https://clubspark.lta.org.uk/SouthwarkPark/Booking/BookByDate#?role=guest&date=2025-07-06",
-    "date": "2025-07-06",
-    "readableTime": "20:00 - 21:00",
-    "cost": "£4.95",
-    "startMinutes": 1200,
-    "endMinutes": 1260,
-    "sessionId": "Southwark-Park_Court-4_2025-07-06_1200_1260",
-    "slotKey": "Southwark-Park_Court-4_2025-07-06_1200_1260"
   },
   {
     "provider": "clubspark",
@@ -99336,6 +99180,19 @@
     "provider": "clubspark",
     "location": "Archbishops Park",
     "court": "Court 2",
+    "bookingUrl": "https://clubspark.lta.org.uk/archbishopsparklambethnorth/Booking/BookByDate#?role=guest&date=2025-07-07",
+    "date": "2025-07-07",
+    "readableTime": "08:00 - 09:00",
+    "cost": "£7.70",
+    "startMinutes": 480,
+    "endMinutes": 540,
+    "sessionId": "Archbishops-Park_Court-2_2025-07-07_480_540",
+    "slotKey": "Archbishops-Park_Court-2_2025-07-07_480_540"
+  },
+  {
+    "provider": "clubspark",
+    "location": "Archbishops Park",
+    "court": "Court 2",
     "bookingUrl": "https://clubspark.lta.org.uk/archbishopsparklambethnorth/Booking/BookByDate#?role=guest&date=2025-07-08",
     "date": "2025-07-08",
     "readableTime": "13:00 - 14:00",
@@ -99513,19 +99370,6 @@
     "endMinutes": 1020,
     "sessionId": "Holland-Park-(Kensington)_Court-2_2025-07-11_960_1020",
     "slotKey": "Holland-Park-(Kensington)_Court-2_2025-07-11_960_1020"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Holland Park (Kensington)",
-    "court": "Court 3",
-    "bookingUrl": "https://clubspark.lta.org.uk/hollandpark2/Booking/BookByDate#?role=guest&date=2025-07-08",
-    "date": "2025-07-08",
-    "readableTime": "08:00 - 09:00",
-    "cost": "£10.20",
-    "startMinutes": 480,
-    "endMinutes": 540,
-    "sessionId": "Holland-Park-(Kensington)_Court-3_2025-07-08_480_540",
-    "slotKey": "Holland-Park-(Kensington)_Court-3_2025-07-08_480_540"
   },
   {
     "provider": "clubspark",
@@ -102971,6 +102815,19 @@
     "endMinutes": 840,
     "sessionId": "Burgess-Park_Crt-2_2025-07-06_810_840",
     "slotKey": "Burgess-Park_Crt-2_2025-07-06_810_840"
+  },
+  {
+    "provider": "clubspark",
+    "location": "Burgess Park",
+    "court": "Crt 2",
+    "bookingUrl": "https://clubspark.lta.org.uk/BurgessParkSouthwark/Booking/BookByDate#?role=guest&date=2025-07-06",
+    "date": "2025-07-06",
+    "readableTime": "15:00 - 16:00",
+    "cost": "£4.95",
+    "startMinutes": 900,
+    "endMinutes": 960,
+    "sessionId": "Burgess-Park_Crt-2_2025-07-06_900_960",
+    "slotKey": "Burgess-Park_Crt-2_2025-07-06_900_960"
   },
   {
     "provider": "clubspark",
@@ -107567,19 +107424,6 @@
     "court": "Court 5",
     "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-11",
     "date": "2025-07-11",
-    "readableTime": "08:00 - 09:00",
-    "cost": "£12.00",
-    "startMinutes": 480,
-    "endMinutes": 540,
-    "sessionId": "Clapham-Common_Court-5_2025-07-11_480_540",
-    "slotKey": "Clapham-Common_Court-5_2025-07-11_480_540"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Clapham Common",
-    "court": "Court 5",
-    "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-11",
-    "date": "2025-07-11",
     "readableTime": "09:00 - 10:00",
     "cost": "£12.00",
     "startMinutes": 540,
@@ -108639,19 +108483,6 @@
     "endMinutes": 960,
     "sessionId": "Clapham-Common_Court-7_2025-07-10_900_960",
     "slotKey": "Clapham-Common_Court-7_2025-07-10_900_960"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Clapham Common",
-    "court": "Court 7",
-    "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-10",
-    "date": "2025-07-10",
-    "readableTime": "21:00 - 22:00",
-    "cost": "£12.00",
-    "startMinutes": 1260,
-    "endMinutes": 1320,
-    "sessionId": "Clapham-Common_Court-7_2025-07-10_1260_1320",
-    "slotKey": "Clapham-Common_Court-7_2025-07-10_1260_1320"
   },
   {
     "provider": "clubspark",
@@ -113358,19 +113189,6 @@
     "endMinutes": 1050,
     "sessionId": "Southwark-Park_Court-3_2025-07-11_1020_1050",
     "slotKey": "Southwark-Park_Court-3_2025-07-11_1020_1050"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Southwark Park",
-    "court": "Court 4",
-    "bookingUrl": "https://clubspark.lta.org.uk/SouthwarkPark/Booking/BookByDate#?role=guest&date=2025-07-06",
-    "date": "2025-07-06",
-    "readableTime": "20:00 - 21:00",
-    "cost": "£4.95",
-    "startMinutes": 1200,
-    "endMinutes": 1260,
-    "sessionId": "Southwark-Park_Court-4_2025-07-06_1200_1260",
-    "slotKey": "Southwark-Park_Court-4_2025-07-06_1200_1260"
   },
   {
     "provider": "clubspark",
@@ -115859,6 +115677,19 @@
     "provider": "clubspark",
     "location": "Archbishops Park",
     "court": "Court 2",
+    "bookingUrl": "https://clubspark.lta.org.uk/archbishopsparklambethnorth/Booking/BookByDate#?role=guest&date=2025-07-07",
+    "date": "2025-07-07",
+    "readableTime": "08:00 - 09:00",
+    "cost": "£7.70",
+    "startMinutes": 480,
+    "endMinutes": 540,
+    "sessionId": "Archbishops-Park_Court-2_2025-07-07_480_540",
+    "slotKey": "Archbishops-Park_Court-2_2025-07-07_480_540"
+  },
+  {
+    "provider": "clubspark",
+    "location": "Archbishops Park",
+    "court": "Court 2",
     "bookingUrl": "https://clubspark.lta.org.uk/archbishopsparklambethnorth/Booking/BookByDate#?role=guest&date=2025-07-08",
     "date": "2025-07-08",
     "readableTime": "13:00 - 14:00",
@@ -116036,19 +115867,6 @@
     "endMinutes": 1020,
     "sessionId": "Holland-Park-(Kensington)_Court-2_2025-07-11_960_1020",
     "slotKey": "Holland-Park-(Kensington)_Court-2_2025-07-11_960_1020"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Holland Park (Kensington)",
-    "court": "Court 3",
-    "bookingUrl": "https://clubspark.lta.org.uk/hollandpark2/Booking/BookByDate#?role=guest&date=2025-07-08",
-    "date": "2025-07-08",
-    "readableTime": "08:00 - 09:00",
-    "cost": "£10.20",
-    "startMinutes": 480,
-    "endMinutes": 540,
-    "sessionId": "Holland-Park-(Kensington)_Court-3_2025-07-08_480_540",
-    "slotKey": "Holland-Park-(Kensington)_Court-3_2025-07-08_480_540"
   },
   {
     "provider": "clubspark",
@@ -119494,6 +119312,19 @@
     "endMinutes": 840,
     "sessionId": "Burgess-Park_Crt-2_2025-07-06_810_840",
     "slotKey": "Burgess-Park_Crt-2_2025-07-06_810_840"
+  },
+  {
+    "provider": "clubspark",
+    "location": "Burgess Park",
+    "court": "Crt 2",
+    "bookingUrl": "https://clubspark.lta.org.uk/BurgessParkSouthwark/Booking/BookByDate#?role=guest&date=2025-07-06",
+    "date": "2025-07-06",
+    "readableTime": "15:00 - 16:00",
+    "cost": "£4.95",
+    "startMinutes": 900,
+    "endMinutes": 960,
+    "sessionId": "Burgess-Park_Crt-2_2025-07-06_900_960",
+    "slotKey": "Burgess-Park_Crt-2_2025-07-06_900_960"
   },
   {
     "provider": "clubspark",
@@ -124090,19 +123921,6 @@
     "court": "Court 5",
     "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-11",
     "date": "2025-07-11",
-    "readableTime": "08:00 - 09:00",
-    "cost": "£12.00",
-    "startMinutes": 480,
-    "endMinutes": 540,
-    "sessionId": "Clapham-Common_Court-5_2025-07-11_480_540",
-    "slotKey": "Clapham-Common_Court-5_2025-07-11_480_540"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Clapham Common",
-    "court": "Court 5",
-    "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-11",
-    "date": "2025-07-11",
     "readableTime": "09:00 - 10:00",
     "cost": "£12.00",
     "startMinutes": 540,
@@ -125162,19 +124980,6 @@
     "endMinutes": 960,
     "sessionId": "Clapham-Common_Court-7_2025-07-10_900_960",
     "slotKey": "Clapham-Common_Court-7_2025-07-10_900_960"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Clapham Common",
-    "court": "Court 7",
-    "bookingUrl": "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest&date=2025-07-10",
-    "date": "2025-07-10",
-    "readableTime": "21:00 - 22:00",
-    "cost": "£12.00",
-    "startMinutes": 1260,
-    "endMinutes": 1320,
-    "sessionId": "Clapham-Common_Court-7_2025-07-10_1260_1320",
-    "slotKey": "Clapham-Common_Court-7_2025-07-10_1260_1320"
   },
   {
     "provider": "clubspark",
@@ -129881,19 +129686,6 @@
     "endMinutes": 1050,
     "sessionId": "Southwark-Park_Court-3_2025-07-11_1020_1050",
     "slotKey": "Southwark-Park_Court-3_2025-07-11_1020_1050"
-  },
-  {
-    "provider": "clubspark",
-    "location": "Southwark Park",
-    "court": "Court 4",
-    "bookingUrl": "https://clubspark.lta.org.uk/SouthwarkPark/Booking/BookByDate#?role=guest&date=2025-07-06",
-    "date": "2025-07-06",
-    "readableTime": "20:00 - 21:00",
-    "cost": "£4.95",
-    "startMinutes": 1200,
-    "endMinutes": 1260,
-    "sessionId": "Southwark-Park_Court-4_2025-07-06_1200_1260",
-    "slotKey": "Southwark-Park_Court-4_2025-07-06_1200_1260"
   },
   {
     "provider": "clubspark",
