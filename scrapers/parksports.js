@@ -4,18 +4,22 @@ import fs from 'fs';
 // Add randomized delay function
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
-const scrapeParkSports = async function ({ name, url }, date) {
+// Shared browser instance for pooling
+let sharedBrowser = null;
+
+const scrapeParkSports = async function ({ name, url }, date, browserInstance = null) {
   const startTime = Date.now();
   
   // Add randomized delay before scraping to avoid rate limiting
   const randomDelay = 4000 + Math.random() * 5000; // 4-9 seconds (more conservative for ParkSports)
   await delay(randomDelay);
   
-  // Launch browser with slowMo to appear more human-like and reduce rate limiting risk
-  const browser = await chromium.launch({
+  // Use provided browser instance or create new one
+  const browser = browserInstance || await chromium.launch({
     headless: true,
     slowMo: 200      // slows operations slightly to reduce server suspicion
   });
+  
   // Set a realistic user agent
   const userAgents = [
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -40,14 +44,14 @@ const scrapeParkSports = async function ({ name, url }, date) {
 
   if (isEmpty) {
     console.log(`[${location} - ${date}] ✅ No slots available on ${date} (confirmed by site)`);
-    await browser.close();
+    await context.close();
     return [];
   }
 
   if (!hasSlots) {
     console.log(`[${location} - ${date}] 🟡 No slots found and no empty-state marker on ${date} — saving debug to investigate.`);
     fs.writeFileSync(`data/debug-${date}.html`, await page.content());
-    await browser.close();
+    await context.close();
     return [];
   }
 
@@ -100,10 +104,35 @@ const scrapeParkSports = async function ({ name, url }, date) {
   const outputPath = `data/parksports-${location.toLowerCase().replace(/\s+/g, '-')}-${date}.json`;
   fs.writeFileSync(outputPath, JSON.stringify(slots, null, 2));
   console.log(`[${location} - ${date}] 💾 Saved ${slots.length} slots to ${outputPath}`);
-  await browser.close();
+  
+  // Close context but keep browser alive for reuse
+  await context.close();
+  
   const duration = ((Date.now() - startTime) / 1000).toFixed(2);
   console.log(`[${location} - ${date}] ⏱️ Scraping for ${date} completed in ${duration} seconds`);
   return slots;
 };
 
+// Function to get or create shared browser instance
+const getSharedBrowser = async () => {
+  if (!sharedBrowser) {
+    console.log('🚀 Launching shared browser instance for Park Sports...');
+    sharedBrowser = await chromium.launch({
+      headless: true,
+      slowMo: 200
+    });
+  }
+  return sharedBrowser;
+};
+
+// Function to close shared browser
+const closeSharedBrowser = async () => {
+  if (sharedBrowser) {
+    console.log('🔒 Closing shared browser instance...');
+    await sharedBrowser.close();
+    sharedBrowser = null;
+  }
+};
+
 export default scrapeParkSports;
+export { getSharedBrowser, closeSharedBrowser };

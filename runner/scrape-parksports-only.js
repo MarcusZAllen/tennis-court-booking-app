@@ -1,12 +1,15 @@
 import fs from 'fs';
 import path from 'path';
-import scrapeParkSports from '../scrapers/parksports.js';
+import scrapeParkSports, { getSharedBrowser, closeSharedBrowser } from '../scrapers/parksports.js';
 import clubSparkLocations from '../locations/clubspark.js';
 import parkSportsLocations from '../locations/parksports.js';
 import DataCleanup from '../utils/data-cleanup.js';
 import scrapeClubSpark from '../scrapers/clubspark-api.js';
 import { execSync } from 'child_process';
 import pLimit from 'p-limit';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const limit = pLimit(3); // Reduce concurrency to 3 total scrapes at a time
 
 const parkLimit = pLimit(1);  // Park Sports is strict — limit to 1 at a time
@@ -44,6 +47,9 @@ cleanup.runFullCleanup({
     errors: []
   };
 
+  // Get shared browser instance for Park Sports
+  let sharedBrowser = null;
+
   try {
     const dates = getFutureDates(8); // scrape next 8 days
 
@@ -78,7 +84,12 @@ cleanup.runFullCleanup({
             const delay = 5000 + Math.random() * 3000; // 5–8s
             await new Promise(res => setTimeout(res, delay));
 
-            const slots = await scrapeParkSports(location, date);
+            // Get shared browser instance for this scrape
+            if (!sharedBrowser) {
+              sharedBrowser = await getSharedBrowser();
+            }
+
+            const slots = await scrapeParkSports(location, date, sharedBrowser);
             stats.successful++;
             stats.totalSlots += slots.length;
             return { success: true, slots, location: location.name, date };
@@ -143,6 +154,10 @@ cleanup.runFullCleanup({
     console.error('💥 Unexpected top-level error:', e);
     process.exit(1);
   } finally {
+    // Always close the shared browser instance
+    if (sharedBrowser) {
+      await closeSharedBrowser();
+    }
     process.exit(0); // ✅ Ensure clean script exit
   }
 })();
