@@ -110,7 +110,3 @@ data/*.json
 data/debug-*.html
 data/clubspark-*.json
 data/parksports-*.json
-
-# Keep only the aggregated data files
-!data/locations.json
-!data/multi-date-output.json

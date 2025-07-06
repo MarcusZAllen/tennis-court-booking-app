@@ -4,12 +4,46 @@ import * as React from "react";
 import Navbar from "../components/Navbar";
 import WeeklyCalendar from "../components/WeeklyCalendar";
 import LocationPills from "../components/LocationPills";
-import { useCalendarData } from '@/hooks/useCalendarData';
-
+import { useSupabaseData } from '@/hooks/useSupabaseData';
 
 const Index = () => {
   const [location, setLocation] = React.useState("All London");
-  const { calendarData } = useCalendarData();
+  const { calendarData, loading, error } = useSupabaseData();
+
+  if (loading) {
+    return (
+      <div className="bg-offwhite dark:bg-background min-h-screen flex flex-col font-jost">
+        <Navbar />
+        <main className="flex-grow flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
+            <p className="text-lg text-gray-600">Loading tennis court availability...</p>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-offwhite dark:bg-background min-h-screen flex flex-col font-jost">
+        <Navbar />
+        <main className="flex-grow flex items-center justify-center">
+          <div className="text-center">
+            <div className="text-red-500 text-6xl mb-4">⚠️</div>
+            <h2 className="text-xl font-bold mb-2">Error Loading Data</h2>
+            <p className="text-gray-600 mb-4">{error}</p>
+            <button 
+              onClick={() => window.location.reload()} 
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            >
+              Try Again
+            </button>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-offwhite dark:bg-background min-h-screen flex flex-col font-jost">

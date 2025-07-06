@@ -19,27 +19,37 @@ export function transformSlotData(data: any[]): TransformedData {
 
   // Group slots by date and time
   data.forEach(slot => {
-    if (!slot.date || typeof slot.startMinutes !== 'number') return;
+    // Handle both camelCase (JSON files) and snake_case (database) property names
+    const date = slot.date || slot.date;
+    const startMinutes = slot.startMinutes || slot.start_minutes;
+    const provider = slot.provider;
+    const location = slot.location;
+    const bookingUrl = slot.bookingUrl || slot.booking_url;
+    const cost = slot.cost;
+    const sessionId = slot.sessionId || slot.session_id;
+    const slotKey = slot.slotKey || slot.slot_key;
 
-    if (!transformed[slot.date]) {
-      transformed[slot.date] = {};
+    if (!date || typeof startMinutes !== 'number') return;
+
+    if (!transformed[date]) {
+      transformed[date] = {};
     }
 
-    if (!transformed[slot.date][slot.startMinutes]) {
-      transformed[slot.date][slot.startMinutes] = {
+    if (!transformed[date][startMinutes]) {
+      transformed[date][startMinutes] = {
         totalCourts: 0,
         slots: []
       };
     }
 
     // Add the slot to the array
-    transformed[slot.date][slot.startMinutes].slots.push({
-      provider: slot.provider,
-      location: slot.location,
-      bookingUrl: slot.bookingUrl,
-      cost: slot.cost,
-      sessionId: slot.sessionId,
-      slotKey: slot.slotKey
+    transformed[date][startMinutes].slots.push({
+      provider,
+      location,
+      bookingUrl,
+      cost,
+      sessionId,
+      slotKey
     });
   });
 

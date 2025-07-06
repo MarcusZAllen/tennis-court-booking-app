@@ -3,11 +3,44 @@ import fs from 'fs';
 import clubsparkLocations from '../locations/clubspark.js';
 import { DatabaseService } from '../lib/database.js';
 import { format } from 'date-fns';
+import { retryWithBackoff } from '../utils/retry-helper.js';
 
 // Function to extract venue slug from URL
 function extractVenueSlug(url) {
   const match = url.match(/clubspark\.lta\.org\.uk\/([^\/]+)\//);
   return match ? match[1] : null;
+}
+
+// Add delay between requests to respect rate limits
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// Simple API fetch with retry logic
+async function fetchWithRetry(url) {
+  return retryWithBackoff(async () => {
+    const response = await fetch(url, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+
+    // Handle rate limiting specifically
+    if (response.status === 429) {
+      const retryAfter = response.headers.get('Retry-After');
+      const delay = retryAfter ? parseInt(retryAfter) * 1000 : 30000; // Default 30 seconds
+      console.log(`🚫 Rate limited! Waiting ${delay}ms before retry...`);
+      await new Promise(resolve => setTimeout(resolve, delay));
+      throw new Error('Rate limit exceeded');
+    }
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+
+    return response;
+  }, 3, 2000); // 3 retries, 2 second base delay
 }
 
 async function scrapeClubspark() {
@@ -24,6 +57,12 @@ async function scrapeClubspark() {
 
     console.log(`[${location.name}] Starting scrape for venue slug: ${venueSlug}`);
     
+    // Add delay between locations to respect rate limits
+    if (results.length > 0) {
+      console.log(`⏳ Waiting 2 seconds before next location...`);
+      await delay(2000);
+    }
+    
     const dates = [];
     const today = new Date();
     
@@ -36,28 +75,38 @@ async function scrapeClubspark() {
 
     const locationSlots = [];
 
-    for (const currentDate of dates) {
+    for (let i = 0; i < dates.length; i++) {
+      const currentDate = dates[i];
+      
       try {
-        const apiUrl = `https://clubspark.lta.org.uk/v0/VenueBooking/${venueSlug}/GetVenueSessions?resourceID=&startDate=${currentDate}&endDate=${currentDate}&roleId=&_=${Date.now()}`;
-        console.log(`[DEBUG] Fetching Clubspark API: ${apiUrl}`);
+        console.log(`[${location.name}] Fetching data for ${currentDate} (${i + 1}/${dates.length})`);
         
-        const response = await fetch(apiUrl, {
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-
+        const apiUrl = `https://clubspark.lta.org.uk/v0/VenueBooking/${venueSlug}/GetVenueSessions?resourceID=&startDate=${currentDate}&endDate=${currentDate}&roleId=&_=${Date.now()}`;
+        
+        const response = await fetchWithRetry(apiUrl);
         const data = await response.json();
         
         // Process the data structure from the working API
         if (data.Resources) {
           for (const resource of data.Resources) {
+            // Filter out non-tennis facilities
+            const resourceName = resource.Name.toLowerCase();
+            if (resourceName.includes('cricket') || 
+                (resourceName.includes('net') && resourceName.includes('cricket')) ||
+                resourceName.includes('football') ||
+                resourceName.includes('rugby') ||
+                resourceName.includes('pitch')) {
+              console.log(`🚫 [${location.name}] Filtering out non-tennis facility: ${resource.Name}`);
+              continue;
+            }
+
             for (const day of resource.Days) {
               for (const session of day.Sessions) {
+                // Only include available sessions
+                if (session.Availability !== 'Available' && session.Capacity <= 0) {
+                  continue;
+                }
+
                 // Convert minutes to readable time
                 const startHour = Math.floor(session.StartTime / 60);
                 const startMinute = session.StartTime % 60;
@@ -86,8 +135,19 @@ async function scrapeClubspark() {
           }
         }
 
+        // Add delay between date requests (1 second)
+        if (i < dates.length - 1) {
+          await delay(1000);
+        }
+
       } catch (error) {
         console.log(`[${location.name}] Failed to fetch data for ${currentDate}: ${error.message}`);
+        
+        // If we hit a rate limit, wait longer before continuing
+        if (error.message.includes('rate limit') || error.message.includes('429')) {
+          console.log(`🚫 Rate limit detected, waiting 60 seconds before continuing...`);
+          await delay(60000);
+        }
       }
     }
 
