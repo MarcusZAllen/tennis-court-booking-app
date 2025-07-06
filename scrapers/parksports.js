@@ -1,5 +1,6 @@
 import { chromium } from 'playwright';
 import fs from 'fs';
+import { DatabaseService } from '../lib/database.js';
 
 // Add randomized delay function
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -100,6 +101,17 @@ const scrapeParkSports = async function ({ name, url }, date, browserInstance = 
   },
   { location, baseURL, date }
   );
+
+  // Initialize database service and save slots
+  const db = new DatabaseService();
+  if (slots.length > 0) {
+    const dbResult = await db.saveSlots(slots);
+    if (!dbResult.success) {
+      console.error(`[${location} - ${date}] Failed to save to database:`, dbResult.error);
+    } else {
+      console.log(`[${location} - ${date}] ✅ Saved ${slots.length} slots to database`);
+    }
+  }
 
   const outputPath = `data/parksports-${location.toLowerCase().replace(/\s+/g, '-')}-${date}.json`;
   fs.writeFileSync(outputPath, JSON.stringify(slots, null, 2));
