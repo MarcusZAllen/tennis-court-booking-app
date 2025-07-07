@@ -73,6 +73,7 @@ export function useSupabaseData() {
         }
 
         console.log(`✅ Fetched ${data.length} slots from Supabase`);
+        console.log('Raw data from Supabase:', data);
 
         // Clear the timeout since we succeeded
         if (timeoutId) {
@@ -82,6 +83,7 @@ export function useSupabaseData() {
         // Transform the data to match the expected format
         const transformedData = transformSlotData(data);
         setCalendarData(transformedData);
+        console.log('Transformed calendarData:', transformedData);
 
       } catch (err) {
         if (!isMounted) return;
