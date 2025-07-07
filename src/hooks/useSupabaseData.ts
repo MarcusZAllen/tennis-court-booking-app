@@ -25,6 +25,7 @@ export function useSupabaseData() {
 
   useEffect(() => {
     let isMounted = true;
+    // eslint-disable-next-line prefer-const
     let timeoutId: NodeJS.Timeout;
 
     async function fetchData() {
@@ -94,9 +95,8 @@ export function useSupabaseData() {
       }
     }
 
-    // Add a timeout to prevent infinite loading
     timeoutId = setTimeout(() => {
-      if (isMounted && loading) {
+      if (isMounted) {
         console.error('❌ Data fetch timed out');
         setError('Data fetch timed out');
         setLoading(false);
@@ -111,6 +111,7 @@ export function useSupabaseData() {
         clearTimeout(timeoutId);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { calendarData, loading, error };
