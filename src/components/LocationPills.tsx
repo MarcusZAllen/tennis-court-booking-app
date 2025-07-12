@@ -1,5 +1,5 @@
 import * as React from "react";
-import { textStyles, typography } from '../../branding/typography';
+import { textStyles } from '../../branding/typography';
 import Navbar from "../components/Navbar";
 import Link from "next/link";
 import WeeklyCalendar from "../components/WeeklyCalendar";
@@ -18,7 +18,7 @@ export default function LocationPills({ selected, onSelect }: LocationPillsProps
         <button
           key={loc}
           type="button"
-          className={`px-4 py-1 rounded-full font-jost font-medium transition-colors ${typography.textSmall}
+          className={`px-4 py-1 rounded-full font-jost font-medium transition-colors text-sm
             ${selected === loc
               ? "text-white shadow border"
               : "bg-[#fcf4ed] text-gray-600 border border-gray-200 hover:bg-gray-100"}
