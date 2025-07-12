@@ -18,44 +18,15 @@ function getFutureDates(daysAhead) {
 
 (async () => {
   const startTime = Date.now();
-  const stats = {
-    totalTasks: 0,
-    successful: 0,
-    failed: 0,
-    totalSlots: 0,
-    errors: []
-  };
 
   try {
-    const dates = getFutureDates(8); // scrape next 8 days
     console.log('Clubspark locations:', clubSparkLocations);
-    const scrapeTasks = [];
-
-    for (const date of dates) {
-      for (const location of clubSparkLocations) {
-        stats.totalTasks++;
-        scrapeTasks.push(async () => {
-          console.log(`[${location.name} - ${date}] Starting ClubSpark scrape`);
-          try {
-            const slots = await scrapeClubSpark(location, date);
-            stats.successful++;
-            stats.totalSlots += slots.length;
-            return { success: true, slots, location: location.name, date };
-          } catch (err) {
-            stats.failed++;
-            const error = `[${location.name} - ${date}] ❌ Error: ${err.message}`;
-            stats.errors.push(error);
-            console.error(error);
-            return { success: false, slots: [], location: location.name, date, error: err.message };
-          }
-        });
-      }
-    }
-
-    const results = await Promise.allSettled(scrapeTasks.map(fn => fn()));
-    const allSlots = results
-      .filter(res => res.status === 'fulfilled')
-      .flatMap(res => res.value.slots || []);
+    
+    // Run the scraper once - it handles all locations and dates internally
+    const results = await scrapeClubSpark();
+    
+    // Extract all slots from all results
+    const allSlots = results.flatMap(r => r.slots || []);
 
     if (!fs.existsSync('data')) {
       fs.mkdirSync('data');
@@ -79,16 +50,8 @@ function getFutureDates(daysAhead) {
     console.log('\n📊 CLUBSPARK SCRAPING SUMMARY');
     console.log('============================');
     console.log(`⏱️  Total duration: ${duration} seconds`);
-    console.log(`📋 Total tasks: ${stats.totalTasks}`);
-    console.log(`✅ Successful: ${stats.successful}`);
-    console.log(`❌ Failed: ${stats.failed}`);
-    console.log(`🎾 Total slots found: ${stats.totalSlots}`);
-    console.log(`📅 Dates scraped: ${dates.length}`);
-    console.log(`🏟️  Locations: ${clubSparkLocations.length}`);
-    if (stats.errors.length > 0) {
-      console.log('\n⚠️  ERRORS:');
-      stats.errors.forEach(error => console.log(`  ${error}`));
-    }
+    console.log(`🎾 Total slots found: ${allSlots.length}`);
+    console.log(`🏟️  Locations: ${results.length}`);
     console.log(`\n🎉 Clubspark-only scraping completed!`);
   } catch (e) {
     console.error('💥 Unexpected top-level error:', e);
