@@ -2,8 +2,8 @@
 // Based on existing font sizes used throughout the frontend
 
 export const typography = {
-  // Header - Main page title (text-3xl)
-  header: "text-3xl font-bold font-jost uppercase leading-tight",
+  // Header - Main page title (text-3xl md:text-3xl)
+  header: "text-3xl md:text-3xl font-bold font-jost uppercase leading-tight",
   
   // Sub Header - Section titles and modal titles (text-xl)
   subHeader: "text-xl font-semibold font-jost leading-none tracking-tight",
