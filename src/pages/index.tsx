@@ -57,7 +57,7 @@ const Index = () => {
         >
           {/* Headline + subheader */}
           <section className="w-full text-center px-4 pt-10 md:pt-14">
-            <h1 className={textStyles.pageHeading}>
+            <h1 className="text-3xl md:text-3xl font-bold mb-3 md:mb-4 text-black leading-tight font-jost uppercase">
               Find and book tennis courts across London
             </h1>
             <p className={textStyles.pageDescription}>
