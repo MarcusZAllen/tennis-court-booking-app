@@ -3,6 +3,7 @@ import SlotBookingModal from "./SlotBookingModal";
 import type { TransformedData } from "@/utils/transformSlotData";
 import { RotateCcw } from "lucide-react";
 import RefreshButton from "./RefreshButton";
+import { textStyles } from '../../branding/typography';
 
 // Utility to add "st", "nd", "rd", "th" suffix to date
 function formatDaySuffix(day: number) {
@@ -128,7 +129,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
             {weekDates.map((d, idx) => (
               <th
                 key={idx}
-                className="px-2 py-2 text-base font-jost font-medium text-black text-center"
+                className={`px-2 py-2 text-center ${textStyles.calendarDayHeader}`}
                 style={{ minWidth: 40 }}
               >
                 <div className="flex flex-col items-center leading-tight">
@@ -144,7 +145,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
           {TIMES.map((time, rowIdx) => (
             <tr key={time}>
               <th
-                className="py-0 pr-2 text-center align-middle text-base font-jost font-normal text-black"
+                className={`py-0 pr-2 text-center align-middle ${textStyles.calendarTime}`}
                 style={{ width: 24, height: 44 }}
               >
                 {time < 12 ? `${time}am` : time === 12 ? `12pm` : `${time - 12}pm`}
@@ -206,7 +207,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
                     <div className="flex flex-col items-center justify-center h-full w-full">
                       <span
                         className={
-                          "font-jost text-[1.2rem] leading-none font-medium " +
+                          `${textStyles.availabilityCount} font-jost ` +
                           (isAvailable ? "text-black" : "text-gray-400")
                         }
                         style={{
@@ -219,7 +220,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
                       </span>
                       <span
                         className={
-                          "font-jost text-[10px] font-medium tracking-tight " +
+                          `${textStyles.availabilityLabel} font-jost ` +
                           (isAvailable ? "text-[#555]" : "text-gray-400")
                         }
                         style={{

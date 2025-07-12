@@ -1,5 +1,6 @@
 
 import * as React from "react";
+import { textStyles } from '../../branding/typography';
 
 const LOCATIONS = [
   "All London",
@@ -26,7 +27,7 @@ const LocationFilter: React.FC<LocationFilterProps> = ({ value, onChange }) => {
             key={loc}
             type="button"
             onClick={() => onChange(loc)}
-            className={`px-5 py-2 font-medium text-lg border-r-4 border-black last:border-r-0
+            className={`px-5 py-2 font-medium border-r-4 border-black last:border-r-0 ${textStyles.textParagraph}
               ${value === loc
                 ? "bg-tennis-green text-white"
                 : "bg-card-warm text-tennis-green hover:bg-warm-accent hover:text-black transition-colors"
@@ -42,7 +43,7 @@ const LocationFilter: React.FC<LocationFilterProps> = ({ value, onChange }) => {
       <div className="w-full max-w-xs flex md:hidden relative">
         <select
           aria-label="Select location"
-          className="block w-full py-2 px-4 rounded-xl border-4 border-black text-lg text-tennis-green font-medium bg-card-warm shadow-card appearance-none"
+          className={`block w-full py-2 px-4 rounded-xl border-4 border-black text-tennis-green font-medium bg-card-warm shadow-card appearance-none ${textStyles.textParagraph}`
           value={value}
           onChange={(e) => onChange(e.target.value)}
         >

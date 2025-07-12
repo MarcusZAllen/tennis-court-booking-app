@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import WeeklyCalendar from "../components/WeeklyCalendar";
 import LocationPills from "../components/LocationPills";
 import { useSupabaseData } from '@/hooks/useSupabaseData';
+import { textStyles } from '../../branding/typography';
 
 const Index = () => {
   const [location, setLocation] = React.useState("All London");
@@ -18,7 +19,7 @@ const Index = () => {
         <main className="flex-grow flex items-center justify-center">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
-            <p className="text-lg text-gray-600">Loading tennis court availability...</p>
+            <p className={textStyles.loadingText}>Loading tennis court availability...</p>
           </div>
         </main>
       </div>
@@ -32,7 +33,7 @@ const Index = () => {
         <main className="flex-grow flex items-center justify-center">
           <div className="text-center">
             <div className="text-red-500 text-6xl mb-4">⚠️</div>
-            <h2 className="text-xl font-bold mb-2">Error Loading Data</h2>
+            <h2 className={textStyles.errorText}>Error Loading Data</h2>
             <p className="text-gray-600 mb-4">{error}</p>
             <button 
               onClick={() => window.location.reload()} 
@@ -56,10 +57,10 @@ const Index = () => {
         >
           {/* Headline + subheader */}
           <section className="w-full text-center px-4 pt-10 md:pt-14">
-            <h1 className="text-3xl md:text-3xl font-bold mb-3 md:mb-4 text-black leading-tight font-jost uppercase">
+            <h1 className={textStyles.pageHeading}>
               Find and book tennis courts across London
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-4">
+            <p className={textStyles.pageDescription}>
               Check real-time availability. Grab the perfect slot.
             </p>
           </section>
@@ -73,7 +74,7 @@ const Index = () => {
         </div>
       </main>
       {/* Footer */}
-      <footer className="text-sm text-gray-400 opacity-90 py-6 text-center">
+      <footer className={`${textStyles.footerText} py-6 text-center`}>
         &copy; {new Date().getFullYear()} CourtBook. All rights reserved.
       </footer>
     </div>

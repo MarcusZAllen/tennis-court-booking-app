@@ -1,7 +1,7 @@
 import { Share } from "lucide-react";
-import ProfileAvatar from "./ProfileAvatar";
 import * as React from "react";
 import Link from "next/link";
+import { textStyles } from '../../branding/typography';
 
 const Navbar = () => {
   return (
@@ -20,22 +20,22 @@ const Navbar = () => {
           BOOK A COURT
         </span>
       </div>
-      {/* Right: Courts, Share, Profile */}
-      <div className="flex items-center gap-3 md:gap-5">
+      {/* Right: Courts, Share */}
+      <div className="flex items-center gap-3 md:gap-5 ml-auto">
         <Link
           href="/courts"
-          className="bg-white text-black rounded-xl px-4 py-2 font-jost font-medium text-base uppercase shadow-sm border-0 transition-all duration-150 hover:bg-gray-100 hover:underline focus:bg-gray-100"
+          className={`bg-white text-black rounded-xl px-4 py-2 shadow-sm border-0 transition-all duration-150 hover:bg-gray-100 hover:underline focus:bg-gray-100 ${textStyles.buttonTextSmall}`}
           style={{ letterSpacing: "0.08em" }}
         >
           Courts
         </Link>
         <button
-          className="bg-white text-black rounded-full p-2 shadow-sm border-0 flex items-center transition-all duration-150 hover:bg-gray-100 hover:underline focus:bg-gray-100"
-          style={{ background: "#fff" }}
+          className={`bg-white text-black rounded-xl px-4 py-2 shadow-sm border-0 transition-all duration-150 hover:bg-gray-100 hover:underline focus:bg-gray-100 flex items-center ${textStyles.buttonTextSmall}`}
+          style={{ letterSpacing: "0.08em" }}
         >
-          <Share className="w-5 h-5" aria-label="Share" />
+          <Share className="w-4 h-4 mr-1" aria-label="Share" />
+          Share
         </button>
-        <ProfileAvatar />
       </div>
     </nav>
   );

@@ -9,6 +9,7 @@ import {
 } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { ExternalLink, MapPin } from "lucide-react";
+import { textStyles } from '../../branding/typography';
 
 type Slot = {
   provider: string;
@@ -56,10 +57,10 @@ export default function SlotBookingModal({
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-md w-full px-6 py-6 shadow-xl bg-white max-h-[80vh] flex flex-col">
         <DialogHeader>
-          <DialogTitle className="text-xl font-jost text-center mb-3">
+          <DialogTitle className={textStyles.modalTitle}>
             {date}, {time}
           </DialogTitle>
-          <DialogDescription className="text-center mb-6 text-gray-600">
+          <DialogDescription className={textStyles.modalDescription}>
             Available courts across {Object.keys(locationGroups).length} locations
           </DialogDescription>
         </DialogHeader>
@@ -73,15 +74,15 @@ export default function SlotBookingModal({
               <div className="flex items-center space-x-3">
                 <MapPin className="h-4 w-4" style={{ color: '#7cb46b' }} />
                 <div>
-                  <span className="font-jost text-base font-medium text-gray-900">
+                  <span className={textStyles.locationName}>
                     {location}
                   </span>
                   <div className="flex items-center space-x-2 mt-1">
                     <span className="text-sm text-gray-600">
                       {data.slotKeys.size} court{data.slotKeys.size !== 1 ? 's' : ''} available
                     </span>
-                    <span className="text-xs text-gray-500 font-medium">
-                      {data.sampleSlot.cost}
+                    <span className="text-xs text-gray-500 font-medium opacity-50">
+                      £{data.sampleSlot.cost}
                     </span>
                   </div>
                 </div>
@@ -113,8 +114,8 @@ export default function SlotBookingModal({
           
           {Object.keys(locationGroups).length === 0 && (
             <div className="text-center py-8 text-gray-500 rounded-xl bg-gray-50 border border-gray-200">
-              <p className="text-lg font-medium">No courts available</p>
-              <p className="text-sm">Try selecting a different time slot</p>
+              <p className={textStyles.subHeader}>No courts available</p>
+              <p className={textStyles.textSmall}>Try selecting a different time slot</p>
             </div>
           )}
         </div>
