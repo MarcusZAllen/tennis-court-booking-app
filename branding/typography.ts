@@ -14,8 +14,8 @@ export const typography = {
   // Text Paragraph - Main content, descriptions (text-lg)
   textParagraph: "text-lg font-normal",
   
-  // Text Small - Secondary content, labels, metadata (text-xs)
-  textSmall: "text-xs font-normal",
+  // Text Small - Secondary content, labels, metadata (text-sm)
+  textSmall: "text-sm font-normal",
   
   // Text Extra Small - Captions, badges, fine print (text-[10px])
   textExtraSmall: "text-[10px] font-medium tracking-tight",
@@ -39,7 +39,7 @@ export const textStyles = {
   buttonText: `${typography.sectionTitle} uppercase tracking-widest`,
   
   // Small button text (for pills and navbar)
-  buttonTextSmall: `text-sm font-medium font-jost uppercase tracking-widest`,
+  buttonTextSmall: `text-base font-medium font-jost uppercase tracking-widest`,
   
   // Location name
   locationName: `${typography.sectionTitle} font-medium text-gray-900`,
