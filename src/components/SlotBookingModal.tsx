@@ -114,8 +114,8 @@ export default function SlotBookingModal({
           
           {Object.keys(locationGroups).length === 0 && (
             <div className="text-center py-8 text-gray-500 rounded-xl bg-gray-50 border border-gray-200">
-              <p className="text-lg font-medium">No courts available</p>
-              <p className={typography.textSmall}>Try selecting a different time slot</p>
+              <p className={textStyles.noCourtsMessage}>No courts available</p>
+                              <p className={textStyles.tryAgainMessage}>Try selecting a different time slot</p>
             </div>
           )}
         </div>

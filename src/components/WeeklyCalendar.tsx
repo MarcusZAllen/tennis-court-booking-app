@@ -207,7 +207,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
                     <div className="flex flex-col items-center justify-center h-full w-full">
                       <span
                         className={
-                          "font-jost text-[1.2rem] leading-none font-medium " +
+                          `${textStyles.availabilityCount} ` +
                           (isAvailable ? "text-black" : "text-gray-400")
                         }
                         style={{
@@ -220,7 +220,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
                       </span>
                       <span
                         className={
-                          "font-jost text-[10px] font-medium tracking-tight " +
+                          `${textStyles.availabilityLabel} ` +
                           (isAvailable ? "text-[#555]" : "text-gray-400")
                         }
                         style={{
