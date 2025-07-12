@@ -110,7 +110,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
 
   return (
     <div
-      className="rounded-[8px] bg-white border border-black w-full max-w-[900px] calendar-main-area"
+      className="bg-white w-full max-w-[900px] calendar-main-area"
       style={{
         boxShadow: "0 2px 12px 0 rgb(60 80 60 / 0.08)",
         padding: "24px",
@@ -118,7 +118,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
         position: "relative"
       }}
     >
-      <table className="min-w-full border-separate border-spacing-2 font-medium select-none">
+      <table className="min-w-full border-separate border-spacing-0 font-medium select-none">
         <thead>
           <tr>
             {/* Refresh button in line with header row and time column */}
@@ -163,12 +163,12 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
                 
                 // slot style logic updated here
                 const slotBase =
-                  "transition-all duration-75 rounded-[8px] px-0 py-0 cursor-pointer";
+                  "transition-all duration-75 px-0 py-0 cursor-pointer";
                 const slotPadding = "p-2";
                 let slotClass = slotBase + " " + slotPadding;
                 // More visible unavailable slot color + forced bg override
                 if (!isAvailable) {
-                  slotClass += " bg-gray-300 !bg-gray-300 text-gray-400 cursor-not-allowed";
+                  slotClass += " bg-gray-200 !bg-gray-200 text-gray-400 cursor-not-allowed";
                 } else {
                   slotClass += " bg-white text-black hover:bg-[#7cb46b] hover:text-white";
                 }
@@ -183,16 +183,18 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
                     className={slotClass}
                     style={{
                       minWidth: 40,
-                      minHeight: 44,
+                      minHeight: 48,
                       width: 48,
-                      height: 48,
+                      height: 52,
                       boxShadow: "none",
                       outline: "none",
                       border: "none",
                       margin: 0,
                       verticalAlign: "middle",
                       pointerEvents: isAvailable ? "auto" : "none",
-                      backgroundColor: !isAvailable ? "#e5e7eb" : undefined, // Tailwind gray-300
+                      backgroundColor: !isAvailable ? "#e5e7eb" : undefined, // Lighter gray
+                      borderRight: colIdx < weekDates.length - 1 ? "1px solid #e5e7eb" : "none", // 1px gray separator line
+                      borderBottom: rowIdx < TIMES.length - 1 ? "1px solid #e5e7eb" : "none", // 1px gray separator line
                     }}
                     onClick={() => isAvailable && handleSlotClick(colIdx, rowIdx, dateStr, timeInMinutes, slotData)}
                     onKeyDown={e => {
@@ -204,7 +206,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
                     <div className="flex flex-col items-center justify-center h-full w-full">
                       <span
                         className={
-                          "font-jost text-[1.5rem] leading-none font-medium " +
+                          "font-jost text-[1.2rem] leading-none font-medium " +
                           (isAvailable ? "text-black" : "text-gray-400")
                         }
                         style={{
