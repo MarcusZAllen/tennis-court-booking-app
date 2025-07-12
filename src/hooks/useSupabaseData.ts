@@ -50,11 +50,12 @@ export function useSupabaseData() {
         console.log(`📅 Fetching data from ${startDateStr} to ${endDateStr}`);
         console.log('🔧 About to make Supabase query...');
 
+        // Try a different query approach
         const { data, error } = await supabase
           .from('tennis_slots')
           .select('*')
-          .gte('date', startDateStr)
-          .lte('date', endDateStr)
+          .filter('date', 'gte', startDateStr)
+          .filter('date', 'lte', endDateStr)
           .order('date', { ascending: true })
           .order('start_minutes', { ascending: true });
 

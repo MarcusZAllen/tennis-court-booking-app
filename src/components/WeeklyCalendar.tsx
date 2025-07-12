@@ -155,6 +155,12 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
                 const slotData = calendarData?.[dateStr]?.[timeInMinutes];
                 const availability = slotData?.totalCourts ?? 0;
                 const isAvailable = availability > 0;
+                
+                // Debug logging for first few slots
+                if (colIdx === 0 && rowIdx < 3) {
+                  console.log(`🔍 Slot debug - Date: ${dateStr}, Time: ${time}:00, Minutes: ${timeInMinutes}, Availability: ${availability}, Available: ${isAvailable}`);
+                }
+                
                 // slot style logic updated here
                 const slotBase =
                   "transition-all duration-75 rounded-[8px] px-0 py-0 cursor-pointer";

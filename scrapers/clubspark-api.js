@@ -37,7 +37,7 @@ async function fetchWithRetry(url) {
 
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
+  }
 
     return response;
   }, 3, 2000); // 3 retries, 2 second base delay
@@ -119,7 +119,7 @@ async function scrapeClubspark() {
                 const slot = {
                   provider: 'clubspark',
                   location: location.name,
-                  court: resource.Name,
+              court: resource.Name,
                   bookingUrl: location.url,
                   date: currentDate,
                   readableTime: `${startTimeStr} - ${endTimeStr}`,
@@ -147,9 +147,9 @@ async function scrapeClubspark() {
         if (error.message.includes('rate limit') || error.message.includes('429')) {
           console.log(`🚫 Rate limit detected, waiting 60 seconds before continuing...`);
           await delay(60000);
-        }
       }
     }
+  }
 
     // Save to database
     if (locationSlots.length > 0) {

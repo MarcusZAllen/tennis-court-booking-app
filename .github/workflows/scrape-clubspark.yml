@@ -32,4 +32,4 @@ jobs:
         run: node runner/scrape-clubspark-only.js
 
       - name: Aggregate data
-        run: node aggregate-daily-to-location.js 
+        run: node aggregate-daily-to-location.js
