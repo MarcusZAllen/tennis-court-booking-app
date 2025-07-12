@@ -9,7 +9,7 @@ import {
 } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { ExternalLink, MapPin } from "lucide-react";
-import { textStyles } from '../../branding/typography';
+import { textStyles, typography } from '../../branding/typography';
 
 type Slot = {
   provider: string;
@@ -115,7 +115,7 @@ export default function SlotBookingModal({
           {Object.keys(locationGroups).length === 0 && (
             <div className="text-center py-8 text-gray-500 rounded-xl bg-gray-50 border border-gray-200">
               <p className={textStyles.subHeader}>No courts available</p>
-              <p className={textStyles.textSmall}>Try selecting a different time slot</p>
+              <p className={typography.textSmall}>Try selecting a different time slot</p>
             </div>
           )}
         </div>
