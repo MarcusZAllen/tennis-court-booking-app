@@ -11,8 +11,8 @@ export const typography = {
   // Section Title - Calendar headers, button text (text-base)
   sectionTitle: "text-base font-medium font-jost",
   
-  // Text Paragraph - Main content, descriptions (text-lg)
-  textParagraph: "text-lg font-normal",
+  // Text Paragraph - Main content, descriptions (text-lg md:text-xl)
+  textParagraph: "text-lg md:text-xl font-normal",
   
   // Text Small - Secondary content, labels, metadata (text-sm)
   textSmall: "text-sm font-normal",
@@ -33,7 +33,7 @@ export const textStyles = {
   modalTitle: `${typography.subHeader} text-center mb-3`,
   
   // Modal description
-  modalDescription: `${typography.textSmall} text-center mb-6 text-gray-600`,
+  modalDescription: `text-center mb-6 text-gray-600`,
   
   // Button text
   buttonText: `${typography.sectionTitle} uppercase tracking-widest`,
@@ -60,10 +60,10 @@ export const textStyles = {
   footerText: `${typography.textSmall} text-gray-400 opacity-90`,
   
   // Error text
-  errorText: `${typography.subHeader} font-bold mb-2`,
+  errorText: `text-xl font-bold mb-2`,
   
   // Loading text
-  loadingText: `${typography.textParagraph} text-gray-600`,
+  loadingText: `text-lg text-gray-600`,
 } as const;
 
 // Font weight constants
