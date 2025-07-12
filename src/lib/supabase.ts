@@ -8,10 +8,14 @@ console.log('🔧 Supabase client initialization:', {
   key: supabaseAnonKey ? 'Set' : 'Missing'
 });
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('❌ Missing Supabase environment variables for frontend');
-  throw new Error('Missing Supabase environment variables for frontend')
+// Only create client if environment variables are available
+let supabase: any = null;
+
+if (supabaseUrl && supabaseAnonKey) {
+  supabase = createClient(supabaseUrl, supabaseAnonKey)
+  console.log('✅ Supabase client created successfully');
+} else {
+  console.warn('⚠️ Supabase environment variables not available - client not created');
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
-console.log('✅ Supabase client created successfully'); 
+export { supabase } 

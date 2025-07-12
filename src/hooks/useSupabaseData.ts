@@ -39,6 +39,11 @@ export function useSupabaseData() {
         setLoading(true);
         setError(null);
 
+        // Check if Supabase client is available
+        if (!supabase) {
+          throw new Error('Supabase client not available - environment variables may be missing');
+        }
+
         // Get the next 7 days
         const today = new Date();
         const endDate = new Date();
