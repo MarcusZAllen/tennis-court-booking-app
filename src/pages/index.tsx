@@ -1,4 +1,5 @@
 // Tennis Court Booking App Homepage
+// Updated to use Supabase environment variables
 
 import * as React from "react";
 import Navbar from "../components/Navbar";
