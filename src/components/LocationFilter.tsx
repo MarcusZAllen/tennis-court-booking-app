@@ -43,7 +43,7 @@ const LocationFilter: React.FC<LocationFilterProps> = ({ value, onChange }) => {
       <div className="w-full max-w-xs flex md:hidden relative">
         <select
           aria-label="Select location"
-          className={`block w-full py-2 px-4 rounded-xl border-4 border-black text-tennis-green font-medium bg-card-warm shadow-card appearance-none ${textStyles.textParagraph}`
+          className={`block w-full py-2 px-4 rounded-xl border-4 border-black text-tennis-green font-medium bg-card-warm shadow-card appearance-none ${textStyles.textParagraph}`}
           value={value}
           onChange={(e) => onChange(e.target.value)}
         >
