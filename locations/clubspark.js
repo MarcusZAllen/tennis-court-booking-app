@@ -52,9 +52,48 @@ const clubsparkLocations = [
   {
     name: "South Park Fulham",
     url: "https://clubspark.lta.org.uk/SouthParkFulham/Booking/BookByDate#?role=guest",
+    bookingWindow: 8
+  },
+  {
+    name: "Parliament Hill Fields Tennis Courts",
+    url: "https://clubspark.lta.org.uk/ParliamentHillFieldsTennisCourts/Booking/BookByDate#?role=guest",
+    bookingWindow: 1
+  },
+  {
+    name: "Queen's Park Tennis Courts",
+    url: "https://clubspark.lta.org.uk/QueensParkTennisCourts/Booking/BookByDate#?role=guest",
+    bookingWindow: 1
+  },
+  {
+    name: "Finsbury Park",
+    url: "https://clubspark.lta.org.uk/FinsburyPark/Booking/BookByDate#?role=guest",
+    bookingWindow: 8
+  },
+  {
+    name: "Northway Gardens",
+    url: "https://clubspark.lta.org.uk/NorthwayGardens/Booking/BookByDate#?role=guest",
+    bookingWindow: 8
+  },
+  {
+    name: "Dulwich Park",
+    url: "https://clubspark.lta.org.uk/DulwichPark/Booking/BookByDate#?role=guest",
     bookingWindow: 7
   },
-  // Add more locations as needed
+  {
+    name: "Ravenscourt Park",
+    url: "https://clubspark.lta.org.uk/RavenscourtPark/Booking/BookByDate#?role=guest",
+    bookingWindow: 8
+  },
+  {
+    name: "Hurlingham Park",
+    url: "https://clubspark.lta.org.uk/HurlinghamPark/Booking/BookByDate#?role=guest",
+    bookingWindow: 8
+  },
+  {
+    name: "Eel Brook Common",
+    url: "https://clubspark.lta.org.uk/EelBrookCommon/Booking/BookByDate#?role=guest",
+    bookingWindow: 8
+  }
 ];
 
 export default clubsparkLocations;
