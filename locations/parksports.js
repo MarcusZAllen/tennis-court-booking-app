@@ -1,13 +1,14 @@
 const parksportsLocations = [
     {
       name: "Regents Park",
-      url: "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest"
+      url: "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest",
+      tags: ["Central", "North"]
     },
     {
       name: "Hyde Park",
-      url: "https://hyde.parksports.co.uk/Booking/BookByDate#?role=guest"
-    },
-      // Add more locations as needed
+      url: "https://hyde.parksports.co.uk/Booking/BookByDate#?role=guest",
+      tags: ["Central", "West"]
+    }
 ];
 
 export default parksportsLocations;
