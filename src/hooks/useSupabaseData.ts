@@ -63,7 +63,7 @@ export function useSupabaseData() {
           .filter('date', 'lte', endDateStr)
           .order('date', { ascending: true })
           .order('start_minutes', { ascending: true })
-          .limit(2000); // Limit set to 2000
+          .limit(5000); // Limit set to 5000
 
         console.log('🔧 Supabase query completed');
 
