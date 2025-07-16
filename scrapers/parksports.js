@@ -10,7 +10,7 @@ const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 let sharedBrowser = null;
 
 // Create a rate limiter for ParkSports (more conservative)
-const rateLimiter = new RateLimiter(5, 60000); // 5 requests per minute
+const rateLimiter = new RateLimiter(3, 60000); // 3 requests per minute (reduced from 5)
 
 const scrapeParkSports = async function ({ name, url }, date, browserInstance = null) {
   const startTime = Date.now();
@@ -19,7 +19,7 @@ const scrapeParkSports = async function ({ name, url }, date, browserInstance = 
   await rateLimiter.waitForSlot();
   
   // Add randomized delay before scraping to avoid rate limiting
-  const randomDelay = 6000 + Math.random() * 8000; // 6-14 seconds (more conservative)
+  const randomDelay = 8000 + Math.random() * 12000; // 8-20 seconds (more conservative)
   console.log(`⏳ Waiting ${Math.round(randomDelay)}ms before scraping ${name}...`);
   await delay(randomDelay);
   
@@ -42,7 +42,10 @@ const scrapeParkSports = async function ({ name, url }, date, browserInstance = 
     userAgent: randomUserAgent,
     viewport: { width: 1920, height: 1080 },
     locale: 'en-GB',
-    timezoneId: 'Europe/London'
+    timezoneId: 'Europe/London',
+    // Add additional options for better reliability
+    ignoreHTTPSErrors: true,
+    bypassCSP: true
   });
   
   const page = await context.newPage();
@@ -50,16 +53,16 @@ const scrapeParkSports = async function ({ name, url }, date, browserInstance = 
   const location = name;
   const baseURL = url;
   
-  // Use retry logic for page navigation
+  // Use retry logic for page navigation with more lenient settings
   const loadPage = async () => {
     await page.goto(`${baseURL}&date=${date}`, { 
-      waitUntil: 'networkidle',
-      timeout: 30000 // 30 second timeout
+      waitUntil: 'domcontentloaded', // Changed from networkidle to domcontentloaded
+      timeout: 60000 // Increased timeout to 60 seconds
     });
   };
   
   try {
-    await retryWithBackoff(loadPage, 3, 2000);
+    await retryWithBackoff(loadPage, 5, 5000); // Increased retries and delay
   } catch (error) {
     console.log(`[${location} - ${date}] Failed to load page after retries: ${error.message}`);
     await context.close();
@@ -168,7 +171,7 @@ const getSharedBrowser = async () => {
     console.log('🚀 Launching shared browser instance for Park Sports...');
     sharedBrowser = await chromium.launch({
       headless: true,
-      slowMo: 300,
+      slowMo: 500, // Increased slowMo
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
@@ -176,7 +179,9 @@ const getSharedBrowser = async () => {
         '--disable-accelerated-2d-canvas',
         '--no-first-run',
         '--no-zygote',
-        '--disable-gpu'
+        '--disable-gpu',
+        '--disable-web-security',
+        '--disable-features=VizDisplayCompositor'
       ]
     });
   }
