@@ -1,34 +1,40 @@
-import { chromium } from 'playwright';
+import puppeteer from 'puppeteer-extra';
+import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import fs from 'fs';
 import { DatabaseService } from '../lib/database.js';
 import { retryWithBackoff, RateLimiter } from '../utils/retry-helper.js';
 
-// Add randomized delay function
+puppeteer.use(StealthPlugin());
+
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
-// Shared browser instance for pooling
 let sharedBrowser = null;
-
-// Create a rate limiter for ParkSports (more conservative)
-const rateLimiter = new RateLimiter(3, 60000); // 3 requests per minute (reduced from 5)
+const rateLimiter = new RateLimiter(3, 60000); // 3 requests per minute
 
 const scrapeParkSports = async function ({ name, url }, date, browserInstance = null) {
   const startTime = Date.now();
-  
-  // Wait for rate limiter slot
   await rateLimiter.waitForSlot();
-  
-  // Add randomized delay before scraping to avoid rate limiting
-  const randomDelay = 8000 + Math.random() * 12000; // 8-20 seconds (more conservative)
+  const randomDelay = 8000 + Math.random() * 12000;
   console.log(`⏳ Waiting ${Math.round(randomDelay)}ms before scraping ${name}...`);
   await delay(randomDelay);
-  
+
   // Use provided browser instance or create new one
-  const browser = browserInstance || await chromium.launch({
+  const browser = browserInstance || await puppeteer.launch({
     headless: true,
-    slowMo: 300      // increased slowMo for more human-like behavior
+    slowMo: 300,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-accelerated-2d-canvas',
+      '--no-first-run',
+      '--no-zygote',
+      '--disable-gpu',
+      '--disable-web-security',
+      '--disable-features=VizDisplayCompositor'
+    ]
   });
-  
+
   // Set a realistic user agent
   const userAgents = [
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -37,61 +43,64 @@ const scrapeParkSports = async function ({ name, url }, date, browserInstance = 
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/121.0'
   ];
   const randomUserAgent = userAgents[Math.floor(Math.random() * userAgents.length)];
-  
-  const context = await browser.newContext({ 
-    userAgent: randomUserAgent,
-    viewport: { width: 1920, height: 1080 },
-    locale: 'en-GB',
-    timezoneId: 'Europe/London',
-    // Add additional options for better reliability
-    ignoreHTTPSErrors: true,
-    bypassCSP: true
-  });
-  
-  const page = await context.newPage();
+
+  const page = await browser.newPage();
+  await page.setUserAgent(randomUserAgent);
+  await page.setViewport({ width: 1920, height: 1080 });
+
+  // Set locale and timezone via emulation
+  await page.emulateTimezone('Europe/London');
+  await page.emulateVisionDeficiency(null); // No vision deficiency
 
   const location = name;
   const baseURL = url;
-  
-  // Use retry logic for page navigation with more lenient settings
+
   const loadPage = async () => {
-    await page.goto(`${baseURL}&date=${date}`, { 
-      waitUntil: 'domcontentloaded', // Changed from networkidle to domcontentloaded
-      timeout: 60000 // Increased timeout to 60 seconds
+    await page.goto(`${baseURL}&date=${date}`, {
+      waitUntil: 'networkidle2',
+      timeout: 60000
     });
   };
-  
+
   try {
-    await retryWithBackoff(loadPage, 5, 5000); // Increased retries and delay
+    await retryWithBackoff(loadPage, 5, 5000);
   } catch (error) {
     console.log(`[${location} - ${date}] Failed to load page after retries: ${error.message}`);
-    await context.close();
+    await page.close();
+    // Only close browser if we created it (not if it was passed in)
+    if (!browserInstance) {
+      await browser.close();
+    }
     return [];
   }
 
   console.log(`[${location} - ${date}] Loaded court availability for ${date}`);
-
-  // Add random wait times to simulate human behavior
-  await page.waitForLoadState('domcontentloaded');
-  await page.waitForTimeout(3000 + Math.random() * 2000); // 3-5 seconds
+  await new Promise(resolve => setTimeout(resolve, 3000 + Math.random() * 2000));
 
   const hasSlots = await page.$('.resource-session[data-availability="true"]');
   const isEmpty = await page.$('.court-grid.no-slots');
 
   if (isEmpty) {
     console.log(`[${location} - ${date}] ✅ No slots available on ${date} (confirmed by site)`);
-    await context.close();
+    await page.close();
+    // Only close browser if we created it (not if it was passed in)
+    if (!browserInstance) {
+      await browser.close();
+    }
     return [];
   }
 
   if (!hasSlots) {
     console.log(`[${location} - ${date}] 🟡 No slots found and no empty-state marker on ${date} — saving debug to investigate.`);
-    // Ensure data directory exists before writing debug file
     if (!fs.existsSync('data')) {
       fs.mkdirSync('data');
     }
     fs.writeFileSync(`data/debug-${date}.html`, await page.content());
-    await context.close();
+    await page.close();
+    // Only close browser if we created it (not if it was passed in)
+    if (!browserInstance) {
+      await browser.close();
+    }
     return [];
   }
 
@@ -126,7 +135,7 @@ const scrapeParkSports = async function ({ name, url }, date, browserInstance = 
         return {
           provider: "parksports",
           location,
-          court: "Tennis Court", // ParkSports doesn't provide court names, so use generic
+          court: "Tennis Court",
           bookingUrl: `${baseURL}&date=${date}`,
           date,
           readableTime: timeSpan.innerText.trim(),
@@ -138,11 +147,8 @@ const scrapeParkSports = async function ({ name, url }, date, browserInstance = 
         };
       })
       .filter(Boolean);
-  },
-  { location, baseURL, date }
-  );
+  }, { location, baseURL, date });
 
-  // Initialize database service and save slots
   const db = new DatabaseService();
   if (slots.length > 0) {
     try {
@@ -157,17 +163,19 @@ const scrapeParkSports = async function ({ name, url }, date, browserInstance = 
     }
   }
 
-  // Ensure data directory exists before writing output file
   if (!fs.existsSync('data')) {
     fs.mkdirSync('data');
   }
   const outputPath = `data/parksports-${location.toLowerCase().replace(/\s+/g, '-')}-${date}.json`;
   fs.writeFileSync(outputPath, JSON.stringify(slots, null, 2));
   console.log(`[${location} - ${date}] 💾 Saved ${slots.length} slots to ${outputPath}`);
-  
-  // Close context but keep browser alive for reuse
-  await context.close();
-  
+
+  // Always close the page, but only close browser if we created it
+  await page.close();
+  if (!browserInstance) {
+    await browser.close();
+  }
+
   const duration = ((Date.now() - startTime) / 1000).toFixed(2);
   console.log(`[${location} - ${date}] ⏱️ Scraping for ${date} completed in ${duration} seconds`);
   return slots;
@@ -177,9 +185,9 @@ const scrapeParkSports = async function ({ name, url }, date, browserInstance = 
 const getSharedBrowser = async () => {
   if (!sharedBrowser) {
     console.log('🚀 Launching shared browser instance for Park Sports...');
-    sharedBrowser = await chromium.launch({
+    sharedBrowser = await puppeteer.launch({
       headless: true,
-      slowMo: 500, // Increased slowMo
+      slowMo: 500,
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
@@ -196,7 +204,6 @@ const getSharedBrowser = async () => {
   return sharedBrowser;
 };
 
-// Function to close shared browser
 const closeSharedBrowser = async () => {
   if (sharedBrowser) {
     console.log('🔒 Closing shared browser instance...');

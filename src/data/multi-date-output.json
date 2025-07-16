@@ -1,1 +1,67 @@
-[]
+[
+  {
+    "provider": "parksports",
+    "location": "Regents Park",
+    "court": "Tennis Court",
+    "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-07-17",
+    "date": "2025-07-17",
+    "readableTime": "Book at 07:00 - 08:00",
+    "cost": "£16.40",
+    "startMinutes": 420,
+    "endMinutes": 480,
+    "sessionId": "fbfa0755-24a8-4700-9a95-b9dda8e89fc5",
+    "slotKey": "e1edd204-4ca7-4046-82aa-69a35586db21fbfa0755-24a8-4700-9a95-b9dda8e89fc5420"
+  },
+  {
+    "provider": "parksports",
+    "location": "Regents Park",
+    "court": "Tennis Court",
+    "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-07-19",
+    "date": "2025-07-19",
+    "readableTime": "Book at 07:00 - 08:00",
+    "cost": "£19.55",
+    "startMinutes": 420,
+    "endMinutes": 480,
+    "sessionId": "fbfa0755-24a8-4700-9a95-b9dda8e89fc5",
+    "slotKey": "d0d3bb94-4fc8-4160-89dd-cf70f82e15c8fbfa0755-24a8-4700-9a95-b9dda8e89fc5420"
+  },
+  {
+    "provider": "parksports",
+    "location": "Regents Park",
+    "court": "Tennis Court",
+    "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-07-19",
+    "date": "2025-07-19",
+    "readableTime": "Book at 07:00 - 08:00",
+    "cost": "£19.55",
+    "startMinutes": 420,
+    "endMinutes": 480,
+    "sessionId": "fbfa0755-24a8-4700-9a95-b9dda8e89fc5",
+    "slotKey": "e1edd204-4ca7-4046-82aa-69a35586db21fbfa0755-24a8-4700-9a95-b9dda8e89fc5420"
+  },
+  {
+    "provider": "parksports",
+    "location": "Regents Park",
+    "court": "Tennis Court",
+    "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-07-19",
+    "date": "2025-07-19",
+    "readableTime": "Book at 07:00 - 08:00",
+    "cost": "£19.55",
+    "startMinutes": 420,
+    "endMinutes": 480,
+    "sessionId": "fbfa0755-24a8-4700-9a95-b9dda8e89fc5",
+    "slotKey": "b968bfb3-2013-4c4d-a1b1-592c58bbabc8fbfa0755-24a8-4700-9a95-b9dda8e89fc5420"
+  },
+  {
+    "provider": "parksports",
+    "location": "Regents Park",
+    "court": "Tennis Court",
+    "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-07-19",
+    "date": "2025-07-19",
+    "readableTime": "Book at 07:00 - 08:00",
+    "cost": "£19.55",
+    "startMinutes": 420,
+    "endMinutes": 480,
+    "sessionId": "fbfa0755-24a8-4700-9a95-b9dda8e89fc5",
+    "slotKey": "6217155f-8be7-4661-a8e0-aaf2c4dc86c0fbfa0755-24a8-4700-9a95-b9dda8e89fc5420"
+  }
+]
