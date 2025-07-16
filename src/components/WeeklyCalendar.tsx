@@ -55,37 +55,45 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
       return slotData;
     }
     
+    // Define location mappings based on our actual location data
+    const locationTagMap: { [key: string]: string[] } = {
+      // ClubSpark locations
+      "Battersea Park": ["West", "South"],
+      "Archbishops Park": ["Central"],
+      "Holland Park (Kensington)": ["West"],
+      "Tanner Street": ["Central", "East"],
+      "Kennington Park": ["South", "Central"],
+      "Geraldine Mary Harmsworth": ["South", "Central"],
+      "Burgess Park": ["South"],
+      "Clapham Common": ["South", "West"],
+      "Southwark Park": ["East", "Central"],
+      "Vauxhall Park": ["South", "Central"],
+      "South Park Fulham": ["West"], // This is the problematic one - it's West, not South!
+      "Parliament Hill Fields Tennis Courts": ["North"],
+      "Queen's Park Tennis Courts": ["North", "West"],
+      "Finsbury Park": ["North"],
+      "Northway Gardens": ["North"],
+      "Dulwich Park": ["South"],
+      "Ravenscourt Park": ["West"],
+      "Hurlingham Park": ["West"],
+      "Eel Brook Common": ["South"],
+      "Belair Park": ["South"],
+      "Brunswick Park": ["South", "Central"],
+      
+      // ParkSports locations
+      "Regents Park": ["Central", "North"],
+      "Hyde Park": ["Central", "West"]
+    };
+    
     // Filter slots based on location tags
     const filteredSlots = slotData.slots.filter((slot: any) => {
-      // For now, we'll need to check the location name against our known tags
-      // This is a simplified approach - in a real implementation, you'd want to
-      // store location tags in the database or pass them through the data structure
+      const locationName = slot.location;
+      const locationTags = locationTagMap[locationName] || [];
       
-      const locationName = slot.location?.toLowerCase() || '';
-      
-      // Check if any of the selected location tags match the location
-      return selectedLocations.some(tag => {
-        const tagLower = tag.toLowerCase();
-        
-        // Simple location matching logic - you may want to improve this
-        if (tagLower === 'north') {
-          return locationName.includes('north') || locationName.includes('finsbury') || locationName.includes('regents');
-        }
-        if (tagLower === 'south') {
-          return locationName.includes('south') || locationName.includes('dulwich') || locationName.includes('clapham') || locationName.includes('battersea');
-        }
-        if (tagLower === 'east') {
-          return locationName.includes('east') || locationName.includes('southwark') || locationName.includes('tanner');
-        }
-        if (tagLower === 'west') {
-          return locationName.includes('west') || locationName.includes('holland') || locationName.includes('fulham') || locationName.includes('hyde');
-        }
-        if (tagLower === 'central') {
-          return locationName.includes('central') || locationName.includes('archbishops') || locationName.includes('kennington') || locationName.includes('vauxhall');
-        }
-        
-        return false;
-      });
+      // Check if any of the selected location tags match the location's tags
+      return selectedLocations.some(selectedTag => 
+        locationTags.includes(selectedTag)
+      );
     });
     
     return {
