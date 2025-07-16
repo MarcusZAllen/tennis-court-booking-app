@@ -35,15 +35,65 @@ const TIMES = Array.from({ length: 15 }, (_, i) => 7 + i); // 7am to 21 (9pm)
 
 type WeeklyCalendarProps = {
   calendarData: TransformedData;
-  selectedLocation: string;
+  selectedLocations: string[];
 };
 
-const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedLocation }) => {
+const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedLocations }) => {
   const weekDates = getCurrentWeek();
   
   // Debug logging
   console.log('Calendar week dates:', weekDates.map(d => d.toDateString()));
   console.log('Available data dates:', Object.keys(calendarData || {}));
+  console.log('Selected locations:', selectedLocations);
+
+  // Helper function to filter slots based on location tags
+  const filterSlotsByLocation = (slotData: any) => {
+    if (!slotData || !slotData.slots) return slotData;
+    
+    // If "All London" is selected, show all slots
+    if (selectedLocations.includes("All London")) {
+      return slotData;
+    }
+    
+    // Filter slots based on location tags
+    const filteredSlots = slotData.slots.filter((slot: any) => {
+      // For now, we'll need to check the location name against our known tags
+      // This is a simplified approach - in a real implementation, you'd want to
+      // store location tags in the database or pass them through the data structure
+      
+      const locationName = slot.location?.toLowerCase() || '';
+      
+      // Check if any of the selected location tags match the location
+      return selectedLocations.some(tag => {
+        const tagLower = tag.toLowerCase();
+        
+        // Simple location matching logic - you may want to improve this
+        if (tagLower === 'north') {
+          return locationName.includes('north') || locationName.includes('finsbury') || locationName.includes('regents');
+        }
+        if (tagLower === 'south') {
+          return locationName.includes('south') || locationName.includes('dulwich') || locationName.includes('clapham') || locationName.includes('battersea');
+        }
+        if (tagLower === 'east') {
+          return locationName.includes('east') || locationName.includes('southwark') || locationName.includes('tanner');
+        }
+        if (tagLower === 'west') {
+          return locationName.includes('west') || locationName.includes('holland') || locationName.includes('fulham') || locationName.includes('hyde');
+        }
+        if (tagLower === 'central') {
+          return locationName.includes('central') || locationName.includes('archbishops') || locationName.includes('kennington') || locationName.includes('vauxhall');
+        }
+        
+        return false;
+      });
+    });
+    
+    return {
+      ...slotData,
+      slots: filteredSlots,
+      totalCourts: filteredSlots.length
+    };
+  };
   
   const [selectedSlot, setSelectedSlot] = React.useState<{
     day: number;
@@ -153,7 +203,8 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
               {weekDates.map((d, colIdx) => {
                 const dateStr = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); // Format: YYYY-MM-DD
                 const timeInMinutes = time * 60;
-                const slotData = calendarData?.[dateStr]?.[timeInMinutes];
+                const rawSlotData = calendarData?.[dateStr]?.[timeInMinutes];
+                const slotData = filterSlotsByLocation(rawSlotData);
                 const availability = slotData?.totalCourts ?? 0;
                 const isAvailable = availability > 0;
                 

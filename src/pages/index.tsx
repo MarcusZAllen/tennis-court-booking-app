@@ -9,7 +9,7 @@ import { useSupabaseData } from '@/hooks/useSupabaseData';
 import { textStyles } from '../../branding/typography';
 
 const Index = () => {
-  const [location, setLocation] = React.useState("All London");
+  const [selectedLocations, setSelectedLocations] = React.useState(["All London"]);
   const { calendarData, loading, error } = useSupabaseData();
 
   if (loading) {
@@ -66,10 +66,10 @@ const Index = () => {
           </section>
           
           {/* Location Pills Selector - now directly above calendar */}
-          <LocationPills selected={location} onSelect={setLocation} />
+          <LocationPills selected={selectedLocations} onSelect={setSelectedLocations} />
           {/* Weekly Calendar Booking Grid */}
           <section className="w-full flex-grow flex items-start justify-center px-1 md:px-4 pb-12">
-            <WeeklyCalendar calendarData={calendarData} selectedLocation={location} />
+            <WeeklyCalendar calendarData={calendarData} selectedLocations={selectedLocations} />
           </section>
         </div>
       </main>
