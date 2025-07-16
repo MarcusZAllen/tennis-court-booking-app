@@ -50,7 +50,13 @@ export default function SlotBookingModal({
   }, {} as Record<string, { slotKeys: Set<string>; sampleSlot: Slot; provider: string }>);
 
   const handleBookingClick = (bookingUrl: string) => {
-    window.open(bookingUrl, '_blank', 'noopener,noreferrer');
+    // Ensure the URL has the correct date parameter
+    let finalUrl = bookingUrl;
+    if (!bookingUrl.includes('date=')) {
+      const separator = bookingUrl.includes('?') ? '&' : '?';
+      finalUrl = `${bookingUrl}${separator}date=${date}`;
+    }
+    window.open(finalUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (

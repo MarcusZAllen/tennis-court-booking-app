@@ -120,7 +120,7 @@ async function scrapeClubspark() {
                   provider: 'clubspark',
                   location: location.name,
               court: resource.Name,
-                  bookingUrl: location.url,
+                  bookingUrl: `${location.url}${location.url.includes('?') ? '&' : '?'}date=${currentDate}`,
                   date: currentDate,
                   readableTime: `${startTimeStr} - ${endTimeStr}`,
                   cost: session.Cost || 0,
