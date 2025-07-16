@@ -86,6 +86,10 @@ const scrapeParkSports = async function ({ name, url }, date, browserInstance = 
 
   if (!hasSlots) {
     console.log(`[${location} - ${date}] 🟡 No slots found and no empty-state marker on ${date} — saving debug to investigate.`);
+    // Ensure data directory exists before writing debug file
+    if (!fs.existsSync('data')) {
+      fs.mkdirSync('data');
+    }
     fs.writeFileSync(`data/debug-${date}.html`, await page.content());
     await context.close();
     return [];
@@ -153,6 +157,10 @@ const scrapeParkSports = async function ({ name, url }, date, browserInstance = 
     }
   }
 
+  // Ensure data directory exists before writing output file
+  if (!fs.existsSync('data')) {
+    fs.mkdirSync('data');
+  }
   const outputPath = `data/parksports-${location.toLowerCase().replace(/\s+/g, '-')}-${date}.json`;
   fs.writeFileSync(outputPath, JSON.stringify(slots, null, 2));
   console.log(`[${location} - ${date}] 💾 Saved ${slots.length} slots to ${outputPath}`);
