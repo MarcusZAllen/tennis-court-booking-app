@@ -1,10 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import scrapeParkSports, { getSharedBrowser, closeSharedBrowser } from '../scrapers/parksports.js';
-import clubSparkLocations from '../locations/clubspark.js';
 import parkSportsLocations from '../locations/parksports.js';
 import DataCleanup from '../utils/data-cleanup.js';
-import scrapeClubSpark from '../scrapers/clubspark-api.js';
 import { DatabaseService } from '../lib/database.js';
 import { execSync } from 'child_process';
 import pLimit from 'p-limit';
@@ -54,38 +52,19 @@ cleanup.runFullCleanup({
   try {
     const dates = getFutureDates(8); // scrape next 8 days
 
-    // 🗄️ Clear database for the dates we're about to scrape
-    console.log('🗄️ Clearing database for fresh scraping...');
+    // 🗄️ Clear ParkSports slots for the dates we're about to scrape
+    console.log('🗄️ Clearing ParkSports slots for fresh scraping...');
     const db = new DatabaseService();
-    const clearResult = await db.clearSlotsForDates(dates);
+    const clearResult = await db.clearSlotsForDatesAndProvider(dates, 'parksports');
     if (clearResult.success) {
-      console.log(`✅ Cleared ${clearResult.count} old slots from database`);
+      console.log(`✅ Cleared ${clearResult.count} ParkSports slots from database`);
     } else {
-      console.error('❌ Failed to clear database:', clearResult.error);
+      console.error('❌ Failed to clear ParkSports database:', clearResult.error);
     }
 
     const scrapeTasks = [];
 
     for (const date of dates) {
-      for (const location of clubSparkLocations) {
-        stats.totalTasks++;
-        scrapeTasks.push(async () => {
-          console.log(`[${location.name} - ${date}] Starting ClubSpark scrape`);
-          try {
-            const slots = await scrapeClubSpark(location, date);
-            stats.successful++;
-            stats.totalSlots += slots.length;
-            return { success: true, slots, location: location.name, date };
-          } catch (err) {
-            stats.failed++;
-            const error = `[${location.name} - ${date}] ❌ Error: ${err.message}`;
-            stats.errors.push(error);
-            console.error(error);
-            return { success: false, slots: [], location: location.name, date, error: err.message };
-          }
-        });
-      }
-
       for (const location of parkSportsLocations) {
         stats.totalTasks++;
         scrapeTasks.push(parkLimit(async () => {
@@ -120,11 +99,9 @@ cleanup.runFullCleanup({
       .filter(res => res.status === 'fulfilled')
       .flatMap(res => res.value.slots || []);
 
-    // Debug: Count ParkSports and Clubspark slots
+    // Debug: Count ParkSports slots
     const parkSportsCount = allSlots.filter(slot => slot.provider === 'parksports').length;
-    const clubsparkCount = allSlots.filter(slot => slot.provider === 'clubspark').length;
-    console.log(`\n[DEBUG] ParkSports slots in combined output: ${parkSportsCount}`);
-    console.log(`[DEBUG] Clubspark slots in combined output: ${clubsparkCount}`);
+    console.log(`\n[DEBUG] ParkSports slots in output: ${parkSportsCount}`);
 
     if (!fs.existsSync('data')) {
       fs.mkdirSync('data');
@@ -153,7 +130,7 @@ cleanup.runFullCleanup({
     console.log(`❌ Failed: ${stats.failed}`);
     console.log(`🎾 Total slots found: ${stats.totalSlots}`);
     console.log(`📅 Dates scraped: ${dates.length}`);
-    console.log(`🏟️  Locations: ${clubSparkLocations.length + parkSportsLocations.length}`);
+    console.log(`🏟️  Locations: ${parkSportsLocations.length}`);
     
     if (stats.errors.length > 0) {
       console.log('\n⚠️  ERRORS:');

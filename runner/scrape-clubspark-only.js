@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import clubSparkLocations from '../locations/clubspark.js';
 import scrapeClubSpark from '../scrapers/clubspark-api.js';
+import { DatabaseService } from '../lib/database.js';
 
 // Generate a list of future dates in YYYY-MM-DD format
 function getFutureDates(daysAhead) {
@@ -21,6 +22,12 @@ function getFutureDates(daysAhead) {
 
   try {
     console.log('Clubspark locations:', clubSparkLocations);
+    
+    // Clear existing ClubSpark slots for the dates we're about to scrape
+    const datesToScrape = getFutureDates(7); // Assuming 7 days ahead
+    console.log('🧹 Clearing existing ClubSpark slots for dates:', datesToScrape);
+    const db = new DatabaseService();
+    await db.clearSlotsForDatesAndProvider(datesToScrape, 'clubspark');
     
     // Run the scraper once - it handles all locations and dates internally
     const results = await scrapeClubSpark();
