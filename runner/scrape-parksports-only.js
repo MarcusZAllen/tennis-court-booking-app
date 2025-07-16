@@ -5,6 +5,7 @@ import clubSparkLocations from '../locations/clubspark.js';
 import parkSportsLocations from '../locations/parksports.js';
 import DataCleanup from '../utils/data-cleanup.js';
 import scrapeClubSpark from '../scrapers/clubspark-api.js';
+import { DatabaseService } from '../lib/database.js';
 import { execSync } from 'child_process';
 import pLimit from 'p-limit';
 import { fileURLToPath } from 'url';
@@ -52,6 +53,16 @@ cleanup.runFullCleanup({
 
   try {
     const dates = getFutureDates(8); // scrape next 8 days
+
+    // 🗄️ Clear database for the dates we're about to scrape
+    console.log('🗄️ Clearing database for fresh scraping...');
+    const db = new DatabaseService();
+    const clearResult = await db.clearSlotsForDates(dates);
+    if (clearResult.success) {
+      console.log(`✅ Cleared ${clearResult.count} old slots from database`);
+    } else {
+      console.error('❌ Failed to clear database:', clearResult.error);
+    }
 
     const scrapeTasks = [];
 
