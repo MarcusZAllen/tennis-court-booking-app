@@ -55,32 +55,50 @@ export function useSupabaseData() {
         console.log(`📅 Fetching data from ${startDateStr} to ${endDateStr}`);
         console.log('🔧 About to make Supabase query...');
 
-        // Try a different query approach
-        const { data, error } = await supabase
-          .from('tennis_slots')
-          .select('*')
-          .filter('date', 'gte', startDateStr)
-          .filter('date', 'lte', endDateStr)
-          .order('date', { ascending: true })
-          .order('start_minutes', { ascending: true })
-          .limit(5000); // Limit set to 5000
+        // Use pagination to fetch all data
+        let allData: any[] = [];
+        let from = 0;
+        const pageSize = 1000;
+        let hasMore = true;
 
-        console.log('🔧 Supabase query completed');
+        while (hasMore && isMounted) {
+          const { data, error } = await supabase
+            .from('tennis_slots')
+            .select('*')
+            .filter('date', 'gte', startDateStr)
+            .filter('date', 'lte', endDateStr)
+            .order('date', { ascending: true })
+            .order('start_minutes', { ascending: true })
+            .range(from, from + pageSize - 1);
 
-        if (!isMounted) return;
+          if (!isMounted) return;
 
-        if (error) {
-          console.error('❌ Supabase error:', error);
-          throw new Error(`Database error: ${error.message}`);
+          if (error) {
+            console.error('❌ Supabase error:', error);
+            throw new Error(`Database error: ${error.message}`);
+          }
+
+          if (!data) {
+            console.error('❌ No data received from database');
+            throw new Error('No data received from database');
+          }
+
+          allData = [...allData, ...data];
+          console.log(`📊 Fetched page ${Math.floor(from / pageSize) + 1}: ${data.length} rows`);
+
+          // Check if we have more data
+          hasMore = data.length === pageSize;
+          from += pageSize;
+
+          // Safety check to prevent infinite loops
+          if (allData.length > 10000) {
+            console.warn('⚠️ Stopping pagination at 10,000 rows for safety');
+            break;
+          }
         }
 
-        if (!data) {
-          console.error('❌ No data received from database');
-          throw new Error('No data received from database');
-        }
-
-        console.log(`✅ Fetched ${data.length} slots from Supabase`);
-        console.log('Raw data from Supabase:', data);
+        console.log(`✅ Total fetched: ${allData.length} slots from Supabase`);
+        console.log('Raw data from Supabase:', allData);
 
         // Clear the timeout since we succeeded
         if (timeoutId) {
@@ -88,7 +106,7 @@ export function useSupabaseData() {
         }
 
         // Transform the data to match the expected format
-        const transformedData = transformSlotData(data);
+        const transformedData = transformSlotData(allData);
         setCalendarData(transformedData);
         console.log('Transformed calendarData:', transformedData);
 
@@ -110,7 +128,7 @@ export function useSupabaseData() {
         setError('Data fetch timed out');
         setLoading(false);
       }
-    }, 10000); // 10 second timeout
+    }, 30000); // Increased timeout to 30 seconds for pagination
 
     fetchData();
 
