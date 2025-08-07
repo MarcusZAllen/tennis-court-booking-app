@@ -11,23 +11,35 @@ const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 let sharedBrowser = null;
 const rateLimiter = new RateLimiter(3, 60000); // 3 requests per minute
 
-const scrapeParkSports = async function ({ name, url }, date, browserInstance = null) {
+const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date, browserInstance = null) {
   const startTime = Date.now();
-  await rateLimiter.waitForSlot();
-  const randomDelay = 8000 + Math.random() * 12000;
-  console.log(`⏳ Waiting ${Math.round(randomDelay)}ms before scraping ${name}...`);
-  await delay(randomDelay);
-
   let browser = browserInstance;
   let page = null;
   let shouldCloseBrowser = false;
 
   try {
-    // Use provided browser instance or create new one
+    // Check if date is within booking window
+    const today = new Date();
+    const targetDate = new Date(date);
+    const daysDiff = Math.ceil((targetDate - today) / (1000 * 60 * 60 * 24));
+    
+    if (daysDiff < 0) {
+      console.log(`[${name} - ${date}] ⏰ Date ${date} is in the past, skipping`);
+      return [];
+    }
+    
+    if (daysDiff > bookingWindow) {
+      console.log(`[${name} - ${date}] ⏰ Date ${date} is outside booking window (${bookingWindow} days), skipping`);
+      return [];
+    }
+
+    console.log(`[${name} - ${date}] Starting Park Sports scrape (${daysDiff} days ahead)`);
+
+    // Initialize browser if not provided
     if (!browser) {
       browser = await puppeteer.launch({
         headless: true,
-        slowMo: 300,
+        slowMo: 1000, // Increased slowMo for better reliability
         args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',
@@ -43,39 +55,15 @@ const scrapeParkSports = async function ({ name, url }, date, browserInstance = 
       shouldCloseBrowser = true;
     }
 
-    // Validate browser is still connected
-    if (!browser.isConnected()) {
-      throw new Error('Browser is not connected');
-    }
-
-    // Set a realistic user agent
-    const userAgents = [
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15',
-      'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/121.0'
-    ];
-    const randomUserAgent = userAgents[Math.floor(Math.random() * userAgents.length)];
-
-    // Create new page with error handling
-    try {
-      page = await browser.newPage();
-    } catch (error) {
-      console.log(`[${name} - ${date}] Failed to create new page: ${error.message}`);
-      throw new Error(`Failed to create page: ${error.message}`);
-    }
-
-    // Validate page is created
-    if (!page) {
-      throw new Error('Page creation failed');
-    }
-
-    await page.setUserAgent(randomUserAgent);
+    // Create new page
+    page = await browser.newPage();
+    
+    // Set user agent and viewport
+    await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
     await page.setViewport({ width: 1920, height: 1080 });
-
-    // Set locale and timezone via emulation
+    
+    // Set timezone to London
     await page.emulateTimezone('Europe/London');
-    await page.emulateVisionDeficiency(null); // No vision deficiency
 
     const location = name;
     const baseURL = url;
@@ -100,23 +88,28 @@ const scrapeParkSports = async function ({ name, url }, date, browserInstance = 
     }
 
     console.log(`[${location} - ${date}] Loaded court availability for ${date}`);
-    await new Promise(resolve => setTimeout(resolve, 3000 + Math.random() * 2000));
+    
+    // Wait longer for the page to fully load and render availability data
+    await new Promise(resolve => setTimeout(resolve, 5000 + Math.random() * 3000));
 
     // Validate page is still valid before DOM operations
     if (!page || page.isClosed()) {
       throw new Error('Page became invalid during scraping');
     }
 
-    const hasSlots = await page.$('.resource-session[data-availability="true"]');
+    // Check for empty state first
     const isEmpty = await page.$('.court-grid.no-slots');
-
     if (isEmpty) {
       console.log(`[${location} - ${date}] ✅ No slots available on ${date} (confirmed by site)`);
       return [];
     }
 
-    if (!hasSlots) {
-      console.log(`[${location} - ${date}] 🟡 No slots found and no empty-state marker on ${date} — saving debug to investigate.`);
+    // Check for available slots with better logic
+    const availableSessions = await page.$$('.resource-session[data-availability="true"]');
+    console.log(`[${location} - ${date}] Found ${availableSessions.length} available sessions`);
+
+    if (availableSessions.length === 0) {
+      console.log(`[${location} - ${date}] 🟡 No available sessions found on ${date} — saving debug to investigate.`);
       if (!fs.existsSync('data')) {
         fs.mkdirSync('data');
       }
@@ -124,13 +117,14 @@ const scrapeParkSports = async function ({ name, url }, date, browserInstance = 
       try {
         const pageContent = await page.content();
         fs.writeFileSync(`data/debug-${date}.html`, pageContent);
+        console.log(`[${location} - ${date}] 💾 Saved debug file to data/debug-${date}.html`);
       } catch (error) {
         console.log(`[${location} - ${date}] Failed to save debug file: ${error.message}`);
       }
       return [];
     }
 
-    console.log(`[${location} - ${date}] ✅ Booking slots loaded`);
+    console.log(`[${location} - ${date}] ✅ Found ${availableSessions.length} available sessions, extracting slots...`);
 
     // Validate page before DOM evaluation
     if (!page || page.isClosed()) {
@@ -149,6 +143,14 @@ const scrapeParkSports = async function ({ name, url }, date, browserInstance = 
         .map(interval => {
           const session = interval.closest('.resource-session');
           if (!session || session.getAttribute('data-availability') !== 'true') return null;
+
+          // Check if there are actually slots available
+          const maxSlotsDoubles = parseInt(session.getAttribute('data-max-slots-doubles') || '0');
+          const maxSlotsSingles = parseInt(session.getAttribute('data-max-slots-singles') || '0');
+          
+          if (maxSlotsDoubles === 0 && maxSlotsSingles === 0) {
+            return null; // No actual slots available
+          }
 
           const anchor = interval.querySelector('a.book-interval');
           if (!anchor) return null;
@@ -179,6 +181,8 @@ const scrapeParkSports = async function ({ name, url }, date, browserInstance = 
         })
         .filter(Boolean);
     }, { location, baseURL, date });
+
+    console.log(`[${location} - ${date}] ✅ Extracted ${slots.length} bookable slots`);
 
     const db = new DatabaseService();
     if (slots.length > 0) {

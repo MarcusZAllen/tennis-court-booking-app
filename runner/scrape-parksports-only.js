@@ -52,16 +52,19 @@ cleanup.runFullCleanup({
   const MAX_BROWSER_ERRORS = 3;
 
   try {
-    const dates = getFutureDates(8); // scrape next 8 days
+    const dates = getFutureDates(7); // scrape next 7 days (matching booking window)
 
-    // 🗄️ Clear ParkSports slots for the dates we're about to scrape
-    console.log('🗄️ Clearing ParkSports slots for fresh scraping...');
+    // 🗄️ Comprehensive cleanup: Remove historical data and clear ParkSports slots for fresh scraping
+    console.log('🗄️ Starting comprehensive database cleanup for ParkSports...');
     const db = new DatabaseService();
-    const clearResult = await db.clearSlotsForDatesAndProvider(dates, 'parksports');
-    if (clearResult.success) {
-      console.log(`✅ Cleared ${clearResult.count} ParkSports slots from database`);
+    const cleanupResult = await db.comprehensiveCleanup(dates, 'parksports', 7);
+    if (cleanupResult.success) {
+      console.log(`✅ Comprehensive cleanup completed:`);
+      console.log(`   - Historical slots deleted: ${cleanupResult.historicalDeleted}`);
+      console.log(`   - Dates cleared for scraping: ${cleanupResult.datesCleared}`);
+      console.log(`   - Total slots in database: ${cleanupResult.totalSlots}`);
     } else {
-      console.error('❌ Failed to clear ParkSports database:', clearResult.error);
+      console.error('❌ Failed to perform comprehensive cleanup:', cleanupResult.error);
     }
 
     const scrapeTasks = [];

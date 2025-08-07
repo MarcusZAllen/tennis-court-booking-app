@@ -23,11 +23,19 @@ function getFutureDates(daysAhead) {
   try {
     console.log('Clubspark locations:', clubSparkLocations);
     
-    // Clear existing ClubSpark slots for the dates we're about to scrape
+    // 🗄️ Comprehensive cleanup: Remove historical data and clear ClubSpark slots for fresh scraping
     const datesToScrape = getFutureDates(7); // Assuming 7 days ahead
-    console.log('🧹 Clearing existing ClubSpark slots for dates:', datesToScrape);
+    console.log('🗄️ Starting comprehensive database cleanup for ClubSpark...');
     const db = new DatabaseService();
-    await db.clearSlotsForDatesAndProvider(datesToScrape, 'clubspark');
+    const cleanupResult = await db.comprehensiveCleanup(datesToScrape, 'clubspark', 7);
+    if (cleanupResult.success) {
+      console.log(`✅ Comprehensive cleanup completed:`);
+      console.log(`   - Historical slots deleted: ${cleanupResult.historicalDeleted}`);
+      console.log(`   - Dates cleared for scraping: ${cleanupResult.datesCleared}`);
+      console.log(`   - Total slots in database: ${cleanupResult.totalSlots}`);
+    } else {
+      console.error('❌ Failed to perform comprehensive cleanup:', cleanupResult.error);
+    }
     
     // Run the scraper once - it handles all locations and dates internally
     const results = await scrapeClubSpark();
