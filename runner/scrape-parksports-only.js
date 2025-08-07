@@ -48,6 +48,8 @@ cleanup.runFullCleanup({
 
   // Get shared browser instance for Park Sports
   let sharedBrowser = null;
+  let browserErrorCount = 0;
+  const MAX_BROWSER_ERRORS = 3;
 
   try {
     const dates = getFutureDates(8); // scrape next 8 days
@@ -88,6 +90,28 @@ cleanup.runFullCleanup({
             const error = `[${location.name} - ${date}] ❌ Error: ${err.message}`;
             stats.errors.push(error);
             console.error(error);
+            
+            // Check if it's a browser context error
+            if (err.message.includes('Protocol error') || err.message.includes('Cannot find context')) {
+              browserErrorCount++;
+              console.log(`[${location.name} - ${date}] 🔄 Browser context error (${browserErrorCount}/${MAX_BROWSER_ERRORS})`);
+              
+              if (browserErrorCount >= MAX_BROWSER_ERRORS) {
+                console.log(`[${location.name} - ${date}] 🚨 Too many browser errors - recreating browser instance`);
+                try {
+                  await closeSharedBrowser();
+                  sharedBrowser = null;
+                  browserErrorCount = 0;
+                  
+                  // Wait a bit before recreating
+                  await new Promise(res => setTimeout(res, 5000));
+                  sharedBrowser = await getSharedBrowser();
+                } catch (browserErr) {
+                  console.error(`[${location.name} - ${date}] Failed to recreate browser: ${browserErr.message}`);
+                }
+              }
+            }
+            
             return { success: false, slots: [], location: location.name, date, error: err.message };
           }
         }));
@@ -131,6 +155,7 @@ cleanup.runFullCleanup({
     console.log(`🎾 Total slots found: ${stats.totalSlots}`);
     console.log(`📅 Dates scraped: ${dates.length}`);
     console.log(`🏟️  Locations: ${parkSportsLocations.length}`);
+    console.log(`🔄 Browser recreations: ${Math.floor(browserErrorCount / MAX_BROWSER_ERRORS)}`);
     
     if (stats.errors.length > 0) {
       console.log('\n⚠️  ERRORS:');
