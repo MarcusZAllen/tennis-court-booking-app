@@ -90,7 +90,16 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
     console.log(`[${location} - ${date}] Loaded court availability for ${date}`);
     
     // Wait longer for the page to fully load and render availability data
-    await new Promise(resolve => setTimeout(resolve, 5000 + Math.random() * 3000));
+    // First a fixed delay, then wait for either available sessions or an empty-state marker
+    await new Promise(resolve => setTimeout(resolve, 4000));
+    try {
+      await page.waitForFunction(() => {
+        const empty = document.querySelector('.court-grid.no-slots');
+        const anyBook = document.querySelector('a.book-interval .available-booking-slot');
+        const anySession = document.querySelector('.resource-session');
+        return !!empty || !!anyBook || !!anySession;
+      }, { timeout: 15000 });
+    } catch {}
 
     // Validate page is still valid before DOM operations
     if (!page || page.isClosed()) {
@@ -104,11 +113,11 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       return [];
     }
 
-    // Check for available slots with better logic
-    const availableSessions = await page.$$('.resource-session[data-availability="true"]');
-    console.log(`[${location} - ${date}] Found ${availableSessions.length} available sessions`);
+    // Check for available bookable anchors directly
+    const bookAnchors = await page.$$('a.book-interval .available-booking-slot');
+    console.log(`[${location} - ${date}] Found ${bookAnchors.length} book anchors`);
 
-    if (availableSessions.length === 0) {
+    if (bookAnchors.length === 0) {
       console.log(`[${location} - ${date}] 🟡 No available sessions found on ${date} — saving debug to investigate.`);
       if (!fs.existsSync('data')) {
         fs.mkdirSync('data');
@@ -124,14 +133,14 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       return [];
     }
 
-    console.log(`[${location} - ${date}] ✅ Found ${availableSessions.length} available sessions, extracting slots...`);
+    console.log(`[${location} - ${date}] ✅ Found ${bookAnchors.length} potential bookable anchors, extracting slots...`);
 
     // Validate page before DOM evaluation
     if (!page || page.isClosed()) {
       throw new Error('Page became invalid before slot extraction');
     }
 
-    const slots = await page.$$eval('.resource-interval', (intervals, meta) => {
+    const slots = await page.$$eval('.resource-interval', (intervals, m eta) => {
       const { location, baseURL, date } = meta;
       const convertToTime = (minutes) => {
         const h = String(Math.floor(minutes / 60)).padStart(2, '0');
@@ -142,15 +151,7 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       return intervals
         .map(interval => {
           const session = interval.closest('.resource-session');
-          if (!session || session.getAttribute('data-availability') !== 'true') return null;
-
-          // Check if there are actually slots available
-          const maxSlotsDoubles = parseInt(session.getAttribute('data-max-slots-doubles') || '0');
-          const maxSlotsSingles = parseInt(session.getAttribute('data-max-slots-singles') || '0');
-          
-          if (maxSlotsDoubles === 0 && maxSlotsSingles === 0) {
-            return null; // No actual slots available
-          }
+          if (!session) return null;
 
           const anchor = interval.querySelector('a.book-interval');
           if (!anchor) return null;

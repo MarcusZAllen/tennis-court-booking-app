@@ -52,7 +52,8 @@ cleanup.runFullCleanup({
   const MAX_BROWSER_ERRORS = 3;
 
   try {
-    const dates = getFutureDates(7); // scrape next 7 days (matching booking window)
+    const maxWindow = Math.max(...parkSportsLocations.map(l => l.bookingWindow || 7));
+    const dates = getFutureDates(maxWindow); // scrape up to the longest booking window
 
     // 🗄️ Comprehensive cleanup: Remove historical data and clear ParkSports slots for fresh scraping
     console.log('🗄️ Starting comprehensive database cleanup for ParkSports...');
