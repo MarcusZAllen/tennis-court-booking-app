@@ -140,7 +140,7 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       throw new Error('Page became invalid before slot extraction');
     }
 
-    const slots = await page.$$eval('.resource-interval', (intervals, m eta) => {
+    const slots = await page.$$eval('.resource-interval', (intervals, meta) => {
       const { location, baseURL, date } = meta;
       const convertToTime = (minutes) => {
         const h = String(Math.floor(minutes / 60)).padStart(2, '0');
