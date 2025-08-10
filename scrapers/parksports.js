@@ -207,7 +207,7 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
             startMinutes: start,
             endMinutes: end,
             sessionId: session.getAttribute('data-session-id'),
-            slotKey: session.getAttribute('data-slot-key'),
+            slotKey: `${location}_${date}_${session.getAttribute('data-slot-key')}`,
           };
         })
         .filter(Boolean);
