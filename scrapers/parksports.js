@@ -127,7 +127,13 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
     const bookAnchors = await page.$$('a.book-interval.not-booked .available-booking-slot');
     console.log(`[${location} - ${date}] Found ${bookAnchors.length} book anchors`);
 
-    if (bookAnchors.length === 0) {
+    // Also check for any slots with correct data attributes, even if they don't have book anchors
+    const availableSlotsByData = await page.evaluate(() => {
+      return document.querySelectorAll('[data-availability="true"][data-category="0"][data-capacity]:not([data-capacity="0"])').length;
+    });
+    console.log(`[${location} - ${date}] Found ${availableSlotsByData} slots with available data attributes`);
+
+    if (bookAnchors.length === 0 && availableSlotsByData === 0) {
       console.log(`[${location} - ${date}] 🟡 No available sessions found on ${date} — saving debug to investigate.`);
       if (!fs.existsSync('data')) {
         fs.mkdirSync('data');
@@ -172,43 +178,70 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
           const session = interval.closest('.resource-session');
           if (!session) return null;
 
-          // Check if this is a bookable slot by looking at multiple indicators
-          const anchor = interval.querySelector('a.book-interval.not-booked');
-          if (!anchor) return null;
-
-          // Additional validation: check data attributes
+          // Check data attributes first
           const availability = session.getAttribute('data-availability');
           const category = session.getAttribute('data-category');
           const capacity = parseInt(session.getAttribute('data-capacity') || '0');
           
-          // Slot is bookable if: availability is true, category is 0 (available), capacity > 0, and has bookable anchor
-          if (availability !== 'true' || category !== '0' || capacity <= 0 || !anchor) {
+          // Slot is bookable if: availability is true, category is 0 (available), capacity > 0
+          if (availability !== 'true' || category !== '0' || capacity <= 0) {
             return null;
           }
 
-          const timeSpan = anchor.querySelector('.available-booking-slot');
-          const costSpan = anchor.querySelector('.cost');
-          const dataTestId = anchor.getAttribute('data-test-id');
+          // Look for bookable anchor, but also check for cost and time information
+          const anchor = interval.querySelector('a.book-interval.not-booked');
+          const costSpan = anchor ? anchor.querySelector('.cost') : null;
+          const timeSpan = anchor ? anchor.querySelector('.available-booking-slot') : null;
+          
+          // If we have an anchor with cost and time, use that
+          if (anchor && costSpan && timeSpan) {
+            const dataTestId = anchor.getAttribute('data-test-id');
+            if (!dataTestId || !dataTestId.includes('|')) return null;
 
-          if (!timeSpan || !costSpan || !dataTestId || !dataTestId.includes('|')) return null;
+            const [_, dateFromTestId, startMinutes] = dataTestId.split('|');
+            const start = parseInt(interval.getAttribute('data-system-start-time'));
+            const end = parseInt(interval.getAttribute('data-system-end-time'));
 
-          const [_, dateFromTestId, startMinutes] = dataTestId.split('|');
-          const start = parseInt(interval.getAttribute('data-system-start-time'));
-          const end = parseInt(interval.getAttribute('data-system-end-time'));
-
-          return {
-            provider: "parksports",
-            location,
-            court: "Tennis Court",
-            bookingUrl: `${baseURL}&date=${date}`,
-            date,
-            readableTime: timeSpan.innerText.trim(),
-            cost: costSpan.innerText.trim(),
-            startMinutes: start,
-            endMinutes: end,
-            sessionId: session.getAttribute('data-session-id'),
-            slotKey: `${location}_${date}_${start}_${session.getAttribute('data-session-id')}`,
-          };
+            return {
+              provider: "parksports",
+              location,
+              court: "Tennis Court",
+              bookingUrl: `${baseURL}&date=${date}`,
+              date,
+              readableTime: timeSpan.innerText.trim(),
+              cost: costSpan.innerText.trim(),
+              startMinutes: start,
+              endMinutes: end,
+              sessionId: session.getAttribute('data-session-id'),
+              slotKey: `${location}_${date}_${start}_${session.getAttribute('data-session-id')}`,
+            };
+          }
+          
+          // If no anchor but we have the right data attributes, try to construct from session data
+          const sessionCost = session.getAttribute('data-session-cost');
+          const startTime = parseInt(session.getAttribute('data-start-time'));
+          const endTime = parseInt(session.getAttribute('data-end-time'));
+          
+          if (sessionCost && startTime !== null && endTime !== null) {
+            const start = parseInt(interval.getAttribute('data-system-start-time'));
+            const end = parseInt(interval.getAttribute('data-system-end-time'));
+            
+            return {
+              provider: "parksports",
+              location,
+              court: "Tennis Court",
+              bookingUrl: `${baseURL}&date=${date}`,
+              date,
+              readableTime: `Book at ${convertToTime(start)} - ${convertToTime(end)}`,
+              cost: `£${parseFloat(sessionCost).toFixed(2)}`,
+              startMinutes: start,
+              endMinutes: end,
+              sessionId: session.getAttribute('data-session-id'),
+              slotKey: `${location}_${date}_${start}_${session.getAttribute('data-session-id')}`,
+            };
+          }
+          
+          return null;
         })
         .filter(Boolean);
     }, { location, baseURL, date });
