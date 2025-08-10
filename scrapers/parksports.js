@@ -89,6 +89,16 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
 
     console.log(`[${location} - ${date}] Loaded court availability for ${date}`);
     
+    // Quick check: Are there any available slots at all?
+    const hasAnyAvailableSlots = await page.evaluate(() => {
+      return document.querySelectorAll('[data-availability="true"][data-category="0"]').length > 0;
+    });
+    
+    if (!hasAnyAvailableSlots) {
+      console.log(`[${location} - ${date}] ✅ No available slots detected by data attributes`);
+      return [];
+    }
+    
     // Wait longer for the page to fully load and render availability data
     // First a fixed delay, then wait for either available sessions or an empty-state marker
     await new Promise(resolve => setTimeout(resolve, 4000));
@@ -135,6 +145,15 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
 
     console.log(`[${location} - ${date}] ✅ Found ${bookAnchors.length} potential bookable anchors, extracting slots...`);
 
+    // Debug: Log the data attribute counts
+    const dataAttributeCounts = await page.evaluate(() => {
+      const available = document.querySelectorAll('[data-availability="true"]').length;
+      const category0 = document.querySelectorAll('[data-category="0"]').length;
+      const capacity1 = document.querySelectorAll('[data-capacity="1"]').length;
+      return { available, category0, capacity1 };
+    });
+    console.log(`[${location} - ${date}] 🔍 Data attributes: available=${dataAttributeCounts.available}, category0=${dataAttributeCounts.category0}, capacity1=${dataAttributeCounts.capacity1}`);
+
     // Validate page before DOM evaluation
     if (!page || page.isClosed()) {
       throw new Error('Page became invalid before slot extraction');
@@ -162,8 +181,8 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
           const category = session.getAttribute('data-category');
           const capacity = parseInt(session.getAttribute('data-capacity') || '0');
           
-          // Slot is bookable if: availability is true, category is 0 (available), and capacity > 0
-          if (availability !== 'true' || category !== '0' || capacity <= 0) {
+          // Slot is bookable if: availability is true, category is 0 (available), capacity > 0, and has bookable anchor
+          if (availability !== 'true' || category !== '0' || capacity <= 0 || !anchor) {
             return null;
           }
 
