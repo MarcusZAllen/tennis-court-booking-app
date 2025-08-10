@@ -95,7 +95,7 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
     try {
       await page.waitForFunction(() => {
         const empty = document.querySelector('.court-grid.no-slots');
-        const anyBook = document.querySelector('a.book-interval .available-booking-slot');
+        const anyBook = document.querySelector('a.book-interval.not-booked .available-booking-slot');
         const anySession = document.querySelector('.resource-session');
         return !!empty || !!anyBook || !!anySession;
       }, { timeout: 15000 });
@@ -114,7 +114,7 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
     }
 
     // Check for available bookable anchors directly
-    const bookAnchors = await page.$$('a.book-interval .available-booking-slot');
+    const bookAnchors = await page.$$('a.book-interval.not-booked .available-booking-slot');
     console.log(`[${location} - ${date}] Found ${bookAnchors.length} book anchors`);
 
     if (bookAnchors.length === 0) {
@@ -153,8 +153,19 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
           const session = interval.closest('.resource-session');
           if (!session) return null;
 
-          const anchor = interval.querySelector('a.book-interval');
+          // Check if this is a bookable slot by looking at multiple indicators
+          const anchor = interval.querySelector('a.book-interval.not-booked');
           if (!anchor) return null;
+
+          // Additional validation: check data attributes
+          const availability = session.getAttribute('data-availability');
+          const category = session.getAttribute('data-category');
+          const capacity = parseInt(session.getAttribute('data-capacity') || '0');
+          
+          // Slot is bookable if: availability is true, category is 0 (available), and capacity > 0
+          if (availability !== 'true' || category !== '0' || capacity <= 0) {
+            return null;
+          }
 
           const timeSpan = anchor.querySelector('.available-booking-slot');
           const costSpan = anchor.querySelector('.cost');
