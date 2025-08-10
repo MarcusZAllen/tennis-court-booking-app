@@ -215,14 +215,23 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
 
     console.log(`[${location} - ${date}] ✅ Extracted ${slots.length} bookable slots`);
 
+    // Deduplicate slots by slotKey to prevent database conflicts
+    const uniqueSlots = slots.filter((slot, index, self) => 
+      index === self.findIndex(s => s.slotKey === slot.slotKey)
+    );
+    
+    if (uniqueSlots.length !== slots.length) {
+      console.log(`[${location} - ${date}] 🔄 Removed ${slots.length - uniqueSlots.length} duplicate slots`);
+    }
+
     const db = new DatabaseService();
-    if (slots.length > 0) {
+    if (uniqueSlots.length > 0) {
       try {
-        const dbResult = await db.saveSlots(slots);
+        const dbResult = await db.saveSlots(uniqueSlots);
         if (!dbResult.success) {
           console.error(`[${location} - ${date}] Failed to save to database:`, dbResult.error);
         } else {
-          console.log(`[${location} - ${date}] ✅ Saved ${slots.length} slots to database`);
+          console.log(`[${location} - ${date}] ✅ Saved ${uniqueSlots.length} slots to database`);
         }
       } catch (error) {
         console.error(`[${location} - ${date}] Database error:`, error.message);
