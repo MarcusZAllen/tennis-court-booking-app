@@ -44,19 +44,6 @@
     "court": "Tennis Court",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-08-11",
     "date": "2025-08-11",
-    "readableTime": "Book at 18:00 - 19:00",
-    "cost": "£19.55",
-    "startMinutes": 1080,
-    "endMinutes": 1140,
-    "sessionId": "936590fa-5990-41e7-824d-6d28ec01530d",
-    "slotKey": "Regents Park_2025-08-11_1080_936590fa-5990-41e7-824d-6d28ec01530d"
-  },
-  {
-    "provider": "parksports",
-    "location": "Regents Park",
-    "court": "Tennis Court",
-    "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-08-11",
-    "date": "2025-08-11",
     "readableTime": "Book at 07:00 - 08:00",
     "cost": "£16.40",
     "startMinutes": 420,
@@ -76,6 +63,32 @@
     "endMinutes": 480,
     "sessionId": "936590fa-5990-41e7-824d-6d28ec01530d",
     "slotKey": "Regents Park_2025-08-11_420_936590fa-5990-41e7-824d-6d28ec01530d"
+  },
+  {
+    "provider": "parksports",
+    "location": "Regents Park",
+    "court": "Tennis Court",
+    "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-08-11",
+    "date": "2025-08-11",
+    "readableTime": "Book at 12:00 - 13:00",
+    "cost": "£16.40",
+    "startMinutes": 720,
+    "endMinutes": 780,
+    "sessionId": "1a1ff7ce-9b15-4731-bea0-d69017114810",
+    "slotKey": "Regents Park_2025-08-11_720_1a1ff7ce-9b15-4731-bea0-d69017114810"
+  },
+  {
+    "provider": "parksports",
+    "location": "Regents Park",
+    "court": "Tennis Court",
+    "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-08-11",
+    "date": "2025-08-11",
+    "readableTime": "Book at 13:00 - 14:00",
+    "cost": "£16.40",
+    "startMinutes": 780,
+    "endMinutes": 840,
+    "sessionId": "1a1ff7ce-9b15-4731-bea0-d69017114810",
+    "slotKey": "Regents Park_2025-08-11_780_1a1ff7ce-9b15-4731-bea0-d69017114810"
   },
   {
     "provider": "parksports",
@@ -89,19 +102,6 @@
     "endMinutes": 1020,
     "sessionId": "c8130327-bf3e-44ff-9da1-75b26c51285d",
     "slotKey": "Regents Park_2025-08-11_960_c8130327-bf3e-44ff-9da1-75b26c51285d"
-  },
-  {
-    "provider": "parksports",
-    "location": "Hyde Park",
-    "court": "Tennis Court",
-    "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-08-11",
-    "date": "2025-08-11",
-    "readableTime": "Book at 07:00 - 08:00",
-    "cost": "£20.15",
-    "startMinutes": 420,
-    "endMinutes": 480,
-    "sessionId": "688fa25f-c6fa-4bb1-9888-02b65f9157e5",
-    "slotKey": "Hyde Park_2025-08-11_420_688fa25f-c6fa-4bb1-9888-02b65f9157e5"
   },
   {
     "provider": "parksports",
@@ -206,19 +206,6 @@
     "endMinutes": 780,
     "sessionId": "c8130327-bf3e-44ff-9da1-75b26c51285d",
     "slotKey": "Regents Park_2025-08-12_720_c8130327-bf3e-44ff-9da1-75b26c51285d"
-  },
-  {
-    "provider": "parksports",
-    "location": "Regents Park",
-    "court": "Tennis Court",
-    "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-08-13",
-    "date": "2025-08-13",
-    "readableTime": "Book at 15:00 - 16:00",
-    "cost": "£16.40",
-    "startMinutes": 900,
-    "endMinutes": 960,
-    "sessionId": "936590fa-5990-41e7-824d-6d28ec01530d",
-    "slotKey": "Regents Park_2025-08-13_900_936590fa-5990-41e7-824d-6d28ec01530d"
   },
   {
     "provider": "parksports",
@@ -460,19 +447,6 @@
     "court": "Tennis Court",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-08-15",
     "date": "2025-08-15",
-    "readableTime": "Book at 12:00 - 13:00",
-    "cost": "£16.40",
-    "startMinutes": 720,
-    "endMinutes": 780,
-    "sessionId": "936590fa-5990-41e7-824d-6d28ec01530d",
-    "slotKey": "Regents Park_2025-08-15_720_936590fa-5990-41e7-824d-6d28ec01530d"
-  },
-  {
-    "provider": "parksports",
-    "location": "Regents Park",
-    "court": "Tennis Court",
-    "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-08-15",
-    "date": "2025-08-15",
     "readableTime": "Book at 07:00 - 08:00",
     "cost": "£16.40",
     "startMinutes": 420,
@@ -518,19 +492,6 @@
     "endMinutes": 780,
     "sessionId": "936590fa-5990-41e7-824d-6d28ec01530d",
     "slotKey": "Regents Park_2025-08-15_720_936590fa-5990-41e7-824d-6d28ec01530d"
-  },
-  {
-    "provider": "parksports",
-    "location": "Regents Park",
-    "court": "Tennis Court",
-    "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-08-15",
-    "date": "2025-08-15",
-    "readableTime": "Book at 15:00 - 16:00",
-    "cost": "£16.40",
-    "startMinutes": 900,
-    "endMinutes": 960,
-    "sessionId": "936590fa-5990-41e7-824d-6d28ec01530d",
-    "slotKey": "Regents Park_2025-08-15_900_936590fa-5990-41e7-824d-6d28ec01530d"
   },
   {
     "provider": "parksports",
@@ -1058,19 +1019,6 @@
     "court": "Tennis Court",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-08-16",
     "date": "2025-08-16",
-    "readableTime": "Book at 08:00 - 09:00",
-    "cost": "£19.55",
-    "startMinutes": 480,
-    "endMinutes": 540,
-    "sessionId": "936590fa-5990-41e7-824d-6d28ec01530d",
-    "slotKey": "Regents Park_2025-08-16_480_936590fa-5990-41e7-824d-6d28ec01530d"
-  },
-  {
-    "provider": "parksports",
-    "location": "Regents Park",
-    "court": "Tennis Court",
-    "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-08-16",
-    "date": "2025-08-16",
     "readableTime": "Book at 19:00 - 20:00",
     "cost": "£19.55",
     "startMinutes": 1140,
@@ -1233,6 +1181,19 @@
     "endMinutes": 480,
     "sessionId": "688fa25f-c6fa-4bb1-9888-02b65f9157e5",
     "slotKey": "Hyde Park_2025-08-16_420_688fa25f-c6fa-4bb1-9888-02b65f9157e5"
+  },
+  {
+    "provider": "parksports",
+    "location": "Hyde Park",
+    "court": "Tennis Court",
+    "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-08-16",
+    "date": "2025-08-16",
+    "readableTime": "Book at 16:00 - 17:00",
+    "cost": "£21.85",
+    "startMinutes": 960,
+    "endMinutes": 1020,
+    "sessionId": "688fa25f-c6fa-4bb1-9888-02b65f9157e5",
+    "slotKey": "Hyde Park_2025-08-16_960_688fa25f-c6fa-4bb1-9888-02b65f9157e5"
   },
   {
     "provider": "parksports",
@@ -1474,19 +1435,6 @@
     "court": "Tennis Court",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-08-17",
     "date": "2025-08-17",
-    "readableTime": "Book at 18:00 - 19:00",
-    "cost": "£19.55",
-    "startMinutes": 1080,
-    "endMinutes": 1140,
-    "sessionId": "936590fa-5990-41e7-824d-6d28ec01530d",
-    "slotKey": "Regents Park_2025-08-17_1080_936590fa-5990-41e7-824d-6d28ec01530d"
-  },
-  {
-    "provider": "parksports",
-    "location": "Regents Park",
-    "court": "Tennis Court",
-    "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-08-17",
-    "date": "2025-08-17",
     "readableTime": "Book at 19:00 - 20:00",
     "cost": "£19.55",
     "startMinutes": 1140,
@@ -1610,19 +1558,6 @@
     "endMinutes": 540,
     "sessionId": "936590fa-5990-41e7-824d-6d28ec01530d",
     "slotKey": "Regents Park_2025-08-17_480_936590fa-5990-41e7-824d-6d28ec01530d"
-  },
-  {
-    "provider": "parksports",
-    "location": "Regents Park",
-    "court": "Tennis Court",
-    "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-08-17",
-    "date": "2025-08-17",
-    "readableTime": "Book at 18:00 - 19:00",
-    "cost": "£19.55",
-    "startMinutes": 1080,
-    "endMinutes": 1140,
-    "sessionId": "936590fa-5990-41e7-824d-6d28ec01530d",
-    "slotKey": "Regents Park_2025-08-17_1080_936590fa-5990-41e7-824d-6d28ec01530d"
   },
   {
     "provider": "parksports",
@@ -1799,19 +1734,6 @@
     "court": "Tennis Court",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-08-17",
     "date": "2025-08-17",
-    "readableTime": "Book at 18:00 - 19:00",
-    "cost": "£21.85",
-    "startMinutes": 1080,
-    "endMinutes": 1140,
-    "sessionId": "688fa25f-c6fa-4bb1-9888-02b65f9157e5",
-    "slotKey": "Hyde Park_2025-08-17_1080_688fa25f-c6fa-4bb1-9888-02b65f9157e5"
-  },
-  {
-    "provider": "parksports",
-    "location": "Hyde Park",
-    "court": "Tennis Court",
-    "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-08-17",
-    "date": "2025-08-17",
     "readableTime": "Book at 20:00 - 21:00",
     "cost": "£27.85",
     "startMinutes": 1200,
@@ -2026,19 +1948,6 @@
     "endMinutes": 480,
     "sessionId": "688fa25f-c6fa-4bb1-9888-02b65f9157e5",
     "slotKey": "Hyde Park_2025-08-17_420_688fa25f-c6fa-4bb1-9888-02b65f9157e5"
-  },
-  {
-    "provider": "parksports",
-    "location": "Hyde Park",
-    "court": "Tennis Court",
-    "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?role=guest&date=2025-08-17",
-    "date": "2025-08-17",
-    "readableTime": "Book at 08:00 - 09:00",
-    "cost": "£21.85",
-    "startMinutes": 480,
-    "endMinutes": 540,
-    "sessionId": "688fa25f-c6fa-4bb1-9888-02b65f9157e5",
-    "slotKey": "Hyde Park_2025-08-17_480_688fa25f-c6fa-4bb1-9888-02b65f9157e5"
   },
   {
     "provider": "parksports",
