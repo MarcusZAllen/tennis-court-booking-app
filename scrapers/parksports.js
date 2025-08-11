@@ -101,14 +101,36 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       const allAnchors = document.querySelectorAll('a').length;
       const allBookIntervals = document.querySelectorAll('a.book-interval').length;
       const allResourceIntervals = document.querySelectorAll('.resource-interval').length;
+      const allResourceSessions = document.querySelectorAll('.resource-session').length;
+      const pageTitle = document.title;
+      const bodyText = document.body.textContent.substring(0, 200); // First 200 chars
       
-      return { bookableAnchors, bookingSlots, allAnchors, allBookIntervals, allResourceIntervals };
+      return { 
+        bookableAnchors, 
+        bookingSlots, 
+        allAnchors, 
+        allBookIntervals, 
+        allResourceIntervals,
+        allResourceSessions,
+        pageTitle,
+        bodyText
+      };
     });
     
-    console.log(`[${location} - ${date}] 🔍 Page evaluation: bookable anchors=${slotCounts.bookableAnchors}, booking slots=${slotCounts.bookingSlots}, all anchors=${slotCounts.allAnchors}, all book intervals=${slotCounts.allBookIntervals}, all resource intervals=${slotCounts.allResourceIntervals} [PRODUCTION READY]`);
+    console.log(`[${location} - ${date}] 🔍 Page evaluation: bookable anchors=${slotCounts.bookableAnchors}, booking slots=${slotCounts.bookingSlots}, all anchors=${slotCounts.allAnchors}, all book intervals=${slotCounts.allBookIntervals}, all resource intervals=${slotCounts.allResourceIntervals}, all resource sessions=${slotCounts.allResourceSessions} [PRODUCTION READY]`);
+    console.log(`[${location} - ${date}] 📄 Page info: title="${slotCounts.pageTitle}", body preview="${slotCounts.bodyText}..."`);
     
     if (slotCounts.bookingSlots === 0) {
       console.log(`[${location} - ${date}] ✅ No actually bookable slots detected`);
+      
+      // Check if page loaded correctly
+      if (slotCounts.allResourceSessions === 0) {
+        console.log(`[${location} - ${date}] ⚠️  WARNING: No resource sessions found - page may not have loaded correctly`);
+      }
+      
+      if (slotCounts.allAnchors < 10) {
+        console.log(`[${location} - ${date}] ⚠️  WARNING: Very few anchors found (${slotCounts.allAnchors}) - page may not have loaded correctly`);
+      }
       
       // Save debug HTML to understand what's on the page
       if (!fs.existsSync('data')) {
@@ -125,8 +147,9 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       return [];
     }
     
-    // Wait for page to load (longer wait for production environment)
-    await new Promise(resolve => setTimeout(resolve, 5000));
+    // Wait for page to load (much longer wait for production environment)
+    console.log(`[${location} - ${date}] ⏳ Waiting for page to fully load (production environment)...`);
+    await new Promise(resolve => setTimeout(resolve, 10000));
 
     // Validate page is still valid before DOM operations
     if (!page || page.isClosed()) {
