@@ -105,7 +105,7 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       return { bookableAnchors, bookingSlots, allAnchors, allBookIntervals, allResourceIntervals };
     });
     
-    console.log(`[${location} - ${date}] 🔍 Page evaluation: bookable anchors=${slotCounts.bookableAnchors}, booking slots=${slotCounts.bookingSlots}, all anchors=${slotCounts.allAnchors}, all book intervals=${slotCounts.allBookIntervals}, all resource intervals=${slotCounts.allResourceIntervals}`);
+    console.log(`[${location} - ${date}] 🔍 Page evaluation: bookable anchors=${slotCounts.bookableAnchors}, booking slots=${slotCounts.bookingSlots}, all anchors=${slotCounts.allAnchors}, all book intervals=${slotCounts.allBookIntervals}, all resource intervals=${slotCounts.allResourceIntervals} [PRODUCTION READY]`);
     
     if (slotCounts.bookingSlots === 0) {
       console.log(`[${location} - ${date}] ✅ No actually bookable slots detected`);
