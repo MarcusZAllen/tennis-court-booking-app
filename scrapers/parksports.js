@@ -95,27 +95,32 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
     console.log(`[${location} - ${date}] Loaded court availability for ${date}`);
     
     // Quick check: Are there any available slots at all?
-    const hasAnyAvailableSlots = await page.evaluate(() => {
-      return document.querySelectorAll('[data-availability="true"][data-category="0"][data-capacity]:not([data-capacity="0"])').length > 0;
+    const slotCounts = await page.evaluate(() => {
+      const available = document.querySelectorAll('[data-availability="true"]').length;
+      const category0 = document.querySelectorAll('[data-category="0"]').length;
+      const capacity1 = document.querySelectorAll('[data-capacity="1"]').length;
+      const combined = document.querySelectorAll('[data-availability="true"][data-category="0"][data-capacity]:not([data-capacity="0"])').length;
+      
+      return { available, category0, capacity1, combined };
     });
     
-    if (!hasAnyAvailableSlots) {
+    console.log(`[${location} - ${date}] 🔍 Page evaluation: available=${slotCounts.available}, category0=${slotCounts.category0}, capacity1=${slotCounts.capacity1}, combined=${slotCounts.combined}`);
+    
+    if (slotCounts.combined === 0) {
       console.log(`[${location} - ${date}] ✅ No available slots detected by data attributes`);
       return [];
     }
     
-    // Wait for page to load (shorter, more efficient wait)
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    // Wait for page to load (longer wait for production environment)
+    await new Promise(resolve => setTimeout(resolve, 5000));
 
     // Validate page is still valid before DOM operations
     if (!page || page.isClosed()) {
       throw new Error('Page became invalid during scraping');
     }
 
-    // Check for available slots using data attributes
-    const availableSlotsCount = await page.evaluate(() => {
-      return document.querySelectorAll('[data-availability="true"][data-category="0"][data-capacity]:not([data-capacity="0"])').length;
-    });
+    // Use the already calculated slot counts
+    const availableSlotsCount = slotCounts.combined;
     console.log(`[${location} - ${date}] Found ${availableSlotsCount} slots with available data attributes`);
 
     if (availableSlotsCount === 0) {

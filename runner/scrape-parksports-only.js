@@ -77,9 +77,9 @@ cleanup.runFullCleanup({
     }
     
     // Get current stats
-    const stats = await db.getStats();
-    if (stats.success) {
-      console.log(`📊 Database now contains ${stats.totalSlots} total slots`);
+    const dbStats = await db.getStats();
+    if (dbStats.success) {
+      console.log(`📊 Database now contains ${dbStats.totalSlots} total slots`);
     }
 
     const scrapeTasks = [];
