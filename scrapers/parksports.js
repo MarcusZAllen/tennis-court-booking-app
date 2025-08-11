@@ -94,20 +94,18 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
 
     console.log(`[${location} - ${date}] Loaded court availability for ${date}`);
     
-    // Quick check: Are there any available slots at all?
+    // Quick check: Are there any actually bookable slots at all?
     const slotCounts = await page.evaluate(() => {
-      const available = document.querySelectorAll('[data-availability="true"]').length;
-      const category0 = document.querySelectorAll('[data-category="0"]').length;
-      const capacity1 = document.querySelectorAll('[data-capacity="1"]').length;
-      const combined = document.querySelectorAll('[data-availability="true"][data-category="0"][data-capacity]:not([data-capacity="0"])').length;
+      const bookableAnchors = document.querySelectorAll('a.book-interval.not-booked').length;
+      const bookingSlots = document.querySelectorAll('a.book-interval.not-booked .available-booking-slot').length;
       
-      return { available, category0, capacity1, combined };
+      return { bookableAnchors, bookingSlots };
     });
     
-    console.log(`[${location} - ${date}] 🔍 Page evaluation: available=${slotCounts.available}, category0=${slotCounts.category0}, capacity1=${slotCounts.capacity1}, combined=${slotCounts.combined}`);
+    console.log(`[${location} - ${date}] 🔍 Page evaluation: bookable anchors=${slotCounts.bookableAnchors}, booking slots=${slotCounts.bookingSlots}`);
     
-    if (slotCounts.combined === 0) {
-      console.log(`[${location} - ${date}] ✅ No available slots detected by data attributes`);
+    if (slotCounts.bookingSlots === 0) {
+      console.log(`[${location} - ${date}] ✅ No actually bookable slots detected`);
       return [];
     }
     
@@ -120,8 +118,8 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
     }
 
     // Use the already calculated slot counts
-    const availableSlotsCount = slotCounts.combined;
-    console.log(`[${location} - ${date}] Found ${availableSlotsCount} slots with available data attributes`);
+    const availableSlotsCount = slotCounts.bookingSlots;
+    console.log(`[${location} - ${date}] Found ${availableSlotsCount} actually bookable slots`);
 
     if (availableSlotsCount === 0) {
       console.log(`[${location} - ${date}] 🟡 No available sessions found on ${date} — saving debug to investigate.`);
@@ -161,14 +159,16 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
           const session = interval.closest('.resource-session');
           if (!session) return null;
 
-          // Check data attributes - this is the only validation we need
-          const availability = session.getAttribute('data-availability');
-          const category = session.getAttribute('data-category');
-          const capacity = parseInt(session.getAttribute('data-capacity') || '0');
-          
-          // Slot is bookable if: availability is true, category is 0 (available), capacity > 0
-          if (availability !== 'true' || category !== '0' || capacity <= 0) {
-            return null;
+          // Look for actual bookable anchors - this is the only reliable way to detect available slots
+          const bookAnchor = interval.querySelector('a.book-interval.not-booked');
+          if (!bookAnchor) {
+            return null; // No bookable anchor found
+          }
+
+          // Check if the anchor contains the booking slot text
+          const bookingSlot = bookAnchor.querySelector('.available-booking-slot');
+          if (!bookingSlot) {
+            return null; // No booking slot text found
           }
 
           // Extract slot information from session data attributes
@@ -216,13 +216,16 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       try {
         const dbResult = await db.saveSlots(uniqueSlots);
         if (!dbResult.success) {
-          console.error(`[${location} - ${date}] Failed to save to database:`, dbResult.error);
+          console.error(`[${location} - ${date}] ❌ Failed to save to database:`, dbResult.error);
         } else {
-          console.log(`[${location} - ${date}] ✅ Saved ${uniqueSlots.length} slots to database`);
+          console.log(`[${location} - ${date}] 💾 DATABASE SAVE: ${uniqueSlots.length} slots saved to Supabase`);
+          console.log(`[${location} - ${date}] 📊 Slots saved: ${uniqueSlots.map(s => `${s.readableTime} (£${s.cost.replace('£', '')})`).join(', ')}`);
         }
       } catch (error) {
-        console.error(`[${location} - ${date}] Database error:`, error.message);
+        console.error(`[${location} - ${date}] ❌ Database error:`, error.message);
       }
+    } else {
+      console.log(`[${location} - ${date}] 📭 No slots to save to database`);
     }
 
     if (!fs.existsSync('data')) {
@@ -234,6 +237,7 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
 
     const duration = ((Date.now() - startTime) / 1000).toFixed(2);
     console.log(`[${location} - ${date}] ⏱️ Scraping for ${date} completed in ${duration} seconds`);
+    console.log(`[${location} - ${date}] 📈 SUMMARY: ${slots.length} slots extracted, ${uniqueSlots.length} unique slots, ${uniqueSlots.length > 0 ? uniqueSlots.length : 0} saved to Supabase`);
     return slots;
 
   } catch (error) {
