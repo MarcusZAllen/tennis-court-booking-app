@@ -96,7 +96,7 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
     
     // Quick check: Are there any available slots at all?
     const hasAnyAvailableSlots = await page.evaluate(() => {
-      return document.querySelectorAll('[data-availability="true"][data-category="0"]').length > 0;
+      return document.querySelectorAll('[data-availability="true"][data-category="0"][data-capacity]:not([data-capacity="0"])').length > 0;
     });
     
     if (!hasAnyAvailableSlots) {
@@ -104,41 +104,21 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       return [];
     }
     
-    // Wait longer for the page to fully load and render availability data
-    // First a fixed delay, then wait for either available sessions or an empty-state marker
-    await new Promise(resolve => setTimeout(resolve, 4000));
-    try {
-      await page.waitForFunction(() => {
-        const empty = document.querySelector('.court-grid.no-slots');
-        const anyBook = document.querySelector('a.book-interval.not-booked .available-booking-slot');
-        const anySession = document.querySelector('.resource-session');
-        return !!empty || !!anyBook || !!anySession;
-      }, { timeout: 15000 });
-    } catch {}
+    // Wait for page to load (shorter, more efficient wait)
+    await new Promise(resolve => setTimeout(resolve, 2000));
 
     // Validate page is still valid before DOM operations
     if (!page || page.isClosed()) {
       throw new Error('Page became invalid during scraping');
     }
 
-    // Check for empty state first
-    const isEmpty = await page.$('.court-grid.no-slots');
-    if (isEmpty) {
-      console.log(`[${location} - ${date}] ✅ No slots available on ${date} (confirmed by site)`);
-      return [];
-    }
-
-    // Check for available bookable anchors directly
-    const bookAnchors = await page.$$('a.book-interval.not-booked .available-booking-slot');
-    console.log(`[${location} - ${date}] Found ${bookAnchors.length} book anchors`);
-
-    // Also check for any slots with correct data attributes, even if they don't have book anchors
-    const availableSlotsByData = await page.evaluate(() => {
+    // Check for available slots using data attributes
+    const availableSlotsCount = await page.evaluate(() => {
       return document.querySelectorAll('[data-availability="true"][data-category="0"][data-capacity]:not([data-capacity="0"])').length;
     });
-    console.log(`[${location} - ${date}] Found ${availableSlotsByData} slots with available data attributes`);
+    console.log(`[${location} - ${date}] Found ${availableSlotsCount} slots with available data attributes`);
 
-    if (bookAnchors.length === 0 && availableSlotsByData === 0) {
+    if (availableSlotsCount === 0) {
       console.log(`[${location} - ${date}] 🟡 No available sessions found on ${date} — saving debug to investigate.`);
       if (!fs.existsSync('data')) {
         fs.mkdirSync('data');
@@ -154,16 +134,9 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       return [];
     }
 
-    console.log(`[${location} - ${date}] ✅ Found ${bookAnchors.length} potential bookable anchors, extracting slots...`);
+    console.log(`[${location} - ${date}] ✅ Found ${availableSlotsCount} available slots, extracting...`);
 
-    // Debug: Log the data attribute counts
-    const dataAttributeCounts = await page.evaluate(() => {
-      const available = document.querySelectorAll('[data-availability="true"]').length;
-      const category0 = document.querySelectorAll('[data-category="0"]').length;
-      const capacity1 = document.querySelectorAll('[data-capacity="1"]').length;
-      return { available, category0, capacity1 };
-    });
-    console.log(`[${location} - ${date}] 🔍 Data attributes: available=${dataAttributeCounts.available}, category0=${dataAttributeCounts.category0}, capacity1=${dataAttributeCounts.capacity1}`);
+
 
     // Validate page before DOM evaluation
     if (!page || page.isClosed()) {
@@ -183,7 +156,7 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
           const session = interval.closest('.resource-session');
           if (!session) return null;
 
-          // Check data attributes first
+          // Check data attributes - this is the only validation we need
           const availability = session.getAttribute('data-availability');
           const category = session.getAttribute('data-category');
           const capacity = parseInt(session.getAttribute('data-capacity') || '0');
@@ -193,36 +166,7 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
             return null;
           }
 
-          // Look for bookable anchor, but also check for cost and time information
-          const anchor = interval.querySelector('a.book-interval.not-booked');
-          const costSpan = anchor ? anchor.querySelector('.cost') : null;
-          const timeSpan = anchor ? anchor.querySelector('.available-booking-slot') : null;
-          
-          // If we have an anchor with cost and time, use that
-          if (anchor && costSpan && timeSpan) {
-            const dataTestId = anchor.getAttribute('data-test-id');
-            if (!dataTestId || !dataTestId.includes('|')) return null;
-
-            const [_, dateFromTestId, startMinutes] = dataTestId.split('|');
-            const start = parseInt(interval.getAttribute('data-system-start-time'));
-            const end = parseInt(interval.getAttribute('data-system-end-time'));
-
-            return {
-              provider: "parksports",
-              location,
-              court: "Tennis Court",
-              bookingUrl: `${baseURL}&date=${date}`,
-              date,
-              readableTime: timeSpan.innerText.trim(),
-              cost: costSpan.innerText.trim(),
-              startMinutes: start,
-              endMinutes: end,
-              sessionId: session.getAttribute('data-session-id'),
-              slotKey: `${location}_${date}_${start}_${session.getAttribute('data-session-id')}`,
-            };
-          }
-          
-          // If no anchor but we have the right data attributes, try to construct from session data
+          // Extract slot information from session data attributes
           const sessionCost = session.getAttribute('data-session-cost');
           const startTime = parseInt(session.getAttribute('data-start-time'));
           const endTime = parseInt(session.getAttribute('data-end-time'));
