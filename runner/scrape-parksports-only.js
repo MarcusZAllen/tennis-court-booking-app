@@ -55,31 +55,14 @@ cleanup.runFullCleanup({
     const maxWindow = Math.max(...parkSportsLocations.map(l => l.bookingWindow || 7));
     const dates = getFutureDates(maxWindow); // scrape up to the longest booking window
 
-    // 🗄️ Conservative cleanup: Only remove historical data, don't clear current slots
-    console.log('🗄️ Starting conservative database cleanup for ParkSports...');
+    // 🗄️ No pre-scraping cleanup - slots will be cleared at the end of each successful scrape
+    console.log('🗄️ Starting ParkSports scraping (old slots will be cleared after each successful scrape)...');
     const db = new DatabaseService();
     
-    // Only remove historical data older than 7 days, don't clear current slots
-    const cutoffDate = new Date();
-    cutoffDate.setDate(cutoffDate.getDate() - 7);
-    const cutoffDateStr = cutoffDate.toISOString().split('T')[0];
-    
-    const { data: oldData, error: oldError } = await db.supabase
-      .from('tennis_slots')
-      .delete()
-      .lt('date', cutoffDateStr)
-      .eq('provider', 'parksports');
-    
-    if (oldError) {
-      console.error('❌ Error deleting historical slots:', oldError);
-    } else {
-      console.log(`✅ Deleted ${oldData?.length || 0} historical ParkSports slots older than ${cutoffDateStr}`);
-    }
-    
-    // Get current stats
+    // Get current stats before scraping
     const dbStats = await db.getStats();
     if (dbStats.success) {
-      console.log(`📊 Database now contains ${dbStats.totalSlots} total slots`);
+      console.log(`📊 Database currently contains ${dbStats.totalSlots} total slots`);
     }
 
     const scrapeTasks = [];

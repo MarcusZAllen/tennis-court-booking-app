@@ -282,6 +282,32 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
     fs.writeFileSync(outputPath, JSON.stringify(slots, null, 2));
     console.log(`[${location} - ${date}] 💾 Saved ${slots.length} slots to ${outputPath}`);
 
+    // Clear old ParkSports slots created around an hour ago (only if we successfully saved new slots)
+    if (uniqueSlots.length > 0) {
+      try {
+        console.log(`[${location} - ${date}] 🧹 Clearing old ParkSports slots...`);
+        
+        // Calculate timestamp for 1 hour ago
+        const oneHourAgo = new Date();
+        oneHourAgo.setHours(oneHourAgo.getHours() - 1);
+        const oneHourAgoStr = oneHourAgo.toISOString();
+        
+        const { data: deletedSlots, error: deleteError } = await db.supabase
+          .from('tennis_slots')
+          .delete()
+          .eq('provider', 'parksports')
+          .lt('created_at', oneHourAgoStr);
+        
+        if (deleteError) {
+          console.error(`[${location} - ${date}] ❌ Error clearing old slots:`, deleteError);
+        } else {
+          console.log(`[${location} - ${date}] ✅ Cleared ${deletedSlots?.length || 0} old ParkSports slots (older than 1 hour)`);
+        }
+      } catch (error) {
+        console.error(`[${location} - ${date}] ❌ Error during slot cleanup:`, error.message);
+      }
+    }
+
     const duration = ((Date.now() - startTime) / 1000).toFixed(2);
     console.log(`[${location} - ${date}] ⏱️ Scraping for ${date} completed in ${duration} seconds`);
     console.log(`[${location} - ${date}] 📈 SUMMARY: ${slots.length} slots extracted, ${uniqueSlots.length} unique slots, ${uniqueSlots.length > 0 ? uniqueSlots.length : 0} saved to Supabase`);
