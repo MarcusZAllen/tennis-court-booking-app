@@ -217,18 +217,28 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
             const start = parseInt(interval.getAttribute('data-system-start-time'));
             const end = parseInt(interval.getAttribute('data-system-end-time'));
             
+            // Find the court name by looking up the resource hierarchy
+            let courtName = "Tennis Court";
+            let resourceElement = interval.closest('.resource');
+            if (resourceElement) {
+              const resourceName = resourceElement.getAttribute('data-resource-name');
+              if (resourceName) {
+                courtName = resourceName;
+              }
+            }
+            
             return {
               provider: "parksports",
               location,
-              court: "Tennis Court",
+              court: courtName,
               bookingUrl: `${baseURL}&date=${date}`,
               date,
               readableTime: `Book at ${convertToTime(start)} - ${convertToTime(end)}`,
               cost: `£${parseFloat(sessionCost).toFixed(2)}`,
               startMinutes: start,
               endMinutes: end,
-              sessionId: `${location}_Tennis-Court_${convertToTime(start)}-${convertToTime(end)}`,
-              slotKey: `${location}_${date}_${start}_${convertToTime(start)}-${convertToTime(end)}`,
+              sessionId: `${location}_${courtName}_${convertToTime(start)}-${convertToTime(end)}`,
+              slotKey: `${location}_${date}_${start}_${courtName}`,
             };
           }
           
