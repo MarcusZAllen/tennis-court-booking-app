@@ -167,7 +167,7 @@ cleanup.runFullCleanup({
     console.log('\n📊 SCRAPING SUMMARY');
     console.log('==================');
     console.log(`⏱️  Total duration: ${duration} seconds`);
-    console.log(`📋 Total tasks: ${stats.totalTasks}`);
+    console.log(`📋 Total tasks: ${dates.length * parkSportsLocations.length}`);
     console.log(`✅ Successful: ${stats.successful}`);
     console.log(`❌ Failed: ${stats.failed}`);
     console.log(`🎾 Total slots found: ${stats.totalSlots}`);
