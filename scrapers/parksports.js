@@ -37,6 +37,7 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
 
     // Initialize browser if not provided
     if (!browser) {
+      console.log(`[${name} - ${date}] 🚀 Launching Puppeteer browser...`);
       browser = await puppeteer.launch({
         headless: true,
         slowMo: 1000, // Increased slowMo for better reliability
@@ -52,11 +53,14 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
           '--disable-features=VizDisplayCompositor'
         ]
       });
+      console.log(`[${name} - ${date}] ✅ Puppeteer browser launched successfully`);
       shouldCloseBrowser = true;
     }
 
     // Create new page
+    console.log(`[${name} - ${date}] 📄 Creating new page...`);
     page = await browser.newPage();
+    console.log(`[${name} - ${date}] ✅ Page created successfully`);
     
     // Set user agent and viewport
     await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
@@ -64,6 +68,7 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
     
     // Set timezone to London
     await page.emulateTimezone('Europe/London');
+    console.log(`[${name} - ${date}] ✅ Page configured successfully`);
 
     const location = name;
     const baseURL = url;
