@@ -98,14 +98,30 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
     const slotCounts = await page.evaluate(() => {
       const bookableAnchors = document.querySelectorAll('a.book-interval.not-booked').length;
       const bookingSlots = document.querySelectorAll('a.book-interval.not-booked .available-booking-slot').length;
+      const allAnchors = document.querySelectorAll('a').length;
+      const allBookIntervals = document.querySelectorAll('a.book-interval').length;
+      const allResourceIntervals = document.querySelectorAll('.resource-interval').length;
       
-      return { bookableAnchors, bookingSlots };
+      return { bookableAnchors, bookingSlots, allAnchors, allBookIntervals, allResourceIntervals };
     });
     
-    console.log(`[${location} - ${date}] 🔍 Page evaluation: bookable anchors=${slotCounts.bookableAnchors}, booking slots=${slotCounts.bookingSlots}`);
+    console.log(`[${location} - ${date}] 🔍 Page evaluation: bookable anchors=${slotCounts.bookableAnchors}, booking slots=${slotCounts.bookingSlots}, all anchors=${slotCounts.allAnchors}, all book intervals=${slotCounts.allBookIntervals}, all resource intervals=${slotCounts.allResourceIntervals}`);
     
     if (slotCounts.bookingSlots === 0) {
       console.log(`[${location} - ${date}] ✅ No actually bookable slots detected`);
+      
+      // Save debug HTML to understand what's on the page
+      if (!fs.existsSync('data')) {
+        fs.mkdirSync('data');
+      }
+      try {
+        const pageContent = await page.content();
+        fs.writeFileSync(`data/debug-${location.toLowerCase().replace(/\s+/g, '-')}-${date}.html`, pageContent);
+        console.log(`[${location} - ${date}] 💾 Saved debug file to data/debug-${location.toLowerCase().replace(/\s+/g, '-')}-${date}.html`);
+      } catch (error) {
+        console.log(`[${location} - ${date}] Failed to save debug file: ${error.message}`);
+      }
+      
       return [];
     }
     
@@ -160,15 +176,36 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
           if (!session) return null;
 
           // Look for actual bookable anchors - this is the only reliable way to detect available slots
-          const bookAnchor = interval.querySelector('a.book-interval.not-booked');
-          if (!bookAnchor) {
-            return null; // No bookable anchor found
+          let bookAnchor = interval.querySelector('a.book-interval.not-booked');
+          let bookingSlot = null;
+          
+          if (bookAnchor) {
+            bookingSlot = bookAnchor.querySelector('.available-booking-slot');
           }
-
-          // Check if the anchor contains the booking slot text
-          const bookingSlot = bookAnchor.querySelector('.available-booking-slot');
-          if (!bookingSlot) {
-            return null; // No booking slot text found
+          
+          // Fallback: try different selectors if the primary ones don't work
+          if (!bookAnchor || !bookingSlot) {
+            bookAnchor = interval.querySelector('a.book-interval');
+            if (bookAnchor) {
+              bookingSlot = bookAnchor.querySelector('.available-booking-slot') || bookAnchor.querySelector('.cost');
+            }
+          }
+          
+          // Another fallback: look for any anchor with booking-related text
+          if (!bookAnchor || !bookingSlot) {
+            const allAnchors = interval.querySelectorAll('a');
+            for (const anchor of allAnchors) {
+              const text = anchor.textContent.toLowerCase();
+              if (text.includes('book') || text.includes('available') || text.includes('£')) {
+                bookAnchor = anchor;
+                bookingSlot = anchor;
+                break;
+              }
+            }
+          }
+          
+          if (!bookAnchor || !bookingSlot) {
+            return null; // No bookable anchor found
           }
 
           // Extract slot information from session data attributes
@@ -190,8 +227,8 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
               cost: `£${parseFloat(sessionCost).toFixed(2)}`,
               startMinutes: start,
               endMinutes: end,
-              sessionId: session.getAttribute('data-session-id'),
-              slotKey: `${location}_${date}_${start}_${session.getAttribute('data-session-id')}`,
+              sessionId: `${location}_Tennis-Court_${convertToTime(start)}-${convertToTime(end)}`,
+              slotKey: `${location}_${date}_${start}_${convertToTime(start)}-${convertToTime(end)}`,
             };
           }
           
