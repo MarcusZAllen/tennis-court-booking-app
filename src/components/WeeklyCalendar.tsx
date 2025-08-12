@@ -180,7 +180,9 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
       <table className="min-w-full border-separate border-spacing-0 font-medium select-none">
         <thead>
           <tr>
-
+            {/* Empty header cell to align with time column */}
+            <th className="w-6 h-14 pr-1 align-middle" style={{ position: 'relative', minWidth: 36, width: 36, padding: 0 }}>
+            </th>
             {weekDates.map((d, idx) => (
               <th
                 key={idx}
