@@ -68,6 +68,25 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
     
     // Set timezone to London
     await page.emulateTimezone('Europe/London');
+    
+    // Additional stealth measures for Cloudflare
+    await page.evaluateOnNewDocument(() => {
+      // Override webdriver property
+      Object.defineProperty(navigator, 'webdriver', {
+        get: () => undefined,
+      });
+      
+      // Override plugins
+      Object.defineProperty(navigator, 'plugins', {
+        get: () => [1, 2, 3, 4, 5],
+      });
+      
+      // Override languages
+      Object.defineProperty(navigator, 'languages', {
+        get: () => ['en-US', 'en'],
+      });
+    });
+    
     console.log(`[${name} - ${date}] ✅ Page configured successfully`);
 
     const location = name;
@@ -93,6 +112,50 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
     }
 
     console.log(`[${location} - ${date}] Loaded court availability for ${date}`);
+    
+    // Wait for Cloudflare verification to complete
+    console.log(`[${location} - ${date}] 🔒 Waiting for Cloudflare verification to complete...`);
+    try {
+      await page.waitForFunction(() => {
+        const title = document.title;
+        const bodyText = document.body.textContent;
+        
+        // Check if we're still on Cloudflare verification page
+        if (title.includes('Just a moment') || bodyText.includes('Verifying you are human')) {
+          return false; // Still on verification page
+        }
+        
+        // Check if we've reached the actual booking page
+        if (title.includes('Clubspark') || title.includes('Booking') || bodyText.includes('resource-session')) {
+          return true; // Verification complete
+        }
+        
+        return false; // Still waiting
+      }, { timeout: 30000 }); // Wait up to 30 seconds
+      
+      console.log(`[${location} - ${date}] ✅ Cloudflare verification completed`);
+    } catch (error) {
+      console.log(`[${location} - ${date}] ⚠️  Cloudflare verification timeout or error: ${error.message}`);
+      
+      // Try refreshing the page once to see if that helps
+      console.log(`[${location} - ${date}] 🔄 Attempting page refresh to bypass Cloudflare...`);
+      try {
+        await page.reload({ waitUntil: 'networkidle2', timeout: 30000 });
+        await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds after refresh
+        
+        // Check if refresh helped
+        const title = await page.title();
+        if (!title.includes('Just a moment')) {
+          console.log(`[${location} - ${date}] ✅ Page refresh successful - Cloudflare bypassed`);
+        } else {
+          console.log(`[${location} - ${date}] ⚠️  Page refresh didn't bypass Cloudflare`);
+        }
+      } catch (refreshError) {
+        console.log(`[${location} - ${date}] ❌ Page refresh failed: ${refreshError.message}`);
+      }
+      
+      // Continue anyway to see what we get
+    }
     
     // Quick check: Are there any actually bookable slots at all?
     const slotCounts = await page.evaluate(() => {
