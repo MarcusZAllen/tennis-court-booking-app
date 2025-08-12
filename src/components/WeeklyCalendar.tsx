@@ -2,7 +2,7 @@ import * as React from "react";
 import SlotBookingModal from "./SlotBookingModal";
 import type { TransformedData } from "@/utils/transformSlotData";
 import { RotateCcw } from "lucide-react";
-import RefreshButton from "./RefreshButton";
+
 import { textStyles } from '../../branding/typography';
 
 // Utility to add "st", "nd", "rd", "th" suffix to date
@@ -180,10 +180,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
       <table className="min-w-full border-separate border-spacing-0 font-medium select-none">
         <thead>
           <tr>
-            {/* Refresh button in line with header row and time column */}
-            <th className="w-6 h-14 pr-1 align-middle" style={{ position: 'relative', minWidth: 36, width: 36, padding: 0 }}>
-              <RefreshButton />
-            </th>
+
             {weekDates.map((d, idx) => (
               <th
                 key={idx}
