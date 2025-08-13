@@ -50,7 +50,17 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
           '--no-zygote',
           '--disable-gpu',
           '--disable-web-security',
-          '--disable-features=VizDisplayCompositor'
+          '--disable-features=VizDisplayCompositor',
+          // Production-specific stealth args
+          '--disable-blink-features=AutomationControlled',
+          '--disable-extensions',
+          '--disable-plugins',
+          '--disable-images',
+          '--disable-background-timer-throttling',
+          '--disable-backgrounding-occluded-windows',
+          '--disable-renderer-backgrounding',
+          '--disable-features=TranslateUI',
+          '--disable-ipc-flooding-protection'
         ]
       });
       console.log(`[${name} - ${date}] ✅ Puppeteer browser launched successfully`);
@@ -63,8 +73,25 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
     console.log(`[${name} - ${date}] ✅ Page created successfully`);
     
     // Set user agent and viewport
-    await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
     await page.setViewport({ width: 1920, height: 1080 });
+    
+    // Set additional headers to look more like a real browser
+    await page.setExtraHTTPHeaders({
+      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+      'Accept-Language': 'en-US,en;q=0.9',
+      'Accept-Encoding': 'gzip, deflate, br',
+      'Cache-Control': 'no-cache',
+      'Pragma': 'no-cache',
+      'Sec-Ch-Ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
+      'Sec-Ch-Ua-Mobile': '?0',
+      'Sec-Ch-Ua-Platform': '"Windows"',
+      'Sec-Fetch-Dest': 'document',
+      'Sec-Fetch-Mode': 'navigate',
+      'Sec-Fetch-Site': 'none',
+      'Sec-Fetch-User': '?1',
+      'Upgrade-Insecure-Requests': '1'
+    });
     
     // Set timezone to London
     await page.emulateTimezone('Europe/London');
@@ -85,6 +112,38 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       Object.defineProperty(navigator, 'languages', {
         get: () => ['en-US', 'en'],
       });
+      
+      // Override permissions
+      Object.defineProperty(navigator, 'permissions', {
+        get: () => ({
+          query: () => Promise.resolve({ state: 'granted' })
+        }),
+      });
+      
+      // Override hardware concurrency
+      Object.defineProperty(navigator, 'hardwareConcurrency', {
+        get: () => 8,
+      });
+      
+      // Override device memory
+      Object.defineProperty(navigator, 'deviceMemory', {
+        get: () => 8,
+      });
+      
+      // Override connection
+      Object.defineProperty(navigator, 'connection', {
+        get: () => ({
+          effectiveType: '4g',
+          rtt: 50,
+          downlink: 10,
+          saveData: false
+        }),
+      });
+      
+      // Remove automation indicators
+      delete window.cdc_adoQpoasnfa76pfcZLmcfl_Array;
+      delete window.cdc_adoQpoasnfa76pfcZLmcfl_Promise;
+      delete window.cdc_adoQpoasnfa76pfcZLmcfl_Symbol;
     });
     
     console.log(`[${name} - ${date}] ✅ Page configured successfully`);
@@ -97,6 +156,11 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       if (!page || page.isClosed()) {
         throw new Error('Page is closed or invalid');
       }
+      
+      // Add random delay to simulate human behavior
+      const randomDelay = Math.floor(Math.random() * 2000) + 1000; // 1-3 seconds
+      console.log(`[${location} - ${date}] ⏳ Adding random delay of ${randomDelay}ms to simulate human behavior...`);
+      await new Promise(resolve => setTimeout(resolve, randomDelay));
       
       await page.goto(`${baseURL}&date=${date}`, {
         waitUntil: 'networkidle2',
