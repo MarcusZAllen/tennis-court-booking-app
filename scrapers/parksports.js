@@ -3,6 +3,7 @@ import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import fs from 'fs';
 import { DatabaseService } from '../lib/database.js';
 import { retryWithBackoff, RateLimiter } from '../utils/retry-helper.js';
+import { getWorkingProxy, getProxyArgs } from '../utils/proxy-config.js';
 
 puppeteer.use(StealthPlugin());
 
@@ -38,6 +39,12 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
     // Initialize browser if not provided
     if (!browser) {
       console.log(`[${name} - ${date}] 🚀 Launching Puppeteer browser...`);
+      
+      // Get proxy configuration
+      const proxyArgs = getProxyArgs();
+      const proxyInfo = proxyArgs.proxy ? `via ${proxyArgs.proxy.server}` : 'direct connection';
+      console.log(`[${name} - ${date}] 🌐 Using ${proxyInfo}`);
+      
       browser = await puppeteer.launch({
         headless: true,
         slowMo: 1000, // Increased slowMo for better reliability
@@ -61,7 +68,8 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
           '--disable-renderer-backgrounding',
           '--disable-features=TranslateUI',
           '--disable-ipc-flooding-protection'
-        ]
+        ],
+        ...proxyArgs
       });
       console.log(`[${name} - ${date}] ✅ Puppeteer browser launched successfully`);
       shouldCloseBrowser = true;
@@ -465,6 +473,15 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
 
   } catch (error) {
     console.error(`[${name} - ${date}] ❌ Error: ${error.message}`);
+    
+    // Handle proxy-related errors
+    if (error.message.includes('proxy') || error.message.includes('ECONNREFUSED') || error.message.includes('timeout')) {
+      const currentProxy = getWorkingProxy();
+      if (currentProxy) {
+        console.log(`[${name} - ${date}] 🚫 Proxy ${currentProxy} failed - marking as failed`);
+        markProxyAsFailed(currentProxy);
+      }
+    }
     
     // If it's a context error, we should recreate the shared browser
     if (error.message.includes('Protocol error') || error.message.includes('Cannot find context')) {
