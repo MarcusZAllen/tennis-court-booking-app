@@ -32,14 +32,14 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="w-full flex items-center justify-between px-6 py-3 bg-offwhite dark:bg-dark z-50 font-jost" style={{ borderBottom: "none", boxShadow: "none" }}>
+    <nav className="w-full flex items-center justify-between px-3 sm:px-6 py-2 sm:py-3 bg-offwhite dark:bg-dark z-50 font-jost" style={{ borderBottom: "none", boxShadow: "none" }}>
       {/* Logo */}
       <div className="flex items-center">
         <span
-          className="text-black rounded-[14px] px-4 py-2 text-[1.5rem] md:text-[1rem] uppercase font-jost font-normal tracking-widest border-0 select-none"
+          className="text-black rounded-[14px] px-2 sm:px-4 py-1 sm:py-2 text-[0.8rem] sm:text-[1rem] md:text-[1.2rem] uppercase font-jost font-normal tracking-widest border-0 select-none"
           style={{
             background: "transparent",
-            letterSpacing: "0.19em",
+            letterSpacing: "0.15em",
             fontWeight: 100,
           }}
           tabIndex={-1}
@@ -48,20 +48,20 @@ const Navbar = () => {
         </span>
       </div>
       {/* Right: Courts, Share */}
-      <div className="flex items-center gap-3 md:gap-5 ml-auto">
+      <div className="flex items-center gap-2 sm:gap-3 md:gap-5 ml-auto">
         <Link
           href="/courts"
-          className={`bg-white text-black rounded-xl px-4 py-2 shadow-sm border-0 transition-all duration-150 hover:bg-gray-100 focus:bg-gray-100 ${textStyles.buttonTextSmall}`}
-          style={{ letterSpacing: "0.08em" }}
+          className={`bg-white text-black rounded-lg sm:rounded-xl px-2 sm:px-4 py-1.5 sm:py-2 shadow-sm border-0 transition-all duration-150 hover:bg-gray-100 focus:bg-gray-100 text-xs sm:text-sm`}
+          style={{ letterSpacing: "0.05em" }}
         >
           Courts
         </Link>
         <button
           onClick={handleShare}
-          className={`bg-white text-black rounded-xl px-4 py-2 shadow-sm border-0 transition-all duration-150 hover:bg-gray-100 focus:bg-gray-100 active:bg-gray-200 flex items-center ${textStyles.buttonTextSmall}`}
-          style={{ letterSpacing: "0.08em" }}
+          className={`bg-white text-black rounded-lg sm:rounded-xl px-2 sm:px-4 py-1.5 sm:py-2 shadow-sm border-0 transition-all duration-150 hover:bg-gray-100 focus:bg-gray-100 active:bg-gray-200 flex items-center text-xs sm:text-sm`}
+          style={{ letterSpacing: "0.05em" }}
         >
-          <Share className="w-4 h-4 mr-1" aria-label="Share" />
+          <Share className="w-3 h-3 sm:w-4 sm:h-4 mr-1" aria-label="Share" />
           Share
         </button>
       </div>

@@ -34,12 +34,12 @@ export default function LocationPills({ selected, onSelect }: LocationPillsProps
   };
 
   return (
-    <div className="flex flex-row items-center justify-center gap-2 mb-3 md:mb-6 w-full">
+    <div className="flex flex-row items-center justify-center gap-1 sm:gap-2 mb-3 md:mb-6 w-full overflow-x-auto px-2">
       {LOCATIONS.map((loc) => (
         <button
           key={loc}
           type="button"
-          className={`px-4 py-1 rounded-full font-jost font-medium transition-colors text-sm
+          className={`px-2 sm:px-4 py-1 rounded-full font-jost font-medium transition-colors text-xs sm:text-sm whitespace-nowrap
             ${selected.includes(loc)
               ? "text-white shadow border"
               : "bg-[#fcf4ed] text-gray-600 border border-gray-200 hover:bg-gray-100"}

@@ -169,133 +169,138 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
 
   return (
     <div
-      className="bg-white w-full max-w-[900px] calendar-main-area"
+      className="bg-white w-full calendar-main-area"
       style={{
         boxShadow: "0 2px 12px 0 rgb(60 80 60 / 0.08)",
-        padding: "24px",
+        padding: "12px",
         margin: 0,
         position: "relative"
       }}
     >
-      <table className="min-w-full border-separate border-spacing-0 font-medium select-none">
-        <thead>
-          <tr>
-            {/* Empty header cell to align with time column */}
-            <th className="w-6 h-14 pr-1 align-middle" style={{ position: 'relative', minWidth: 36, width: 36, padding: 0 }}>
-            </th>
-            {weekDates.map((d, idx) => (
-              <th
-                key={idx}
-                className={`px-2 py-2 text-center ${textStyles.calendarDayHeader}`}
-                style={{ minWidth: 40 }}
-              >
-                <div className="flex flex-col items-center leading-tight">
-                  <span className="text-xs md:text-sm font-normal text-black">
-                    {`${d.toLocaleDateString("en-GB", { weekday: "short" })} ${formatDaySuffix(d.getDate())}`}
-                  </span>
-                </div>
+      {/* Mobile: Horizontal scroll container */}
+      <div className="overflow-x-auto">
+        <table className="border-separate border-spacing-0 font-medium select-none" style={{ minWidth: "600px" }}>
+          <thead>
+            <tr>
+              {/* Empty header cell to align with time column */}
+              <th className="w-8 h-12 pr-1 align-middle sticky left-0 bg-white z-10" style={{ position: 'sticky', minWidth: 32, width: 32, padding: 0 }}>
               </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {TIMES.map((time, rowIdx) => (
-            <tr key={time}>
-              <th
-                className={`py-0 pr-2 text-center align-middle ${textStyles.calendarTime}`}
-                style={{ width: 24, height: 44 }}
-              >
-                {time < 12 ? `${time}am` : time === 12 ? `12pm` : `${time - 12}pm`}
-              </th>
-              {weekDates.map((d, colIdx) => {
-                const dateStr = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); // Format: YYYY-MM-DD
-                const timeInMinutes = time * 60;
-                const rawSlotData = calendarData?.[dateStr]?.[timeInMinutes];
-                const slotData = filterSlotsByLocation(rawSlotData);
-                const availability = slotData?.totalCourts ?? 0;
-                const isAvailable = availability > 0;
-                
-                // Debug logging for first few slots
-                if (colIdx === 0 && rowIdx < 3) {
-                  console.log(`🔍 Slot debug - Date: ${dateStr}, Time: ${time}:00, Minutes: ${timeInMinutes}, Availability: ${availability}, Available: ${isAvailable}`);
-                }
-                
-                // slot style logic updated here
-                const slotBase =
-                  "transition-all duration-75 px-0 py-0 cursor-pointer";
-                const slotPadding = "p-2";
-                let slotClass = slotBase + " " + slotPadding;
-                // More visible unavailable slot color + forced bg override
-                if (!isAvailable) {
-                  slotClass += " bg-gray-200 !bg-gray-200 text-gray-400 cursor-not-allowed";
-                } else {
-                  slotClass += " bg-white text-black hover:bg-[#7cb46b] hover:text-white";
-                }
-
-                return (
-                  <td
-                    key={colIdx}
-                    tabIndex={isAvailable ? 0 : -1}
-                    aria-label={`${d.toLocaleDateString("en-GB", { weekday: "short" })} ${
-                      time <= 12 ? `${time}am` : time === 12 ? `12pm` : `${time - 12}pm`
-                    }, ${availability} courts`}
-                    className={slotClass}
-                    style={{
-                      minWidth: 40,
-                      minHeight: 48,
-                      width: 48,
-                      height: 52,
-                      boxShadow: "none",
-                      outline: "none",
-                      border: "none",
-                      margin: 0,
-                      verticalAlign: "middle",
-                      pointerEvents: isAvailable ? "auto" : "none",
-                      backgroundColor: !isAvailable ? "#e5e7eb" : undefined, // Lighter gray
-                      borderRight: colIdx < weekDates.length - 1 ? "1px solid #e5e7eb" : "none", // 1px gray separator line
-                      borderBottom: rowIdx < TIMES.length - 1 ? "1px solid #e5e7eb" : "none", // 1px gray separator line
-                    }}
-                    onClick={() => isAvailable && handleSlotClick(colIdx, rowIdx, dateStr, timeInMinutes, slotData)}
-                    onKeyDown={e => {
-                      if (isAvailable && (e.key === "Enter" || e.key === " ")) {
-                        handleSlotClick(colIdx, rowIdx, dateStr, timeInMinutes, slotData);
-                      }
-                    }}
-                  >
-                    <div className="flex flex-col items-center justify-center h-full w-full">
-                      <span
-                        className={
-                          "font-jost text-[1.2rem] leading-none font-medium " +
-                          (isAvailable ? "text-black" : "text-gray-400")
-                        }
-                        style={{
-                          marginBottom: "0.15em",
-                          letterSpacing: "0.01em",
-                          color: !isAvailable ? "#bcbcbc" : "#222",
-                        }}
-                      >
-                        {availability}
-                      </span>
-                      <span
-                        className={
-                          "font-jost text-[10px] font-medium tracking-tight " +
-                          (isAvailable ? "text-[#555]" : "text-gray-400")
-                        }
-                        style={{
-                          marginTop: "-0.20em",
-                          color: !isAvailable ? "#bcbcbc" : "#555",
-                        }}
-                      >
-                        courts
-                      </span>
-                    </div>
-                  </td>
-                );
-              })}
+              {weekDates.map((d, idx) => (
+                <th
+                  key={idx}
+                  className={`px-1 py-2 text-center ${textStyles.calendarDayHeader}`}
+                  style={{ minWidth: 60, width: 60 }}
+                >
+                  <div className="flex flex-col items-center leading-tight">
+                    <span className="text-xs font-normal text-black">
+                      {`${d.toLocaleDateString("en-GB", { weekday: "short" })} ${formatDaySuffix(d.getDate())}`}
+                    </span>
+                  </div>
+                </th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {TIMES.map((time, rowIdx) => (
+              <tr key={time}>
+                <th
+                  className={`py-0 pr-2 text-center align-middle sticky left-0 bg-white z-10 ${textStyles.calendarTime}`}
+                  style={{ width: 32, height: 44, minWidth: 32 }}
+                >
+                  <span className="text-xs">
+                    {time < 12 ? `${time}am` : time === 12 ? `12pm` : `${time - 12}pm`}
+                  </span>
+                </th>
+                {weekDates.map((d, colIdx) => {
+                  const dateStr = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); // Format: YYYY-MM-DD
+                  const timeInMinutes = time * 60;
+                  const rawSlotData = calendarData?.[dateStr]?.[timeInMinutes];
+                  const slotData = filterSlotsByLocation(rawSlotData);
+                  const availability = slotData?.totalCourts ?? 0;
+                  const isAvailable = availability > 0;
+                  
+                  // Debug logging for first few slots
+                  if (colIdx === 0 && rowIdx < 3) {
+                    console.log(`🔍 Slot debug - Date: ${dateStr}, Time: ${time}:00, Minutes: ${timeInMinutes}, Availability: ${availability}, Available: ${isAvailable}`);
+                  }
+                  
+                  // slot style logic updated here
+                  const slotBase =
+                    "transition-all duration-75 px-0 py-0 cursor-pointer";
+                  const slotPadding = "p-1";
+                  let slotClass = slotBase + " " + slotPadding;
+                  // More visible unavailable slot color + forced bg override
+                  if (!isAvailable) {
+                    slotClass += " bg-gray-200 !bg-gray-200 text-gray-400 cursor-not-allowed";
+                  } else {
+                    slotClass += " bg-white text-black hover:bg-[#7cb46b] hover:text-white";
+                  }
+
+                  return (
+                    <td
+                      key={colIdx}
+                      tabIndex={isAvailable ? 0 : -1}
+                      aria-label={`${d.toLocaleDateString("en-GB", { weekday: "short" })} ${
+                        time <= 12 ? `${time}am` : time === 12 ? `12pm` : `${time - 12}pm`
+                      }, ${availability} courts`}
+                      className={slotClass}
+                      style={{
+                        minWidth: 60,
+                        minHeight: 44,
+                        width: 60,
+                        height: 44,
+                        boxShadow: "none",
+                        outline: "none",
+                        border: "none",
+                        margin: 0,
+                        verticalAlign: "middle",
+                        pointerEvents: isAvailable ? "auto" : "none",
+                        backgroundColor: !isAvailable ? "#e5e7eb" : undefined, // Lighter gray
+                        borderRight: colIdx < weekDates.length - 1 ? "1px solid #e5e7eb" : "none", // 1px gray separator line
+                        borderBottom: rowIdx < TIMES.length - 1 ? "1px solid #e5e7eb" : "none", // 1px gray separator line
+                      }}
+                      onClick={() => isAvailable && handleSlotClick(colIdx, rowIdx, dateStr, timeInMinutes, slotData)}
+                      onKeyDown={e => {
+                        if (isAvailable && (e.key === "Enter" || e.key === " ")) {
+                          handleSlotClick(colIdx, rowIdx, dateStr, timeInMinutes, slotData);
+                        }
+                      }}
+                    >
+                      <div className="flex flex-col items-center justify-center h-full w-full">
+                        <span
+                          className={
+                            "font-jost text-sm leading-none font-medium " +
+                            (isAvailable ? "text-black" : "text-gray-400")
+                          }
+                          style={{
+                            marginBottom: "0.1em",
+                            letterSpacing: "0.01em",
+                            color: !isAvailable ? "#bcbcbc" : "#222",
+                          }}
+                        >
+                          {availability}
+                        </span>
+                        <span
+                          className={
+                            "font-jost text-[8px] font-medium tracking-tight " +
+                            (isAvailable ? "text-[#555]" : "text-gray-400")
+                          }
+                          style={{
+                            marginTop: "-0.15em",
+                            color: !isAvailable ? "#bcbcbc" : "#555",
+                          }}
+                        >
+                          courts
+                        </span>
+                      </div>
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <SlotBookingModal
         open={modalOpen}
         date={selectedDateStr}

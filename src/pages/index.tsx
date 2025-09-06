@@ -50,31 +50,33 @@ const Index = () => {
   return (
     <div className="bg-offwhite dark:bg-background min-h-screen flex flex-col font-jost">
       <Navbar />
-      <main className="flex-grow flex items-start justify-center px-2">
+      <main className="flex-grow flex items-start justify-center px-1 sm:px-2">
         <div
           className="w-full min-h-[80vh] bg-[#fcf4ed] flex flex-col items-center justify-center border-0 mx-auto p-0 pt-0 mt-0"
           style={{ marginTop: 0, boxShadow: "none", borderRadius: 0 }}
         >
           {/* Headline + subheader */}
-          <section className="w-full text-center px-4 pt-10 md:pt-14">
-            <h1 className="text-3xl md:text-3xl font-bold mb-3 md:mb-4 text-black leading-tight font-jost uppercase">
+          <section className="w-full text-center px-2 sm:px-4 pt-6 sm:pt-10 md:pt-14">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-3 md:mb-4 text-black leading-tight font-jost uppercase">
               Find and book tennis courts across London
             </h1>
-            <p className={textStyles.pageDescription}>
+            <p className={`${textStyles.pageDescription} text-sm sm:text-base`}>
               Check real-time availability. Grab the perfect slot.
             </p>
           </section>
           
           {/* Location Pills Selector - now directly above calendar */}
-          <LocationPills selected={selectedLocations} onSelect={setSelectedLocations} />
+          <div className="w-full px-2 sm:px-4">
+            <LocationPills selected={selectedLocations} onSelect={setSelectedLocations} />
+          </div>
           {/* Weekly Calendar Booking Grid */}
-          <section className="w-full flex-grow flex items-start justify-center px-1 md:px-4 pb-12">
+          <section className="w-full flex-grow flex items-start justify-center px-1 sm:px-2 md:px-4 pb-8 sm:pb-12">
             <WeeklyCalendar calendarData={calendarData} selectedLocations={selectedLocations} />
           </section>
         </div>
       </main>
       {/* Footer */}
-      <footer className={`${textStyles.footerText} py-6 text-center`}>
+      <footer className={`${textStyles.footerText} py-4 sm:py-6 text-center text-xs sm:text-sm`}>
         &copy; {new Date().getFullYear()} CourtBook. All rights reserved.
       </footer>
     </div>
