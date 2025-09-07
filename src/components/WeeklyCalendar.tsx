@@ -169,7 +169,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
 
   return (
     <div
-      className="bg-white w-full calendar-main-area"
+      className="bg-white w-full max-w-[900px] calendar-main-area"
       style={{
         boxShadow: "0 2px 12px 0 rgb(60 80 60 / 0.08)",
         padding: "12px",
@@ -177,22 +177,22 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
         position: "relative"
       }}
     >
-      {/* Mobile: Horizontal scroll container */}
-      <div className="overflow-x-auto">
-        <table className="border-separate border-spacing-0 font-medium select-none" style={{ minWidth: "600px" }}>
+      {/* Mobile: Horizontal scroll container, Desktop: Normal table */}
+      <div className="overflow-x-auto md:overflow-x-visible">
+        <table className="border-separate border-spacing-0 font-medium select-none w-full md:min-w-full" style={{ minWidth: "600px" }}>
           <thead>
             <tr>
               {/* Empty header cell to align with time column */}
-              <th className="w-8 h-12 pr-1 align-middle sticky left-0 bg-white z-10" style={{ position: 'sticky', minWidth: 32, width: 32, padding: 0 }}>
+              <th className="w-8 md:w-6 h-12 md:h-14 pr-1 align-middle sticky left-0 bg-white z-10 md:static" style={{ position: 'sticky', minWidth: 32, width: 32, padding: 0 }}>
               </th>
               {weekDates.map((d, idx) => (
                 <th
                   key={idx}
-                  className={`px-1 py-2 text-center ${textStyles.calendarDayHeader}`}
+                  className={`px-1 md:px-2 py-2 text-center ${textStyles.calendarDayHeader}`}
                   style={{ minWidth: 60, width: 60 }}
                 >
                   <div className="flex flex-col items-center leading-tight">
-                    <span className="text-xs font-normal text-black">
+                    <span className="text-xs md:text-sm font-normal text-black">
                       {`${d.toLocaleDateString("en-GB", { weekday: "short" })} ${formatDaySuffix(d.getDate())}`}
                     </span>
                   </div>
@@ -204,7 +204,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
             {TIMES.map((time, rowIdx) => (
               <tr key={time}>
                 <th
-                  className={`py-0 pr-2 text-center align-middle sticky left-0 bg-white z-10 ${textStyles.calendarTime}`}
+                  className={`py-0 pr-2 text-center align-middle sticky left-0 bg-white z-10 md:static ${textStyles.calendarTime}`}
                   style={{ width: 32, height: 44, minWidth: 32 }}
                 >
                   <span className="text-xs">
@@ -227,7 +227,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
                   // slot style logic updated here
                   const slotBase =
                     "transition-all duration-75 px-0 py-0 cursor-pointer";
-                  const slotPadding = "p-1";
+                  const slotPadding = "p-1 md:p-2";
                   let slotClass = slotBase + " " + slotPadding;
                   // More visible unavailable slot color + forced bg override
                   if (!isAvailable) {
@@ -269,7 +269,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
                       <div className="flex flex-col items-center justify-center h-full w-full">
                         <span
                           className={
-                            "font-jost text-sm leading-none font-medium " +
+                            "font-jost text-sm md:text-[1.2rem] leading-none font-medium " +
                             (isAvailable ? "text-black" : "text-gray-400")
                           }
                           style={{
@@ -282,7 +282,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
                         </span>
                         <span
                           className={
-                            "font-jost text-[8px] font-medium tracking-tight " +
+                            "font-jost text-[8px] md:text-[10px] font-medium tracking-tight " +
                             (isAvailable ? "text-[#555]" : "text-gray-400")
                           }
                           style={{
