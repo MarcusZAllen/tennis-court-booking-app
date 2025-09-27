@@ -3,7 +3,7 @@ import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import fs from 'fs';
 import { DatabaseService } from '../lib/database.js';
 import { retryWithBackoff, RateLimiter } from '../utils/retry-helper.js';
-import { getWorkingProxy, getProxyArgs } from '../utils/proxy-config.js';
+import { getWorkingProxy, getProxyArgs, healthCheckProxies, recordProxyResult } from '../utils/proxy-config.js';
 
 puppeteer.use(StealthPlugin());
 
@@ -67,6 +67,9 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
     // Initialize browser if not provided
     if (!browser) {
       console.log(`[${name} - ${date}] 🚀 Launching Puppeteer browser...`);
+      
+      // Run proxy health check before starting
+      await healthCheckProxies();
       
       // Get proxy configuration
       const proxyArgs = getProxyArgs();
@@ -617,10 +620,16 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       }
     }
 
-  const duration = ((Date.now() - startTime) / 1000).toFixed(2);
-  console.log(`[${location} - ${date}] ⏱️ Scraping for ${date} completed in ${duration} seconds`);
+    // Record successful proxy usage
+    const currentProxy = getWorkingProxy();
+    if (currentProxy) {
+      recordProxyResult(currentProxy, true);
+    }
+
+    const duration = ((Date.now() - startTime) / 1000).toFixed(2);
+    console.log(`[${location} - ${date}] ⏱️ Scraping for ${date} completed in ${duration} seconds`);
     console.log(`[${location} - ${date}] 📈 SUMMARY: ${slots.length} slots extracted, ${uniqueSlots.length} unique slots, ${uniqueSlots.length > 0 ? uniqueSlots.length : 0} saved to Supabase`);
-  return slots;
+    return slots;
 
   } catch (error) {
     console.error(`[${name} - ${date}] ❌ Error: ${error.message}`);
@@ -630,7 +639,7 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       const currentProxy = getWorkingProxy();
       if (currentProxy) {
         console.log(`[${name} - ${date}] 🚫 Proxy ${currentProxy} failed - marking as failed`);
-        markProxyAsFailed(currentProxy);
+        recordProxyResult(currentProxy, false);
       }
     }
     

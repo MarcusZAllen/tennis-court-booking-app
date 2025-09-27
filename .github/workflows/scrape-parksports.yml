@@ -15,6 +15,9 @@ jobs:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      # Enable proxy usage in production
+      USE_PROXIES: 'true'
+      NODE_ENV: 'production'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
