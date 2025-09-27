@@ -9,6 +9,34 @@ puppeteer.use(StealthPlugin());
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
+// Enhanced user agent rotation for better Cloudflare bypass
+const USER_AGENTS = [
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+  'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/121.0',
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/121.0'
+];
+
+// Random viewport sizes to avoid detection
+const VIEWPORTS = [
+  { width: 1920, height: 1080 },
+  { width: 1366, height: 768 },
+  { width: 1440, height: 900 },
+  { width: 1536, height: 864 },
+  { width: 1280, height: 720 }
+];
+
+function getRandomUserAgent() {
+  return USER_AGENTS[Math.floor(Math.random() * USER_AGENTS.length)];
+}
+
+function getRandomViewport() {
+  return VIEWPORTS[Math.floor(Math.random() * VIEWPORTS.length)];
+}
+
 let sharedBrowser = null;
 const rateLimiter = new RateLimiter(3, 60000); // 3 requests per minute
 
@@ -46,8 +74,8 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       console.log(`[${name} - ${date}] 🌐 Using ${proxyInfo}`);
       
       browser = await puppeteer.launch({
-        headless: true,
-        slowMo: 1000, // Increased slowMo for better reliability
+    headless: true,
+        slowMo: Math.floor(Math.random() * 2000) + 1000, // Random slowMo between 1-3 seconds
         args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',
@@ -58,7 +86,7 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
           '--disable-gpu',
           '--disable-web-security',
           '--disable-features=VizDisplayCompositor',
-          // Production-specific stealth args
+          // Enhanced Cloudflare bypass args
           '--disable-blink-features=AutomationControlled',
           '--disable-extensions',
           '--disable-plugins',
@@ -66,6 +94,27 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
           '--disable-background-timer-throttling',
           '--disable-backgrounding-occluded-windows',
           '--disable-renderer-backgrounding',
+          '--disable-features=TranslateUI',
+          '--disable-ipc-flooding-protection',
+          '--disable-client-side-phishing-detection',
+          '--disable-sync',
+          '--disable-default-apps',
+          '--disable-hang-monitor',
+          '--disable-prompt-on-repost',
+          '--disable-domain-reliability',
+          '--disable-component-extensions-with-background-pages',
+          '--disable-background-networking',
+          '--disable-features=TranslateUI,BlinkGenPropertyTrees',
+          '--disable-ipc-flooding-protection',
+          '--no-default-browser-check',
+          '--no-first-run',
+          '--no-pings',
+          '--password-store=basic',
+          '--use-mock-keychain',
+          '--disable-component-update',
+          '--disable-background-timer-throttling',
+          '--disable-renderer-backgrounding',
+          '--disable-backgrounding-occluded-windows',
           '--disable-features=TranslateUI',
           '--disable-ipc-flooding-protection'
         ],
@@ -80,9 +129,13 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
     page = await browser.newPage();
     console.log(`[${name} - ${date}] ✅ Page created successfully`);
     
-    // Set user agent and viewport
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
-    await page.setViewport({ width: 1920, height: 1080 });
+    // Set random user agent and viewport for better Cloudflare bypass
+    const userAgent = getRandomUserAgent();
+    const viewport = getRandomViewport();
+    await page.setUserAgent(userAgent);
+    await page.setViewport(viewport);
+    console.log(`[${name} - ${date}] 🎭 Using user agent: ${userAgent.substring(0, 50)}...`);
+    console.log(`[${name} - ${date}] 📱 Using viewport: ${viewport.width}x${viewport.height}`);
     
     // Set additional headers to look more like a real browser
     await page.setExtraHTTPHeaders({
@@ -104,16 +157,21 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
     // Set timezone to London
     await page.emulateTimezone('Europe/London');
     
-    // Additional stealth measures for Cloudflare
+    // Enhanced stealth measures for Cloudflare bypass
     await page.evaluateOnNewDocument(() => {
       // Override webdriver property
       Object.defineProperty(navigator, 'webdriver', {
         get: () => undefined,
       });
       
-      // Override plugins
+      // Override plugins with realistic data
       Object.defineProperty(navigator, 'plugins', {
-        get: () => [1, 2, 3, 4, 5],
+        get: () => ({
+          length: 3,
+          0: { name: 'Chrome PDF Plugin', description: 'Portable Document Format' },
+          1: { name: 'Chrome PDF Viewer', description: '' },
+          2: { name: 'Native Client', description: '' }
+        }),
       });
       
       // Override languages
@@ -128,36 +186,68 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
         }),
       });
       
-      // Override hardware concurrency
+      // Randomize hardware concurrency
       Object.defineProperty(navigator, 'hardwareConcurrency', {
-        get: () => 8,
+        get: () => Math.floor(Math.random() * 8) + 4, // 4-12 cores
       });
       
-      // Override device memory
+      // Randomize device memory
       Object.defineProperty(navigator, 'deviceMemory', {
-        get: () => 8,
+        get: () => [4, 8, 16][Math.floor(Math.random() * 3)],
       });
       
-      // Override connection
+      // Randomize connection
       Object.defineProperty(navigator, 'connection', {
         get: () => ({
-          effectiveType: '4g',
-          rtt: 50,
-          downlink: 10,
+          effectiveType: ['4g', '3g'][Math.floor(Math.random() * 2)],
+          rtt: Math.floor(Math.random() * 100) + 20,
+          downlink: Math.floor(Math.random() * 10) + 1,
           saveData: false
         }),
+      });
+      
+      // Override screen properties
+      Object.defineProperty(screen, 'width', {
+        get: () => Math.floor(Math.random() * 500) + 1200,
+      });
+      Object.defineProperty(screen, 'height', {
+        get: () => Math.floor(Math.random() * 500) + 800,
+      });
+      
+      // Override timezone
+      Object.defineProperty(Intl.DateTimeFormat.prototype, 'resolvedOptions', {
+        get: () => () => ({ timeZone: 'Europe/London' }),
       });
       
       // Remove automation indicators
       delete window.cdc_adoQpoasnfa76pfcZLmcfl_Array;
       delete window.cdc_adoQpoasnfa76pfcZLmcfl_Promise;
       delete window.cdc_adoQpoasnfa76pfcZLmcfl_Symbol;
+      delete window.cdc_adoQpoasnfa76pfcZLmcfl_JSON;
+      delete window.cdc_adoQpoasnfa76pfcZLmcfl_Object;
+      delete window.cdc_adoQpoasnfa76pfcZLmcfl_Proxy;
+      delete window.cdc_adoQpoasnfa76pfcZLmcfl_Reflect;
+      
+      // Override chrome runtime
+      if (window.chrome) {
+        Object.defineProperty(window.chrome, 'runtime', {
+          get: () => ({
+            onConnect: undefined,
+            onMessage: undefined
+          }),
+        });
+      }
+      
+      // Override notification permission
+      Object.defineProperty(Notification, 'permission', {
+        get: () => 'default',
+      });
     });
     
     console.log(`[${name} - ${date}] ✅ Page configured successfully`);
 
-    const location = name;
-    const baseURL = url;
+  const location = name;
+  const baseURL = url;
 
     const loadPage = async () => {
       // Check if page is still valid before navigation
@@ -166,14 +256,37 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       }
       
       // Add random delay to simulate human behavior
-      const randomDelay = Math.floor(Math.random() * 2000) + 1000; // 1-3 seconds
+      const randomDelay = Math.floor(Math.random() * 3000) + 2000; // 2-5 seconds
       console.log(`[${location} - ${date}] ⏳ Adding random delay of ${randomDelay}ms to simulate human behavior...`);
       await new Promise(resolve => setTimeout(resolve, randomDelay));
       
-      await page.goto(`${baseURL}&date=${date}`, {
-        waitUntil: 'networkidle2',
-        timeout: 60000
-      });
+      // Try multiple navigation strategies
+      const strategies = [
+        { waitUntil: 'networkidle2', timeout: 60000 },
+        { waitUntil: 'domcontentloaded', timeout: 45000 },
+        { waitUntil: 'load', timeout: 30000 }
+      ];
+      
+      let lastError = null;
+      for (let i = 0; i < strategies.length; i++) {
+        try {
+          console.log(`[${location} - ${date}] 🚀 Attempting navigation strategy ${i + 1}/${strategies.length}...`);
+          await page.goto(`${baseURL}&date=${date}`, strategies[i]);
+          console.log(`[${location} - ${date}] ✅ Navigation successful with strategy ${i + 1}`);
+          break;
+        } catch (error) {
+          lastError = error;
+          console.log(`[${location} - ${date}] ⚠️ Strategy ${i + 1} failed: ${error.message}`);
+          if (i < strategies.length - 1) {
+            console.log(`[${location} - ${date}] 🔄 Trying next strategy...`);
+            await new Promise(resolve => setTimeout(resolve, 2000));
+          }
+        }
+      }
+      
+      if (lastError && lastError.message.includes('Navigation timeout')) {
+        throw lastError;
+      }
     };
 
     try {
@@ -183,50 +296,88 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       return [];
     }
 
-    console.log(`[${location} - ${date}] Loaded court availability for ${date}`);
-    
-    // Wait for Cloudflare verification to complete
+  console.log(`[${location} - ${date}] Loaded court availability for ${date}`);
+
+    // Enhanced Cloudflare verification with multiple bypass strategies
     console.log(`[${location} - ${date}] 🔒 Waiting for Cloudflare verification to complete...`);
+    let cloudflareBypassed = false;
+    
     try {
       await page.waitForFunction(() => {
         const title = document.title;
         const bodyText = document.body.textContent;
         
         // Check if we're still on Cloudflare verification page
-        if (title.includes('Just a moment') || bodyText.includes('Verifying you are human')) {
+        if (title.includes('Just a moment') || 
+            bodyText.includes('Verifying you are human') ||
+            bodyText.includes('Please wait') ||
+            bodyText.includes('Checking your browser') ||
+            bodyText.includes('DDoS protection')) {
           return false; // Still on verification page
         }
         
         // Check if we've reached the actual booking page
-        if (title.includes('Clubspark') || title.includes('Booking') || bodyText.includes('resource-session')) {
+        if (title.includes('Clubspark') || 
+            title.includes('Booking') || 
+            bodyText.includes('resource-session') ||
+            bodyText.includes('book-interval') ||
+            document.querySelector('.resource-session')) {
           return true; // Verification complete
         }
         
         return false; // Still waiting
-      }, { timeout: 30000 }); // Wait up to 30 seconds
+      }, { timeout: 45000 }); // Increased timeout to 45 seconds
       
       console.log(`[${location} - ${date}] ✅ Cloudflare verification completed`);
+      cloudflareBypassed = true;
     } catch (error) {
-      console.log(`[${location} - ${date}] ⚠️  Cloudflare verification timeout or error: ${error.message}`);
+      console.log(`[${location} - ${date}] ⚠️  Cloudflare verification timeout: ${error.message}`);
       
-      // Try refreshing the page once to see if that helps
-      console.log(`[${location} - ${date}] 🔄 Attempting page refresh to bypass Cloudflare...`);
-      try {
-        await page.reload({ waitUntil: 'networkidle2', timeout: 30000 });
-        await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds after refresh
-        
-        // Check if refresh helped
-        const title = await page.title();
-        if (!title.includes('Just a moment')) {
-          console.log(`[${location} - ${date}] ✅ Page refresh successful - Cloudflare bypassed`);
-        } else {
-          console.log(`[${location} - ${date}] ⚠️  Page refresh didn't bypass Cloudflare`);
+      // Try multiple bypass strategies
+      const bypassStrategies = [
+        async () => {
+          console.log(`[${location} - ${date}] 🔄 Strategy 1: Page refresh...`);
+          await page.reload({ waitUntil: 'networkidle2', timeout: 30000 });
+          await new Promise(resolve => setTimeout(resolve, 5000));
+        },
+        async () => {
+          console.log(`[${location} - ${date}] 🔄 Strategy 2: Navigate to homepage first...`);
+          await page.goto(baseURL, { waitUntil: 'networkidle2', timeout: 30000 });
+          await new Promise(resolve => setTimeout(resolve, 3000));
+          await page.goto(`${baseURL}&date=${date}`, { waitUntil: 'networkidle2', timeout: 30000 });
+        },
+        async () => {
+          console.log(`[${location} - ${date}] 🔄 Strategy 3: Simulate mouse movement...`);
+          await page.mouse.move(100, 100);
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          await page.mouse.move(200, 200);
+          await new Promise(resolve => setTimeout(resolve, 2000));
         }
-      } catch (refreshError) {
-        console.log(`[${location} - ${date}] ❌ Page refresh failed: ${refreshError.message}`);
+      ];
+      
+      for (let i = 0; i < bypassStrategies.length; i++) {
+        try {
+          await bypassStrategies[i]();
+          
+          // Check if any strategy worked
+          const title = await page.title();
+          const bodyText = await page.evaluate(() => document.body.textContent);
+          
+          if (!title.includes('Just a moment') && 
+              !bodyText.includes('Verifying you are human') &&
+              (bodyText.includes('resource-session') || bodyText.includes('book-interval'))) {
+            console.log(`[${location} - ${date}] ✅ Strategy ${i + 1} successful - Cloudflare bypassed`);
+            cloudflareBypassed = true;
+            break;
+          }
+        } catch (strategyError) {
+          console.log(`[${location} - ${date}] ❌ Strategy ${i + 1} failed: ${strategyError.message}`);
+        }
       }
       
-      // Continue anyway to see what we get
+      if (!cloudflareBypassed) {
+        console.log(`[${location} - ${date}] ⚠️  All Cloudflare bypass strategies failed, continuing anyway...`);
+      }
     }
     
     // Quick check: Are there any actually bookable slots at all?
@@ -279,9 +430,9 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
         console.log(`[${location} - ${date}] Failed to save debug file: ${error.message}`);
       }
       
-      return [];
-    }
-    
+    return [];
+  }
+
     // Wait for page to load (much longer wait for production environment)
     console.log(`[${location} - ${date}] ⏳ Waiting for page to fully load (production environment)...`);
     await new Promise(resolve => setTimeout(resolve, 10000));
@@ -308,8 +459,8 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       } catch (error) {
         console.log(`[${location} - ${date}] Failed to save debug file: ${error.message}`);
       }
-      return [];
-    }
+    return [];
+  }
 
     console.log(`[${location} - ${date}] ✅ Found ${availableSlotsCount} available slots, extracting...`);
 
@@ -320,17 +471,17 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       throw new Error('Page became invalid before slot extraction');
     }
 
-    const slots = await page.$$eval('.resource-interval', (intervals, meta) => {
-      const { location, baseURL, date } = meta;
-      const convertToTime = (minutes) => {
-        const h = String(Math.floor(minutes / 60)).padStart(2, '0');
-        const m = String(minutes % 60).padStart(2, '0');
-        return `${h}:${m}`;
-      };
+  const slots = await page.$$eval('.resource-interval', (intervals, meta) => {
+    const { location, baseURL, date } = meta;
+    const convertToTime = (minutes) => {
+      const h = String(Math.floor(minutes / 60)).padStart(2, '0');
+      const m = String(minutes % 60).padStart(2, '0');
+      return `${h}:${m}`;
+    };
 
-      return intervals
-        .map(interval => {
-          const session = interval.closest('.resource-session');
+    return intervals
+      .map(interval => {
+        const session = interval.closest('.resource-session');
           if (!session) return null;
 
           // Look for actual bookable anchors - this is the only reliable way to detect available slots
@@ -372,8 +523,8 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
           const endTime = parseInt(session.getAttribute('data-end-time'));
           
           if (sessionCost && startTime !== null && endTime !== null) {
-            const start = parseInt(interval.getAttribute('data-system-start-time'));
-            const end = parseInt(interval.getAttribute('data-system-end-time'));
+        const start = parseInt(interval.getAttribute('data-system-start-time'));
+        const end = parseInt(interval.getAttribute('data-system-end-time'));
             
             // Find the court name by looking up the resource hierarchy
             let courtName = "Tennis Court";
@@ -384,25 +535,25 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
                 courtName = resourceName;
               }
             }
-            
-            return {
-              provider: "parksports",
-              location,
+
+        return {
+          provider: "parksports",
+          location,
               court: courtName,
-              bookingUrl: `${baseURL}&date=${date}`,
-              date,
+          bookingUrl: `${baseURL}&date=${date}`,
+          date,
               readableTime: `Book at ${convertToTime(start)} - ${convertToTime(end)}`,
               cost: `£${parseFloat(sessionCost).toFixed(2)}`,
-              startMinutes: start,
-              endMinutes: end,
+          startMinutes: start,
+          endMinutes: end,
               sessionId: `${location}_${courtName}_${convertToTime(start)}-${convertToTime(end)}`,
               slotKey: `${location}_${date}_${start}_${courtName}`,
-            };
+        };
           }
           
           return null;
-        })
-        .filter(Boolean);
+      })
+      .filter(Boolean);
     }, { location, baseURL, date });
 
     console.log(`[${location} - ${date}] ✅ Extracted ${slots.length} bookable slots`);
@@ -436,9 +587,9 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
     if (!fs.existsSync('data')) {
       fs.mkdirSync('data');
     }
-    const outputPath = `data/parksports-${location.toLowerCase().replace(/\s+/g, '-')}-${date}.json`;
-    fs.writeFileSync(outputPath, JSON.stringify(slots, null, 2));
-    console.log(`[${location} - ${date}] 💾 Saved ${slots.length} slots to ${outputPath}`);
+  const outputPath = `data/parksports-${location.toLowerCase().replace(/\s+/g, '-')}-${date}.json`;
+  fs.writeFileSync(outputPath, JSON.stringify(slots, null, 2));
+  console.log(`[${location} - ${date}] 💾 Saved ${slots.length} slots to ${outputPath}`);
 
     // Clear old ParkSports slots created around an hour ago (only if we successfully saved new slots)
     if (uniqueSlots.length > 0) {
@@ -466,10 +617,10 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       }
     }
 
-    const duration = ((Date.now() - startTime) / 1000).toFixed(2);
-    console.log(`[${location} - ${date}] ⏱️ Scraping for ${date} completed in ${duration} seconds`);
+  const duration = ((Date.now() - startTime) / 1000).toFixed(2);
+  console.log(`[${location} - ${date}] ⏱️ Scraping for ${date} completed in ${duration} seconds`);
     console.log(`[${location} - ${date}] 📈 SUMMARY: ${slots.length} slots extracted, ${uniqueSlots.length} unique slots, ${uniqueSlots.length > 0 ? uniqueSlots.length : 0} saved to Supabase`);
-    return slots;
+  return slots;
 
   } catch (error) {
     console.error(`[${name} - ${date}] ❌ Error: ${error.message}`);
