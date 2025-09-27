@@ -183,6 +183,11 @@ export function getBestProxy() {
     return PROXY_CONFIG.proxies[0] || null;
   }
   
+  // If no stats yet, return first working proxy
+  if (PROXY_CONFIG.proxyStats.size === 0) {
+    return workingProxies[0];
+  }
+  
   // Sort by success rate
   const sortedProxies = workingProxies.sort((a, b) => {
     const statsA = PROXY_CONFIG.proxyStats.get(a) || { successes: 0, failures: 0 };
