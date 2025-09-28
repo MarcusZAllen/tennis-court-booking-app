@@ -2,8 +2,8 @@
 // Supports both free and premium proxy services
 
 export const PROXY_CONFIG = {
-  enabled: process.env.USE_PROXIES === 'true' || process.env.NODE_ENV === 'production',
-  proxies: process.env.PROXY_LIST ? process.env.PROXY_LIST.split(',') : [],
+  enabled: false, // Will be set dynamically
+  proxies: [],
   currentIndex: 0,
   failedProxies: new Set(),
   proxyStats: new Map(), // Track success/failure rates
@@ -12,7 +12,27 @@ export const PROXY_CONFIG = {
   lastHealthCheck: 0
 };
 
+// Initialize proxy configuration dynamically
+function initializeProxyConfig() {
+  PROXY_CONFIG.enabled = process.env.USE_PROXIES === 'true' || process.env.NODE_ENV === 'production';
+  PROXY_CONFIG.proxies = process.env.PROXY_LIST ? process.env.PROXY_LIST.split(',') : [];
+  
+  // Initialize with free proxies if no premium ones are configured
+  if (PROXY_CONFIG.enabled && PROXY_CONFIG.proxies.length === 0) {
+    console.log('⚠️ No premium proxies configured, using free proxy list (unreliable)');
+    PROXY_CONFIG.proxies = [...FREE_PROXIES];
+    console.log(`📋 Loaded ${PROXY_CONFIG.proxies.length} free proxies`);
+  }
+  
+  console.log(`🔧 Proxy system initialized: enabled=${PROXY_CONFIG.enabled}, proxies=${PROXY_CONFIG.proxies.length}`);
+}
+
 export function getNextProxy() {
+  // Initialize if not already done
+  if (PROXY_CONFIG.proxies.length === 0) {
+    initializeProxyConfig();
+  }
+  
   if (!PROXY_CONFIG.enabled || PROXY_CONFIG.proxies.length === 0) {
     return null;
   }
@@ -231,10 +251,3 @@ export async function healthCheckProxies() {
   
   console.log(`📊 Health check complete: ${workingCount}/${proxiesToCheck.length} proxies working`);
 }
-
-// Initialize with free proxies if no premium ones are configured
-if (PROXY_CONFIG.enabled && PROXY_CONFIG.proxies.length === 0) {
-  console.log('⚠️ No premium proxies configured, using free proxy list (unreliable)');
-  PROXY_CONFIG.proxies = [...FREE_PROXIES];
-  console.log(`📋 Loaded ${PROXY_CONFIG.proxies.length} free proxies`);
-} 
