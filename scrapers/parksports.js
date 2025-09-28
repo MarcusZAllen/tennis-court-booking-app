@@ -69,12 +69,17 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
       console.log(`[${name} - ${date}] 🚀 Launching Puppeteer browser...`);
       
       // Run proxy health check before starting
+      console.log(`[${name} - ${date}] 🔍 Running proxy health check...`);
       await healthCheckProxies();
       
       // Get proxy configuration
       const proxyArgs = getProxyArgs();
       const proxyInfo = proxyArgs.proxy ? `via ${proxyArgs.proxy.server}` : 'direct connection';
       console.log(`[${name} - ${date}] 🌐 Using ${proxyInfo}`);
+      
+      if (!proxyArgs.proxy) {
+        console.log(`[${name} - ${date}] ⚠️ WARNING: No proxy available - using direct connection (may be blocked by Cloudflare)`);
+      }
       
       browser = await puppeteer.launch({
     headless: true,

@@ -33,6 +33,8 @@ export function getWorkingProxy() {
 
 // Enhanced proxy args with better error handling
 export function getProxyArgs() {
+  console.log(`🔧 Proxy system status: enabled=${PROXY_CONFIG.enabled}, proxies=${PROXY_CONFIG.proxies.length}, failed=${PROXY_CONFIG.failedProxies.size}`);
+  
   const proxy = getWorkingProxy();
   if (!proxy) {
     console.log('⚠️ No working proxy available, using direct connection');
@@ -233,5 +235,6 @@ export async function healthCheckProxies() {
 // Initialize with free proxies if no premium ones are configured
 if (PROXY_CONFIG.enabled && PROXY_CONFIG.proxies.length === 0) {
   console.log('⚠️ No premium proxies configured, using free proxy list (unreliable)');
-  PROXY_CONFIG.proxies = FREE_PROXIES;
+  PROXY_CONFIG.proxies = [...FREE_PROXIES];
+  console.log(`📋 Loaded ${PROXY_CONFIG.proxies.length} free proxies`);
 } 
