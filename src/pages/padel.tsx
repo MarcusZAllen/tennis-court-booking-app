@@ -14,11 +14,11 @@ const Padel = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col font-jost" style={{ backgroundColor: '#caf0f8' }}>
+      <div className="min-h-screen flex flex-col font-jost" style={{ backgroundColor: '#a9d6e5' }}>
         <Navbar />
         <main className="flex-grow flex items-center justify-center">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto mb-4" style={{ borderColor: '#00b4d8' }}></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto mb-4" style={{ borderColor: '#61a5c2' }}></div>
             <p className={textStyles.loadingText}>Loading padel court availability...</p>
           </div>
         </main>
@@ -28,7 +28,7 @@ const Padel = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col font-jost" style={{ backgroundColor: '#caf0f8' }}>
+      <div className="min-h-screen flex flex-col font-jost" style={{ backgroundColor: '#a9d6e5' }}>
         <Navbar />
         <main className="flex-grow flex items-center justify-center">
           <div className="text-center">
@@ -37,8 +37,8 @@ const Padel = () => {
             <p className="text-gray-600 mb-4">{error}</p>
             <button 
               onClick={() => window.location.reload()} 
-              className="text-white px-4 py-2 rounded hover:bg-[#0096c7]"
-              style={{ backgroundColor: '#00b4d8' }}
+              className="text-white px-4 py-2 rounded hover:bg-[#4a8fa6]"
+              style={{ backgroundColor: '#61a5c2' }}
             >
               Try Again
             </button>
@@ -49,12 +49,12 @@ const Padel = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col font-jost" style={{ backgroundColor: '#caf0f8' }}>
+    <div className="min-h-screen flex flex-col font-jost" style={{ backgroundColor: '#a9d6e5' }}>
       <Navbar />
       <main className="flex-grow flex items-start justify-center px-1 sm:px-2">
         <div
           className="w-full min-h-[80vh] flex flex-col items-center justify-center border-0 mx-auto p-0 pt-0 mt-0"
-          style={{ backgroundColor: '#caf0f8', marginTop: 0, boxShadow: "none", borderRadius: 0 }}
+          style={{ backgroundColor: '#a9d6e5', marginTop: 0, boxShadow: "none", borderRadius: 0 }}
         >
           {/* Headline + subheader */}
           <section className="w-full text-center px-2 sm:px-4 pt-6 sm:pt-10 md:pt-14">
@@ -77,7 +77,7 @@ const Padel = () => {
                 calendarData={calendarData} 
                 selectedLocations={selectedLocations}
                 sportType="padel"
-                hoverColor="#00b4d8"
+                hoverColor="#61a5c2"
               />
             </div>
           </section>
