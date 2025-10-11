@@ -544,6 +544,9 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
               }
             }
 
+            // Detect sport type based on court name
+            const sportType = courtName.toLowerCase().includes('padel') ? 'padel' : 'tennis';
+
         return {
           provider: "parksports",
           location,
@@ -556,6 +559,7 @@ const scrapeParkSports = async function ({ name, url, bookingWindow = 7 }, date,
           endMinutes: end,
               sessionId: `${location}_${courtName}_${convertToTime(start)}-${convertToTime(end)}`,
               slotKey: `${location}_${date}_${start}_${courtName}`,
+              sportType: sportType,
         };
           }
           

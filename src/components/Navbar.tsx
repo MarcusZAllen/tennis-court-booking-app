@@ -47,14 +47,14 @@ const Navbar = () => {
           BOOK A COURT
         </span>
       </div>
-      {/* Right: Courts, Share */}
+      {/* Right: Padel, Share */}
       <div className="flex items-center gap-2 sm:gap-3 md:gap-5 ml-auto">
         <Link
-          href="/courts"
+          href="/padel"
           className={`bg-white text-black rounded-lg sm:rounded-xl px-2 sm:px-4 py-1.5 sm:py-2 shadow-sm border-0 transition-all duration-150 hover:bg-gray-100 focus:bg-gray-100 text-xs sm:text-sm`}
           style={{ letterSpacing: "0.05em" }}
         >
-          Courts
+          Padel
         </Link>
         <button
           onClick={handleShare}

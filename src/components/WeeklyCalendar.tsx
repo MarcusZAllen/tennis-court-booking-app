@@ -36,9 +36,16 @@ const TIMES = Array.from({ length: 15 }, (_, i) => 7 + i); // 7am to 21 (9pm)
 type WeeklyCalendarProps = {
   calendarData: TransformedData;
   selectedLocations: string[];
+  sportType?: string;
+  hoverColor?: string;
 };
 
-const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedLocations }) => {
+const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ 
+  calendarData, 
+  selectedLocations, 
+  sportType = 'tennis',
+  hoverColor = '#7cb46b'
+}) => {
   const weekDates = getCurrentWeek();
   
   // Debug logging
@@ -115,6 +122,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
   const [done, setDone] = React.useState(false);
   const [hovered, setHovered] = React.useState(false);
   const [pressed, setPressed] = React.useState(false);
+  const [hoveredCell, setHoveredCell] = React.useState<{col: number, row: number} | null>(null);
 
   // Animation for completion
   React.useEffect(() => {
@@ -229,11 +237,13 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
                     "transition-all duration-75 px-0 py-0 cursor-pointer";
                   const slotPadding = "p-1 md:p-2";
                   let slotClass = slotBase + " " + slotPadding;
+                  const isHovered = hoveredCell?.col === colIdx && hoveredCell?.row === rowIdx;
+                  
                   // More visible unavailable slot color + forced bg override
                   if (!isAvailable) {
                     slotClass += " bg-gray-200 !bg-gray-200 text-gray-400 cursor-not-allowed";
                   } else {
-                    slotClass += " bg-white text-black hover:bg-[#7cb46b] hover:text-white";
+                    slotClass += " bg-white text-black";
                   }
 
                   return (
@@ -255,10 +265,13 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
                         margin: 0,
                         verticalAlign: "middle",
                         pointerEvents: isAvailable ? "auto" : "none",
-                        backgroundColor: !isAvailable ? "#e5e7eb" : undefined, // Lighter gray
+                        backgroundColor: !isAvailable ? "#e5e7eb" : (isHovered && isAvailable ? hoverColor : undefined),
+                        color: isHovered && isAvailable ? "white" : undefined,
                         borderRight: colIdx < weekDates.length - 1 ? "1px solid #e5e7eb" : "none", // 1px gray separator line
                         borderBottom: rowIdx < TIMES.length - 1 ? "1px solid #e5e7eb" : "none", // 1px gray separator line
                       }}
+                      onMouseEnter={() => isAvailable && setHoveredCell({col: colIdx, row: rowIdx})}
+                      onMouseLeave={() => setHoveredCell(null)}
                       onClick={() => isAvailable && handleSlotClick(colIdx, rowIdx, dateStr, timeInMinutes, slotData)}
                       onKeyDown={e => {
                         if (isAvailable && (e.key === "Enter" || e.key === " ")) {
@@ -275,7 +288,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
                           style={{
                             marginBottom: "0.1em",
                             letterSpacing: "0.01em",
-                            color: !isAvailable ? "#bcbcbc" : "#222",
+                            color: !isAvailable ? "#bcbcbc" : (isHovered ? "white" : "#222"),
                           }}
                         >
                           {availability}
@@ -287,7 +300,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ calendarData, selectedL
                           }
                           style={{
                             marginTop: "-0.15em",
-                            color: !isAvailable ? "#bcbcbc" : "#555",
+                            color: !isAvailable ? "#bcbcbc" : (isHovered ? "white" : "#555"),
                           }}
                         >
                           courts

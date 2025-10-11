@@ -18,7 +18,7 @@ export type TransformedData = {
   };
 };
 
-export function useSupabaseData() {
+export function useSupabaseData(sportType: string = 'tennis') {
   const [calendarData, setCalendarData] = useState<TransformedData>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -30,7 +30,7 @@ export function useSupabaseData() {
 
     async function fetchData() {
       try {
-        console.log('🔄 Starting data fetch...');
+        console.log(`🔄 Starting data fetch for ${sportType} courts...`);
         console.log('🔧 ENV check:', {
           url: process.env.NEXT_PUBLIC_SUPABASE_URL ? 'Set' : 'Missing',
           key: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? 'Set' : 'Missing'
@@ -67,6 +67,7 @@ export function useSupabaseData() {
             .select('*')
             .filter('date', 'gte', startDateStr)
             .filter('date', 'lte', endDateStr)
+            .filter('sport_type', 'eq', sportType)
             .order('date', { ascending: true })
             .order('start_minutes', { ascending: true })
             .range(from, from + pageSize - 1);
@@ -139,7 +140,7 @@ export function useSupabaseData() {
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [sportType]);
 
   return { calendarData, loading, error };
 } 
