@@ -14,7 +14,7 @@ const Padel = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col font-jost" style={{ backgroundColor: '#a9d6e5' }}>
+      <div className="min-h-screen flex flex-col font-jost" style={{ backgroundColor: '#e3f2fd' }}>
         <Navbar />
         <main className="flex-grow flex items-center justify-center">
           <div className="text-center">
@@ -28,7 +28,7 @@ const Padel = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col font-jost" style={{ backgroundColor: '#a9d6e5' }}>
+      <div className="min-h-screen flex flex-col font-jost" style={{ backgroundColor: '#e3f2fd' }}>
         <Navbar />
         <main className="flex-grow flex items-center justify-center">
           <div className="text-center">
@@ -49,12 +49,12 @@ const Padel = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col font-jost" style={{ backgroundColor: '#a9d6e5' }}>
+    <div className="min-h-screen flex flex-col font-jost" style={{ backgroundColor: '#e3f2fd' }}>
       <Navbar />
       <main className="flex-grow flex items-start justify-center px-1 sm:px-2">
         <div
           className="w-full min-h-[80vh] flex flex-col items-center justify-center border-0 mx-auto p-0 pt-0 mt-0"
-          style={{ backgroundColor: '#a9d6e5', marginTop: 0, boxShadow: "none", borderRadius: 0 }}
+          style={{ backgroundColor: '#e3f2fd', marginTop: 0, boxShadow: "none", borderRadius: 0 }}
         >
           {/* Headline + subheader */}
           <section className="w-full text-center px-2 sm:px-4 pt-6 sm:pt-10 md:pt-14">

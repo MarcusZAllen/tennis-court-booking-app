@@ -158,7 +158,7 @@ Potential improvements for the padel feature:
 - Primary/Hover: #7cb46b (green)
 
 ### Padel
-- Background: #a9d6e5 (soft blue)
+- Background: #e3f2fd (soft blue)
 - Primary/Hover: #61a5c2 (teal blue)
 
 ## Files Modified
