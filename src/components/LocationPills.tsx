@@ -6,9 +6,10 @@ const LOCATIONS = ["All London", "North", "South", "East", "West", "Central"];
 type LocationPillsProps = {
   selected: string[];
   onSelect: (locations: string[]) => void;
+  accentColor?: string;
 };
 
-export default function LocationPills({ selected, onSelect }: LocationPillsProps) {
+export default function LocationPills({ selected, onSelect, accentColor = '#7cb46b' }: LocationPillsProps) {
   const handleLocationClick = (location: string) => {
     if (location === "All London") {
       // If "All London" is clicked, clear all other selections
@@ -47,8 +48,8 @@ export default function LocationPills({ selected, onSelect }: LocationPillsProps
           style={{
             letterSpacing: "0.06em",
             minWidth: 0,
-            backgroundColor: selected.includes(loc) ? '#7cb46b' : undefined,
-            borderColor: selected.includes(loc) ? '#7cb46b' : undefined,
+            backgroundColor: selected.includes(loc) ? accentColor : undefined,
+            borderColor: selected.includes(loc) ? accentColor : undefined,
           }}
           aria-pressed={selected.includes(loc)}
           onClick={() => handleLocationClick(loc)}

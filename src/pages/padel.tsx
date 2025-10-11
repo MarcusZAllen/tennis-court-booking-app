@@ -68,7 +68,7 @@ const Padel = () => {
           
           {/* Location Pills Selector - now directly above calendar */}
           <div className="w-full px-2 sm:px-4">
-            <LocationPills selected={selectedLocations} onSelect={setSelectedLocations} />
+            <LocationPills selected={selectedLocations} onSelect={setSelectedLocations} accentColor="#61a5c2" />
           </div>
           {/* Weekly Calendar Booking Grid */}
           <section className="w-full flex-grow flex items-start justify-center px-1 sm:px-2 md:px-4 pb-8 sm:pb-12">
