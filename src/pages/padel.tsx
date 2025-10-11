@@ -37,8 +37,8 @@ const Padel = () => {
             <p className="text-gray-600 mb-4">{error}</p>
             <button 
               onClick={() => window.location.reload()} 
-              className="text-white px-4 py-2 rounded"
-              style={{ backgroundColor: '#00b4d8', ':hover': { backgroundColor: '#0096c7' } }}
+              className="text-white px-4 py-2 rounded hover:bg-[#0096c7]"
+              style={{ backgroundColor: '#00b4d8' }}
             >
               Try Again
             </button>
