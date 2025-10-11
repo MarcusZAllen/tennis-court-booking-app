@@ -158,7 +158,8 @@ Potential improvements for the padel feature:
 - Primary/Hover: #7cb46b (green)
 
 ### Padel
-- Background: #e3f2fd (soft blue)
+- Page Background: White (bg-offwhite) - same as tennis page
+- Content Box Background: #e3f2fd (soft blue)
 - Primary/Hover: #61a5c2 (teal blue)
 
 ## Files Modified
