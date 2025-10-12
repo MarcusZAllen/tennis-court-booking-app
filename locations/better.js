@@ -13,6 +13,14 @@ const betterLocations = [
     activity: "rosemary-gardens-tennis",
     url: "https://bookings.better.org.uk/location/islington-tennis-centre/rosemary-gardens-tennis",
     bookingWindow: 6,
+    tags: ["North","East"]
+  },
+  {
+    name: "Tufnell Park",
+    venue: "islington-tennis-centre",
+    activity: "tufnell-park-tennis",
+    url: "https://bookings.better.org.uk/location/islington-tennis-centre/tufnell-park-tennis",
+    bookingWindow: 7,
     tags: ["North"]
   }
 ];
