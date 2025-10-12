@@ -9,7 +9,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£51.00",
+    "price": "51.00",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-12&resourceId=c5ec08d4-a0a3-493e-9c03-1cf21dd1a678",
     "slotKey": "hyde-park-2025-10-12-padel-court-0700",
     "sportType": "padel"
@@ -24,7 +24,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£27.85",
+    "price": "27.85",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-12&resourceId=35843bac-1024-4bfd-8215-016d6ae7ffef",
     "slotKey": "hyde-park-2025-10-12-tennis-court-3-0700",
     "sportType": "tennis"
@@ -39,7 +39,7 @@
     "startMinutes": 540,
     "endMinutes": 900,
     "isAvailable": true,
-    "price": "£7.35",
+    "price": "7.35",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-12&resourceId=71cf1f63-9b75-7fe7-1807-2366b3978213",
     "slotKey": "hyde-park-2025-10-12-table-tennis-0900",
     "sportType": "tennis"
@@ -54,7 +54,7 @@
     "startMinutes": 1020,
     "endMinutes": 1080,
     "isAvailable": true,
-    "price": "£7.35",
+    "price": "7.35",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-12&resourceId=71cf1f63-9b75-7fe7-1807-2366b3978213",
     "slotKey": "hyde-park-2025-10-12-table-tennis-1700",
     "sportType": "tennis"
@@ -69,7 +69,7 @@
     "startMinutes": 480,
     "endMinutes": 960,
     "isAvailable": true,
-    "price": "£7.35",
+    "price": "7.35",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-12&resourceId=2f554626-b306-47b0-ae7f-6b0f35589381",
     "slotKey": "regents-park-2025-10-12-table-tennis-0800",
     "sportType": "tennis"
@@ -84,7 +84,7 @@
     "startMinutes": 1020,
     "endMinutes": 1080,
     "isAvailable": true,
-    "price": "£7.35",
+    "price": "7.35",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-12&resourceId=2f554626-b306-47b0-ae7f-6b0f35589381",
     "slotKey": "regents-park-2025-10-12-table-tennis-1700",
     "sportType": "tennis"
@@ -99,7 +99,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£25.55",
+    "price": "25.55",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-12&resourceId=62838d09-4653-4ad0-acde-c1dfb237dbeb",
     "slotKey": "regents-park-2025-10-12-tennis-court-2-0700",
     "sportType": "tennis"
@@ -114,7 +114,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£51.00",
+    "price": "51.00",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-12&resourceId=24562cff-b844-4edd-a70b-4480a7f9caae",
     "slotKey": "regents-park-2025-10-12-padel-court-1-0700",
     "sportType": "padel"
@@ -129,7 +129,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£51.00",
+    "price": "51.00",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-12&resourceId=606f096c-c682-4de0-b097-bd1119087685",
     "slotKey": "regents-park-2025-10-12-padel-court-2-0700",
     "sportType": "padel"
@@ -144,7 +144,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£26.15",
+    "price": "26.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-13&resourceId=99b4715b-feae-4395-be13-007154d08035",
     "slotKey": "hyde-park-2025-10-13-tennis-court-2-0700",
     "sportType": "tennis"
@@ -159,7 +159,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£26.15",
+    "price": "26.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-13&resourceId=35843bac-1024-4bfd-8215-016d6ae7ffef",
     "slotKey": "hyde-park-2025-10-13-tennis-court-3-0700",
     "sportType": "tennis"
@@ -174,7 +174,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£26.15",
+    "price": "26.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-13&resourceId=58671b0e-4b60-4f1d-aabe-796677912eea",
     "slotKey": "hyde-park-2025-10-13-tennis-court-4-0700",
     "sportType": "tennis"
@@ -189,7 +189,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£26.15",
+    "price": "26.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-13&resourceId=b7756c73-281c-426d-b3c2-2229901ab419",
     "slotKey": "hyde-park-2025-10-13-tennis-court-5-0700",
     "sportType": "tennis"
@@ -204,7 +204,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£26.15",
+    "price": "26.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-13&resourceId=56f07fbf-f03d-463d-9158-7ea1d6be983a",
     "slotKey": "hyde-park-2025-10-13-tennis-court-6-0700",
     "sportType": "tennis"
@@ -219,7 +219,7 @@
     "startMinutes": 540,
     "endMinutes": 1080,
     "isAvailable": true,
-    "price": "£7.35",
+    "price": "7.35",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-13&resourceId=71cf1f63-9b75-7fe7-1807-2366b3978213",
     "slotKey": "hyde-park-2025-10-13-table-tennis-0900",
     "sportType": "tennis"
@@ -234,7 +234,7 @@
     "startMinutes": 480,
     "endMinutes": 1080,
     "isAvailable": true,
-    "price": "£7.35",
+    "price": "7.35",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-13&resourceId=2f554626-b306-47b0-ae7f-6b0f35589381",
     "slotKey": "regents-park-2025-10-13-table-tennis-0800",
     "sportType": "tennis"
@@ -249,7 +249,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£22.40",
+    "price": "22.40",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-13&resourceId=62838d09-4653-4ad0-acde-c1dfb237dbeb",
     "slotKey": "regents-park-2025-10-13-tennis-court-2-0700",
     "sportType": "tennis"
@@ -264,7 +264,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£22.40",
+    "price": "22.40",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-13&resourceId=5f4c81c5-b306-4aa0-aac7-7e4c5e86e86c",
     "slotKey": "regents-park-2025-10-13-tennis-court-3-0700",
     "sportType": "tennis"
@@ -279,7 +279,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£22.40",
+    "price": "22.40",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-13&resourceId=8025533e-35ef-4749-92c2-0df99e0aaef3",
     "slotKey": "regents-park-2025-10-13-tennis-court-4-0700",
     "sportType": "tennis"
@@ -294,7 +294,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£22.40",
+    "price": "22.40",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-13&resourceId=e1edd204-4ca7-4046-82aa-69a35586db21",
     "slotKey": "regents-park-2025-10-13-tennis-court-8-0700",
     "sportType": "tennis"
@@ -309,7 +309,7 @@
     "startMinutes": 540,
     "endMinutes": 600,
     "isAvailable": true,
-    "price": "£16.40",
+    "price": "16.40",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-13&resourceId=b968bfb3-2013-4c4d-a1b1-592c58bbabc8",
     "slotKey": "regents-park-2025-10-13-tennis-court-9-0900",
     "sportType": "tennis"
@@ -324,7 +324,7 @@
     "startMinutes": 480,
     "endMinutes": 540,
     "isAvailable": true,
-    "price": "£16.40",
+    "price": "16.40",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-13&resourceId=48b75637-4acf-4c6b-8252-cf0c3baf91f4",
     "slotKey": "regents-park-2025-10-13-tennis-court-12-0800",
     "sportType": "tennis"
@@ -339,7 +339,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-14&resourceId=99b4715b-feae-4395-be13-007154d08035",
     "slotKey": "hyde-park-2025-10-14-tennis-court-2-0700",
     "sportType": "tennis"
@@ -354,7 +354,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-14&resourceId=35843bac-1024-4bfd-8215-016d6ae7ffef",
     "slotKey": "hyde-park-2025-10-14-tennis-court-3-0700",
     "sportType": "tennis"
@@ -369,7 +369,7 @@
     "startMinutes": 840,
     "endMinutes": 900,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-14&resourceId=35843bac-1024-4bfd-8215-016d6ae7ffef",
     "slotKey": "hyde-park-2025-10-14-tennis-court-3-1400",
     "sportType": "tennis"
@@ -384,7 +384,7 @@
     "startMinutes": 600,
     "endMinutes": 660,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-14&resourceId=58671b0e-4b60-4f1d-aabe-796677912eea",
     "slotKey": "hyde-park-2025-10-14-tennis-court-4-1000",
     "sportType": "tennis"
@@ -399,7 +399,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-14&resourceId=56f07fbf-f03d-463d-9158-7ea1d6be983a",
     "slotKey": "hyde-park-2025-10-14-tennis-court-6-0700",
     "sportType": "tennis"
@@ -414,7 +414,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£26.15",
+    "price": "26.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-14&resourceId=3b03cc41-d973-41e1-98cd-8de9090bcf18",
     "slotKey": "hyde-park-2025-10-14-tennis-court-7-0700",
     "sportType": "tennis"
@@ -429,7 +429,7 @@
     "startMinutes": 540,
     "endMinutes": 1020,
     "isAvailable": true,
-    "price": "£7.35",
+    "price": "7.35",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-14&resourceId=71cf1f63-9b75-7fe7-1807-2366b3978213",
     "slotKey": "hyde-park-2025-10-14-table-tennis-0900",
     "sportType": "tennis"
@@ -444,7 +444,7 @@
     "startMinutes": 480,
     "endMinutes": 1020,
     "isAvailable": true,
-    "price": "£7.35",
+    "price": "7.35",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-14&resourceId=2f554626-b306-47b0-ae7f-6b0f35589381",
     "slotKey": "regents-park-2025-10-14-table-tennis-0800",
     "sportType": "tennis"
@@ -459,7 +459,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-15&resourceId=99b4715b-feae-4395-be13-007154d08035",
     "slotKey": "hyde-park-2025-10-15-tennis-court-2-0700",
     "sportType": "tennis"
@@ -474,7 +474,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-15&resourceId=35843bac-1024-4bfd-8215-016d6ae7ffef",
     "slotKey": "hyde-park-2025-10-15-tennis-court-3-0700",
     "sportType": "tennis"
@@ -489,7 +489,7 @@
     "startMinutes": 540,
     "endMinutes": 600,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-15&resourceId=35843bac-1024-4bfd-8215-016d6ae7ffef",
     "slotKey": "hyde-park-2025-10-15-tennis-court-3-0900",
     "sportType": "tennis"
@@ -504,7 +504,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-15&resourceId=58671b0e-4b60-4f1d-aabe-796677912eea",
     "slotKey": "hyde-park-2025-10-15-tennis-court-4-0700",
     "sportType": "tennis"
@@ -519,7 +519,7 @@
     "startMinutes": 540,
     "endMinutes": 600,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-15&resourceId=58671b0e-4b60-4f1d-aabe-796677912eea",
     "slotKey": "hyde-park-2025-10-15-tennis-court-4-0900",
     "sportType": "tennis"
@@ -534,7 +534,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£26.15",
+    "price": "26.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-15&resourceId=3b03cc41-d973-41e1-98cd-8de9090bcf18",
     "slotKey": "hyde-park-2025-10-15-tennis-court-7-0700",
     "sportType": "tennis"
@@ -549,7 +549,7 @@
     "startMinutes": 480,
     "endMinutes": 540,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-15&resourceId=3b03cc41-d973-41e1-98cd-8de9090bcf18",
     "slotKey": "hyde-park-2025-10-15-tennis-court-7-0800",
     "sportType": "tennis"
@@ -564,7 +564,7 @@
     "startMinutes": 660,
     "endMinutes": 720,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-15&resourceId=3b03cc41-d973-41e1-98cd-8de9090bcf18",
     "slotKey": "hyde-park-2025-10-15-tennis-court-7-1100",
     "sportType": "tennis"
@@ -579,7 +579,7 @@
     "startMinutes": 540,
     "endMinutes": 1020,
     "isAvailable": true,
-    "price": "£7.35",
+    "price": "7.35",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-15&resourceId=71cf1f63-9b75-7fe7-1807-2366b3978213",
     "slotKey": "hyde-park-2025-10-15-table-tennis-0900",
     "sportType": "tennis"
@@ -594,7 +594,7 @@
     "startMinutes": 480,
     "endMinutes": 1020,
     "isAvailable": true,
-    "price": "£7.35",
+    "price": "7.35",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-15&resourceId=2f554626-b306-47b0-ae7f-6b0f35589381",
     "slotKey": "regents-park-2025-10-15-table-tennis-0800",
     "sportType": "tennis"
@@ -609,7 +609,7 @@
     "startMinutes": 540,
     "endMinutes": 600,
     "isAvailable": true,
-    "price": "£16.40",
+    "price": "16.40",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-15&resourceId=e1edd204-4ca7-4046-82aa-69a35586db21",
     "slotKey": "regents-park-2025-10-15-tennis-court-8-0900",
     "sportType": "tennis"
@@ -624,7 +624,7 @@
     "startMinutes": 960,
     "endMinutes": 1020,
     "isAvailable": true,
-    "price": "£16.40",
+    "price": "16.40",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-15&resourceId=b968bfb3-2013-4c4d-a1b1-592c58bbabc8",
     "slotKey": "regents-park-2025-10-15-tennis-court-9-1600",
     "sportType": "tennis"
@@ -639,7 +639,7 @@
     "startMinutes": 540,
     "endMinutes": 600,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-16&resourceId=99b4715b-feae-4395-be13-007154d08035",
     "slotKey": "hyde-park-2025-10-16-tennis-court-2-0900",
     "sportType": "tennis"
@@ -654,7 +654,7 @@
     "startMinutes": 780,
     "endMinutes": 960,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-16&resourceId=99b4715b-feae-4395-be13-007154d08035",
     "slotKey": "hyde-park-2025-10-16-tennis-court-2-1300",
     "sportType": "tennis"
@@ -669,7 +669,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-16&resourceId=35843bac-1024-4bfd-8215-016d6ae7ffef",
     "slotKey": "hyde-park-2025-10-16-tennis-court-3-0700",
     "sportType": "tennis"
@@ -684,7 +684,7 @@
     "startMinutes": 720,
     "endMinutes": 900,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-16&resourceId=35843bac-1024-4bfd-8215-016d6ae7ffef",
     "slotKey": "hyde-park-2025-10-16-tennis-court-3-1200",
     "sportType": "tennis"
@@ -699,7 +699,7 @@
     "startMinutes": 720,
     "endMinutes": 900,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-16&resourceId=58671b0e-4b60-4f1d-aabe-796677912eea",
     "slotKey": "hyde-park-2025-10-16-tennis-court-4-1200",
     "sportType": "tennis"
@@ -714,7 +714,7 @@
     "startMinutes": 900,
     "endMinutes": 960,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-16&resourceId=b7756c73-281c-426d-b3c2-2229901ab419",
     "slotKey": "hyde-park-2025-10-16-tennis-court-5-1500",
     "sportType": "tennis"
@@ -729,7 +729,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£26.15",
+    "price": "26.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-16&resourceId=3b03cc41-d973-41e1-98cd-8de9090bcf18",
     "slotKey": "hyde-park-2025-10-16-tennis-court-7-0700",
     "sportType": "tennis"
@@ -744,7 +744,7 @@
     "startMinutes": 480,
     "endMinutes": 540,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-16&resourceId=3b03cc41-d973-41e1-98cd-8de9090bcf18",
     "slotKey": "hyde-park-2025-10-16-tennis-court-7-0800",
     "sportType": "tennis"
@@ -759,7 +759,7 @@
     "startMinutes": 660,
     "endMinutes": 840,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-16&resourceId=3b03cc41-d973-41e1-98cd-8de9090bcf18",
     "slotKey": "hyde-park-2025-10-16-tennis-court-7-1100",
     "sportType": "tennis"
@@ -774,7 +774,7 @@
     "startMinutes": 540,
     "endMinutes": 1020,
     "isAvailable": true,
-    "price": "£7.35",
+    "price": "7.35",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-16&resourceId=71cf1f63-9b75-7fe7-1807-2366b3978213",
     "slotKey": "hyde-park-2025-10-16-table-tennis-0900",
     "sportType": "tennis"
@@ -789,7 +789,7 @@
     "startMinutes": 480,
     "endMinutes": 1020,
     "isAvailable": true,
-    "price": "£7.35",
+    "price": "7.35",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-16&resourceId=2f554626-b306-47b0-ae7f-6b0f35589381",
     "slotKey": "regents-park-2025-10-16-table-tennis-0800",
     "sportType": "tennis"
@@ -804,7 +804,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£22.40",
+    "price": "22.40",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-16&resourceId=5f4c81c5-b306-4aa0-aac7-7e4c5e86e86c",
     "slotKey": "regents-park-2025-10-16-tennis-court-3-0700",
     "sportType": "tennis"
@@ -819,7 +819,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£22.40",
+    "price": "22.40",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-16&resourceId=f91e9940-69b4-4297-b80f-be26f9470839",
     "slotKey": "regents-park-2025-10-16-tennis-court-5-0700",
     "sportType": "tennis"
@@ -834,7 +834,7 @@
     "startMinutes": 1200,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£79.25",
+    "price": "79.25",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=c11f090e-0a36-46be-9b03-a8073d0af5d3",
     "slotKey": "hyde-park-2025-10-17-5-a-side-football-pitch-2000",
     "sportType": "tennis"
@@ -849,7 +849,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=35843bac-1024-4bfd-8215-016d6ae7ffef",
     "slotKey": "hyde-park-2025-10-17-tennis-court-3-0700",
     "sportType": "tennis"
@@ -864,7 +864,7 @@
     "startMinutes": 540,
     "endMinutes": 600,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=35843bac-1024-4bfd-8215-016d6ae7ffef",
     "slotKey": "hyde-park-2025-10-17-tennis-court-3-0900",
     "sportType": "tennis"
@@ -879,7 +879,7 @@
     "startMinutes": 840,
     "endMinutes": 900,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=35843bac-1024-4bfd-8215-016d6ae7ffef",
     "slotKey": "hyde-park-2025-10-17-tennis-court-3-1400",
     "sportType": "tennis"
@@ -894,7 +894,7 @@
     "startMinutes": 1200,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£27.85",
+    "price": "27.85",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=35843bac-1024-4bfd-8215-016d6ae7ffef",
     "slotKey": "hyde-park-2025-10-17-tennis-court-3-2000",
     "sportType": "tennis"
@@ -909,7 +909,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=58671b0e-4b60-4f1d-aabe-796677912eea",
     "slotKey": "hyde-park-2025-10-17-tennis-court-4-0700",
     "sportType": "tennis"
@@ -924,7 +924,7 @@
     "startMinutes": 540,
     "endMinutes": 660,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=58671b0e-4b60-4f1d-aabe-796677912eea",
     "slotKey": "hyde-park-2025-10-17-tennis-court-4-0900",
     "sportType": "tennis"
@@ -939,7 +939,7 @@
     "startMinutes": 780,
     "endMinutes": 900,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=58671b0e-4b60-4f1d-aabe-796677912eea",
     "slotKey": "hyde-park-2025-10-17-tennis-court-4-1300",
     "sportType": "tennis"
@@ -954,7 +954,7 @@
     "startMinutes": 1200,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£27.85",
+    "price": "27.85",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=58671b0e-4b60-4f1d-aabe-796677912eea",
     "slotKey": "hyde-park-2025-10-17-tennis-court-4-2000",
     "sportType": "tennis"
@@ -969,7 +969,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=b7756c73-281c-426d-b3c2-2229901ab419",
     "slotKey": "hyde-park-2025-10-17-tennis-court-5-0700",
     "sportType": "tennis"
@@ -984,7 +984,7 @@
     "startMinutes": 900,
     "endMinutes": 960,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=b7756c73-281c-426d-b3c2-2229901ab419",
     "slotKey": "hyde-park-2025-10-17-tennis-court-5-1500",
     "sportType": "tennis"
@@ -999,7 +999,7 @@
     "startMinutes": 1200,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£27.85",
+    "price": "27.85",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=b7756c73-281c-426d-b3c2-2229901ab419",
     "slotKey": "hyde-park-2025-10-17-tennis-court-5-2000",
     "sportType": "tennis"
@@ -1014,7 +1014,7 @@
     "startMinutes": 1200,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£27.85",
+    "price": "27.85",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=56f07fbf-f03d-463d-9158-7ea1d6be983a",
     "slotKey": "hyde-park-2025-10-17-tennis-court-6-2000",
     "sportType": "tennis"
@@ -1029,7 +1029,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£26.15",
+    "price": "26.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=3b03cc41-d973-41e1-98cd-8de9090bcf18",
     "slotKey": "hyde-park-2025-10-17-tennis-court-7-0700",
     "sportType": "tennis"
@@ -1044,7 +1044,7 @@
     "startMinutes": 480,
     "endMinutes": 540,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=3b03cc41-d973-41e1-98cd-8de9090bcf18",
     "slotKey": "hyde-park-2025-10-17-tennis-court-7-0800",
     "sportType": "tennis"
@@ -1059,7 +1059,7 @@
     "startMinutes": 720,
     "endMinutes": 840,
     "isAvailable": true,
-    "price": "£20.15",
+    "price": "20.15",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=3b03cc41-d973-41e1-98cd-8de9090bcf18",
     "slotKey": "hyde-park-2025-10-17-tennis-court-7-1200",
     "sportType": "tennis"
@@ -1074,7 +1074,7 @@
     "startMinutes": 1080,
     "endMinutes": 1140,
     "isAvailable": true,
-    "price": "£27.85",
+    "price": "27.85",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=3b03cc41-d973-41e1-98cd-8de9090bcf18",
     "slotKey": "hyde-park-2025-10-17-tennis-court-7-1800",
     "sportType": "tennis"
@@ -1089,7 +1089,7 @@
     "startMinutes": 1200,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£27.85",
+    "price": "27.85",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=3b03cc41-d973-41e1-98cd-8de9090bcf18",
     "slotKey": "hyde-park-2025-10-17-tennis-court-7-2000",
     "sportType": "tennis"
@@ -1104,7 +1104,7 @@
     "startMinutes": 540,
     "endMinutes": 1020,
     "isAvailable": true,
-    "price": "£7.35",
+    "price": "7.35",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=71cf1f63-9b75-7fe7-1807-2366b3978213",
     "slotKey": "hyde-park-2025-10-17-table-tennis-0900",
     "sportType": "tennis"
@@ -1119,7 +1119,7 @@
     "startMinutes": 480,
     "endMinutes": 1020,
     "isAvailable": true,
-    "price": "£7.35",
+    "price": "7.35",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=2f554626-b306-47b0-ae7f-6b0f35589381",
     "slotKey": "regents-park-2025-10-17-table-tennis-0800",
     "sportType": "tennis"
@@ -1134,7 +1134,7 @@
     "startMinutes": 1200,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£25.55",
+    "price": "25.55",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=62838d09-4653-4ad0-acde-c1dfb237dbeb",
     "slotKey": "regents-park-2025-10-17-tennis-court-2-2000",
     "sportType": "tennis"
@@ -1149,7 +1149,7 @@
     "startMinutes": 1080,
     "endMinutes": 1140,
     "isAvailable": true,
-    "price": "£25.55",
+    "price": "25.55",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=5f4c81c5-b306-4aa0-aac7-7e4c5e86e86c",
     "slotKey": "regents-park-2025-10-17-tennis-court-3-1800",
     "sportType": "tennis"
@@ -1164,7 +1164,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£22.40",
+    "price": "22.40",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=f91e9940-69b4-4297-b80f-be26f9470839",
     "slotKey": "regents-park-2025-10-17-tennis-court-5-0700",
     "sportType": "tennis"
@@ -1179,7 +1179,7 @@
     "startMinutes": 540,
     "endMinutes": 600,
     "isAvailable": true,
-    "price": "£16.40",
+    "price": "16.40",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=f91e9940-69b4-4297-b80f-be26f9470839",
     "slotKey": "regents-park-2025-10-17-tennis-court-5-0900",
     "sportType": "tennis"
@@ -1194,7 +1194,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£22.40",
+    "price": "22.40",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=92fd3be1-3a82-4c30-a418-3263ccecad70",
     "slotKey": "regents-park-2025-10-17-tennis-court-6-0700",
     "sportType": "tennis"
@@ -1209,7 +1209,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£22.40",
+    "price": "22.40",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=e1edd204-4ca7-4046-82aa-69a35586db21",
     "slotKey": "regents-park-2025-10-17-tennis-court-8-0700",
     "sportType": "tennis"
@@ -1224,7 +1224,7 @@
     "startMinutes": 960,
     "endMinutes": 1020,
     "isAvailable": true,
-    "price": "£16.40",
+    "price": "16.40",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=e1edd204-4ca7-4046-82aa-69a35586db21",
     "slotKey": "regents-park-2025-10-17-tennis-court-8-1600",
     "sportType": "tennis"
@@ -1239,7 +1239,7 @@
     "startMinutes": 480,
     "endMinutes": 600,
     "isAvailable": true,
-    "price": "£16.40",
+    "price": "16.40",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=b968bfb3-2013-4c4d-a1b1-592c58bbabc8",
     "slotKey": "regents-park-2025-10-17-tennis-court-9-0800",
     "sportType": "tennis"
@@ -1254,7 +1254,7 @@
     "startMinutes": 960,
     "endMinutes": 1020,
     "isAvailable": true,
-    "price": "£16.40",
+    "price": "16.40",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-17&resourceId=b968bfb3-2013-4c4d-a1b1-592c58bbabc8",
     "slotKey": "regents-park-2025-10-17-tennis-court-9-1600",
     "sportType": "tennis"
@@ -1269,7 +1269,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£51.00",
+    "price": "51.00",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=c5ec08d4-a0a3-493e-9c03-1cf21dd1a678",
     "slotKey": "hyde-park-2025-10-18-padel-court-0700",
     "sportType": "padel"
@@ -1284,7 +1284,7 @@
     "startMinutes": 1200,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£51.00",
+    "price": "51.00",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=c5ec08d4-a0a3-493e-9c03-1cf21dd1a678",
     "slotKey": "hyde-park-2025-10-18-padel-court-2000",
     "sportType": "padel"
@@ -1299,7 +1299,7 @@
     "startMinutes": 1200,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£27.85",
+    "price": "27.85",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=5abc4055-7db8-4a93-99db-6e3bab8e8585",
     "slotKey": "hyde-park-2025-10-18-tennis-court-1-2000",
     "sportType": "tennis"
@@ -1314,7 +1314,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£21.85",
+    "price": "21.85",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=99b4715b-feae-4395-be13-007154d08035",
     "slotKey": "hyde-park-2025-10-18-tennis-court-2-0700",
     "sportType": "tennis"
@@ -1329,7 +1329,7 @@
     "startMinutes": 1200,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£27.85",
+    "price": "27.85",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=99b4715b-feae-4395-be13-007154d08035",
     "slotKey": "hyde-park-2025-10-18-tennis-court-2-2000",
     "sportType": "tennis"
@@ -1344,7 +1344,7 @@
     "startMinutes": 1200,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£27.85",
+    "price": "27.85",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=35843bac-1024-4bfd-8215-016d6ae7ffef",
     "slotKey": "hyde-park-2025-10-18-tennis-court-3-2000",
     "sportType": "tennis"
@@ -1359,7 +1359,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£21.85",
+    "price": "21.85",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=58671b0e-4b60-4f1d-aabe-796677912eea",
     "slotKey": "hyde-park-2025-10-18-tennis-court-4-0700",
     "sportType": "tennis"
@@ -1374,7 +1374,7 @@
     "startMinutes": 1140,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£27.85",
+    "price": "27.85",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=58671b0e-4b60-4f1d-aabe-796677912eea",
     "slotKey": "hyde-park-2025-10-18-tennis-court-4-1900",
     "sportType": "tennis"
@@ -1389,7 +1389,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£21.85",
+    "price": "21.85",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=b7756c73-281c-426d-b3c2-2229901ab419",
     "slotKey": "hyde-park-2025-10-18-tennis-court-5-0700",
     "sportType": "tennis"
@@ -1404,7 +1404,7 @@
     "startMinutes": 1200,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£27.85",
+    "price": "27.85",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=b7756c73-281c-426d-b3c2-2229901ab419",
     "slotKey": "hyde-park-2025-10-18-tennis-court-5-2000",
     "sportType": "tennis"
@@ -1419,7 +1419,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£21.85",
+    "price": "21.85",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=56f07fbf-f03d-463d-9158-7ea1d6be983a",
     "slotKey": "hyde-park-2025-10-18-tennis-court-6-0700",
     "sportType": "tennis"
@@ -1434,7 +1434,7 @@
     "startMinutes": 1200,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£27.85",
+    "price": "27.85",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=56f07fbf-f03d-463d-9158-7ea1d6be983a",
     "slotKey": "hyde-park-2025-10-18-tennis-court-6-2000",
     "sportType": "tennis"
@@ -1449,7 +1449,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£27.85",
+    "price": "27.85",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=3b03cc41-d973-41e1-98cd-8de9090bcf18",
     "slotKey": "hyde-park-2025-10-18-tennis-court-7-0700",
     "sportType": "tennis"
@@ -1464,7 +1464,7 @@
     "startMinutes": 1140,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£27.85",
+    "price": "27.85",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=3b03cc41-d973-41e1-98cd-8de9090bcf18",
     "slotKey": "hyde-park-2025-10-18-tennis-court-7-1900",
     "sportType": "tennis"
@@ -1479,7 +1479,7 @@
     "startMinutes": 540,
     "endMinutes": 1020,
     "isAvailable": true,
-    "price": "£7.35",
+    "price": "7.35",
     "bookingUrl": "https://hyde.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=71cf1f63-9b75-7fe7-1807-2366b3978213",
     "slotKey": "hyde-park-2025-10-18-table-tennis-0900",
     "sportType": "tennis"
@@ -1494,7 +1494,7 @@
     "startMinutes": 480,
     "endMinutes": 1020,
     "isAvailable": true,
-    "price": "£7.35",
+    "price": "7.35",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=2f554626-b306-47b0-ae7f-6b0f35589381",
     "slotKey": "regents-park-2025-10-18-table-tennis-0800",
     "sportType": "tennis"
@@ -1509,7 +1509,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£25.55",
+    "price": "25.55",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=41fc4c60-36a4-4990-9e47-3cd264ed3831",
     "slotKey": "regents-park-2025-10-18-tennis-court-1-0700",
     "sportType": "tennis"
@@ -1524,7 +1524,7 @@
     "startMinutes": 1140,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£25.55",
+    "price": "25.55",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=41fc4c60-36a4-4990-9e47-3cd264ed3831",
     "slotKey": "regents-park-2025-10-18-tennis-court-1-1900",
     "sportType": "tennis"
@@ -1539,7 +1539,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£25.55",
+    "price": "25.55",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=62838d09-4653-4ad0-acde-c1dfb237dbeb",
     "slotKey": "regents-park-2025-10-18-tennis-court-2-0700",
     "sportType": "tennis"
@@ -1554,7 +1554,7 @@
     "startMinutes": 1140,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£25.55",
+    "price": "25.55",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=62838d09-4653-4ad0-acde-c1dfb237dbeb",
     "slotKey": "regents-park-2025-10-18-tennis-court-2-1900",
     "sportType": "tennis"
@@ -1569,7 +1569,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£25.55",
+    "price": "25.55",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=5f4c81c5-b306-4aa0-aac7-7e4c5e86e86c",
     "slotKey": "regents-park-2025-10-18-tennis-court-3-0700",
     "sportType": "tennis"
@@ -1584,7 +1584,7 @@
     "startMinutes": 1140,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£25.55",
+    "price": "25.55",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=5f4c81c5-b306-4aa0-aac7-7e4c5e86e86c",
     "slotKey": "regents-park-2025-10-18-tennis-court-3-1900",
     "sportType": "tennis"
@@ -1599,7 +1599,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£25.55",
+    "price": "25.55",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=8025533e-35ef-4749-92c2-0df99e0aaef3",
     "slotKey": "regents-park-2025-10-18-tennis-court-4-0700",
     "sportType": "tennis"
@@ -1614,7 +1614,7 @@
     "startMinutes": 1200,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£25.55",
+    "price": "25.55",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=8025533e-35ef-4749-92c2-0df99e0aaef3",
     "slotKey": "regents-park-2025-10-18-tennis-court-4-2000",
     "sportType": "tennis"
@@ -1629,7 +1629,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£25.55",
+    "price": "25.55",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=f91e9940-69b4-4297-b80f-be26f9470839",
     "slotKey": "regents-park-2025-10-18-tennis-court-5-0700",
     "sportType": "tennis"
@@ -1644,7 +1644,7 @@
     "startMinutes": 1200,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£25.55",
+    "price": "25.55",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=f91e9940-69b4-4297-b80f-be26f9470839",
     "slotKey": "regents-park-2025-10-18-tennis-court-5-2000",
     "sportType": "tennis"
@@ -1659,7 +1659,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£25.55",
+    "price": "25.55",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=92fd3be1-3a82-4c30-a418-3263ccecad70",
     "slotKey": "regents-park-2025-10-18-tennis-court-6-0700",
     "sportType": "tennis"
@@ -1674,7 +1674,7 @@
     "startMinutes": 1200,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£25.55",
+    "price": "25.55",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=92fd3be1-3a82-4c30-a418-3263ccecad70",
     "slotKey": "regents-park-2025-10-18-tennis-court-6-2000",
     "sportType": "tennis"
@@ -1689,7 +1689,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£25.55",
+    "price": "25.55",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=d0d3bb94-4fc8-4160-89dd-cf70f82e15c8",
     "slotKey": "regents-park-2025-10-18-tennis-court-7-0700",
     "sportType": "tennis"
@@ -1704,7 +1704,7 @@
     "startMinutes": 1140,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£25.55",
+    "price": "25.55",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=d0d3bb94-4fc8-4160-89dd-cf70f82e15c8",
     "slotKey": "regents-park-2025-10-18-tennis-court-7-1900",
     "sportType": "tennis"
@@ -1719,7 +1719,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£25.55",
+    "price": "25.55",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=e1edd204-4ca7-4046-82aa-69a35586db21",
     "slotKey": "regents-park-2025-10-18-tennis-court-8-0700",
     "sportType": "tennis"
@@ -1734,7 +1734,7 @@
     "startMinutes": 1200,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£25.55",
+    "price": "25.55",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=e1edd204-4ca7-4046-82aa-69a35586db21",
     "slotKey": "regents-park-2025-10-18-tennis-court-8-2000",
     "sportType": "tennis"
@@ -1749,7 +1749,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£51.00",
+    "price": "51.00",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=24562cff-b844-4edd-a70b-4480a7f9caae",
     "slotKey": "regents-park-2025-10-18-padel-court-1-0700",
     "sportType": "padel"
@@ -1764,7 +1764,7 @@
     "startMinutes": 420,
     "endMinutes": 480,
     "isAvailable": true,
-    "price": "£51.00",
+    "price": "51.00",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=606f096c-c682-4de0-b097-bd1119087685",
     "slotKey": "regents-park-2025-10-18-padel-court-2-0700",
     "sportType": "padel"
@@ -1779,7 +1779,7 @@
     "startMinutes": 1200,
     "endMinutes": 1260,
     "isAvailable": true,
-    "price": "£51.00",
+    "price": "51.00",
     "bookingUrl": "https://regents.parksports.co.uk/Booking/BookByDate#?date=2025-10-18&resourceId=606f096c-c682-4de0-b097-bd1119087685",
     "slotKey": "regents-park-2025-10-18-padel-court-2-2000",
     "sportType": "padel"

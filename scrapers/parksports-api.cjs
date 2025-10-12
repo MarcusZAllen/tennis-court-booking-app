@@ -73,8 +73,8 @@ function extractCourtData(apiResponse, locationName, locationUrl, date) {
                 // Build proper booking URL
                 const bookingUrl = `${locationUrl}/Booking/BookByDate#?date=${date}&resourceId=${resource.ID}`;
                 
-                // Format price
-                const price = session.Cost ? `£${session.Cost.toFixed(2)}` : (session.CourtCost ? `£${session.CourtCost.toFixed(2)}` : "N/A");
+                // Format price (store as number with 2 decimal places, no currency symbol)
+                const price = session.Cost ? session.Cost.toFixed(2) : (session.CourtCost ? session.CourtCost.toFixed(2) : "N/A");
                 
                 // Create slot key
                 const slotKey = `${locationName.toLowerCase().replace(/\s+/g, '-')}-${date}-${courtName.toLowerCase().replace(/\s+/g, '-')}-${startTime.replace(':', '')}`;
