@@ -224,7 +224,15 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({
                   const timeInMinutes = time * 60;
                   const rawSlotData = calendarData?.[dateStr]?.[timeInMinutes];
                   const slotData = filterSlotsByLocation(rawSlotData);
-                  const availability = slotData?.totalCourts ?? 0;
+                  
+                  // Check if this slot is in the past
+                  const now = new Date();
+                  const slotDateTime = new Date(d);
+                  slotDateTime.setHours(time, 0, 0, 0);
+                  const isPastSlot = slotDateTime < now;
+                  
+                  // If slot is in the past, show as unavailable (0 courts)
+                  const availability = isPastSlot ? 0 : (slotData?.totalCourts ?? 0);
                   const isAvailable = availability > 0;
                   
                   // Debug logging for first few slots
