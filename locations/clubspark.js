@@ -130,8 +130,7 @@ const clubsparkLocations = [
     url: "https://clubspark.lta.org.uk/BrunswickPark/Booking/BookByDate#?role=guest",
     bookingWindow: 7,
     tags: ["South", "Central"]
-  },
-
+  }
 ];
 
 export default clubsparkLocations;
