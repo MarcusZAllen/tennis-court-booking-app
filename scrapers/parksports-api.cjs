@@ -145,20 +145,36 @@ async function scrapeLocationAPI(location, date) {
     
     const fullUrl = `${apiUrl}?${params.toString()}`;
     
-    // Make the API request
+    // Add a random delay before each request (2-5 seconds)
+    const delay = 2000 + Math.random() * 3000;
+    await new Promise(resolve => setTimeout(resolve, delay));
+    
+    // Make the API request with better headers
     const response = await fetch(fullUrl, {
       method: 'GET',
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36',
         'Accept': 'application/json, text/plain, */*',
-        'Accept-Language': 'en-US,en;q=0.9',
+        'Accept-Language': 'en-GB,en-US;q=0.9,en;q=0.8',
+        'Accept-Encoding': 'gzip, deflate, br',
         'Referer': `${location.url}/Booking/BookByDate`,
-        'Origin': location.url
-      },
-      timeout: 10000 // 10 second timeout
+        'Origin': location.url,
+        'Sec-Fetch-Dest': 'empty',
+        'Sec-Fetch-Mode': 'cors',
+        'Sec-Fetch-Site': 'same-origin',
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache'
+      }
     });
     
     console.log(`✅ API response received: ${response.status}`);
+    
+    // Check if response is OK
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`❌ API error (${response.status}):`, errorText.substring(0, 200));
+      return [];
+    }
     
     // Parse JSON response
     const data = await response.json();
@@ -207,8 +223,9 @@ async function scrapeParkSportsAPI(dates = []) {
       const slots = await scrapeLocationAPI(location, date);
       allSlots.push(...slots);
       
-      // Small delay between locations to be respectful
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Longer delay between locations to avoid rate limiting (5-8 seconds)
+      const delay = 5000 + Math.random() * 3000;
+      await new Promise(resolve => setTimeout(resolve, delay));
     }
   }
   

@@ -1,5 +1,11 @@
 const clubsparkLocations = [
   {
+    name: "Clissold Park",
+    url: "https://clubspark.lta.org.uk/ClissoldParkHackney/Booking/BookByDate#?role=guest",
+    bookingWindow: 8,
+    tags: ["North", "East"]
+  },
+  {
     name: "Battersea Park",
     url: "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest",
     bookingWindow: 1,
