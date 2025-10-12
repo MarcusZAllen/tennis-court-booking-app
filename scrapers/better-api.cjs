@@ -38,25 +38,29 @@ function extractSlotData(apiResponse, locationName, locationUrl, date) {
           const priceFormatted = timeSlot.price.formatted_amount;
           const price = priceFormatted.replace('£', '');
           
-          // Create slot key
-          const slotKey = `${locationName.toLowerCase().replace(/\s+/g, '-')}-${date}-${startTime.replace(':', '')}`;
-          
-          slots.push({
-            provider: "better",
-            location: locationName,
-            court: `${timeSlot.name} (${timeSlot.spaces} court${timeSlot.spaces > 1 ? 's' : ''} available)`,
-            date: date,
-            startTime: startTime,
-            endTime: endTime,
-            startMinutes: timeToMinutes(startTime),
-            endMinutes: timeToMinutes(endTime),
-            isAvailable: true,
-            price: price,
-            bookingUrl: bookingUrl,
-            slotKey: slotKey,
-            sportType: "tennis", // Better.org.uk - assuming tennis for now
-            spacesAvailable: timeSlot.spaces
-          });
+          // Create separate slots for each available court/space
+          // This ensures the calendar shows the correct count
+          for (let i = 1; i <= timeSlot.spaces; i++) {
+            // Create unique slot key for each court
+            const slotKey = `${locationName.toLowerCase().replace(/\s+/g, '-')}-${date}-court${i}-${startTime.replace(':', '')}`;
+            
+            slots.push({
+              provider: "better",
+              location: locationName,
+              court: `${timeSlot.name} - Court ${i}`,
+              date: date,
+              startTime: startTime,
+              endTime: endTime,
+              startMinutes: timeToMinutes(startTime),
+              endMinutes: timeToMinutes(endTime),
+              isAvailable: true,
+              price: price,
+              bookingUrl: bookingUrl,
+              slotKey: slotKey,
+              sportType: "tennis", // Better.org.uk - assuming tennis for now
+              spacesAvailable: timeSlot.spaces
+            });
+          }
         }
       });
     }

@@ -1,0 +1,42 @@
+name: Scrape Better.org.uk Data
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: '0,15,30,45 * * * *'  # Every 15 minutes
+  workflow_dispatch:
+
+jobs:
+  scrape-better:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      NODE_ENV: 'production'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Better.org.uk API scraper
+        run: node runner/scrape-better-only.js
+
+      - name: Commit and push updated data (if changed)
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/ src/data/ public/data/ || true
+          git diff --staged --quiet || git commit -m "🤖 Update Better.org.uk court availability data"
+          git push || true
+
