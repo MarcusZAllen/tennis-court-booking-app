@@ -3,12 +3,19 @@
   "functions": {
     "src/pages/api/scrape.js": {
       "maxDuration": 300
+    },
+    "src/pages/api/cron-scrape-parksports.ts": {
+      "maxDuration": 60
     }
   },
   "crons": [
     {
       "path": "/api/scrape",
       "schedule": "0 6 * * *"
+    },
+    {
+      "path": "/api/cron-scrape-parksports",
+      "schedule": "0 * * * *"
     }
   ]
 } 
