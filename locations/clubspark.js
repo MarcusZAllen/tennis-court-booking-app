@@ -136,6 +136,18 @@ const clubsparkLocations = [
     url: "https://clubspark.lta.org.uk/larkhallpark/Booking/BookByDate#?role=guest",
     bookingWindow: 8,
     tags: ["South"]
+  },
+  {
+    name: "Avondale Park",
+    url: "https://clubspark.lta.org.uk/AvondalePark/Booking/BookByDate#?role=guest",
+    bookingWindow: 8,
+    tags: ["West"]
+  },
+  {
+    name: "Kensington Memorial Park",
+    url: "https://clubspark.lta.org.uk/KensingtonMemorialPark/Booking/BookByDate#?role=guest",
+    bookingWindow: 8,
+    tags: ["West"]
   }
 ];
 
