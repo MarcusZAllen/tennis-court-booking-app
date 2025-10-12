@@ -11,16 +11,11 @@ dotenv.config({ path: '.env.local' });
  * Uses the /times endpoint to get availability
  */
 
-const LOCATIONS = [
-  {
-    name: "Islington Tennis Centre",
-    venue: "islington-tennis-centre",
-    activity: "highbury-tennis",
-    displayName: "Highbury Fields",
-    url: "https://bookings.better.org.uk"
-  }
-  // Add more Better.org.uk locations here as needed
-];
+// Load locations dynamically
+async function getLocations() {
+  const { default: betterLocations } = await import('../locations/better.js');
+  return betterLocations;
+}
 
 /**
  * Extract slot data from API response
@@ -121,8 +116,8 @@ async function scrapeLocationAPI(location, date) {
     // Debug: Log basic response info
     console.log(`🔍 Time slots found:`, data.data ? data.data.length : 0);
     
-    // Extract slot data from response
-    const slots = extractSlotData(data, location.displayName, location.url, date);
+    // Extract slot data from response (use location.url which contains the base booking URL)
+    const slots = extractSlotData(data, location.name, 'https://bookings.better.org.uk', date);
     
     console.log(`📊 Extracted ${slots.length} available slots for ${location.name}`);
     
@@ -152,12 +147,16 @@ async function scrapeBetterAPI(dates = []) {
   console.log('🚀 Starting Better.org.uk API scraper...');
   console.log(`📅 Dates to scrape: ${dates.join(', ')}`);
   
+  // Load locations from config
+  const locations = await getLocations();
+  console.log(`📍 Loaded ${locations.length} location(s)`);
+  
   const allSlots = [];
   
   for (const date of dates) {
     console.log(`\n📅 Processing date: ${date}`);
     
-    for (const location of LOCATIONS) {
+    for (const location of locations) {
       const slots = await scrapeLocationAPI(location, date);
       allSlots.push(...slots);
       
