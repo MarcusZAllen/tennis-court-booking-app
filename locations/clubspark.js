@@ -130,6 +130,12 @@ const clubsparkLocations = [
     url: "https://clubspark.lta.org.uk/BrunswickPark/Booking/BookByDate#?role=guest",
     bookingWindow: 7,
     tags: ["South", "Central"]
+  },
+  {
+    name: "Larkhall Park",
+    url: "https://clubspark.lta.org.uk/larkhallpark/Booking/BookByDate#?role=guest",
+    bookingWindow: 8,
+    tags: ["South"]
   }
 ];
 
