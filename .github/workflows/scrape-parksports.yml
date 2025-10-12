@@ -1,11 +1,11 @@
-name: Scrape ParkSports Data
+name: Scrape ParkSports Data (API)
 
 permissions:
   contents: write
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Every hour, on the hour
+    - cron: '*/30 * * * *'  # Every 30 minutes
   workflow_dispatch:
 
 jobs:
@@ -15,8 +15,6 @@ jobs:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-      # Enable proxy usage in production
-      USE_PROXIES: 'true'
       NODE_ENV: 'production'
     steps:
       - name: Checkout repository
@@ -31,19 +29,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Cache Puppeteer browsers
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/puppeteer
-          key: ${{ runner.os }}-puppeteer-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-puppeteer-
+      - name: Run ParkSports API scraper
+        run: node runner/scrape-parksports-api-only.js
 
-      - name: Install Puppeteer Browsers
-        run: npx puppeteer browsers install chrome
-
-      - name: Run ParkSports scraper
-        run: node runner/scrape-parksports-only.js
-
-      - name: Aggregate data
-        run: node aggregate-daily-to-location.js
+      - name: Commit and push updated data (if changed)
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/ src/data/ public/data/ || true
+          git diff --staged --quiet || git commit -m "🤖 Update court availability data (API scraper)"
+          git push || true
