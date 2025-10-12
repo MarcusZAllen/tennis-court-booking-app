@@ -131,12 +131,7 @@ const clubsparkLocations = [
     bookingWindow: 7,
     tags: ["South", "Central"]
   },
-  {
-    name: "Clissold Park",
-    url: "https://clubspark.lta.org.uk/ClissoldParkHackney/Booking/BookByDate#?role=guest",
-    bookingWindow: 7,
-    tags: ["North"]
-  }
+
 ];
 
 export default clubsparkLocations;
