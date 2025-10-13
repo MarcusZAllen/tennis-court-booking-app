@@ -75,11 +75,11 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
       {/* Mobile: Center modal with padding */}
       {/* Desktop: Bottom-right corner, no overlay */}
       <div
-        className="fixed inset-0 z-50 flex items-center justify-center md:items-end md:justify-end p-4 md:p-6 pointer-events-none"
+        className="fixed inset-0 z-50 flex items-center justify-center md:items-end md:justify-end p-4 md:p-6"
         onClick={onClose}
       >
         <div
-          className="bg-white rounded-lg shadow-2xl border border-gray-200 w-full max-w-md md:max-w-sm pointer-events-auto font-jost"
+          className="bg-white rounded-lg shadow-2xl border border-gray-200 w-full max-w-md md:max-w-sm font-jost"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
@@ -104,7 +104,8 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Type your message here..."
-              className="min-h-[120px] resize-none font-jost bg-white"
+              className="min-h-[120px] resize-none font-jost bg-white text-base"
+              style={{ fontSize: '16px' }}
               disabled={isSubmitting}
               autoFocus
             />
