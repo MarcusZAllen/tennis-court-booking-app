@@ -1,15 +1,8 @@
 import * as React from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
+import { Loader2, X } from "lucide-react";
 
 type FeedbackModalProps = {
   isOpen: boolean;
@@ -19,6 +12,17 @@ type FeedbackModalProps = {
 const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
   const [message, setMessage] = React.useState("");
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  
+  // Close on escape key
+  React.useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      return () => document.removeEventListener('keydown', handleEscape);
+    }
+  }, [isOpen, onClose]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,56 +68,76 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
     }
   };
 
-  return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[500px] font-jost">
-        <DialogHeader>
-          <DialogTitle className="text-xl font-bold">Send Feedback</DialogTitle>
-          <DialogDescription className="text-sm text-gray-600">
-            We&apos;d love to hear your thoughts, suggestions, or bug reports!
-          </DialogDescription>
-        </DialogHeader>
+  if (!isOpen) return null;
 
-        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-          <div>
+  return (
+    <>
+      {/* Mobile: Center modal with padding */}
+      {/* Desktop: Bottom-right corner, no overlay */}
+      <div
+        className="fixed inset-0 z-50 flex items-center justify-center md:items-end md:justify-end p-4 md:p-6 pointer-events-none"
+        onClick={onClose}
+      >
+        <div
+          className="bg-white rounded-lg shadow-2xl border border-gray-200 w-full max-w-md md:max-w-sm pointer-events-auto font-jost"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between p-4 border-b border-gray-200">
+            <h2 className="text-lg font-bold">Send Feedback</h2>
+            <button
+              onClick={onClose}
+              className="text-gray-400 hover:text-gray-600 transition-colors"
+              aria-label="Close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Content */}
+          <form onSubmit={handleSubmit} className="p-4 space-y-4">
+            <p className="text-sm text-gray-600">
+              We&apos;d love to hear your thoughts, suggestions, or bug reports!
+            </p>
+
             <Textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Type your message here..."
-              className="min-h-[150px] resize-none font-jost"
+              className="min-h-[120px] resize-none font-jost bg-white"
               disabled={isSubmitting}
               autoFocus
             />
-          </div>
 
-          <div className="flex justify-end gap-3">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={onClose}
-              disabled={isSubmitting}
-              className="font-jost"
-            >
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              disabled={isSubmitting || !message.trim()}
-              className="font-jost bg-[#7cb46b] hover:bg-[#6a9d5b] text-white"
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Sending...
-                </>
-              ) : (
-                "Submit Feedback"
-              )}
-            </Button>
-          </div>
-        </form>
-      </DialogContent>
-    </Dialog>
+            <div className="flex justify-end gap-3">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={onClose}
+                disabled={isSubmitting}
+                className="font-jost"
+              >
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                disabled={isSubmitting || !message.trim()}
+                className="font-jost bg-[#7cb46b] hover:bg-[#6a9d5b] text-white"
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  "Submit Feedback"
+                )}
+              </Button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
   );
 };
 
