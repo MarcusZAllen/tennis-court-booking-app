@@ -5,6 +5,7 @@ import * as React from "react";
 import Navbar from "../components/Navbar";
 import WeeklyCalendar from "../components/WeeklyCalendar";
 import LocationPills from "../components/LocationPills";
+import FeedbackButton from "../components/FeedbackButton";
 import { useSupabaseData } from '@/hooks/useSupabaseData';
 import { textStyles } from '../../branding/typography';
 
@@ -87,6 +88,9 @@ const Padel = () => {
       <footer className={`${textStyles.footerText} py-4 sm:py-6 text-center text-xs sm:text-sm`}>
         &copy; {new Date().getFullYear()} CourtBook. All rights reserved.
       </footer>
+      
+      {/* Feedback Button */}
+      <FeedbackButton />
     </div>
   );
 };
