@@ -8,13 +8,13 @@ const clubsparkLocations = [
   {
     name: "Battersea Park",
     url: "https://clubspark.lta.org.uk/BatterseaParkTennisCourts/Booking/BookByDate#?role=guest",
-    bookingWindow: 1,
+    bookingWindow: 2,
     tags: ["West", "South"]
   },
   {
     name: "Archbishops Park",
     url: "https://clubspark.lta.org.uk/archbishopsparklambethnorth/Booking/BookByDate#?role=guest",
-    bookingWindow: 7,
+    bookingWindow: 8,
     tags: ["Central"]
   },
   {
@@ -26,43 +26,43 @@ const clubsparkLocations = [
   {
     name: "Tanner Street",
     url: "https://clubspark.lta.org.uk/TannerStPark/Booking/BookByDate#?role=guest",
-    bookingWindow: 7,
+    bookingWindow: 8,
     tags: ["Central", "East"]
   },
   {
     name: "Kennington Park",
     url: "https://clubspark.lta.org.uk/kenningtonpark/Booking/BookByDate#?role=guest",
-    bookingWindow: 7,
+    bookingWindow: 8,
     tags: ["South", "Central"]
   },
   {
     name: "Geraldine Mary Harmsworth",
     url: "https://clubspark.lta.org.uk/GeraldineMaryHarmsworth/Booking/BookByDate#?role=guest",
-    bookingWindow: 7,
+    bookingWindow: 8,
     tags: ["South", "Central"]
   },
   {
     name: "Burgess Park",
     url: "https://clubspark.lta.org.uk/BurgessParkSouthwark/Booking/BookByDate#?role=guest",
-    bookingWindow: 7,
+    bookingWindow: 8,
     tags: ["South"]
   },
   {
     name: "Clapham Common",
     url: "https://clubspark.lta.org.uk/ClaphamCommon/Booking/BookByDate#?role=guest",
-    bookingWindow: 7,
+    bookingWindow: 8,
     tags: ["South", "West"]
   },
   {
     name: "Southwark Park",
     url: "https://clubspark.lta.org.uk/SouthwarkPark/Booking/BookByDate#?role=guest",
-    bookingWindow: 7,
+    bookingWindow: 8,
     tags: ["East", "Central"]
   },
   {
     name: "Vauxhall Park",
     url: "https://clubspark.lta.org.uk/VauxhallPark/Booking/BookByDate#?role=guest",
-    bookingWindow: 7,
+    bookingWindow: 8,
     tags: ["South", "Central"]
   },
   {
@@ -74,13 +74,13 @@ const clubsparkLocations = [
   {
     name: "Parliament Hill Fields Tennis Courts",
     url: "https://clubspark.lta.org.uk/ParliamentHillFieldsTennisCourts/Booking/BookByDate#?role=guest",
-    bookingWindow: 1,
+    bookingWindow: 2,
     tags: ["North"]
   },
   {
     name: "Queen's Park Tennis Courts",
     url: "https://clubspark.lta.org.uk/QueensParkTennisCourts/Booking/BookByDate#?role=guest",
-    bookingWindow: 1,
+    bookingWindow: 2,
     tags: ["North", "West"]
   },
   {
@@ -98,7 +98,7 @@ const clubsparkLocations = [
   {
     name: "Dulwich Park",
     url: "https://clubspark.lta.org.uk/DulwichPark/Booking/BookByDate#?role=guest",
-    bookingWindow: 7,
+    bookingWindow: 8,
     tags: ["South"]
   },
   {
@@ -122,13 +122,13 @@ const clubsparkLocations = [
   {
     name: "Belair Park",
     url: "https://clubspark.lta.org.uk/BelairPark/Booking/BookByDate#?role=guest",
-    bookingWindow: 7,
+    bookingWindow: 8,
     tags: ["South"]
   },
   {
     name: "Brunswick Park",
     url: "https://clubspark.lta.org.uk/BrunswickPark/Booking/BookByDate#?role=guest",
-    bookingWindow: 7,
+    bookingWindow: 8,
     tags: ["South", "Central"]
   },
   {
