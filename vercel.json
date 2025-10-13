@@ -15,7 +15,7 @@
     },
     {
       "path": "/api/cron-scrape-parksports",
-      "schedule": "0 * * * *"
+      "schedule": "0 8 * * *"
     }
   ]
 } 
