@@ -26,7 +26,7 @@ export default async function handler(
 
     // Send email via Resend
     const { data, error } = await resend.emails.send({
-      from: 'CourtBook Feedback <feedback@courtbook.app>', // You'll need to verify your domain or use Resend's test domain
+      from: 'CourtBook Feedback <onboarding@resend.dev>', // Using Resend's test domain (works immediately)
       to: ['marcus.zhang.allen@gmail.com'],
       subject: 'New Feedback from CourtBook',
       html: `
