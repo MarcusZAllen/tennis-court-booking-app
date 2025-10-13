@@ -70,7 +70,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
         <DialogHeader>
           <DialogTitle className="text-xl font-bold">Send Feedback</DialogTitle>
           <DialogDescription className="text-sm text-gray-600">
-            We'd love to hear your thoughts, suggestions, or bug reports!
+            We&apos;d love to hear your thoughts, suggestions, or bug reports!
           </DialogDescription>
         </DialogHeader>
 
