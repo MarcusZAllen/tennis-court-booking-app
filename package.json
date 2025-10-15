@@ -82,6 +82,7 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
+    "@types/google.maps": "^3.58.1",
     "@types/node": "^20.19.0",
     "@types/react": "^18.3.23",
     "@types/react-day-picker": "^5.2.1",
