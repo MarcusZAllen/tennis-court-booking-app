@@ -198,7 +198,7 @@ export default function AddressLocationPopover({
           <span className="truncate">{displayText}</span>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-80 p-4" align="end">
+      <PopoverContent className="w-80 p-4 bg-white" align="end">
         <div className="space-y-4">
           <div>
             <h4 className="font-medium text-sm mb-1">Your Location</h4>
