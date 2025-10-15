@@ -2,12 +2,6 @@
  * Type declarations for Google Maps API
  */
 
-declare global {
-  interface Window {
-    google: typeof google;
-  }
-}
-
 declare namespace google {
   namespace maps {
     namespace places {
@@ -36,6 +30,12 @@ declare namespace google {
         };
       }
     }
+  }
+}
+
+declare global {
+  interface Window {
+    google: typeof google;
   }
 }
 
