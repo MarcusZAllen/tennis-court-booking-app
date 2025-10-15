@@ -47,6 +47,24 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({
   hoverColor = '#7cb46b'
 }) => {
   const weekDates = getCurrentWeek();
+  const [locationTagMap, setLocationTagMap] = React.useState<{ [key: string]: string[] }>({});
+  
+  // Fetch location tags from API on mount
+  React.useEffect(() => {
+    fetch('/api/locations')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          setLocationTagMap(data.locationTagMap);
+          console.log('📍 Loaded location tags:', data.totalLocations, 'locations');
+        }
+      })
+      .catch(err => {
+        console.error('Failed to load location tags:', err);
+        // Fallback to empty map (will show all locations)
+        setLocationTagMap({});
+      });
+  }, []);
   
   // Debug logging
   console.log('Calendar week dates:', weekDates.map(d => d.toDateString()));
@@ -62,49 +80,12 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({
       return slotData;
     }
     
-    // Define location mappings based on our actual location data
-    const locationTagMap: { [key: string]: string[] } = {
-      // ClubSpark locations
-      "Battersea Park": ["West", "South"],
-      "Archbishops Park": ["Central"],
-      "Holland Park (Kensington)": ["West"],
-      "Tanner Street": ["Central", "East"],
-      "Kennington Park": ["South", "Central"],
-      "Geraldine Mary Harmsworth": ["South", "Central"],
-      "Burgess Park": ["South"],
-      "Clapham Common": ["South", "West"],
-      "Southwark Park": ["East", "Central"],
-      "Vauxhall Park": ["South", "Central"],
-      "South Park Fulham": ["West"], // This is the problematic one - it's West, not South!
-      "Parliament Hill Fields Tennis Courts": ["North"],
-      "Queen's Park Tennis Courts": ["North", "West"],
-      "Finsbury Park": ["North"],
-      "Northway Gardens": ["North"],
-      "Dulwich Park": ["South"],
-      "Ravenscourt Park": ["West"],
-      "Hurlingham Park": ["West"],
-      "Eel Brook Common": ["South"],
-      "Belair Park": ["South"],
-      "Brunswick Park": ["South", "Central"],
-      "Clissold Park": ["North", "East"],
-      "Larkhall Park": ["South"],
-      "Avondale Park": ["West"],
-      "Kensington Memorial Park": ["West"],
-      
-      // ParkSports locations
-      "Regents Park": ["Central", "North"],
-      "Hyde Park": ["Central", "West"],
-      
-      // Better.org.uk locations
-      "Highbury Fields": ["North"],
-      "Rosemary Gardens": ["North", "East"],
-      "Tufnell Park": ["North"],
-      
-      // Matchi locations
-      "Tower Hill Terrace": ["South", "Central"]
-    };
+    // If locationTagMap hasn't loaded yet, show all slots (prevents filtering before data loads)
+    if (Object.keys(locationTagMap).length === 0) {
+      return slotData;
+    }
     
-    // Filter slots based on location tags
+    // Filter slots based on location tags from API
     const filteredSlots = slotData.slots.filter((slot: any) => {
       const locationName = slot.location;
       const locationTags = locationTagMap[locationName] || [];

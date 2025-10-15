@@ -1,4 +1,4 @@
-const matchiLocations = [
+Changeconst matchiLocations = [
   {
     name: "Tower Hill Terrace",
     facilitySlug: "tower-hill-terrace",
