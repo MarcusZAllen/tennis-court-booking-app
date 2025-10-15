@@ -68,6 +68,7 @@ export default function AddressLocationPopover({
         title: "Address required",
         description: "Please enter your address",
         variant: "destructive",
+        duration: 3000,
       });
       return;
     }
@@ -92,12 +93,14 @@ export default function AddressLocationPopover({
         toast({
           title: "Location set!",
           description: "Distances will now be shown for each court",
+          duration: 3000,
         });
       } else {
         toast({
           title: "Location not found",
           description: "Please check your address and try again",
           variant: "destructive",
+          duration: 3000,
         });
       }
     } catch (error) {
@@ -106,6 +109,7 @@ export default function AddressLocationPopover({
         title: "Error",
         description: "Failed to set location. Please try again.",
         variant: "destructive",
+        duration: 3000,
       });
     } finally {
       setIsLoading(false);
@@ -121,6 +125,7 @@ export default function AddressLocationPopover({
     toast({
       title: "Location cleared",
       description: "Distance information has been removed",
+      duration: 3000,
     });
   };
 
@@ -155,6 +160,7 @@ export default function AddressLocationPopover({
               toast({
                 title: "Location set!",
                 description: "Using your current location",
+                duration: 3000,
               });
             }
           } catch (error) {
@@ -170,6 +176,7 @@ export default function AddressLocationPopover({
             title: "Location access denied",
             description: "Please enable location access or enter your address manually",
             variant: "destructive",
+            duration: 3000,
           });
         }
       );
@@ -178,6 +185,7 @@ export default function AddressLocationPopover({
         title: "Not supported",
         description: "Your browser doesn't support geolocation",
         variant: "destructive",
+        duration: 3000,
       });
     }
   };
