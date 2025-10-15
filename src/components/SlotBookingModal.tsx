@@ -84,7 +84,7 @@ export default function SlotBookingModal({
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-md w-full px-6 py-6 shadow-xl bg-white max-h-[80vh] flex flex-col">
+      <DialogContent className="max-w-md w-full px-4 sm:px-6 py-4 sm:py-6 shadow-xl bg-white max-h-[80vh] flex flex-col">
         <DialogHeader>
           <DialogTitle className={textStyles.modalTitle}>
             {date}, {time}
@@ -94,17 +94,17 @@ export default function SlotBookingModal({
           </DialogDescription>
         </DialogHeader>
         
-        <div className="space-y-4 flex-1 overflow-y-auto">
+        <div className="space-y-3 sm:space-y-4 flex-1 overflow-y-auto">
           {Object.entries(locationGroups).map(([location, data]) => {
             const distanceInfo = locationDistances[location];
             
             return (
               <div
                 key={location}
-                className="flex items-center justify-between pl-4 pr-5 py-4 rounded-xl bg-gray-50 border border-gray-200 hover:bg-gray-100 transition-colors"
+                className="flex items-center justify-between pl-3 pr-4 sm:pl-4 sm:pr-5 py-3 sm:py-4 rounded-xl bg-gray-50 border border-gray-200 hover:bg-gray-100 transition-colors"
               >
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 flex items-center justify-center">
+                <div className="flex items-center space-x-2 sm:space-x-3">
+                  <div className="w-9 sm:w-10 flex items-center justify-center flex-shrink-0">
                     {distanceInfo ? (
                       // Show directional arrow with distance when user location is set
                       <div className="flex flex-col items-center gap-1">
