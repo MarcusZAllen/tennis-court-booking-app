@@ -5,7 +5,9 @@ const betterLocations = [
     activity: "highbury-tennis",
     url: "https://bookings.better.org.uk/location/islington-tennis-centre/highbury-tennis",
     bookingWindow: 7,
-    tags: ["North"]
+    tags: ["North"],
+    lat: 51.5513,
+    lng: -0.0977
   },
   {
     name: "Rosemary Gardens",
@@ -13,7 +15,9 @@ const betterLocations = [
     activity: "rosemary-gardens-tennis",
     url: "https://bookings.better.org.uk/location/islington-tennis-centre/rosemary-gardens-tennis",
     bookingWindow: 7,
-    tags: ["North","East"]
+    tags: ["North","East"],
+    lat: 51.5437,
+    lng: -0.0887
   },
   {
     name: "Tufnell Park",
@@ -21,7 +25,9 @@ const betterLocations = [
     activity: "tufnell-park-tennis",
     url: "https://bookings.better.org.uk/location/islington-tennis-centre/tufnell-park-tennis",
     bookingWindow: 7,
-    tags: ["North"]
+    tags: ["North"],
+    lat: 51.5567,
+    lng: -0.1372
   }
 ];
 

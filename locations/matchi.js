@@ -9,7 +9,9 @@ const matchiLocations = [
     courtName: "Tower Hill Terrace Padel Court",
     sportType: "padel",
     bookingWindow: 8,
-    tags: ["South", "Central"]
+    tags: ["South", "Central"],
+    lat: 51.5098,
+    lng: -0.0764
   }
 ];
 

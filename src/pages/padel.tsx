@@ -8,15 +8,29 @@ import LocationPills from "../components/LocationPills";
 import FeedbackButton from "../components/FeedbackButton";
 import { useSupabaseData } from '@/hooks/useSupabaseData';
 import { textStyles } from '../../branding/typography';
+import { UserLocation } from "../components/AddressLocationPopover";
 
 const Padel = () => {
   const [selectedLocations, setSelectedLocations] = React.useState(["All London"]);
   const { calendarData, loading, error } = useSupabaseData('padel');
+  const [userLocation, setUserLocation] = React.useState<UserLocation | null>(null);
+
+  // Load user location from localStorage on mount
+  React.useEffect(() => {
+    const savedLocation = localStorage.getItem("userLocation");
+    if (savedLocation) {
+      try {
+        setUserLocation(JSON.parse(savedLocation));
+      } catch (error) {
+        console.error("Error parsing saved location:", error);
+      }
+    }
+  }, []);
 
   if (loading) {
     return (
       <div className="bg-offwhite dark:bg-background min-h-screen flex flex-col font-jost">
-        <Navbar />
+        <Navbar onLocationChange={setUserLocation} currentLocation={userLocation} />
         <main className="flex-grow flex items-center justify-center">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto mb-4" style={{ borderColor: '#61a5c2' }}></div>
@@ -30,7 +44,7 @@ const Padel = () => {
   if (error) {
     return (
       <div className="bg-offwhite dark:bg-background min-h-screen flex flex-col font-jost">
-        <Navbar />
+        <Navbar onLocationChange={setUserLocation} currentLocation={userLocation} />
         <main className="flex-grow flex items-center justify-center">
           <div className="text-center">
             <div className="text-red-500 text-6xl mb-4">⚠️</div>
@@ -51,7 +65,7 @@ const Padel = () => {
 
   return (
     <div className="bg-offwhite dark:bg-background min-h-screen flex flex-col font-jost">
-      <Navbar />
+      <Navbar onLocationChange={setUserLocation} currentLocation={userLocation} />
       <main className="flex-grow flex items-start justify-center px-1 sm:px-2">
         <div
           className="w-full min-h-[80vh] bg-[#e3f2fd] flex flex-col items-center justify-center border-0 mx-auto p-0 pt-0 mt-0"
@@ -79,6 +93,7 @@ const Padel = () => {
                 selectedLocations={selectedLocations}
                 sportType="padel"
                 hoverColor="#61a5c2"
+                userLocation={userLocation}
               />
             </div>
           </section>

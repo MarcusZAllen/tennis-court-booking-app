@@ -8,8 +8,11 @@ import {
   DialogClose,
 } from "./ui/dialog";
 import { Button } from "./ui/button";
-import { ExternalLink, MapPin } from "lucide-react";
+import { ExternalLink, MapPin, Navigation } from "lucide-react";
 import { textStyles, typography } from '../../branding/typography';
+import { UserLocation } from "./AddressLocationPopover";
+import { getLocationCoordinates } from "@/lib/utils/locationCoordinates";
+import { calculateDistance, calculateBearing, getArrowRotation, formatDistance } from "@/lib/utils/distanceCalculation";
 
 type Slot = {
   provider: string;
@@ -26,6 +29,7 @@ type SlotBookingModalProps = {
   time: string;
   onClose: () => void;
   slots?: Slot[];
+  userLocation?: UserLocation | null;
 };
 
 export default function SlotBookingModal({
@@ -34,6 +38,7 @@ export default function SlotBookingModal({
   time,
   onClose,
   slots = [],
+  userLocation = null,
 }: SlotBookingModalProps) {
   // Group slots by location and count unique courts (by slotKey)
   const locationGroups = slots.reduce((groups, slot) => {
@@ -48,6 +53,24 @@ export default function SlotBookingModal({
     groups[location].slotKeys.add(slot.slotKey);
     return groups;
   }, {} as Record<string, { slotKeys: Set<string>; sampleSlot: Slot; provider: string }>);
+
+  // Calculate distance and bearing for each location
+  const locationDistances = React.useMemo(() => {
+    if (!userLocation) return {};
+    
+    const distances: Record<string, { distance: number; bearing: number }> = {};
+    
+    Object.keys(locationGroups).forEach((locationName) => {
+      const locationCoords = getLocationCoordinates(locationName);
+      if (locationCoords) {
+        const distance = calculateDistance(userLocation.coordinates, locationCoords);
+        const bearing = calculateBearing(userLocation.coordinates, locationCoords);
+        distances[locationName] = { distance, bearing };
+      }
+    });
+    
+    return distances;
+  }, [userLocation, locationGroups]);
 
   const handleBookingClick = (bookingUrl: string) => {
     // Ensure the URL has the correct date parameter
@@ -72,51 +95,73 @@ export default function SlotBookingModal({
         </DialogHeader>
         
         <div className="space-y-4 flex-1 overflow-y-auto">
-          {Object.entries(locationGroups).map(([location, data]) => (
-            <div
-              key={location}
-              className="flex items-center justify-between px-5 py-4 rounded-xl bg-gray-50 border border-gray-200 hover:bg-gray-100 transition-colors"
-            >
-              <div className="flex items-center space-x-3">
-                <MapPin className="h-4 w-4" style={{ color: '#7cb46b' }} />
-                <div>
-                  <span className={textStyles.locationName}>
-                    {location}
-                  </span>
-                  <div className="flex items-center space-x-2 mt-1">
-                    <span className="text-sm text-gray-600">
-                      {data.slotKeys.size} court{data.slotKeys.size !== 1 ? 's' : ''} available
+          {Object.entries(locationGroups).map(([location, data]) => {
+            const distanceInfo = locationDistances[location];
+            
+            return (
+              <div
+                key={location}
+                className="flex items-center justify-between pl-4 pr-5 py-4 rounded-xl bg-gray-50 border border-gray-200 hover:bg-gray-100 transition-colors"
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 flex items-center justify-center">
+                    {distanceInfo ? (
+                      // Show directional arrow with distance when user location is set
+                      <div className="flex flex-col items-center gap-1">
+                        <Navigation 
+                          className="h-5 w-5" 
+                          style={{ 
+                            color: '#7cb46b',
+                            transform: `rotate(${getArrowRotation(distanceInfo.bearing)}deg)`,
+                            transition: 'transform 0.3s ease'
+                          }}
+                        />
+                        <span className="text-xs font-medium" style={{ color: '#7cb46b' }}>{formatDistance(distanceInfo.distance)}</span>
+                      </div>
+                    ) : (
+                      // Show regular pin when no user location
+                      <MapPin className="h-4 w-4" style={{ color: '#7cb46b' }} />
+                    )}
+                  </div>
+                  <div>
+                    <span className={textStyles.locationName}>
+                      {location}
                     </span>
-                    <span className="text-xs text-gray-500 font-medium opacity-50">
-                      £{data.sampleSlot.cost}
-                    </span>
+                    <div className="flex items-center space-x-2 mt-1">
+                      <span className="text-sm text-gray-600">
+                        {data.slotKeys.size} court{data.slotKeys.size !== 1 ? 's' : ''} available
+                      </span>
+                      <span className="text-xs text-gray-500 font-medium opacity-50">
+                        £{data.sampleSlot.cost}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
               
-              <Button
-                onClick={() => handleBookingClick(data.sampleSlot.bookingUrl)}
-                size="sm"
-                className="px-4 py-2 font-medium rounded-xl flex items-center space-x-1"
-                style={{ 
-                  backgroundColor: '#7cb46b',
-                  borderColor: '#7cb46b',
-                  color: 'white'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#6ba55a';
-                  e.currentTarget.style.borderColor = '#6ba55a';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#7cb46b';
-                  e.currentTarget.style.borderColor = '#7cb46b';
-                }}
-              >
-                <span>Book</span>
-                <ExternalLink className="h-3 w-3" />
-              </Button>
-            </div>
-          ))}
+                <Button
+                  onClick={() => handleBookingClick(data.sampleSlot.bookingUrl)}
+                  size="sm"
+                  className="px-4 py-2 font-medium rounded-xl flex items-center space-x-1"
+                  style={{ 
+                    backgroundColor: '#7cb46b',
+                    borderColor: '#7cb46b',
+                    color: 'white'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#6ba55a';
+                    e.currentTarget.style.borderColor = '#6ba55a';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#7cb46b';
+                    e.currentTarget.style.borderColor = '#7cb46b';
+                  }}
+                >
+                  <span>Book</span>
+                  <ExternalLink className="h-3 w-3" />
+                </Button>
+              </div>
+            );
+          })}
           
           {Object.keys(locationGroups).length === 0 && (
             <div className="text-center py-8 text-gray-500 rounded-xl bg-gray-50 border border-gray-200">

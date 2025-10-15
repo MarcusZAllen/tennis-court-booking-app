@@ -8,15 +8,29 @@ import LocationPills from "../components/LocationPills";
 import FeedbackButton from "../components/FeedbackButton";
 import { useSupabaseData } from '@/hooks/useSupabaseData';
 import { textStyles } from '../../branding/typography';
+import { UserLocation } from "../components/AddressLocationPopover";
 
 const Index = () => {
   const [selectedLocations, setSelectedLocations] = React.useState(["All London"]);
   const { calendarData, loading, error } = useSupabaseData();
+  const [userLocation, setUserLocation] = React.useState<UserLocation | null>(null);
+
+  // Load user location from localStorage on mount
+  React.useEffect(() => {
+    const savedLocation = localStorage.getItem("userLocation");
+    if (savedLocation) {
+      try {
+        setUserLocation(JSON.parse(savedLocation));
+      } catch (error) {
+        console.error("Error parsing saved location:", error);
+      }
+    }
+  }, []);
 
   if (loading) {
     return (
       <div className="bg-offwhite dark:bg-background min-h-screen flex flex-col font-jost">
-        <Navbar />
+        <Navbar onLocationChange={setUserLocation} currentLocation={userLocation} />
         <main className="flex-grow flex items-center justify-center">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
@@ -30,7 +44,7 @@ const Index = () => {
   if (error) {
     return (
       <div className="bg-offwhite dark:bg-background min-h-screen flex flex-col font-jost">
-        <Navbar />
+        <Navbar onLocationChange={setUserLocation} currentLocation={userLocation} />
         <main className="flex-grow flex items-center justify-center">
           <div className="text-center">
             <div className="text-red-500 text-6xl mb-4">⚠️</div>
@@ -50,7 +64,7 @@ const Index = () => {
 
   return (
     <div className="bg-offwhite dark:bg-background min-h-screen flex flex-col font-jost">
-      <Navbar />
+      <Navbar onLocationChange={setUserLocation} currentLocation={userLocation} />
       <main className="flex-grow flex items-start justify-center px-1 sm:px-2">
         <div
           className="w-full min-h-[80vh] bg-[#fcf4ed] flex flex-col items-center justify-center border-0 mx-auto p-0 pt-0 mt-0"
@@ -73,7 +87,11 @@ const Index = () => {
           {/* Weekly Calendar Booking Grid */}
           <section className="w-full flex-grow flex items-start justify-center px-1 sm:px-2 md:px-4 pb-8 sm:pb-12">
             <div className="w-full flex justify-center">
-              <WeeklyCalendar calendarData={calendarData} selectedLocations={selectedLocations} />
+              <WeeklyCalendar 
+                calendarData={calendarData} 
+                selectedLocations={selectedLocations}
+                userLocation={userLocation}
+              />
             </div>
           </section>
         </div>

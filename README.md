@@ -10,6 +10,8 @@ A comprehensive tennis court availability aggregator that scrapes real-time book
 - **Modern UI**: Next.js frontend with responsive design
 - **Location Filtering**: Filter by specific tennis courts
 - **Weekly Calendar View**: Easy-to-use booking interface
+- **Distance Calculation**: Set your location to see distances and directions to each court
+- **Address Autocomplete**: Google Places integration for easy address entry
 
 ## 🏟️ Supported Locations
 
@@ -40,22 +42,33 @@ A comprehensive tennis court availability aggregator that scrapes real-time book
    npm install
    ```
 
-3. **Install Playwright browsers**
+3. **Set up environment variables**
+   ```bash
+   cp env.example .env.local
+   ```
+   
+   Add your API keys:
+   - Supabase credentials (required for data storage)
+   - Google Maps API key (optional, for distance feature)
+   
+   See [SUPABASE_SETUP.md](SUPABASE_SETUP.md) and [GOOGLE_MAPS_SETUP.md](GOOGLE_MAPS_SETUP.md) for details.
+
+4. **Install Playwright browsers**
    ```bash
    npx playwright install chromium
    ```
 
-4. **Run the scraper**
+5. **Run the scraper**
    ```bash
    npm run scrape
    ```
 
-5. **Start the development server**
+6. **Start the development server**
    ```bash
    npm run dev
    ```
 
-6. **Open your browser**
+7. **Open your browser**
    Navigate to `http://localhost:3000`
 
 ## 📁 Project Structure
@@ -80,6 +93,14 @@ tennis-court-booking-app/
 ```
 
 ## 🔧 Configuration
+
+### Environment Variables
+
+See `.env.example` for all available configuration options:
+- **Supabase**: Database connection (required)
+- **Google Maps API**: Distance calculation feature (optional)
+
+### Scraper Configuration
 
 Edit `config.js` to customize:
 - Scraping parameters (days ahead, concurrency limits)
@@ -110,7 +131,11 @@ Edit `config.js` to customize:
    // locations/clubspark.js
    {
      name: "New Location",
-     url: "https://booking-url.com"
+     url: "https://booking-url.com",
+     bookingWindow: 8,
+     tags: ["Central", "North"],
+     lat: 51.5074,  // Latitude for distance calculation
+     lng: -0.1278   // Longitude for distance calculation
    }
    ```
 
@@ -120,6 +145,8 @@ Edit `config.js` to customize:
    ```
 
 3. **Update frontend filters** if needed
+
+**Note**: Latitude and longitude are optional but enable the distance calculation feature.
 
 ## 🚨 Rate Limiting
 

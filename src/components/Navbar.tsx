@@ -3,8 +3,14 @@ import * as React from "react";
 import Link from "next/link";
 import { textStyles } from '../../branding/typography';
 import { useToast } from "../hooks/use-toast";
+import AddressLocationPopover, { UserLocation } from "./AddressLocationPopover";
 
-const Navbar = () => {
+interface NavbarProps {
+  onLocationChange?: (location: UserLocation | null) => void;
+  currentLocation?: UserLocation | null;
+}
+
+const Navbar = ({ onLocationChange, currentLocation }: NavbarProps) => {
   const { toast } = useToast();
 
   const handleShare = async () => {
@@ -33,8 +39,8 @@ const Navbar = () => {
 
   return (
     <nav className="w-full flex items-center justify-between px-3 sm:px-6 py-2 sm:py-3 bg-offwhite dark:bg-dark z-50 font-jost" style={{ borderBottom: "none", boxShadow: "none" }}>
-      {/* Logo */}
-      <div className="flex items-center">
+      {/* Logo and Location */}
+      <div className="flex items-center gap-2 sm:gap-3">
         <span
           className="text-black rounded-[14px] px-2 sm:px-4 py-1 sm:py-2 text-[0.8rem] sm:text-[1rem] md:text-[1.2rem] uppercase font-jost font-normal tracking-widest border-0 select-none"
           style={{
@@ -46,6 +52,12 @@ const Navbar = () => {
         >
           BOOK A COURT
         </span>
+        {onLocationChange && (
+          <AddressLocationPopover 
+            onLocationChange={onLocationChange}
+            currentLocation={currentLocation || null}
+          />
+        )}
       </div>
       {/* Right: Tennis, Padel, Share */}
       <div className="flex items-center gap-2 sm:gap-3 md:gap-5 ml-auto">

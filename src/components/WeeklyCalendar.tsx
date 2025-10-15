@@ -2,6 +2,7 @@ import * as React from "react";
 import SlotBookingModal from "./SlotBookingModal";
 import type { TransformedData } from "@/utils/transformSlotData";
 import { RotateCcw } from "lucide-react";
+import { UserLocation } from "./AddressLocationPopover";
 
 import { textStyles } from '../../branding/typography';
 
@@ -38,13 +39,15 @@ type WeeklyCalendarProps = {
   selectedLocations: string[];
   sportType?: string;
   hoverColor?: string;
+  userLocation?: UserLocation | null;
 };
 
 const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({ 
   calendarData, 
   selectedLocations, 
   sportType = 'tennis',
-  hoverColor = '#7cb46b'
+  hoverColor = '#7cb46b',
+  userLocation = null
 }) => {
   const weekDates = getCurrentWeek();
   const [locationTagMap, setLocationTagMap] = React.useState<{ [key: string]: string[] }>({});
@@ -321,6 +324,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({
         time={selectedTimeStr}
         slots={selectedSlots}
         onClose={() => setModalOpen(false)}
+        userLocation={userLocation}
       />
     </div>
   );
