@@ -86,10 +86,22 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({
       "Eel Brook Common": ["South"],
       "Belair Park": ["South"],
       "Brunswick Park": ["South", "Central"],
+      "Clissold Park": ["North", "East"],
+      "Larkhall Park": ["South"],
+      "Avondale Park": ["West"],
+      "Kensington Memorial Park": ["West"],
       
       // ParkSports locations
       "Regents Park": ["Central", "North"],
-      "Hyde Park": ["Central", "West"]
+      "Hyde Park": ["Central", "West"],
+      
+      // Better.org.uk locations
+      "Highbury Fields": ["North"],
+      "Rosemary Gardens": ["North", "East"],
+      "Tufnell Park": ["North"],
+      
+      // Matchi locations
+      "Tower Hill Terrace": ["South", "Central"]
     };
     
     // Filter slots based on location tags
